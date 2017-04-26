@@ -1,13 +1,24 @@
 # Beeround
 Find the best rated beers close to your geo location.
 
-# Install the App
-$ npm install -g cordova ionic
-$ ionic start beeraround tabs --v1
+# What to do after download
+1. Step <br />
+$ npm install
 
-# Run the App and start the server:
-$ cd beeraround
-$ ionic serve
+2. Step: Run the App and start the server (--lab shows the app on ios and android) <br />
+$ ionic serve --lab
 
-# First upload:
+First upload:
+$ ionic upload <br />
+
+# What should I do after I edited a file
+$ git add FILENAME <br />
+$ git commit -m 'Add a commit name' <br />
+$ git pull https://github.com/beeround/beeround.git <br />
+$ git push https://github.com/beeround/beeround.git
+
+# I want to see what I changed in GIT
+$ git st
+
+# Upload to Ionic (!! This overrides the old files)
 $ ionic upload
