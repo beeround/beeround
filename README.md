@@ -2,13 +2,14 @@
 Find the best rated beers close to your geo location.
 
 # What to do after download
+1. Step <br />
 $ npm install
 
-Run the App and start the server (--lab shows the app on ios and android)
+2. Step: Run the App and start the server (--lab shows the app on ios and android) <br />
 $ ionic serve --lab
 
 First upload:
-$ ionic upload
+$ ionic upload <br />
 
 # What should I do after I edited a file
 $ git add FILENAME <br />
