@@ -38,24 +38,23 @@
   </head>
 
   <body ng-app="beeround">
-    <ion-nav-view></ion-nav-view>
+  <!-- TABS !-->
+  <ion-tabs class="tabs-icon">
 
-    <!-- TABS !-->
-    <ion-tabs class="tabs-icon">
+    <ion-tab icon="ion-ios-location" href="#/tab/map">
+      <!-- 'name="map-tab"' Attribut einfügen ohne wird standart "Playlist view eingebunden" !-->
+      <ion-nav-view></ion-nav-view>
+    </ion-tab>
 
-      <ion-tab icon="ion-ios-location" href="#/tab/map">
-        <ion-nav-view name="map-tab"></ion-nav-view>
-      </ion-tab>
-
-      <ion-tab icon="ion-beer" ui-sref="tabs.contact">
-        <ion-nav-view name="beer-tab"></ion-nav-view>
-      </ion-tab>
+    <ion-tab icon="ion-beer" ui-sref="tabs.contact">
+      <ion-nav-view name="beer-tab"></ion-nav-view>
+    </ion-tab>
 
 
-      <ion-tab icon="ion-android-settings" ui-sref="tabs.contact">
-        <ion-nav-view name="settings-tab"></ion-nav-view>
-      </ion-tab>
+    <ion-tab icon="ion-android-settings" ui-sref="tabs.contact">
+      <ion-nav-view name="settings-tab"></ion-nav-view>
+    </ion-tab>
 
-    </ion-tabs>
+  </ion-tabs>
   </body>
 </html>

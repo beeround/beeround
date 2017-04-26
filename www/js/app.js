@@ -4,8 +4,10 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
-angular.module('beeround', ['ionic', 'beeround.index', 'beeround.playlists'])
-
+angular.module('beeround', ['ionic', 'beeround.index', 'beeround.playlists', 'beeround.services'])
+  .constant('ApiEndpoint', {
+    url: 'http://localhost:8100/api'
+  })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
