@@ -1,5 +1,8 @@
 angular.module('beeround.playlists', [])
-  .controller('PlaylistsCtrl', function($scope) {
+  .controller('PlaylistsCtrl', function($scope, beerService) {
+
+    beerService.getBeers();
+
     $scope.playlists = [
       { title: 'Reggae', id: 1 },
       { title: 'Chill', id: 2 },
