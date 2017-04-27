@@ -1890,8 +1890,8 @@ IonicModule
     },
 
     tabs: {
-      style: 'striped',
-      position: 'top'
+      style: 'standard',
+      position: 'bottom'
     },
 
     scrolling: {
