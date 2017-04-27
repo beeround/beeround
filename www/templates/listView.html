@@ -1,9 +1,29 @@
 <ion-view view-title="Becks">
   <ion-content>
+
     <ion-list>
       <ion-item ng-repeat="beer in beerlist">
         {{beer.name}}
       </ion-item>
     </ion-list>
+
+
   </ion-content>
+  <ion-footer-bar>
+    <ion-tabs class="tabs-icon">
+
+      <ion-tab icon="ion-ios-location" href="#/tab/map">
+      </ion-tab>
+
+      <ion-tab icon="ion-beer" href="#/tab/t">
+      </ion-tab>
+
+
+      <ion-tab icon="ion-android-settings" href="#/tab/t">
+      </ion-tab>
+
+    </ion-tabs>
+  </ion-footer-bar>
+  <!-- TABS !-->
+
 </ion-view>

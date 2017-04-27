@@ -21,7 +21,7 @@ angular.module('beeround', ['ionic', 'beeround.index', 'beeround.beer', 'beeroun
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
   $stateProvider
 
     .state('app', {
@@ -59,4 +59,7 @@ angular.module('beeround', ['ionic', 'beeround.index', 'beeround.beer', 'beeroun
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/list');
+
+  $ionicConfigProvider.tabs.position('bottom');
+
 });
