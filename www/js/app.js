@@ -4,10 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
-angular.module('beeround', ['ionic', 'beeround.index', 'beeround.beerlists', 'beeround.services'])
-  .constant('ApiEndpoint', {
-    url: 'http://localhost:8100/api'
-  })
+angular.module('beeround', ['ionic', 'beeround.index', 'beeround.beer', 'beeround.services'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -51,25 +48,15 @@ angular.module('beeround', ['ionic', 'beeround.index', 'beeround.beerlists', 'be
         }
       }
     })
-    .state('app.beerlists', {
-      url: '/beerlists',
+    .state('app.list', {
+      url: '/list',
       views: {
         'menuContent': {
-          templateUrl: 'templates/beerlists.html',
-          controller: 'BeerlistsCtrl'
+          templateUrl: 'templates/listView.html',
+          controller: 'listCtrl'
         }
       }
-    })
-
-  .state('app.single', {
-    url: '/beerlists/:beerlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/beerlist.html',
-        controller: 'BeerlistCtrl'
-      }
-    }
-  });
+    });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/beerlists');
+  $urlRouterProvider.otherwise('/app/list');
 });
