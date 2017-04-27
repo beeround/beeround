@@ -23,43 +23,41 @@ angular.module('beeround', ['ionic','ngCordova','beeround.index', 'beeround.beer
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
   $stateProvider
-
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  })
-
-  .state('app.profile', {
+  .state('profile', {
     url: '/profile',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/profile.html'
-      }
-    }
+    templateUrl: 'templates/profile.html'
   })
-
-  .state('app.statistics', {
+  .state('statistics', {
       url: '/statistics',
+      templateUrl: 'templates/statistics.html'
+    })
+    .state('tabs', {
+      url: "/tab",
+      abstract: true,
+      templateUrl: "templates/tabs.html"
+    })
+    .state('tabs.list', {
+      url: '/list',
       views: {
-        'menuContent': {
-          templateUrl: 'templates/statistics.html'
+        'tab-list': {
+          templateUrl: 'templates/listView.html',
+          controller: 'listCtrl'
         }
       }
     })
-    .state('app.list', {
-      url: '/list',
+    .state('tabs.map', {
+      url: '/map',
       views: {
-        'menuContent': {
-          templateUrl: 'templates/listView.html',
+        'tab-map': {
+          templateUrl: 'templates/mapView.html',
           controller: 'listCtrl'
         }
       }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/list');
+  $urlRouterProvider.otherwise('/tab/list');
 
   $ionicConfigProvider.tabs.position('bottom');
 
-});
+})
+
