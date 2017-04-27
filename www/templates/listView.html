@@ -1,7 +1,15 @@
 <ion-view view-title="Becks">
-  <ion-content>
 
+  <ion-content>
+    <div class="card">
+      <div class="item item-text-wrap">
+        <h3>Street: {{location.road}} {{location.house_number}}</h3>
+        <h3>City: {{location.town}}</h3>
+
+      </div>
+    </div>
     <ion-list>
+
       <ion-item ng-repeat="beer in beerlist">
         {{beer.name}}
       </ion-item>
@@ -24,6 +32,5 @@
 
     </ion-tabs>
   </ion-footer-bar>
-  <!-- TABS !-->
 
 </ion-view>
