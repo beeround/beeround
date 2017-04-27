@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
-angular.module('beeround', ['ionic', 'beeround.index', 'beeround.playlists', 'beeround.services'])
+angular.module('beeround', ['ionic', 'beeround.index', 'beeround.beerlists', 'beeround.services'])
   .constant('ApiEndpoint', {
     url: 'http://localhost:8100/api'
   })
@@ -34,42 +34,42 @@ angular.module('beeround', ['ionic', 'beeround.index', 'beeround.playlists', 'be
     controller: 'AppCtrl'
   })
 
-  .state('app.search', {
-    url: '/search',
+  .state('app.profile', {
+    url: '/profile',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/profile.html'
       }
     }
   })
 
-  .state('app.browse', {
-      url: '/browse',
+  .state('app.statistics', {
+      url: '/statistics',
       views: {
         'menuContent': {
-          templateUrl: 'templates/browse.html'
+          templateUrl: 'templates/statistics.html'
         }
       }
     })
-    .state('app.playlists', {
-      url: '/playlists',
+    .state('app.beerlists', {
+      url: '/beerlists',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
+          templateUrl: 'templates/beerlists.html',
+          controller: 'BeerlistsCtrl'
         }
       }
     })
 
   .state('app.single', {
-    url: '/playlists/:playlistId',
+    url: '/beerlists/:beerlistId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
+        templateUrl: 'templates/beerlist.html',
+        controller: 'BeerlistCtrl'
       }
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/beerlists');
 });
