@@ -20,7 +20,7 @@ angular.module('beeround.beer', [])
         //TODO ERROR: NO INTERNET; NO GPS OR ELSE
       });
 
-    beerService.getBeers().then(result => {
+    beerService.getBrewerys().then(result => {
       $scope.beerlist = result.data;
     });
   });
