@@ -7,6 +7,10 @@ angular.module('beeround.beer', [])
       .then(function (position) {
         $scope.lat  = position.coords.latitude;
         $scope.lng = position.coords.longitude;
+        $scope.lng = position.address.zip;
+
+        // $http.get('http://nominatim.openstreetmap.org/search.php?q='+$scope.zip+'&polygon_geojson=1&viewbox=').then(result => {
+        //   console.log(result);
 
         $http.get('http://nominatim.openstreetmap.org/reverse?lat='+$scope.lat+'&lon='+$scope.lng+'&format=json').then(result => {
           console.log(result);
