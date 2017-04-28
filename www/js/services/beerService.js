@@ -8,6 +8,12 @@ angular.module('beeround.services', [])
           return res.data;
         });
       };
+
+      this.getBrewerysByPLZ = function (plz) {
+        return $http.get('http://api.brewerydb.com/v2/locations?postalCode='+plz+'&key=7802f26125b23378098b3c32911adcce').then(function (res) {
+          return res.data;
+        });
+      };
     }
 
 ]);
