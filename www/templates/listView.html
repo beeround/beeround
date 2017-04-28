@@ -1,11 +1,23 @@
 <ion-view title="Breweries">
 
   <ion-content>
+    <div class="list list-inset">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input  g-places-autocomplete force-selection="true" options="autocompleteOptions" ng-model="place" type="text" placeholder="Standort eingeben">
+      </label>
+    </div>
+
+    <div class="card" ng-show="connectionError">
+      <div class="item item-text-wrap">
+        <h3>Ein Fehler ist aufgetreten</h3>
+        <p>Bitte überprüfen Sie Ihre Internetverbindung.</p>
+      </div>
+    </div>
     <div class="card">
       <div class="item item-text-wrap">
-        <h3>Street: {{location.road}} {{location.house_number}}</h3>
-        <h3>City: {{location.town || location.village}}</h3>
-        <h3>ZIP: {{location.postcode}}</h3>
+        <h3>{{location.town || location.village}}</h3>
+        <h3>Radius: 50km</h3>
         <h3>Current View: {{current}}</h3>
 
       </div>
@@ -13,7 +25,11 @@
     <ion-list>
 
       <ion-item ng-repeat="location in breweries">
-        {{location.brewery.nameShortDisplay}}
+        <p>
+          {{location.brewery.nameShortDisplay}}
+          <span class="badge badge-positive">{{location.distance}}km</span>
+
+        </p>
       </ion-item>
     </ion-list>
 
