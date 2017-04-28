@@ -5,7 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
 angular.module('beeround', ['ionic','ngCordova','beeround.index', 'beeround.beer', 'beeround.services'])
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $state, $stateParams, $rootScope) {
+
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -18,6 +19,10 @@ angular.module('beeround', ['ionic','ngCordova','beeround.index', 'beeround.beer
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+
   });
 })
 

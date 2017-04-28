@@ -40,7 +40,13 @@ angular.module('beeround.index', [])
   })
   .controller('HomeTabCtrl', function($scope) {
   })
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state) {
 
+  // GET CURRENT STATE
+  $scope.$on('$stateChangeSuccess',
+    function(event, toState, toParams, fromState, fromParams) {
+      $scope.current = toState.url;
+    }
+  )
 
 });

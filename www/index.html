@@ -49,16 +49,16 @@
       </ion-header-bar>
       <ion-content has-header="true">
         <ion-list>
-          <ion-item menu-close ng-click="login()">
+          <ion-item menu-close="" ng-click="login()">
             Login
           </ion-item>
-          <ion-item menu-close href="#/profile">
+          <ion-item menu-close="" href="#/profile">
             Profil
           </ion-item>
-          <ion-item menu-close href="#/statistics">
+          <ion-item menu-close="" href="#/statistics">
             Statistik
           </ion-item>
-          <ion-item menu-close ng-click="logout()">
+          <ion-item menu-close="" ng-click="logout()">
             Logout
           </ion-item>
         </ion-list>
@@ -67,7 +67,7 @@
 
 
     <!-- VIEW -->
-    <ion-side-menu-content>
+    <ion-side-menu-content ng-controller="AppCtrl">
       <ion-nav-bar class="bar-stable">
         <ion-nav-back-button>
         </ion-nav-back-button>
@@ -77,7 +77,7 @@
           </button>
         </ion-nav-buttons>
         <ion-nav-buttons side="right">
-          <a class="button button-icon button-clear ion-beer" href="#/tab/list">
+          <a class="button button-icon button-clear ion-beer" href="#/tab/list" ng-show="current != '/list' &&current != '/map'">
           </a>
         </ion-nav-buttons>
       </ion-nav-bar>
