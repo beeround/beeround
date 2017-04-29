@@ -20,6 +20,12 @@ angular.module('beeround.services', [])
           return res.data;
         });
       };
+
+      this.getBeersByBrewery = function (breweryId) {
+        return $http.get('http://api.brewerydb.com/v2/brewery/'+breweryId+'/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
+          return res.data;
+        });
+      };
     }
 
 ]);

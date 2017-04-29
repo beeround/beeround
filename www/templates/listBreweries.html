@@ -18,7 +18,6 @@
       <div class="item item-text-wrap">
         <h3>{{location.town || location.village}}</h3>
         <h3>Radius: {{radius}}km</h3>
-        <h3>Current View: {{current}}</h3>
       </div>
     </div>
 
@@ -40,7 +39,8 @@
     </div>
 
     <ion-list>
-      <ion-item ng-repeat="location in breweries">
+      <ion-item ng-repeat="location in breweries" ng-href="#/tab/list/{{location.brewery.id}}">
+
         <p>
           {{location.brewery.nameShortDisplay}}
           <span class="badge badge-positive">{{location.distance}}km</span>

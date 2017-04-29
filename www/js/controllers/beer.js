@@ -1,22 +1,25 @@
 angular.module('beeround.beer', [])
-  .controller('listCtrl', function($scope, beerService, $http, $cordovaGeolocation) {
+  .controller('breweriesListCtrl', function($scope, beerService, $http, $cordovaGeolocation) {
 
     $scope.place = undefined;
 
-    // INIT radius variable and set to  50
+    // INIT radius var and set to  50
     $scope.radius = 50;
 
+    // INIT lat and lng var
     $scope.lat = undefined;
     $scope.lng = undefined;
 
-
-
+    // Only show locations in DE
     $scope.autocompleteOptions = {
       componentRestrictions: { country: 'de' },
       types: ['geocode']
     };
 
-    var posOptions = {timeout: 10000, enableHighAccuracy: false};
+    // Don't wait till death
+    var posOptions = {timeout: 20000, enableHighAccuracy: false};
+
+    // Geolocation
     $cordovaGeolocation
       .getCurrentPosition(posOptions)
       .then(function (position) {
@@ -26,9 +29,8 @@ angular.module('beeround.beer', [])
         $http.get('http://nominatim.openstreetmap.org/reverse?lat='+$scope.lat+'&lon='+$scope.lng+'&format=json').then(result => {
           $scope.location = result.data.address;
 
-          beerService.getBrewerysNearCoordinates( $scope.lat, $scope.lng, $scope.radius).then(result => {
-            $scope.breweries = result.data;
-          });
+          getBreweries();
+
         })
       }, function(err) {
         $scope.connectionError = true;
@@ -36,20 +38,19 @@ angular.module('beeround.beer', [])
       });
 
 
-    // ON LOCATION CHANGE
+    // on manual location change
     $scope.$on('g-places-autocomplete:select', function(event, place) {
 
       const location = JSON.parse(JSON.stringify(place.geometry.location));
       $scope.lat = location.lat;
       $scope.lng = location.lng;
-      beerService.getBrewerysNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
-        $scope.breweries = result.data;
-        $scope.location = {
-          town : place.formatted_address
-        }
-      });
+      $scope.location = {
+        town : place.formatted_address
+      };
+      getBreweries();
     });
 
+    // filters
     $scope.showSelectValue = function(radiusSelect) {
       var str = radiusSelect;
       str = radiusSelect.substring(0, str.length - 3);
@@ -58,11 +59,29 @@ angular.module('beeround.beer', [])
       $scope.radius = str;
 
       // Reload breweries
+      getBreweries();
+    };
+
+
+
+    // Get breweries function
+    function getBreweries() {
       beerService.getBrewerysNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
         $scope.breweries = result.data;
       });
+      // TODO NO Breweries FOUND
     }
 
 
+  })
+  .controller('beerListCtrl', function($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
+    const breweryId = $stateParams.brewery;
+    beerService.getBeersByBrewery(breweryId).then(result => {
+      $scope.beerList = result.data;
+    })
+
+
   });
+
+
 

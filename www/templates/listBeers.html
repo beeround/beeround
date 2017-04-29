@@ -1,7 +1,14 @@
 <ion-view title="Beers">
 
   <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="beer in beerList">
 
+        <p>
+          {{beer.nameDisplay}}
+        </p>
+      </ion-item>
+    </ion-list>
   </ion-content>
 
 

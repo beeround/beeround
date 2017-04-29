@@ -41,12 +41,21 @@ angular.module('beeround', ['ionic','ngCordova', 'google.places','beeround.index
       abstract: true,
       templateUrl: "templates/tabs.html"
     })
-    .state('tabs.list', {
+    .state('tabs.breweryList', {
       url: '/list',
       views: {
         'tab-list': {
           templateUrl: 'templates/listBreweries.html',
-          controller: 'listCtrl'
+          controller: 'breweriesListCtrl'
+        }
+      }
+    })
+    .state('tabs.beerList', {
+      url: '/list/:brewery',
+      views: {
+        'tab-list': {
+          templateUrl: 'templates/listBeers.html',
+          controller: 'beerListCtrl'
         }
       }
     })
