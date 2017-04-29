@@ -45,7 +45,7 @@ angular.module('beeround', ['ionic','ngCordova', 'google.places','beeround.index
       url: '/list',
       views: {
         'tab-list': {
-          templateUrl: 'templates/listView.html',
+          templateUrl: 'templates/listBreweries.html',
           controller: 'listCtrl'
         }
       }

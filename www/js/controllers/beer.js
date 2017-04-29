@@ -3,6 +3,14 @@ angular.module('beeround.beer', [])
 
     $scope.place = undefined;
 
+    // INIT radius variable and set to  50
+    $scope.radius = 50;
+
+    $scope.lat = undefined;
+    $scope.lng = undefined;
+
+
+
     $scope.autocompleteOptions = {
       componentRestrictions: { country: 'de' },
       types: ['geocode']
@@ -18,7 +26,7 @@ angular.module('beeround.beer', [])
         $http.get('http://nominatim.openstreetmap.org/reverse?lat='+$scope.lat+'&lon='+$scope.lng+'&format=json').then(result => {
           $scope.location = result.data.address;
 
-          beerService.getBrewerysNearCoordinates(position.coords.latitude, position.coords.longitude, 50).then(result => {
+          beerService.getBrewerysNearCoordinates( $scope.lat, $scope.lng, $scope.radius).then(result => {
             $scope.breweries = result.data;
           });
         })
@@ -30,9 +38,11 @@ angular.module('beeround.beer', [])
 
     // ON LOCATION CHANGE
     $scope.$on('g-places-autocomplete:select', function(event, place) {
-      console.log(place);
+
       const location = JSON.parse(JSON.stringify(place.geometry.location));
-      beerService.getBrewerysNearCoordinates(location.lat,location.lng, 50).then(result => {
+      $scope.lat = location.lat;
+      $scope.lng = location.lng;
+      beerService.getBrewerysNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
         $scope.breweries = result.data;
         $scope.location = {
           town : place.formatted_address
@@ -43,7 +53,14 @@ angular.module('beeround.beer', [])
     $scope.showSelectValue = function(radiusSelect) {
       var str = radiusSelect;
       str = radiusSelect.substring(0, str.length - 3);
-      console.log(str);
+
+      // Write new radius in variable
+      $scope.radius = str;
+
+      // Reload breweries
+      beerService.getBrewerysNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
+        $scope.breweries = result.data;
+      });
     }
 
 

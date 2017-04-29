@@ -17,21 +17,23 @@
     <div class="card">
       <div class="item item-text-wrap">
         <h3>{{location.town || location.village}}</h3>
-        <h3>Radius: 50km</h3>
+        <h3>Radius: {{radius}}km</h3>
         <h3>Current View: {{current}}</h3>
       </div>
     </div>
 
-    <div class="card">
+    <!-- Show when coordinates saved-->
+    <div ng-show="lat" class="card">
       <div class="item item-text-wrap">
         <label class="item">
           <p>Radius</p>
           <select ng-model="radiusSelect" ng-change="showSelectValue(radiusSelect)">
-            <option>10 km</option>
-            <option>30 km</option>
-            <option selected>50 km</option>
-            <option>80 km</option>
-            <option>100 km</option>
+            <option ng-selected="radius == 10">10 km</option>
+            <option  ng-selected="radius == 30">30 km</option>
+            <option  ng-selected="radius == 50">50 km</option>
+            <option  ng-selected="radius == 80">80 km</option>
+            <option  ng-selected="radius == 100">100 km</option>
+
           </select>
         </label>
       </div>
