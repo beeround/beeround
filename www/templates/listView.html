@@ -1,10 +1,10 @@
 <ion-view title="Breweries">
-
   <ion-content>
     <div class="list list-inset">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
-        <input  g-places-autocomplete force-selection="true" options="autocompleteOptions" ng-model="place" type="text" placeholder="Standort eingeben">
+        <input g-places-autocomplete force-selection="true" options="autocompleteOptions" ng-model="place" type="text"
+               placeholder="Standort eingeben">
       </label>
     </div>
 
@@ -19,11 +19,25 @@
         <h3>{{location.town || location.village}}</h3>
         <h3>Radius: 50km</h3>
         <h3>Current View: {{current}}</h3>
-
       </div>
     </div>
-    <ion-list>
 
+    <div class="card">
+      <div class="item item-text-wrap">
+        <label class="item">
+          <p>Radius</p>
+          <select ng-model="radiusSelect" ng-change="showSelectValue(radiusSelect)">
+            <option>10 km</option>
+            <option>30 km</option>
+            <option selected>50 km</option>
+            <option>80 km</option>
+            <option>100 km</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <ion-list>
       <ion-item ng-repeat="location in breweries">
         <p>
           {{location.brewery.nameShortDisplay}}
@@ -33,8 +47,5 @@
       </ion-item>
     </ion-list>
 
-
   </ion-content>
-
-
 </ion-view>

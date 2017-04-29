@@ -40,6 +40,11 @@ angular.module('beeround.beer', [])
       });
     });
 
+    $scope.showSelectValue = function(radiusSelect) {
+      var str = radiusSelect;
+      str = radiusSelect.substring(0, str.length - 3);
+      console.log(str);
+    }
 
 
   });
