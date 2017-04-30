@@ -15,7 +15,7 @@ angular.module('beeround.services', [])
         });
       };
 
-      this.getBrewerysNearCoordinates = function (lat,lng,radius) {
+      this.getBreweriesNearCoordinates = function (lat,lng,radius) {
         return $http.get('http://api.brewerydb.com/v2//search/geo/point?lat='+lat+'&lng='+lng+'&radius='+radius+'&unit=km&key=7802f26125b23378098b3c32911adcce').then(function (res) {
           return res.data;
         });

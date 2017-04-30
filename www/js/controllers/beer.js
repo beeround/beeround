@@ -48,6 +48,7 @@ angular.module('beeround.beer', [])
     // Get breweries function
     // When parameter is given, disable geolocation
     function getBreweries(noGeo) {
+      $scope.breweries = [];
 
       // TODO ERROR HANDLING
       // Setup the loader
@@ -57,9 +58,17 @@ angular.module('beeround.beer', [])
       });
 
       if(noGeo){
-        beerService.getBrewerysNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
-          $scope.breweries = result.data;
+        beerService.getBreweriesNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
+          // Map results and push beer informations in breweries array
+          result.data.map(brewery => {
+            beerService.getBeersByBrewery(brewery.brewery.id).then(allBeerByBrewery => {
+              brewery.beers = allBeerByBrewery.data;
+              $scope.breweries.push(brewery);
+            });
+          });
           $ionicLoading.hide()
+
+
         });
       }
       else {
@@ -75,11 +84,18 @@ angular.module('beeround.beer', [])
 
             $http.get('http://nominatim.openstreetmap.org/reverse?lat='+$scope.lat+'&lon='+$scope.lng+'&format=json').then(result => {
               $scope.location = result.data.address;
-              beerService.getBrewerysNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
-                $scope.breweries = result.data;
+
+              // GET BREWERIES
+              beerService.getBreweriesNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
+                result.data.map(brewery => {
+                  beerService.getBeersByBrewery(brewery.brewery.id).then(allBeerByBrewery => {
+                    brewery.beers = allBeerByBrewery.data;
+                    $scope.breweries.push(brewery);
+                  });
+                });
                 $ionicLoading.hide()
               });
-            })
+            });
           }, function(err) {
             $scope.connectionError = true;
             //TODO ERROR: NO INTERNET; NO GPS OR ELSE
