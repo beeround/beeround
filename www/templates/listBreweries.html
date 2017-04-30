@@ -22,30 +22,36 @@
     </div>
 
     <!-- Show when coordinates saved-->
+
     <div ng-show="lat" class="card">
       <div class="item item-text-wrap">
-        <label class="item">
-          <p>Radius</p>
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Radius
+          </div>
           <select ng-model="radiusSelect" ng-change="showSelectValue(radiusSelect)">
             <option ng-selected="radius == 10">10 km</option>
             <option  ng-selected="radius == 30">30 km</option>
             <option  ng-selected="radius == 50">50 km</option>
             <option  ng-selected="radius == 80">80 km</option>
             <option  ng-selected="radius == 100">100 km</option>
-
           </select>
         </label>
+
       </div>
     </div>
 
     <ion-list>
-      <ion-item ng-repeat="location in breweries" ng-href="#/tab/list/{{location.brewery.id}}">
-
-        <p>
-          {{location.brewery.nameShortDisplay}}
-          <span class="badge badge-positive">{{location.distance}}km</span>
-
-        </p>
+      <ion-item ng-repeat="location in breweries">
+        <a class="item item-thumbnail-left"  ng-href="#/tab/list/{{location.brewery.id}}">
+          <img ng-src="{{location.brewery.images.icon || '/img/no-image-placeholder.png'}}">
+          <h2 class="text-center">{{location.brewery.nameShortDisplay}}</h2>
+          <p class="text-center">{{location.locality}}</p>
+          <p class="text-center">Entfernung:
+            <strong>{{location.distance}}km</strong>
+          </p>
+        </a>
       </ion-item>
     </ion-list>
 

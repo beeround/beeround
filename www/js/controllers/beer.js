@@ -1,5 +1,5 @@
 angular.module('beeround.beer', [])
-  .controller('breweriesListCtrl', function($scope, beerService, $http, $cordovaGeolocation) {
+  .controller('breweriesListCtrl', function($scope, beerService, $http, $cordovaGeolocation, $ionicLoading) {
 
     $scope.place = undefined;
 
@@ -16,10 +16,17 @@ angular.module('beeround.beer', [])
       types: ['geocode']
     };
 
+    // Setup the loader
+    $ionicLoading.show({
+      content: 'Loading',
+      animation: 'fade-in',
+    });
+
     // Don't wait till death
     var posOptions = {timeout: 20000, enableHighAccuracy: false};
 
     // Geolocation
+
     $cordovaGeolocation
       .getCurrentPosition(posOptions)
       .then(function (position) {
@@ -28,7 +35,6 @@ angular.module('beeround.beer', [])
 
         $http.get('http://nominatim.openstreetmap.org/reverse?lat='+$scope.lat+'&lon='+$scope.lng+'&format=json').then(result => {
           $scope.location = result.data.address;
-
           getBreweries();
 
         })
@@ -66,8 +72,10 @@ angular.module('beeround.beer', [])
 
     // Get breweries function
     function getBreweries() {
+
       beerService.getBrewerysNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
         $scope.breweries = result.data;
+        $ionicLoading.hide()
       });
       // TODO NO Breweries FOUND
     }
