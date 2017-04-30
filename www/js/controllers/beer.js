@@ -16,33 +16,8 @@ angular.module('beeround.beer', [])
       types: ['geocode']
     };
 
-    // Setup the loader
-    $ionicLoading.show({
-      content: 'Loading',
-      animation: 'fade-in',
-    });
-
-    // Don't wait till death
-    var posOptions = {timeout: 20000, enableHighAccuracy: false};
-
-    // Geolocation
-
-    $cordovaGeolocation
-      .getCurrentPosition(posOptions)
-      .then(function (position) {
-        $scope.lat  = position.coords.latitude;
-        $scope.lng = position.coords.longitude;
-
-        $http.get('http://nominatim.openstreetmap.org/reverse?lat='+$scope.lat+'&lon='+$scope.lng+'&format=json').then(result => {
-          $scope.location = result.data.address;
-          getBreweries();
-
-        })
-      }, function(err) {
-        $scope.connectionError = true;
-        //TODO ERROR: NO INTERNET; NO GPS OR ELSE
-      });
-
+    // Load breweries on start
+    getBreweries();
 
     // on manual location change
     $scope.$on('g-places-autocomplete:select', function(event, place) {
@@ -53,7 +28,7 @@ angular.module('beeround.beer', [])
       $scope.location = {
         town : place.formatted_address
       };
-      getBreweries();
+      getBreweries("noGeo");
     });
 
     // filters
@@ -65,28 +40,73 @@ angular.module('beeround.beer', [])
       $scope.radius = str;
 
       // Reload breweries
-      getBreweries();
+      getBreweries("noGeo");
     };
 
 
 
     // Get breweries function
-    function getBreweries() {
+    // When parameter is given, disable geolocation
+    function getBreweries(noGeo) {
 
-      beerService.getBrewerysNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
-        $scope.breweries = result.data;
-        $ionicLoading.hide()
+      // TODO ERROR HANDLING
+      // Setup the loader
+      $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
       });
-      // TODO NO Breweries FOUND
+
+      if(noGeo){
+        beerService.getBrewerysNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
+          $scope.breweries = result.data;
+          $ionicLoading.hide()
+        });
+      }
+      else {
+        // Don't wait till death
+        var posOptions = {timeout: 20000, enableHighAccuracy: false};
+
+        // Geolocation
+        $cordovaGeolocation
+          .getCurrentPosition(posOptions)
+          .then(function (position) {
+            $scope.lat  = position.coords.latitude;
+            $scope.lng = position.coords.longitude;
+
+            $http.get('http://nominatim.openstreetmap.org/reverse?lat='+$scope.lat+'&lon='+$scope.lng+'&format=json').then(result => {
+              $scope.location = result.data.address;
+              beerService.getBrewerysNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
+                $scope.breweries = result.data;
+                $ionicLoading.hide()
+              });
+            })
+          }, function(err) {
+            $scope.connectionError = true;
+            //TODO ERROR: NO INTERNET; NO GPS OR ELSE
+          });
+      }
+
+
+
+
     }
 
 
   })
   .controller('beerListCtrl', function($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
     const breweryId = $stateParams.brewery;
+
+    // Get beers
     beerService.getBeersByBrewery(breweryId).then(result => {
       $scope.beerList = result.data;
-    })
+    });
+
+    // Get brewery informations
+    beerService.getBreweryById(breweryId).then(result => {
+      $scope.brewery = result.data;
+    });
+
+    // TODO ERROR HANDLING
 
 
   });

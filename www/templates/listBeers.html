@@ -1,6 +1,10 @@
 <ion-view title="Beers">
 
   <ion-content>
+    <h2>{{brewery.nameShortDisplay}}</h2>
+    <p>{{brewery.locations[0].streetAddress}}</p>
+    <p>{{brewery.locations[0].locality}}</p>
+
     <ion-list>
       <ion-item ng-repeat="beer in beerList">
 
