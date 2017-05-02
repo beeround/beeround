@@ -63,6 +63,20 @@
       </div>
     </div>
 
+    <div ng-show="lat" class="card">
+      <div class="item item-text-wrap">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Ist geöffnet
+          </div>
+          <select ng-model="isOpen" ng-change="showOpenOrClosedLocations(openClosedSelect)">
+            <option ng-selected="openOrClosed == Y">Ja</option>
+            <option  ng-selected="openOrClosed == N">Nein</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
     <ion-list>
       <ion-item ng-repeat="location in breweries">
         <a class="item item-thumbnail-left"  ng-href="#/tab/list/{{location.brewery.id}}">

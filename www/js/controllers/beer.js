@@ -50,8 +50,19 @@ angular.module('beeround.beer', [])
       var str = locationSelect;
       console.log(str);
 
-      // Write new radius in variable
-      $scope.locationType = str;
+      //TODO: Reload Filter with new Select
+
+      // Reload breweries
+      getBreweries("noGeo");
+    };
+
+
+    //Filter: Get the selected location Type and push it to getBreweries function
+    $scope.showOpenOrClosedLocations = function(openClosedSelect) {
+      var str = openClosedSelect;
+      console.log(str);
+
+      //TODO: Reload Filter with new Select
 
       // Reload breweries
       getBreweries("noGeo");
