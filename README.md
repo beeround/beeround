@@ -21,4 +21,12 @@ $ git push https://github.com/beeround/beeround.git
 $ git st
 
 # Upload to Ionic (!! This overrides the old files)
-$ ionic upload
+$ ionic upload <br />
+
+# I want to start a local server
+1.Install the plugin to allow Cross Origin: <br />
+https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi <br /> 
+2. Install the cordova pluign to allow geolocation <br />
+$ cordova plugin add cordova-plugin-geolocation <br /> 
+3. Start the server <br />
+$ ionic serve --address localhost <br />
