@@ -3,6 +3,9 @@ angular.module('beeround.beer', [])
 
     $scope.place = undefined;
 
+    //INIT
+    $scope.listType = breweryList;
+
     // INIT radius var and set to  50
     $scope.radius = 50;
 
@@ -32,6 +35,7 @@ angular.module('beeround.beer', [])
     });
 
     // filters
+
     //filter: Get the selected radius from users position
     $scope.showSelectValue = function(radiusSelect) {
       var str = radiusSelect;
@@ -66,6 +70,14 @@ angular.module('beeround.beer', [])
 
       // Reload breweries
       getBreweries("noGeo");
+    };
+
+    $scope.showBreweriesOrBeers = function(listTypeSelect){
+      // Write new radius in variable
+      $scope.listType = listTypeSelect;
+
+      // Reload beers
+      getBeers("noGeo");
     };
 
 
