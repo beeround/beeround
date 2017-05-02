@@ -102,10 +102,6 @@ angular.module('beeround.beer', [])
           }
 
           //TODO ERROR HANDLING
-          $ionicLoading.hide();
-
-
-
 
         });
       }
