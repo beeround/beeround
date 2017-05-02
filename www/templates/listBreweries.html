@@ -29,10 +29,11 @@
           <div class="input-label">
             Zeige mir Brauereien oder Biere
           </div>
+
           <!--Filter, if the user sees a list with brewerys or beers.-->
-          <select ng-model="listTypeSelect" ng-change="showBreweriesOrBeers(listTypeSelect)">
-            <option ng-selected="listType == breweryList">Brauereien</option>
-            <option ng-selected="listType == beerlist">Biere</option>
+          <select ng-model="listTypeSelect">
+            <option value="breweryList">Brauereien</option>
+            <option value="beerList">Biere</option>
           </select>
         </label>
       </div>
@@ -97,7 +98,7 @@
     <!--</div>-->
 
     <!--Get a list from all breweries around the users location-->
-    <ion-list>
+    <ion-list ng-show="listTypeSelect == 'breweryList'">
       <ion-item ng-repeat="location in breweries">
         <a class="item item-thumbnail-left"  ng-href="#/tab/list/{{location.brewery.id}}">
           <img ng-src="{{location.brewery.images.icon || '/img/no-image-placeholder.png'}}">
@@ -111,5 +112,8 @@
       </ion-item>
     </ion-list>
 
+    <ion-list ng-show="listTypeSelect == 'beerList'">
+      <h2>Beers</h2>
+    </ion-list>
   </ion-content>
 </ion-view>

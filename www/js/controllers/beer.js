@@ -4,7 +4,7 @@ angular.module('beeround.beer', [])
     $scope.place = undefined;
 
     //INIT
-    $scope.listType = breweryList;
+    $scope.listTypeSelect = "breweryList";
 
     // INIT radius var and set to  50
     $scope.radius = 50;
@@ -71,15 +71,6 @@ angular.module('beeround.beer', [])
       // Reload breweries
       getBreweries("noGeo");
     };
-
-    $scope.showBreweriesOrBeers = function(listTypeSelect){
-      // Write new radius in variable
-      $scope.listType = listTypeSelect;
-
-      // Reload beers
-      getBeers("noGeo");
-    };
-
 
     // Get breweries function
     // When parameter is given, disable geolocation
@@ -193,7 +184,6 @@ angular.module('beeround.beer', [])
   .controller('beerDetailsCtrl', function($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
     const beerId = $stateParams.beerId;
 
-    console.log("hi")
     beerService.getBeerDetails(beerId).then(result => {
       $scope.beer = result.data;
 
