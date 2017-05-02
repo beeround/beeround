@@ -28,6 +28,7 @@
           <div class="input-label">
             Radius
           </div>
+          <!--Filter, in which radius the brewery should be away from the user-->
           <select ng-model="radiusSelect" ng-change="showSelectValue(radiusSelect)">
             <option ng-selected="radius == 10">10 km</option>
             <option  ng-selected="radius == 30">30 km</option>
@@ -47,6 +48,7 @@
           <div class="input-label">
             Art der Brauerei
           </div>
+          <!--Filter, which type of locations the user want to see-->
           <select ng-model="locationSelect" ng-change="showLocationType(locationSelect)">
             <option ng-selected="locationType == micro">Kleinstbrauerei</option>
             <option  ng-selected="locationType == nano">Mittelgroße Brauerei</option>
@@ -69,6 +71,7 @@
           <div class="input-label">
             Ist geöffnet
           </div>
+          <!--Filter, if location is closed or opened-->
           <select ng-model="isOpen" ng-change="showOpenOrClosedLocations(openClosedSelect)">
             <option ng-selected="openOrClosed == Y">Ja</option>
             <option  ng-selected="openOrClosed == N">Nein</option>
@@ -77,6 +80,7 @@
       </div>
     </div>
 
+    <!--Get a list from all breweries around the users location-->
     <ion-list>
       <ion-item ng-repeat="location in breweries">
         <a class="item item-thumbnail-left"  ng-href="#/tab/list/{{location.brewery.id}}">

@@ -57,7 +57,7 @@ angular.module('beeround.beer', [])
     };
 
 
-    //Filter: Get the selected location Type and push it to getBreweries function
+    //Filter: Get the users select if open or closed and push it to getBreweries function
     $scope.showOpenOrClosedLocations = function(openClosedSelect) {
       var str = openClosedSelect;
       console.log(str);
