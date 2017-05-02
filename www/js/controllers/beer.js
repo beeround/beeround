@@ -1,5 +1,5 @@
 angular.module('beeround.beer', [])
-  .controller('breweriesListCtrl', function($scope, beerService, $http, $cordovaGeolocation, $ionicLoading) {
+  .controller('breweriesListCtrl', function($scope, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout) {
 
     $scope.place = undefined;
 
@@ -83,21 +83,35 @@ angular.module('beeround.beer', [])
 
       if(noGeo){
         beerService.getBreweriesNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
-          // Map results and push beer informations in breweries array
-          result.data.map(brewery => {
-            beerService.getBeersByBrewery(brewery.brewery.id).then(allBeerByBrewery => {
-              brewery.beers = allBeerByBrewery.data;
-              $scope.breweries.push(brewery);
+
+          if(result.data){
+            // Get beers
+            let promises = result.data.map(function(obj){
+              return getBeers(obj).then(result => {
+                return result
+              });
             });
-          });
-          $ionicLoading.hide()
+
+            // Save to var
+            Promise.all(promises).then(function(results) {
+              $timeout(function () {
+                $scope.breweries = results;
+                $ionicLoading.hide();
+              },0);
+            });
+          }
+
+          //TODO ERROR HANDLING
+          $ionicLoading.hide();
+
+
 
 
         });
       }
       else {
         // Don't wait till death
-        var posOptions = {timeout: 20000, enableHighAccuracy: false};
+        let posOptions = {timeout: 20000, enableHighAccuracy: false};
 
         // Geolocation
         $cordovaGeolocation
@@ -109,15 +123,27 @@ angular.module('beeround.beer', [])
             $http.get('http://nominatim.openstreetmap.org/reverse?lat='+$scope.lat+'&lon='+$scope.lng+'&format=json').then(result => {
               $scope.location = result.data.address;
 
+
               // GET BREWERIES
               beerService.getBreweriesNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
-                result.data.map(brewery => {
-                  beerService.getBeersByBrewery(brewery.brewery.id).then(allBeerByBrewery => {
-                    brewery.beers = allBeerByBrewery.data;
-                    $scope.breweries.push(brewery);
+
+                // Get beers
+                let promises = result.data.map(function(obj){
+                  return getBeers(obj).then(result => {
+                    return result
                   });
                 });
-                $ionicLoading.hide()
+
+                // Save to var
+                Promise.all(promises).then(function(results) {
+                  $timeout(function () {
+                    $scope.breweries = results;
+                    $ionicLoading.hide();
+                  },0);
+                });
+
+
+
               });
             });
           }, function(err) {
@@ -125,12 +151,18 @@ angular.module('beeround.beer', [])
             //TODO ERROR: NO INTERNET; NO GPS OR ELSE
           });
       }
-
-
-
-
     }
 
+    function getBeers(brewery) {
+      return new Promise(function(resolve, reject) {
+        beerService.getBeersByBrewery(brewery.brewery.id).then(allBeerByBrewery => {
+          brewery.beers = allBeerByBrewery.data;
+          return resolve(brewery);
+        }, function () {
+          console.log("err")
+        });
+      });
+    }
 
   })
   .controller('beerListCtrl', function($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
