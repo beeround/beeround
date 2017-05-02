@@ -103,6 +103,9 @@ angular.module('beeround.beer', [])
               },0);
             });
           }
+          else {
+            $ionicLoading.hide();
+          }
 
           //TODO ERROR HANDLING
 
