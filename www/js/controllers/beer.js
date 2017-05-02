@@ -177,6 +177,18 @@ angular.module('beeround.beer', [])
     // TODO ERROR HANDLING
 
 
+  })
+  .controller('beerDetailsCtrl', function($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
+    const beerId = $stateParams.beerId;
+
+    console.log("hi")
+    beerService.getBeerDetails(beerId).then(result => {
+      $scope.beer = result.data;
+
+    })
+
+
+
   });
 
 

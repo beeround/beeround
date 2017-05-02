@@ -30,7 +30,13 @@ angular.module('beeround.services', [])
         return $http.get('http://api.brewerydb.com/v2/brewery/'+breweryId+'?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
           return res.data;
         });
-      }
+      };
+
+      this.getBeerDetails = function (beerId) {
+        return $http.get('http://api.brewerydb.com/v2/beer/'+beerId+'?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
+          return res.data;
+        });
+      };
     }
 
 ]);

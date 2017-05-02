@@ -59,6 +59,15 @@ angular.module('beeround', ['ionic','ngCordova', 'google.places','beeround.index
         }
       }
     })
+    .state('tabs.beerDetails', {
+      url: '/details/beer/:beerId',
+      views: {
+        'tab-list': {
+          templateUrl: 'templates/beerDetails.html',
+          controller: 'beerDetailsCtrl'
+        }
+      }
+    })
     .state('tabs.map', {
       url: '/map',
       views: {
