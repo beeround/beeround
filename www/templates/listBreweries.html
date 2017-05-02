@@ -22,10 +22,8 @@
     </div>
 
     <!-- Show when coordinates saved-->
-
     <div ng-show="lat" class="card">
       <div class="item item-text-wrap">
-
         <label class="item item-input item-select">
           <div class="input-label">
             Radius
@@ -38,7 +36,30 @@
             <option  ng-selected="radius == 100">100 km</option>
           </select>
         </label>
+      </div>
+    </div>
 
+
+    <div ng-show="lat" class="card">
+      <div class="item item-text-wrap">
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Art der Brauerei
+          </div>
+          <select ng-model="locationSelect" ng-change="showLocationType(locationSelect)">
+            <option ng-selected="locationType == micro">Kleinstbrauerei</option>
+            <option  ng-selected="locationType == nano">Mittelgroße Brauerei</option>
+            <option  ng-selected="locationType == macro">Großbrauerei</option>
+            <option  ng-selected="locationType == production">Produktion</option>
+            <option  ng-selected="locationType == tasting">Biertasting</option>
+            <option  ng-selected="locationType == prewpub">Brauereipub (mit Restaurant)</option>
+            <option  ng-selected="locationType == restaurant">Restaurant (ohne Brauerei)</option>
+            <!--<option  ng-selected="radius == office">Brauerei Büro</option>-->
+            <!--<option  ng-selected="radius == cidery">100 km</option>-->
+            <!--<option  ng-selected="radius == meadery"></option>-->
+          </select>
+        </label>
       </div>
     </div>
 

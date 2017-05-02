@@ -32,6 +32,7 @@ angular.module('beeround.beer', [])
     });
 
     // filters
+    //filter: Get the selected radius from users position
     $scope.showSelectValue = function(radiusSelect) {
       var str = radiusSelect;
       str = radiusSelect.substring(0, str.length - 3);
@@ -43,6 +44,18 @@ angular.module('beeround.beer', [])
       getBreweries("noGeo");
     };
 
+
+    //Filter: Get the selected location Type and push it to getBreweries function
+    $scope.showLocationType = function(locationSelect) {
+      var str = locationSelect;
+      console.log(str);
+
+      // Write new radius in variable
+      $scope.locationType = str;
+
+      // Reload breweries
+      getBreweries("noGeo");
+    };
 
 
     // Get breweries function
