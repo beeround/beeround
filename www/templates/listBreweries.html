@@ -48,10 +48,10 @@
           <!--Filter, in which radius the brewery should be away from the user-->
           <select ng-model="radiusSelect" ng-change="showSelectValue(radiusSelect)">
             <option ng-selected="radius == 10">10 km</option>
-            <option  ng-selected="radius == 30">30 km</option>
-            <option  ng-selected="radius == 50">50 km</option>
-            <option  ng-selected="radius == 80">80 km</option>
-            <option  ng-selected="radius == 100">100 km</option>
+            <option ng-selected="radius == 30">30 km</option>
+            <option ng-selected="radius == 50">50 km</option>
+            <option ng-selected="radius == 80">80 km</option>
+            <option ng-selected="radius == 100">100 km</option>
           </select>
         </label>
       </div>
@@ -59,48 +59,48 @@
 
 
     <!--<div ng-show="lat" class="card">-->
-      <!--<div class="item item-text-wrap">-->
+    <!--<div class="item item-text-wrap">-->
 
-        <!--<label class="item item-input item-select">-->
-          <!--<div class="input-label">-->
-            <!--Art der Brauerei-->
-          <!--</div>-->
-          <!--&lt;!&ndash;Filter, which type of locations the user want to see&ndash;&gt;-->
-          <!--<select ng-model="locationSelect" ng-change="showLocationType(locationSelect)">-->
-            <!--<option ng-selected="locationType == micro">Kleinstbrauerei</option>-->
-            <!--<option  ng-selected="locationType == nano">Mittelgroße Brauerei</option>-->
-            <!--<option  ng-selected="locationType == macro">Großbrauerei</option>-->
-            <!--<option  ng-selected="locationType == production">Produktion</option>-->
-            <!--<option  ng-selected="locationType == tasting">Biertasting</option>-->
-            <!--<option  ng-selected="locationType == prewpub">Brauereipub (mit Restaurant)</option>-->
-            <!--<option  ng-selected="locationType == restaurant">Restaurant (ohne Brauerei)</option>-->
-            <!--&lt;!&ndash;<option  ng-selected="radius == office">Brauerei Büro</option>&ndash;&gt;-->
-            <!--&lt;!&ndash;<option  ng-selected="radius == cidery">100 km</option>&ndash;&gt;-->
-            <!--&lt;!&ndash;<option  ng-selected="radius == meadery">Wein</option>&ndash;&gt;-->
-          <!--</select>-->
-        <!--</label>-->
-      <!--</div>-->
+    <!--<label class="item item-input item-select">-->
+    <!--<div class="input-label">-->
+    <!--Art der Brauerei-->
+    <!--</div>-->
+    <!--&lt;!&ndash;Filter, which type of locations the user want to see&ndash;&gt;-->
+    <!--<select ng-model="locationSelect" ng-change="showLocationType(locationSelect)">-->
+    <!--<option ng-selected="locationType == micro">Kleinstbrauerei</option>-->
+    <!--<option  ng-selected="locationType == nano">Mittelgroße Brauerei</option>-->
+    <!--<option  ng-selected="locationType == macro">Großbrauerei</option>-->
+    <!--<option  ng-selected="locationType == production">Produktion</option>-->
+    <!--<option  ng-selected="locationType == tasting">Biertasting</option>-->
+    <!--<option  ng-selected="locationType == prewpub">Brauereipub (mit Restaurant)</option>-->
+    <!--<option  ng-selected="locationType == restaurant">Restaurant (ohne Brauerei)</option>-->
+    <!--&lt;!&ndash;<option  ng-selected="radius == office">Brauerei Büro</option>&ndash;&gt;-->
+    <!--&lt;!&ndash;<option  ng-selected="radius == cidery">100 km</option>&ndash;&gt;-->
+    <!--&lt;!&ndash;<option  ng-selected="radius == meadery">Wein</option>&ndash;&gt;-->
+    <!--</select>-->
+    <!--</label>-->
+    <!--</div>-->
     <!--</div>-->
 
     <!--<div ng-show="lat" class="card">-->
-      <!--<div class="item item-text-wrap">-->
-        <!--<label class="item item-input item-select">-->
-          <!--<div class="input-label">-->
-            <!--Ist geöffnet-->
-          <!--</div>-->
-          <!--&lt;!&ndash;Filter, if location is closed or opened&ndash;&gt;-->
-          <!--<select ng-model="isOpen" ng-change="showOpenOrClosedLocations(openClosedSelect)">-->
-            <!--<option ng-selected="openOrClosed == Y">Ja</option>-->
-            <!--<option  ng-selected="openOrClosed == N">Nein</option>-->
-          <!--</select>-->
-        <!--</label>-->
-      <!--</div>-->
+    <!--<div class="item item-text-wrap">-->
+    <!--<label class="item item-input item-select">-->
+    <!--<div class="input-label">-->
+    <!--Ist geöffnet-->
+    <!--</div>-->
+    <!--&lt;!&ndash;Filter, if location is closed or opened&ndash;&gt;-->
+    <!--<select ng-model="isOpen" ng-change="showOpenOrClosedLocations(openClosedSelect)">-->
+    <!--<option ng-selected="openOrClosed == Y">Ja</option>-->
+    <!--<option  ng-selected="openOrClosed == N">Nein</option>-->
+    <!--</select>-->
+    <!--</label>-->
+    <!--</div>-->
     <!--</div>-->
 
     <!--Get a list from all breweries around the users location-->
     <ion-list ng-show="listTypeSelect == 'breweryList'">
       <ion-item ng-repeat="location in breweries">
-        <a class="item item-thumbnail-left"  ng-href="#/tab/list/{{location.brewery.id}}">
+        <a class="item item-thumbnail-left" ng-href="#/tab/list/{{location.brewery.id}}">
           <img ng-src="{{location.brewery.images.icon || '/img/no-image-placeholder.png'}}">
           <h2 class="text-center">{{location.brewery.nameShortDisplay}}</h2>
           <p class="text-center">{{location.locality}}</p>
@@ -113,7 +113,17 @@
     </ion-list>
 
     <ion-list ng-show="listTypeSelect == 'beerList'">
-      <h2>Beers</h2>
+      <ion-item ng-repeat="location in breweries">
+        <h5>{{location.brewery.nameShortDisplay}}</h5>
+        <ion-item ng-repeat="beer in location.beers">
+          <a class="item item-thumbnail-left" ng-href="#/tab/details/beer/{{beer.id}}">
+            <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
+            <p class="text-center">{{beer.name}}</p>
+            <p></p>
+          </a>
+        </ion-item>
+
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-view>
