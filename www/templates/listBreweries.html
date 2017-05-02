@@ -57,46 +57,6 @@
       </div>
     </div>
 
-
-    <!--<div ng-show="lat" class="card">-->
-    <!--<div class="item item-text-wrap">-->
-
-    <!--<label class="item item-input item-select">-->
-    <!--<div class="input-label">-->
-    <!--Art der Brauerei-->
-    <!--</div>-->
-    <!--&lt;!&ndash;Filter, which type of locations the user want to see&ndash;&gt;-->
-    <!--<select ng-model="locationSelect" ng-change="showLocationType(locationSelect)">-->
-    <!--<option ng-selected="locationType == micro">Kleinstbrauerei</option>-->
-    <!--<option  ng-selected="locationType == nano">Mittelgroße Brauerei</option>-->
-    <!--<option  ng-selected="locationType == macro">Großbrauerei</option>-->
-    <!--<option  ng-selected="locationType == production">Produktion</option>-->
-    <!--<option  ng-selected="locationType == tasting">Biertasting</option>-->
-    <!--<option  ng-selected="locationType == prewpub">Brauereipub (mit Restaurant)</option>-->
-    <!--<option  ng-selected="locationType == restaurant">Restaurant (ohne Brauerei)</option>-->
-    <!--&lt;!&ndash;<option  ng-selected="radius == office">Brauerei Büro</option>&ndash;&gt;-->
-    <!--&lt;!&ndash;<option  ng-selected="radius == cidery">100 km</option>&ndash;&gt;-->
-    <!--&lt;!&ndash;<option  ng-selected="radius == meadery">Wein</option>&ndash;&gt;-->
-    <!--</select>-->
-    <!--</label>-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div ng-show="lat" class="card">-->
-    <!--<div class="item item-text-wrap">-->
-    <!--<label class="item item-input item-select">-->
-    <!--<div class="input-label">-->
-    <!--Ist geöffnet-->
-    <!--</div>-->
-    <!--&lt;!&ndash;Filter, if location is closed or opened&ndash;&gt;-->
-    <!--<select ng-model="isOpen" ng-change="showOpenOrClosedLocations(openClosedSelect)">-->
-    <!--<option ng-selected="openOrClosed == Y">Ja</option>-->
-    <!--<option  ng-selected="openOrClosed == N">Nein</option>-->
-    <!--</select>-->
-    <!--</label>-->
-    <!--</div>-->
-    <!--</div>-->
-
     <!--Get a list from all breweries around the users location-->
     <ion-list ng-show="listTypeSelect == 'breweryList'">
       <ion-item ng-repeat="location in breweries">
@@ -107,6 +67,7 @@
           <p class="text-center">Entfernung:
             <strong>{{location.distance}}km</strong>
           </p>
+          <p ng-show="location.openToPublic == 'Y'" class="text-center">Zugänglich für Öffentlichkeit</p>
           <p class="text-center">{{location.beers.length}} Biere</p>
         </a>
       </ion-item>
