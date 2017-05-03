@@ -115,6 +115,7 @@ angular.module('beeround.beer', [])
         // Don't wait till death
         let posOptions = {timeout: 20000, enableHighAccuracy: false};
 
+
         // Geolocation
         $cordovaGeolocation
           .getCurrentPosition(posOptions)
@@ -143,8 +144,6 @@ angular.module('beeround.beer', [])
                     $ionicLoading.hide();
                   },0);
                 });
-
-
 
               });
             });
@@ -184,6 +183,57 @@ angular.module('beeround.beer', [])
 
 
   })
+  .controller('mapCtrl', function($scope, beerService, $http, $cordovaGeolocation, $ionicLoading) {
+
+    let options = {timeout: 10000, enableHighAccuracy: true};
+
+    // Setup the loader
+    $ionicLoading.show({
+      content: 'Loading',
+      animation: 'fade-in',
+    });
+
+    $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+
+      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+      let mapOptions = {
+        center: latLng,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+      // Hide loading
+      $ionicLoading.hide();
+
+      //Wait until the map is loaded
+      google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+
+        let marker = new google.maps.Marker({
+          map: $scope.map,
+          animation: google.maps.Animation.DROP,
+          position: latLng
+        });
+
+        let infoWindow = new google.maps.InfoWindow({
+          content: "Here I am!"
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+          infoWindow.open($scope.map, marker);
+        });
+
+      });
+
+
+    }, function(error){
+      console.log("Could not get location");
+    });
+
+
+  })
   .controller('beerDetailsCtrl', function($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
     const beerId = $stateParams.beerId;
 
@@ -191,8 +241,6 @@ angular.module('beeround.beer', [])
       $scope.beer = result.data;
 
     })
-
-
 
   });
 

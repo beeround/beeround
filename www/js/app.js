@@ -73,7 +73,7 @@ angular.module('beeround', ['ionic','ngCordova', 'google.places','beeround.index
       views: {
         'tab-map': {
           templateUrl: 'templates/mapView.html',
-          controller: 'breweriesListCtrl'
+          controller: 'mapCtrl'
         }
       }
     });
