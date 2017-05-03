@@ -7,6 +7,7 @@ angular.module('beeround.index', [])
       $ionicSideMenuDelegate.toggleRight();
     };
 
+
     // Form data for the login modal
     $scope.loginData = {};
 
