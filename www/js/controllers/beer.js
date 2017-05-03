@@ -205,10 +205,27 @@ angular.module('beeround.beer', [])
 
       $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+      //Enable Infowindow
+      let infowindow = new google.maps.InfoWindow;
+
+      let myposition = new google.maps.Marker({
+        position: latLng,
+        map: $scope.map,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 5
+        },
+      });
+
+      google.maps.event.addListener(myposition, 'click', (function(myposition) {
+        return function() {
+          infowindow.setContent("Du bist hier");
+          infowindow.open(map, myposition);
+        }
+      })(myposition));
+
       //GET Breweries around
       beerService.getBreweriesNearCoordinates(position.coords.latitude, position.coords.longitude, 40).then(location => {
-
-        let infowindow = new google.maps.InfoWindow;
 
         location.data.map((result,index) => {
           let marker = new google.maps.Marker({
