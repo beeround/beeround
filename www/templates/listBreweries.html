@@ -39,13 +39,13 @@
       </div>
     </div>
 
+    <!--Filter, in which radius the brewery should be away from the user-->
     <div ng-show="lat" class="card">
       <div class="item item-text-wrap">
         <label class="item item-input item-select">
           <div class="input-label">
             Radius
           </div>
-          <!--Filter, in which radius the brewery should be away from the user-->
           <select ng-model="radiusSelect" ng-change="showSelectValue(radiusSelect)">
             <option ng-selected="radius == 10">10 km</option>
             <option ng-selected="radius == 20">20 km</option>
@@ -57,11 +57,7 @@
       </div>
     </div>
 
-
-
-
-
-
+    <!--Filter, in which locality the place should be-->
     <div ng-show="lat" class="card">
       <div class="item item-text-wrap">
         <label class="item item-input item-select">
@@ -78,6 +74,7 @@
       </div>
     </div>
 
+    <!--Filter, which type the brewery should be-->
     <div ng-show="lat" class="card">
       <div class="item item-text-wrap">
         <label class="item item-input item-select">
@@ -93,50 +90,47 @@
         </label>
       </div>
 
-    <div ng-model="sortingOptions">
+      <!--Sorting the brewery and beer list after name, rating and distance-->
+      <div ng-model="sortingOptions">
+        <button ng-click="sortBy('name')">Name</button>
+        <span class="sortorder" ng-show="propertyName === 'name'" ng-class="{reverse: reverse}"></span>
+        <button ng-click="sortBy('rating')">Bewertung</button>
+        <span class="sortorder" ng-show="propertyName === 'rating'" ng-class="{reverse: reverse}"></span>
+        <button ng-click="sortBy('distance')">Entfernung</button>
+        <span class="sortorder" ng-show="propertyName === 'distance'" ng-class="{reverse: reverse}"></span>
+      </div>
 
-      <button ng-click="sortBy('name')">Name</button>
-      <span class="sortorder" ng-show="propertyName === 'name'" ng-class="{reverse: reverse}"></span>
-
-      <button ng-click="sortBy('rating')">Bewertung</button>
-      <span class="sortorder" ng-show="propertyName === 'rating'" ng-class="{reverse: reverse}"></span>
-
-
-      <button ng-click="sortBy('distance')">Entfernung</button>
-      <span class="sortorder" ng-show="propertyName === 'distance'" ng-class="{reverse: reverse}"></span>
-    </div>
-
-
-
-    <!--Get a list from all breweries around the users location-->
-    <ion-list ng-show="listTypeSelect == 'breweryList'">
-      <ion-item ng-show="(location.locationType == filterLocationType || filterLocationType == 'allLocationTypes') && (location.locality == citySelect || citySelect == 'allCities')"
-        ng-repeat="location in breweries">
-        <a class="item item-thumbnail-left" ng-href="#/tab/list/{{location.brewery.id}}">
-          <img ng-src="{{location.brewery.images.icon || '/img/no-image-placeholder.png'}}">
-          <h2 class="text-center">{{location.brewery.name}}</h2>
-          <p class="text-center">{{location.locality}}</p>
-          <p class="text-center">Entfernung:
-            <strong>{{location.distance}}km</strong>
-          </p>
-          <p ng-show="location.openToPublic == 'Y'" class="text-center">Zugänglich für Öffentlichkeit</p>
-          <p class="text-center">{{location.beers.length}} Biere</p>
-        </a>
-      </ion-item>
-    </ion-list>
-
-    <ion-list ng-show="listTypeSelect == 'beerList'">
-      <ion-item ng-show="citySelect == 'allCities' || citySelect == location.locality" ng-repeat="location in breweries">
-        <a ng-href="#/tab/list/{{location.brewery.id}}">
-          <h5>{{location.brewery.name}}</h5></a>
-        <ion-item ng-repeat="beer in location.beers">
-          <a class="item item-thumbnail-left" ng-href="#/tab/details/beer/{{beer.id}}">
-            <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
-            <p class="text-center">{{beer.name}}</p>
-            <p></p>
+      <!--Get a list from all breweries around the users location-->
+      <ion-list ng-show="listTypeSelect == 'breweryList'">
+        <ion-item
+          ng-show="(location.locationType == filterLocationType || filterLocationType == 'allLocationTypes') && (location.locality == citySelect || citySelect == 'allCities')"
+          ng-repeat="location in breweries">
+          <a class="item item-thumbnail-left" ng-href="#/tab/list/{{location.brewery.id}}">
+            <img ng-src="{{location.brewery.images.icon || '/img/no-image-placeholder.png'}}">
+            <h2 class="text-center">{{location.brewery.name}}</h2>
+            <p class="text-center">{{location.locality}}</p>
+            <p class="text-center">Entfernung:
+              <strong>{{location.distance}}km</strong>
+            </p>
+            <p ng-show="location.openToPublic == 'Y'" class="text-center">Zugänglich für Öffentlichkeit</p>
+            <p class="text-center">{{location.beers.length}} Biere</p>
           </a>
         </ion-item>
-      </ion-item>
-    </ion-list>
+      </ion-list>
+
+      <ion-list ng-show="listTypeSelect == 'beerList'">
+        <ion-item ng-show="citySelect == 'allCities' || citySelect == location.locality"
+                  ng-repeat="location in breweries">
+          <a ng-href="#/tab/list/{{location.brewery.id}}">
+            <h5>{{location.brewery.name}}</h5></a>
+          <ion-item ng-repeat="beer in location.beers">
+            <a class="item item-thumbnail-left" ng-href="#/tab/details/beer/{{beer.id}}">
+              <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
+              <p class="text-center">{{beer.name}}</p>
+              <p></p>
+            </a>
+          </ion-item>
+        </ion-item>
+      </ion-list>
   </ion-content>
 </ion-view>
