@@ -2,41 +2,52 @@ angular.module('beeround.services', [])
   .service('beerService', ['$http', '$q',
     function ($http, $q) {
 
-      this.getBrewerys = function () {
-        return $http.get('http://api.brewerydb.com/v2/locations?postalCode=70173&key=7802f26125b23378098b3c32911adcce').then(function (res) {
-          return res.data;
-        });
-      };
+      let breweries;
+      let userSettings;
 
-      this.getBrewerysByPLZ = function (plz) {
-        return $http.get('http://api.brewerydb.com/v2/locations?postalCode='+plz+'&key=7802f26125b23378098b3c32911adcce').then(function (res) {
-          return res.data;
-        });
-      };
+      return {
 
-      this.getBreweriesNearCoordinates = function (lat,lng,radius) {
-        return $http.get('http://api.brewerydb.com/v2//search/geo/point?lat='+lat+'&lng='+lng+'&radius='+radius+'&unit=km&key=7802f26125b23378098b3c32911adcce').then(function (res) {
-          return res.data;
-        });
-      };
+        getBreweriesNearCoordinates: function (clientSettings) {
 
-      this.getBeersByBrewery = function (breweryId) {
-        return $http.get('http://api.brewerydb.com/v2/brewery/'+breweryId+'/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
-          return res.data;
-        });
-      };
+          if(angular.equals(userSettings, clientSettings)){
+            console.log("Same settings");
 
-      this.getBreweryById = function (breweryId) {
-        return $http.get('http://api.brewerydb.com/v2/brewery/'+breweryId+'?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
-          return res.data;
-        });
-      };
+            // TODO Implement Beer request
 
-      this.getBeerDetails = function (beerId) {
-        return $http.get('http://api.brewerydb.com/v2/beer/'+beerId+'?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
-          return res.data;
-        });
-      };
+            return new Promise(function(resolve, reject) {
+              resolve(breweries)
+            });
+          }
+          else {
+            // New usersettings, so reload
+            userSettings = angular.copy(clientSettings);
+            console.log("New Usersettings");
+
+            return $http.get('http://api.brewerydb.com/v2//search/geo/point?lat=' + clientSettings.lat + '&lng=' + clientSettings.lng + '&radius=' + clientSettings.radius + '&unit=km&key=7802f26125b23378098b3c32911adcce').then(function (res) {
+              breweries = res.data;
+              return res.data;
+            });
+          }
+        },
+
+        getBeersByBrewery: function (breweryId) {
+          return $http.get('http://api.brewerydb.com/v2/brewery/' + breweryId + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
+            return res.data;
+          });
+        },
+
+        getBreweryById: function (breweryId) {
+          return $http.get('http://api.brewerydb.com/v2/brewery/' + breweryId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
+            return res.data;
+          });
+        },
+
+        getBeerDetails: function (beerId) {
+          return $http.get('http://api.brewerydb.com/v2/beer/' + beerId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
+            return res.data;
+          });
+        }
+      }
     }
 
-]);
+  ]);

@@ -43,6 +43,7 @@ angular.module('beeround.index', [])
   })
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $state) {
 
+
   // GET CURRENT STATE
   $scope.$on('$stateChangeSuccess',
     function(event, toState, toParams, fromState, fromParams) {

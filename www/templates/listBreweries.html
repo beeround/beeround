@@ -17,13 +17,13 @@
     <div class="card">
       <div class="item item-text-wrap">
         <h3>{{location.town || location.village}}</h3>
-        <h3>Radius: {{radius}}km</h3>
+        <h3>Radius: {{userSettings.radius}}km</h3>
       </div>
     </div>
 
     <!-- Show when coordinates saved-->
 
-    <div ng-show="lat" class="card">
+    <div ng-show="userSettings.lat" class="card">
       <div class="item item-text-wrap">
         <label class="item item-input item-select">
           <div class="input-label">
@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div ng-show="lat" class="card">
+    <div ng-show="userSettings.lat" class="card">
       <div class="item item-text-wrap">
         <label class="item item-input item-select">
           <div class="input-label">
@@ -47,17 +47,17 @@
           </div>
           <!--Filter, in which radius the brewery should be away from the user-->
           <select ng-model="radiusSelect" ng-change="showSelectValue(radiusSelect)">
-            <option ng-selected="radius == 10">10 km</option>
-            <option ng-selected="radius == 20">20 km</option>
-            <option ng-selected="radius == 30">30 km</option>
-            <option ng-selected="radius == 40">40 km</option>
-            <option selected ng-selected="radius == 50">50 km</option>
+            <option ng-selected="userSettings.radius == 10">10 km</option>
+            <option ng-selected="userSettings.radius == 20">20 km</option>
+            <option ng-selected="userSettings.radius == 30">30 km</option>
+            <option ng-selected="userSettings.radius == 40">40 km</option>
+            <option selected ng-selected="userSettings.radius == 50">50 km</option>
           </select>
         </label>
       </div>
     </div>
 
-    <div ng-show="lat" class="card">
+    <div ng-show="userSettings.lat" class="card">
       <div class="item item-text-wrap">
         <label class="item item-input item-select">
           <div class="input-label">

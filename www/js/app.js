@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
 angular.module('beeround', ['ionic','ngCordova', 'google.places','beeround.index', 'beeround.beer', 'beeround.services'])
-.run(function($ionicPlatform, $state, $stateParams, $rootScope) {
+.run(function($ionicPlatform, $state, $stateParams, $rootScope, $cordovaGeolocation) {
 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -76,6 +76,7 @@ angular.module('beeround', ['ionic','ngCordova', 'google.places','beeround.index
           controller: 'mapCtrl'
         }
       }
+
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/list');
