@@ -6,6 +6,9 @@ angular.module('beeround.beer', [])
     //INIT
     $scope.listTypeSelect = "breweryList";
 
+    //INIT
+    $scope.citySelect = 'allCities';
+
     // INIT radius var and set to  50
     $scope.radius = 50;
 

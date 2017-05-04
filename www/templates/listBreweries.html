@@ -51,7 +51,23 @@
             <option ng-selected="radius == 20">20 km</option>
             <option ng-selected="radius == 30">30 km</option>
             <option ng-selected="radius == 40">40 km</option>
-            <option ng-selected="radius == 50">50 km</option>
+            <option selected ng-selected="radius == 50">50 km</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div ng-show="lat" class="card">
+      <div class="item item-text-wrap">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Ort
+          </div>
+          <select ng-model="citySelect">
+            <option selected value="allCities">Alle Orte anzeigen</option>
+            <option ng-repeat="location in breweries"
+                    value="{{location.locality}}">{{location.locality}}
+            </option>
           </select>
         </label>
       </div>
@@ -59,7 +75,7 @@
 
     <!--Get a list from all breweries around the users location-->
     <ion-list ng-show="listTypeSelect == 'breweryList'">
-      <ion-item ng-repeat="location in breweries">
+      <ion-item ng-show="citySelect == 'allCities' || citySelect == location.locality" ng-repeat="location in breweries">
         <a class="item item-thumbnail-left" ng-href="#/tab/list/{{location.brewery.id}}">
           <img ng-src="{{location.brewery.images.icon || '/img/no-image-placeholder.png'}}">
           <h2 class="text-center">{{location.brewery.nameShortDisplay}}</h2>
@@ -75,7 +91,8 @@
 
     <ion-list ng-show="listTypeSelect == 'beerList'">
       <ion-item ng-repeat="location in breweries">
-        <h5>{{location.brewery.nameShortDisplay}}</h5>
+        <a ng-href="#/tab/list/{{location.brewery.id}}">
+          <h5>{{location.brewery.nameShortDisplay}}</h5></a>
         <ion-item ng-repeat="beer in location.beers">
           <a class="item item-thumbnail-left" ng-href="#/tab/details/beer/{{beer.id}}">
             <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
