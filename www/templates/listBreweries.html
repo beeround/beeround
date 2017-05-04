@@ -57,6 +57,11 @@
       </div>
     </div>
 
+
+
+
+
+
     <div ng-show="lat" class="card">
       <div class="item item-text-wrap">
         <label class="item item-input item-select">
@@ -73,12 +78,28 @@
       </div>
     </div>
 
+
+    <div ng-model="sortingOptions">
+
+      <button ng-click="sortBy('name')">Name</button>
+      <span class="sortorder" ng-show="propertyName === 'name'" ng-class="{reverse: reverse}"></span>
+
+      <button ng-click="sortBy('rating')">Bewertung</button>
+      <span class="sortorder" ng-show="propertyName === 'rating'" ng-class="{reverse: reverse}"></span>
+
+
+      <button ng-click="sortBy('distance')">Entfernung</button>
+      <span class="sortorder" ng-show="propertyName === 'distance'" ng-class="{reverse: reverse}"></span>
+    </div>
+
+
+
     <!--Get a list from all breweries around the users location-->
     <ion-list ng-show="listTypeSelect == 'breweryList'">
       <ion-item ng-show="citySelect == 'allCities' || citySelect == location.locality" ng-repeat="location in breweries">
         <a class="item item-thumbnail-left" ng-href="#/tab/list/{{location.brewery.id}}">
           <img ng-src="{{location.brewery.images.icon || '/img/no-image-placeholder.png'}}">
-          <h2 class="text-center">{{location.brewery.nameShortDisplay}}</h2>
+          <h2 class="text-center">{{location.brewery.name}}</h2>
           <p class="text-center">{{location.locality}}</p>
           <p class="text-center">Entfernung:
             <strong>{{location.distance}}km</strong>
@@ -92,7 +113,7 @@
     <ion-list ng-show="listTypeSelect == 'beerList'">
       <ion-item ng-show="citySelect == 'allCities' || citySelect == location.locality" ng-repeat="location in breweries">
         <a ng-href="#/tab/list/{{location.brewery.id}}">
-          <h5>{{location.brewery.nameShortDisplay}}</h5></a>
+          <h5>{{location.brewery.name}}</h5></a>
         <ion-item ng-repeat="beer in location.beers">
           <a class="item item-thumbnail-left" ng-href="#/tab/details/beer/{{beer.id}}">
             <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">

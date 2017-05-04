@@ -16,13 +16,60 @@ angular.module('beeround.beer', [])
     $scope.lat = undefined;
     $scope.lng = undefined;
 
+
     // Only show locations in DE
     $scope.autocompleteOptions = {
       componentRestrictions: { country: 'de' },
       types: ['geocode']
     };
 
-    // Load breweries on start
+
+    // INIT sorting settings
+
+      $scope.propertyName = 'name';
+      $scope.sortReverse = false;
+
+    //start sorting function
+
+
+      $scope.sortBy = function(propertyName) {
+
+          if(propertyName === 'name'){
+
+          $scope.breweries.sort(function (a, b) {
+              if (a.brewery.name < b.brewery.name) return -1;
+              if (a.brewery.name > b.brewery.name) return 1;
+              return 0;
+
+          })
+
+         /*
+         Console Check if function works
+         for (brewery of $scope.breweries) {
+              console.log(brewery.brewery.name);
+          }*/
+
+        }
+
+      else if(propertyName === 'rating'){
+            //TODO
+          }
+
+
+      else if(propertyName === 'distance'){
+
+              $scope.breweries.sort(function (a, b) {
+                  if (a.distance < b.distance) return -1;
+                  if (a.distance > b.distance) return 1;
+                  return 0;
+
+              })
+          }
+      };
+
+
+
+      // Load breweries on start
     getBreweries();
 
     // on manual location change
@@ -168,6 +215,8 @@ angular.module('beeround.beer', [])
       });
     }
 
+
+
   })
   .controller('beerListCtrl', function($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
     const breweryId = $stateParams.brewery;
@@ -268,6 +317,9 @@ angular.module('beeround.beer', [])
     })
 
   });
+
+
+
 
 
 
