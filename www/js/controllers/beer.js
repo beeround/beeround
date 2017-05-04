@@ -1,5 +1,7 @@
 angular.module('beeround.beer', [])
-  .controller('breweriesListCtrl', function ($scope, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout) {
+
+  .controller('breweriesListCtrl', function ($scope, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout) {
+
 
     $scope.place = undefined;
 
@@ -13,11 +15,7 @@ angular.module('beeround.beer', [])
     $scope.citySelect = 'allCities';
 
     // INIT radius var and set to  50
-    $scope.radius = 50;
-
-    // INIT lat and lng var
-    $scope.lat = undefined;
-    $scope.lng = undefined;
+    //$scope.radius = 50;
 
 
     // Only show locations in DE
@@ -36,6 +34,8 @@ angular.module('beeround.beer', [])
 
 
     $scope.sortBy = function (propertyName) {
+
+      //TODO Save sorting onchange
 
       if (propertyName === 'name') {
 
@@ -74,17 +74,20 @@ angular.module('beeround.beer', [])
     // Load breweries on start
     getBreweries();
 
+
     // on manual location change
     $scope.$on('g-places-autocomplete:select', function (event, place) {
 
       const location = JSON.parse(JSON.stringify(place.geometry.location));
-      $scope.lat = location.lat;
-      $scope.lng = location.lng;
-      $scope.location = {
+
+      $rootScope.userSettings.lat = location.lat;
+      $rootScope.userSettings.lng = location.lng;
+      $rootScope.location = {
         town: place.formatted_address
       };
       getBreweries("noGeo");
     });
+
 
     // filters
 
@@ -94,7 +97,7 @@ angular.module('beeround.beer', [])
       str = radiusSelect.substring(0, str.length - 3);
 
       // Write new radius in variable
-      $scope.radius = str;
+      $rootScope.userSettings.radius = str;
 
       // Reload breweries
       getBreweries("noGeo");
@@ -127,6 +130,7 @@ angular.module('beeround.beer', [])
     // Get breweries function
     // When parameter is given, disable geolocation
     function getBreweries(noGeo) {
+
       $scope.breweries = [];
 
       // TODO ERROR HANDLING
@@ -137,27 +141,12 @@ angular.module('beeround.beer', [])
       });
 
       if (noGeo) {
-        beerService.getBreweriesNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
 
-          if (result.data) {
-            // Get beers
-            let promises = result.data.map(function (obj) {
-              return getBeers(obj).then(result => {
-                return result
-              });
-            });
+        beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
 
-            // Save to var
-            Promise.all(promises).then(function (results) {
-              $timeout(function () {
-                $scope.breweries = results;
-                $ionicLoading.hide();
-              }, 0);
-            });
-          }
-          else {
-            $ionicLoading.hide();
-          }
+          $scope.breweries = result;
+          $ionicLoading.hide();
+
 
           //TODO ERROR HANDLING
 
@@ -167,57 +156,39 @@ angular.module('beeround.beer', [])
         // Don't wait till death
         let posOptions = {timeout: 20000, enableHighAccuracy: false};
 
-
         // Geolocation
         $cordovaGeolocation
           .getCurrentPosition(posOptions)
           .then(function (position) {
-            $scope.lat = position.coords.latitude;
-            $scope.lng = position.coords.longitude;
 
-            $http.get('http://nominatim.openstreetmap.org/reverse?lat=' + $scope.lat + '&lon=' + $scope.lng + '&format=json').then(result => {
-              $scope.location = result.data.address;
 
+            $rootScope.userSettings = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+              radius: 30 // standard
+            };
+
+            $http.get('http://nominatim.openstreetmap.org/reverse?lat=' + $rootScope.userSettings.lat + '&lon=' + $rootScope.userSettings.lng + '&format=json').then(result => {
+              $rootScope.location = result.data.address;
+
+              console.log($rootScope.userSettings);
 
               // GET BREWERIES
-              beerService.getBreweriesNearCoordinates($scope.lat, $scope.lng, $scope.radius).then(result => {
+              beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
 
-                // Get beers
-                let promises = result.data.map(function (obj) {
-                  return getBeers(obj).then(result => {
-                    return result
-                  });
-                });
-
-                // Save to var
-                Promise.all(promises).then(function (results) {
-                  $timeout(function () {
-                    $scope.breweries = results;
-                    $ionicLoading.hide();
-                  }, 0);
-                });
+                $scope.breweries = result;
+                $ionicLoading.hide();
 
               });
+            }, function (err) {
+              $scope.connectionError = true;
+              //TODO ERROR: NO INTERNET; NO GPS OR ELSE
             });
-          }, function (err) {
-            $scope.connectionError = true;
-            //TODO ERROR: NO INTERNET; NO GPS OR ELSE
-          });
+
+
+          })
       }
-    }
-
-    function getBeers(brewery) {
-      return new Promise(function (resolve, reject) {
-        beerService.getBeersByBrewery(brewery.brewery.id).then(allBeerByBrewery => {
-          brewery.beers = allBeerByBrewery.data;
-          return resolve(brewery);
-        }, function () {
-          console.log("err")
-        });
-      });
-    }
-
-
+    };
   })
   .controller('beerListCtrl', function ($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
     const breweryId = $stateParams.brewery;
@@ -234,80 +205,74 @@ angular.module('beeround.beer', [])
 
     // TODO ERROR HANDLING
 
-
   })
-  .controller('mapCtrl', function ($scope, beerService, $http, $cordovaGeolocation, $ionicLoading) {
 
-    let options = {timeout: 10000, enableHighAccuracy: true};
+  .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading) {
 
-    // Setup the loader
-    $ionicLoading.show({
-      content: 'Loading',
-      animation: 'fade-in',
+    $scope.markers = [];
+
+    NgMap.getMap().then(function (map) {
+      $scope.map = map;
+      loadMap();
     });
 
-    $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
 
-      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    $scope.showTextbox = function (e, data) {
+      $scope.boxContent = data;
+      $scope.map.showInfoWindow('overlay', data.id);
+    };
 
-      let mapOptions = {
-        center: latLng,
-        zoom: 9,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
 
-      $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-      //Enable Infowindow
-      let infowindow = new google.maps.InfoWindow;
-
-      let myposition = new google.maps.Marker({
-        position: latLng,
-        map: $scope.map,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 5
-        },
+    // REFRESH Markers on change view
+    $rootScope.$on('$stateChangeStart',
+      function (event, toState, toParams, fromState, fromParams) {
+        if (toState.name == "tabs.map") {
+          loadMap();
+        }
       });
 
-      google.maps.event.addListener(myposition, 'click', (function (myposition) {
-        return function () {
-          infowindow.setContent("Du bist hier");
-          infowindow.open(map, myposition);
+
+    function loadMap() {
+      $scope.markers = [];
+
+      if ($rootScope.userSettings) {
+
+        if ($rootScope.userSettings.radius == 10) {
+          $scope.zoom = 11;
         }
-      })(myposition));
+        if ($rootScope.userSettings.radius == 20) {
+          $scope.zoom = 10;
+        }
+        if ($rootScope.userSettings.radius == 30) {
+          $scope.zoom = 9;
+        }
+        if ($rootScope.userSettings.radius > 40) {
+          $scope.zoom = 8;
+        }
+      }
 
       //GET Breweries around
-      beerService.getBreweriesNearCoordinates(position.coords.latitude, position.coords.longitude, 40).then(location => {
+      beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(location => {
+        location.map((result, index) => {
 
-        location.data.map((result, index) => {
-          let marker = new google.maps.Marker({
-            position: new google.maps.LatLng(result.latitude, result.longitude),
-            map: $scope.map,
+          $scope.markers.push({
+            id: result.brewery.id,
+            name: result.brewery.nameShortDisplay,
+            lat: result.latitude,
+            lng: result.longitude
           });
 
-          //Add marker
-          google.maps.event.addListener(marker, 'click', (function (marker) {
-            return function () {
-              infowindow.setContent(result.brewery.name);
-              infowindow.open(map, marker);
-            }
-          })(marker));
+          // Hide loading
+          $ionicLoading.hide();
+
+
+        }, function (error) {
+          console.log("Could not get location");
         });
-
-
-      });
-
-      // Hide loading
-      $ionicLoading.hide();
-
-
-    }, function (error) {
-      console.log("Could not get location");
-    });
-
-
+      })
+    }
   })
+
   .controller('beerDetailsCtrl', function ($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
     const beerId = $stateParams.beerId;
 

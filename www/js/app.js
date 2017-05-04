@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
-angular.module('beeround', ['ionic','ngCordova', 'google.places','beeround.index', 'beeround.beer', 'beeround.services'])
+angular.module('beeround', ['ionic','ngCordova','ngMap', 'google.places','beeround.index', 'beeround.beer', 'beeround.services'])
 .run(function($ionicPlatform, $state, $stateParams, $rootScope) {
 
   $ionicPlatform.ready(function() {
@@ -76,6 +76,7 @@ angular.module('beeround', ['ionic','ngCordova', 'google.places','beeround.index
           controller: 'mapCtrl'
         }
       }
+
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/list');
