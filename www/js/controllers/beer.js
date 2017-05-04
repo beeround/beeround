@@ -1,12 +1,17 @@
 angular.module('beeround.beer', [])
+
   .controller('breweriesListCtrl', function ($scope, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout) {
+
 
     $scope.place = undefined;
 
-    //INIT
+    //INIT set default variable for brewery and beer list
     $scope.listTypeSelect = "breweryList";
 
-    //INIT
+    //INIT set default variable for locationType
+    $scope.filterLocationType = 'allLocationTypes';
+
+    //INIT set default variable for location
     $scope.citySelect = 'allCities';
 
     // INIT radius var and set to  50
@@ -20,13 +25,61 @@ angular.module('beeround.beer', [])
     };
 
 
+    // INIT sorting settings
+
+    $scope.propertyName = 'name';
+    $scope.sortReverse = false;
+
+    //start sorting function
+
+
+    $scope.sortBy = function (propertyName) {
+
+      //TODO Save sorting onchange
+
+      if (propertyName === 'name') {
+
+        $scope.breweries.sort(function (a, b) {
+          if (a.brewery.name < b.brewery.name) return -1;
+          if (a.brewery.name > b.brewery.name) return 1;
+          return 0;
+
+        })
+
+        /*
+         Console Check if function works
+         for (brewery of $scope.breweries) {
+         console.log(brewery.brewery.name);
+         }*/
+
+      }
+
+      else if (propertyName === 'rating') {
+        //TODO
+      }
+
+
+      else if (propertyName === 'distance') {
+
+        $scope.breweries.sort(function (a, b) {
+          if (a.distance < b.distance) return -1;
+          if (a.distance > b.distance) return 1;
+          return 0;
+
+        })
+      }
+    };
+
+
     // Load breweries on start
     getBreweries();
+
 
     // on manual location change
     $scope.$on('g-places-autocomplete:select', function (event, place) {
 
       const location = JSON.parse(JSON.stringify(place.geometry.location));
+
       $rootScope.userSettings.lat = location.lat;
       $rootScope.userSettings.lng = location.lng;
       $rootScope.location = {
@@ -34,6 +87,7 @@ angular.module('beeround.beer', [])
       };
       getBreweries("noGeo");
     });
+
 
     // filters
 
@@ -87,6 +141,7 @@ angular.module('beeround.beer', [])
       });
 
       if (noGeo) {
+
         beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
 
           $scope.breweries = result;
@@ -106,6 +161,7 @@ angular.module('beeround.beer', [])
           .getCurrentPosition(posOptions)
           .then(function (position) {
 
+
             $rootScope.userSettings = {
               lat: position.coords.latitude,
               lng: position.coords.longitude,
@@ -120,18 +176,19 @@ angular.module('beeround.beer', [])
               // GET BREWERIES
               beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
 
-                    $scope.breweries = result;
-                    $ionicLoading.hide();
+                $scope.breweries = result;
+                $ionicLoading.hide();
 
               });
+            }, function (err) {
+              $scope.connectionError = true;
+              //TODO ERROR: NO INTERNET; NO GPS OR ELSE
             });
-          }, function (err) {
-            $scope.connectionError = true;
-            //TODO ERROR: NO INTERNET; NO GPS OR ELSE
-          });
-      }
-    }
 
+
+          })
+      }
+    };
   })
   .controller('beerListCtrl', function ($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
     const breweryId = $stateParams.brewery;
@@ -148,8 +205,8 @@ angular.module('beeround.beer', [])
 
     // TODO ERROR HANDLING
 
-
   })
+
   .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading) {
 
     $scope.markers = [];
@@ -159,11 +216,12 @@ angular.module('beeround.beer', [])
       loadMap();
     });
 
+
     $scope.showTextbox = function (e, data) {
       $scope.boxContent = data;
       $scope.map.showInfoWindow('overlay', data.id);
-
     };
+
 
     // REFRESH Markers on change view
     $rootScope.$on('$stateChangeStart',
@@ -179,40 +237,42 @@ angular.module('beeround.beer', [])
 
       if ($rootScope.userSettings) {
 
-        if($rootScope.userSettings.radius == 10 ) {
+        if ($rootScope.userSettings.radius == 10) {
           $scope.zoom = 11;
         }
-        if($rootScope.userSettings.radius == 20 ) {
+        if ($rootScope.userSettings.radius == 20) {
           $scope.zoom = 10;
         }
-        if($rootScope.userSettings.radius == 30 ) {
+        if ($rootScope.userSettings.radius == 30) {
           $scope.zoom = 9;
         }
-        if($rootScope.userSettings.radius > 40 ) {
+        if ($rootScope.userSettings.radius > 40) {
           $scope.zoom = 8;
         }
+      }
 
-        //GET Breweries around
-        beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(location => {
-          location.map((result, index) => {
+      //GET Breweries around
+      beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(location => {
+        location.map((result, index) => {
 
-            $scope.markers.push({
-              id: result.brewery.id,
-              name: result.brewery.nameShortDisplay,
-              lat: result.latitude,
-              lng: result.longitude
-            });
-
+          $scope.markers.push({
+            id: result.brewery.id,
+            name: result.brewery.nameShortDisplay,
+            lat: result.latitude,
+            lng: result.longitude
           });
+
           // Hide loading
           $ionicLoading.hide();
 
+
+        }, function (error) {
+          console.log("Could not get location");
         });
-      }
-
+      })
     }
-
   })
+
   .controller('beerDetailsCtrl', function ($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
     const beerId = $stateParams.beerId;
 
@@ -222,6 +282,9 @@ angular.module('beeround.beer', [])
     })
 
   });
+
+
+
 
 
 
