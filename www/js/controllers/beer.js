@@ -89,25 +89,9 @@ angular.module('beeround.beer', [])
       if (noGeo) {
         beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
 
-          if (result.data) {
-            // Get beers
-            let promises = result.data.map(function (obj) {
-              return getBeers(obj).then(result => {
-                return result
-              });
-            });
+          $scope.breweries = result;
+          $ionicLoading.hide();
 
-            // Save to var
-            Promise.all(promises).then(function (results) {
-              $timeout(function () {
-                $scope.breweries = results;
-                $ionicLoading.hide();
-              }, 0);
-            });
-          }
-          else {
-            $ionicLoading.hide();
-          }
 
           //TODO ERROR HANDLING
 
@@ -136,22 +120,8 @@ angular.module('beeround.beer', [])
               // GET BREWERIES
               beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
 
-                // Get beers
-                let promises = result.data.map(function (obj) {
-                  return getBeers(obj).then(result => {
-                    return result
-                  });
-                });
-
-                // Save to var
-                Promise.all(promises).then(function (results) {
-                  $timeout(function () {
-                    $scope.breweries = results;
-
-                    console.log(beerService.breweries);
+                    $scope.breweries = result;
                     $ionicLoading.hide();
-                  }, 0);
-                });
 
               });
             });
@@ -160,17 +130,6 @@ angular.module('beeround.beer', [])
             //TODO ERROR: NO INTERNET; NO GPS OR ELSE
           });
       }
-    }
-
-    function getBeers(brewery) {
-      return new Promise(function (resolve, reject) {
-        beerService.getBeersByBrewery(brewery.brewery.id).then(allBeerByBrewery => {
-          brewery.beers = allBeerByBrewery.data;
-          return resolve(brewery);
-        }, function () {
-          console.log("err")
-        });
-      });
     }
 
   })
@@ -191,75 +150,66 @@ angular.module('beeround.beer', [])
 
 
   })
-  .controller('mapCtrl', function ($scope, $state, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading) {
+  .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading) {
+
+    $scope.markers = [];
+
+    NgMap.getMap().then(function (map) {
+      $scope.map = map;
+      loadMap();
+    });
+
+    $scope.showTextbox = function (e, data) {
+      $scope.boxContent = data;
+      $scope.map.showInfoWindow('overlay', data.id);
+
+    };
 
     // REFRESH Markers on change view
     $rootScope.$on('$stateChangeStart',
-      function(event, toState, toParams, fromState, fromParams){
-        if(toState.name == "tabs.map") {
-          setMarker();
+      function (event, toState, toParams, fromState, fromParams) {
+        if (toState.name == "tabs.map") {
+          loadMap();
         }
       });
 
-    if ($rootScope.userSettings) {
-      let latLng = new google.maps.LatLng($rootScope.userSettings.lat, $rootScope.userSettings.lng);
 
-      let mapOptions = {
-        center: latLng,
-        zoom: 9,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
+    function loadMap() {
+      $scope.markers = [];
 
-      $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      if ($rootScope.userSettings) {
 
-      //Enable Infowindow
-      let infowindow = new google.maps.InfoWindow;
-
-      let myposition = new google.maps.Marker({
-        position: latLng,
-        map: $scope.map,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 5
-        },
-      });
-
-      google.maps.event.addListener(myposition, 'click', (function (myposition) {
-        return function () {
-          infowindow.setContent("Du bist hier");
-          infowindow.open(map, myposition);
+        if($rootScope.userSettings.radius == 10 ) {
+          $scope.zoom = 11;
         }
-      })(myposition));
+        if($rootScope.userSettings.radius == 20 ) {
+          $scope.zoom = 10;
+        }
+        if($rootScope.userSettings.radius == 30 ) {
+          $scope.zoom = 9;
+        }
+        if($rootScope.userSettings.radius > 40 ) {
+          $scope.zoom = 8;
+        }
 
-      setMarker();
-      // Hide loading
-      $ionicLoading.hide();
-    }
+        //GET Breweries around
+        beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(location => {
+          location.map((result, index) => {
 
+            $scope.markers.push({
+              id: result.brewery.id,
+              name: result.brewery.nameShortDisplay,
+              lat: result.latitude,
+              lng: result.longitude
+            });
 
-    function setMarker () {
-
-
-
-      //GET Breweries around
-      beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(location => {
-
-        console.log("new request");
-        location.data.map((result, index) => {
-          let marker = new google.maps.Marker({
-            position: new google.maps.LatLng(result.latitude, result.longitude),
-            map: $scope.map,
           });
+          // Hide loading
+          $ionicLoading.hide();
 
-          //Add marker
-          google.maps.event.addListener(marker, 'click', (function (marker) {
-            return function () {
-              infowindow.setContent(result.brewery.name);
-              infowindow.open(map, marker);
-            }
-          })(marker));
         });
-      });
+      }
+
     }
 
   })
