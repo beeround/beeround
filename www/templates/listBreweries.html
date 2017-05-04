@@ -90,7 +90,7 @@
     </ion-list>
 
     <ion-list ng-show="listTypeSelect == 'beerList'">
-      <ion-item ng-repeat="location in breweries">
+      <ion-item ng-show="citySelect == 'allCities' || citySelect == location.locality" ng-repeat="location in breweries">
         <a ng-href="#/tab/list/{{location.brewery.id}}">
           <h5>{{location.brewery.nameShortDisplay}}</h5></a>
         <ion-item ng-repeat="beer in location.beers">
@@ -100,7 +100,6 @@
             <p></p>
           </a>
         </ion-item>
-
       </ion-item>
     </ion-list>
   </ion-content>
