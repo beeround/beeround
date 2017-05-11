@@ -1,6 +1,6 @@
 angular.module('beeround.beer', [])
 
-  .controller('breweriesListCtrl', function ($scope, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout) {
+  .controller('breweriesListCtrl', function ($scope, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup) {
 
 
     $scope.place = undefined;
@@ -146,6 +146,7 @@ angular.module('beeround.beer', [])
       });
 
       if (noGeo) {
+        console.log("Abfrage ohne Ortung");
 
         beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
 
@@ -153,7 +154,20 @@ angular.module('beeround.beer', [])
           $ionicLoading.hide();
 
 
-          //TODO ERROR HANDLING
+          if(result) {
+            $scope.noData = false;
+          }
+
+          else {
+            let alertPopup = $ionicPopup.alert({
+              title: 'Keine Brauerei gefunden!',
+              template: 'Bitte passe deine Suchanfrage an. '
+            });
+
+            alertPopup.then(function(res) {
+              $scope.noData = true;
+            });
+          }
 
         });
       }
@@ -176,7 +190,6 @@ angular.module('beeround.beer', [])
             $http.get('http://nominatim.openstreetmap.org/reverse?lat=' + $rootScope.userSettings.lat + '&lon=' + $rootScope.userSettings.lng + '&format=json').then(result => {
               $rootScope.location = result.data.address;
 
-              console.log($rootScope.userSettings);
 
               // GET BREWERIES
               beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
@@ -193,14 +206,22 @@ angular.module('beeround.beer', [])
 
           })
       }
-    };
+    }
   })
   .controller('beerListCtrl', function ($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
     const breweryId = $stateParams.brewery;
 
     // Get beers
     beerService.getBeersByBrewery(breweryId).then(result => {
-      $scope.beerList = result.data;
+      if(result.data) {
+        $scope.beerList = result.data;
+        $scope.noData = false;
+
+      }
+      else {
+        $scope.noData = true;
+
+      }
     });
 
     // Get brewery informations

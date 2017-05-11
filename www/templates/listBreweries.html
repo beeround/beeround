@@ -79,7 +79,7 @@
     </div>
 
     <!--Filter, which type the brewery should be-->
-    <div ng-show="lat" class="card">
+    <div ng-show="userSettings.lat" class="card">
       <div class="item item-text-wrap">
         <label class="item item-input item-select">
           <div class="input-label">
@@ -134,5 +134,11 @@
           </ion-item>
         </ion-item>
       </ion-list>
+
+    <ion-list ng-show="noData">
+      <ion-item>
+        <p>Keine Brauereien gefunden!</p>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

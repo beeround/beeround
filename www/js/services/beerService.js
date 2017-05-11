@@ -35,19 +35,28 @@ angular.module('beeround.services', [])
             return new Promise(function (resolve, reject) {
               $http.get('http://api.brewerydb.com/v2//search/geo/point?lat=' + clientSettings.lat + '&lng=' + clientSettings.lng + '&radius=' + clientSettings.radius + '&unit=km&key=7802f26125b23378098b3c32911adcce').then(function (res) {
 
-                let promises = res.data.data.map(function (obj) {
-                  return getBeers(obj).then(result => {
-                    return result
+                console.log(res.data);
+                // Check, if data is available
+                if(res.data.data){
+                  let promises = res.data.data.map(function (obj) {
+                    return getBeers(obj).then(result => {
+                      return result
+                    });
                   });
-                });
 
-                // Save to var and give back, if function has ended
-                Promise.all(promises).then(function (results) {
-                  breweries = results;
-                  resolve(results);
-                });
+                  // Save to var and give back, if function has ended
+                  Promise.all(promises).then(function (results) {
+                    breweries = results;
+                    resolve(results);
+                  });
+                }
+
+                else {
+                  breweries = undefined;
+                  resolve()
+                }
+
               });
-
             });
           }
         },
