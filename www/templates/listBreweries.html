@@ -70,7 +70,7 @@
           </div>
           <select ng-model="citySelect">
             <option selected value="allCities">Alle Orte anzeigen</option>
-            <option ng-repeat="location in breweries"
+            <option ng-repeat="location in breweries | unique:'locality'"
                     value="{{location.locality}}">{{location.locality}}
             </option>
           </select>
