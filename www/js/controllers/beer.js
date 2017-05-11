@@ -32,14 +32,19 @@ angular.module('beeround.beer', [])
 
     //start sorting function
 
+    $scope.active = "distance";
 
     $scope.sortBy = function (propertyName) {
 
-      //TODO Save sorting onchange
+        $scope.active = propertyName;
+
+
+        //TODO Save sorting onchange
 
       if (propertyName === 'name') {
 
-        $scope.breweries.sort(function (a, b) {
+
+          $scope.breweries.sort(function (a, b) {
           if (a.brewery.name < b.brewery.name) return -1;
           if (a.brewery.name > b.brewery.name) return 1;
           return 0;

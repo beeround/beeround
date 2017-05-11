@@ -97,12 +97,9 @@
 
       <!--Sorting the brewery and beer list after name, rating and distance-->
       <div ng-model="sortingOptions">
-        <button ng-click="sortBy('name')">Name</button>
-        <span class="sortorder" ng-show="propertyName === 'name'" ng-class="{reverse: reverse}"></span>
-        <button ng-click="sortBy('rating')">Bewertung</button>
-        <span class="sortorder" ng-show="propertyName === 'rating'" ng-class="{reverse: reverse}"></span>
-        <button ng-click="sortBy('distance')">Entfernung</button>
-        <span class="sortorder" ng-show="propertyName === 'distance'" ng-class="{reverse: reverse}"></span>
+        <button ng-click="sortBy('name')" class="sortorder"  ng-class="{active: active == 'name'}">Name </button>
+        <button ng-click="sortBy('rating')" class="sortorder"  ng-class="{active: active == 'rating'}">Bewertung</button>
+        <button ng-click="sortBy('distance')" class="sortorder"  ng-class="{active: active == 'distance'}">Entfernung</button>
       </div>
 
       <!--Get a list from all breweries around the users location-->
