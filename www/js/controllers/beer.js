@@ -1,7 +1,20 @@
 angular.module('beeround.beer', [])
 
-  .controller('breweriesListCtrl', function ($scope, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup) {
+  .controller('breweriesListCtrl', function ($scope, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
 
+    let details = {'email': 'xxx@web.de', 'password': '123123123'};
+
+   /* $ionicAuth.signup(details).then(function() {
+      // `$ionicUser` is now registered
+    }, function(err) {
+      for (var e of err.details) {
+        if (e === 'conflict_email') {
+          alert('Email already exists.');
+        } else {
+          // handle other errors
+        }
+      }
+    });*/
 
     $scope.place = undefined;
 

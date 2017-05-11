@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
-angular.module('beeround', ['ionic','ngCordova','ngMap', 'google.places','beeround.index', 'beeround.beer', 'beeround.services', 'angular.filter'])
+angular.module('beeround', ['ionic','ionic.cloud','ngCordova','ngMap', 'google.places','beeround.index', 'beeround.beer', 'beeround.services', 'angular.filter'])
 .run(function($ionicPlatform, $state, $stateParams, $rootScope) {
 
   $ionicPlatform.ready(function() {
@@ -26,7 +26,7 @@ angular.module('beeround', ['ionic','ngCordova','ngMap', 'google.places','beerou
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider,$ionicCloudProvider) {
   $stateProvider
   .state('profile', {
     url: '/profile',
@@ -82,6 +82,13 @@ angular.module('beeround', ['ionic','ngCordova','ngMap', 'google.places','beerou
   $urlRouterProvider.otherwise('/tab/list');
 
   $ionicConfigProvider.tabs.position('bottom');
+
+  $ionicCloudProvider.init({
+    "core": {
+      "app_id": "9b8ef8c6"
+    }
+
+  });
 
 });
 
