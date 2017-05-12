@@ -93,6 +93,7 @@ angular.module('beeround.beer', [])
           //TODO
         }
         else if (propertyName === 'distance') {
+
           $scope.allBeers = undefined;
           $scope.breweries.sort(function (a, b) {
             if (a.distance < b.distance) return -1;
