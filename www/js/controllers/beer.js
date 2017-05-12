@@ -26,10 +26,6 @@ angular.module('beeround.beer', [])
 
     // INIT FILTER
     $scope.radiusSelect = "30 km";
-    $scope.citySelect = "Alle Orte anzeigen";
-
-    //INIT set default variable for location
-    $scope.citySelect = 'allCities';
 
     // INIT radius var and set to  50
     //$scope.radius = 50;
@@ -97,6 +93,7 @@ angular.module('beeround.beer', [])
           //TODO
         }
         else if (propertyName === 'distance') {
+          $scope.allBeers = undefined;
           $scope.breweries.sort(function (a, b) {
             if (a.distance < b.distance) return -1;
             if (a.distance > b.distance) return 1;

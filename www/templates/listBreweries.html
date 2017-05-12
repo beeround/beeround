@@ -55,24 +55,6 @@
       </div>
     </div>
 
-
-    <!--Filter, in which locality the place should be-->
-    <div ng-show="userSettings.lat" class="card">
-      <div class="item item-text-wrap">
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Ort
-          </div>
-          <select ng-model="citySelect">
-            <option selected value="allCities">Alle Orte anzeigen</option>
-            <option ng-show="location.locality" ng-repeat="location in breweries | unique:'locality'"
-                    value="{{location.locality}}">{{location.locality}}
-            </option>
-          </select>
-        </label>
-      </div>
-    </div>
-
     <!--Filter, which type the brewery should be-->
     <div ng-show="userSettings.lat" class="card">
       <div class="item item-text-wrap">
@@ -116,9 +98,8 @@
       </ion-item>
     </ion-list>
 
-    <ion-list ng-show="listTypeSelect == 'beerList'">
-      <ion-item ng-show="citySelect == 'allCities' || citySelect == location.locality"
-                ng-repeat="location in breweries">
+    <ion-list ng-show="listTypeSelect == 'beerList'" ng-hide="allBeers">
+      <ion-item ng-repeat="location in breweries">
         <ion-item ng-repeat="beer in location.beers">
           <a class="item item-thumbnail-left" ng-href="#/tab/details/beer/{{beer.id}}">
             <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
@@ -126,6 +107,15 @@
           </a>
         </ion-item>
       </ion-item>
+    </ion-list>
+
+    <ion-list ng-show="listTypeSelect == 'beerList' || allBeers">
+        <ion-item ng-repeat="beer in allBeers">
+          <a class="item item-thumbnail-left" ng-href="#/tab/details/beer/{{beer.id}}">
+            <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
+            <p>{{beer.name}}</p>
+          </a>
+        </ion-item>
     </ion-list>
 
     <ion-list ng-show="noData">
