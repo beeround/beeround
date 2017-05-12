@@ -42,10 +42,10 @@ angular.module('beeround.beer', [])
     $scope.sortReverse = false;
 
     // Start sorting function
-    $scope.active = "distance";
+    $scope.activeSorting = "distance";
 
     $scope.sortBy = function (propertyName) {
-      $scope.active = propertyName;
+      $scope.activeSorting = propertyName;
 
       //TODO Save sorting onchange
       if ($scope.listTypeSelect === 'breweryList') {
@@ -70,24 +70,7 @@ angular.module('beeround.beer', [])
         }
       } else {
         if (propertyName === 'name') {
-          $scope.allBeers = [];
-
-          $scope.breweries.map(function (brewery) {
-            if (brewery.beers) {
-              brewery.beers.map(function (beer) {
-                $scope.allBeers.push(beer);
-              });
-            }
-          });
-          console.log($scope.allBeers);
-
-          $scope.allBeers.sort(function (a, b) {
-            if (a.name < b.name) return -1;
-            if (a.name > b.name) return 1;
-            return 0;
-          });
-
-          console.log($scope.allBeers);
+          makeBeerList();
         }
         else if (propertyName === 'rating') {
           //TODO
@@ -161,6 +144,26 @@ angular.module('beeround.beer', [])
       getBreweries("noGeo");
     };
 
+
+
+    // Init beer for name sorting
+    function makeBeerList () {
+
+      if($scope.activeSorting == "name"){
+        $scope.allBeers = [];
+
+        console.log("Do Function")
+
+        $scope.breweries.map(function (brewery) {
+          if (brewery.beers) {
+            brewery.beers.map(function (beer) {
+              $scope.allBeers.push(beer);
+            });
+          }
+        });
+      }
+
+    }
     // Get breweries function
     // When parameter is given, disable geolocation
     function getBreweries(noGeo) {
@@ -180,6 +183,10 @@ angular.module('beeround.beer', [])
         beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
 
           $scope.breweries = result;
+
+          // Update beer array
+          makeBeerList();
+
           $ionicLoading.hide();
 
 

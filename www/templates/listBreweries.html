@@ -74,9 +74,9 @@
 
     <!--Sorting the brewery and beer list after name, rating and distance-->
     <div ng-model="sortingOptions">
-      <button ng-click="sortBy('name')" class="sortorder" ng-class="{active: active == 'name'}">Name</button>
-      <button ng-click="sortBy('rating')" class="sortorder" ng-class="{active: active == 'rating'}">Bewertung</button>
-      <button ng-click="sortBy('distance')" class="sortorder" ng-class="{active: active == 'distance'}">Entfernung
+      <button ng-click="sortBy('name')" class="sortorder" ng-class="{active: activeSorting == 'name'}">Name</button>
+      <button ng-click="sortBy('rating')" class="sortorder" ng-class="{active: activeSorting == 'rating'}">Bewertung</button>
+      <button ng-click="sortBy('distance')" class="sortorder" ng-class="{active: activeSorting == 'distance'}">Entfernung
       </button>
     </div>
 
@@ -98,6 +98,8 @@
 
     <ion-list ng-show="listTypeSelect == 'beerList' && !allBeers">
       <ion-item ng-repeat="location in breweries">
+        <h2>{{location.brewery.name}}</h2>
+
         <ion-item ng-repeat="beer in location.beers">
           <a class="item item-thumbnail-left" ng-href="#/tab/details/beer/{{beer.id}}">
             <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
