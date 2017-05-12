@@ -27,8 +27,7 @@ ion-header-bar.bar.bar-stable{
     color: #FFFFFF;
 }
 
-.bar-stable .button.button-clear{
-    color: #FFFFFF;
+.bar-stable .button.button-clear.ion-navicon{
     width: 100%;
 }
 
@@ -123,6 +122,10 @@ button.back-button{
 
 a.item {
     border-bottom: 1px solid #C8C6C5;
+}
+
+.bar-stable .button.button-clear{
+    color: #FFFFFF;
 }
 
 
