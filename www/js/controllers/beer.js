@@ -4,25 +4,25 @@ angular.module('beeround.beer', [])
 
     let details = {'email': 'xxx@web.de', 'password': '123123123'};
 
-   /* $ionicAuth.signup(details).then(function() {
-      // `$ionicUser` is now registered
-    }, function(err) {
-      for (var e of err.details) {
-        if (e === 'conflict_email') {
-          alert('Email already exists.');
-        } else {
-          // handle other errors
-        }
-      }
-    });*/
+    /* $ionicAuth.signup(details).then(function() {
+     // `$ionicUser` is now registered
+     }, function(err) {
+     for (var e of err.details) {
+     if (e === 'conflict_email') {
+     alert('Email already exists.');
+     } else {
+     // handle other errors
+     }
+     }
+     });*/
 
     $scope.place = undefined;
 
-    //INIT set default variable for brewery and beer list
-    $scope.listTypeSelect = "breweryList";
-
     //INIT set default variable for locationType
     $scope.filterLocationType = 'allLocationTypes';
+
+    //INIT set default variable for brewery and beer list
+    $scope.listTypeSelect = "breweryList";
 
     // INIT FILTER
     $scope.radiusSelect = "30 km";
@@ -41,54 +41,69 @@ angular.module('beeround.beer', [])
       types: ['geocode']
     };
 
-
     // INIT sorting settings
-
     $scope.propertyName = 'name';
     $scope.sortReverse = false;
 
-    //start sorting function
-
+    // Start sorting function
     $scope.active = "distance";
 
     $scope.sortBy = function (propertyName) {
+      $scope.active = propertyName;
 
-        $scope.active = propertyName;
+      //TODO Save sorting onchange
+      if ($scope.listTypeSelect === 'breweryList') {
+        console.log($scope.listTypeSelect);
 
-
-        //TODO Save sorting onchange
-
-      if (propertyName === 'name') {
-
-
+        if (propertyName === 'name') {
           $scope.breweries.sort(function (a, b) {
-          if (a.brewery.name < b.brewery.name) return -1;
-          if (a.brewery.name > b.brewery.name) return 1;
-          return 0;
+            if (a.brewery.name < b.brewery.name) return -1;
+            if (a.brewery.name > b.brewery.name) return 1;
+            return 0;
+          })
+        }
+        else if (propertyName === 'rating') {
+          //TODO
+        }
+        else if (propertyName === 'distance') {
+          $scope.breweries.sort(function (a, b) {
+            if (a.distance < b.distance) return -1;
+            if (a.distance > b.distance) return 1;
+            return 0;
+          })
+        }
+      } else {
+        if (propertyName === 'name') {
+          $scope.allBeers = [];
 
-        })
+          $scope.breweries.map(function (brewery) {
+            if (brewery.beers) {
+              brewery.beers.map(function (beer) {
+                $scope.allBeers.push(beer);
+              });
+            }
+          });
+          console.log($scope.allBeers);
 
-        /*
-         Console Check if function works
-         for (brewery of $scope.breweries) {
-         console.log(brewery.brewery.name);
-         }*/
+          $scope.allBeers.sort(function (a, b) {
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
+          });
 
-      }
+          console.log($scope.allBeers);
+        }
+        else if (propertyName === 'rating') {
+          //TODO
+        }
+        else if (propertyName === 'distance') {
+          $scope.breweries.sort(function (a, b) {
+            if (a.distance < b.distance) return -1;
+            if (a.distance > b.distance) return 1;
+            return 0;
 
-      else if (propertyName === 'rating') {
-        //TODO
-      }
-
-
-      else if (propertyName === 'distance') {
-
-        $scope.breweries.sort(function (a, b) {
-          if (a.distance < b.distance) return -1;
-          if (a.distance > b.distance) return 1;
-          return 0;
-
-        })
+          })
+        }
       }
     };
 
@@ -112,8 +127,7 @@ angular.module('beeround.beer', [])
 
 
     // filters
-
-    //filter: Get the selected radius from users position
+    //Filter: Get the selected radius from users position
     $scope.showSelectValue = function (radiusSelect) {
       var str = radiusSelect;
       str = radiusSelect.substring(0, str.length - 3);
@@ -125,16 +139,16 @@ angular.module('beeround.beer', [])
       getBreweries("noGeo");
     };
 
-
     //Filter: Get the selected location Type and push it to getBreweries function
-    $scope.showLocationType = function (locationSelect) {
-      var str = locationSelect;
-      console.log(str);
+    $scope.showLocationType = function (listTypeSelect) {
+      let str = listTypeSelect;
 
-      //TODO: Reload Filter with new Select
+      $scope.listTypeSelect = str;
+
+      console.log($scope.listTypeSelect);
 
       // Reload breweries
-      getBreweries("noGeo");
+      //getBreweries("noGeo");
     };
 
 
@@ -171,7 +185,7 @@ angular.module('beeround.beer', [])
           $ionicLoading.hide();
 
 
-          if(result) {
+          if (result) {
             $scope.noData = false;
           }
 
@@ -181,7 +195,7 @@ angular.module('beeround.beer', [])
               template: 'Bitte passe deine Suchanfrage an. '
             });
 
-            alertPopup.then(function(res) {
+            alertPopup.then(function (res) {
               $scope.noData = true;
             });
           }
@@ -230,7 +244,7 @@ angular.module('beeround.beer', [])
 
     // Get beers
     beerService.getBeersByBrewery(breweryId).then(result => {
-      if(result.data) {
+      if (result.data) {
         $scope.beerList = result.data;
         $scope.noData = false;
 
