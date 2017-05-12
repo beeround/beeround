@@ -24,6 +24,10 @@ angular.module('beeround.beer', [])
     //INIT set default variable for locationType
     $scope.filterLocationType = 'allLocationTypes';
 
+    // INIT FILTER
+    $scope.radiusSelect = "30 km";
+    $scope.citySelect = "Alle Orte anzeigen";
+
     //INIT set default variable for location
     $scope.citySelect = 'allCities';
 
