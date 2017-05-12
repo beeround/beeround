@@ -9,7 +9,7 @@
       <ion-item ng-repeat="beer in beerList">
         <a class="item item-thumbnail-left"  ng-href="#/tab/details/beer/{{beer.id}}">
           <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
-          <h2 class="text-center">{{beer.nameDisplay}}</h2>
+          <h2>{{beer.nameDisplay}}</h2>
         </a>
       </ion-item>
     </ion-list>

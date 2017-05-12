@@ -1,3 +1,139 @@
+/*
+COLORS:
+
+black:          #000000
+brown:          #773D17
+yellow:         #F1A435
+grey:           #C8C6C5
+light-yellow:   #F2F0CE
+white:          #FFFFFF
+
+*/
+
+
+/*BODY*/
+
+body{
+    font-family: "Proxima Nova", "Roboto", "sans-serif";
+    font-size: 16px;
+    color: #000000;
+}
+
+
+/*HEADER*/
+
+ion-header-bar.bar.bar-stable{
+    background: #773D17;
+    color: #FFFFFF;
+}
+
+.bar-stable .button.button-clear.ion-navicon{
+    width: 100%;
+}
+
+.bar.bar-stable .title{
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+
+/*FOOTER*/
+
+
+.tabs-striped .tabs {
+    background: #773D17;
+    color: #FFFFFF;
+    border: none;
+}
+
+.tabs-striped .tab-item.tab-item-active {
+    border: 0px;
+    color: #F3A522;
+}
+
+
+
+/*SEARCHBOX*/
+
+.list-inset .item:last-child{
+    border: 1px solid #F3A522;
+   border-radius: 4px;
+}
+
+
+
+/*FONTS*/
+
+h1{
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+h2{
+
+}
+
+h3{
+
+}
+
+p{
+
+}
+
+/*LINKS*/
+
+
+
+/*BUTTONS*/
+
+button{
+    font-family: "Proxima Nova", "Roboto","sans-serif";
+    font-size: 14px;
+    color: #F1A435;
+    font-weight: lighter;
+    background: #FFFFFF;
+    border:1px solid #F1A435;
+    border-radius: 4px;
+    width:100px;
+    margin: 5px;
+}
+
+button.active{
+    background: #F1A435;
+    color: #FFFFFF;
+    font-weight: normal;
+}
+
+
+button.back-button{
+    display: inherit;
+}
+
+/*ITEM*/
+
+.item{
+    border-style: none;
+}
+
+a.item {
+    border-bottom: 1px solid #C8C6C5;
+}
+
+.bar-stable .button.button-clear{
+    color: #FFFFFF;
+}
+
+
+
+
+
+
 .scroll {
   height: 100%;
 }
@@ -7,6 +143,3 @@ ng-map {
   height: 100%;
 }
 
- button.active{
-  background: #387ef5;
-}
