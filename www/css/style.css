@@ -14,7 +14,7 @@ white:          #FFFFFF
 /*BODY*/
 
 body{
-    font-family: "Proxima Nova", "sans-serif";
+    font-family: "Proxima Nova", "Roboto", "sans-serif";
     font-size: 16px;
     color: #000000;
 }
@@ -46,6 +46,7 @@ ion-header-bar.bar.bar-stable{
 .tabs-striped .tabs {
     background: #773D17;
     color: #FFFFFF;
+    border: none;
 }
 
 .tabs-striped .tab-item.tab-item-active {
@@ -92,7 +93,7 @@ p{
 /*BUTTONS*/
 
 button{
-    font-family: "Proxima Nova", "sans-serif";
+    font-family: "Proxima Nova", "Roboto","sans-serif";
     font-size: 14px;
     color: #F1A435;
     font-weight: lighter;
