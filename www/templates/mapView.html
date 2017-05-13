@@ -7,7 +7,7 @@
         <h3>Radius: {{userSettings.radius}}km</h3>
       </div>
     </div>
-    <ng-map zoom="{{zoom}}" center="{{userSettings.lat}}, {{userSettings.lng}}">
+    <ng-map on-zoom_changed="zoomChanged()" zoom="{{zoom}}" center="{{userSettings.lat}}, {{userSettings.lng}}">
       <marker position="{{userSettings.lat}}, {{userSettings.lng}}" animation="Animation.BOUNCE" centered="true"></marker>
       <marker ng-repeat="marker in markers" id="{{marker.id}}" position="{{marker.lat}},{{marker.lng}}" on-click="showTextbox({{marker}})"></marker>
       <info-window id="overlay">

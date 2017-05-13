@@ -89,6 +89,14 @@ angular.module('beeround.beer', [])
     };
 
 
+    // REFRESH Breweries on change view
+    $rootScope.$on('$stateChangeStart',
+      function (event, toState, toParams, fromState, fromParams) {
+        if (toState.name == "tabs.breweryList") {
+          getBreweries("noGeo");
+        }
+      });
+
     // Load breweries on start
     getBreweries();
 
@@ -103,6 +111,7 @@ angular.module('beeround.beer', [])
       $rootScope.location = {
         town: place.formatted_address
       };
+
       getBreweries("noGeo");
     });
 
@@ -126,7 +135,7 @@ angular.module('beeround.beer', [])
 
       $scope.listTypeSelect = str;
 
-      console.log($scope.listTypeSelect);
+      makeBeerList();
 
       // Reload breweries
       //getBreweries("noGeo");
@@ -149,10 +158,9 @@ angular.module('beeround.beer', [])
     // Init beer for name sorting
     function makeBeerList () {
 
-      if($scope.activeSorting == "name"){
+      if($scope.activeSorting == "name" && $scope.breweries){
         $scope.allBeers = [];
 
-        console.log("Do Function")
 
         $scope.breweries.map(function (brewery) {
           if (brewery.beers) {
@@ -164,6 +172,7 @@ angular.module('beeround.beer', [])
       }
 
     }
+
     // Get breweries function
     // When parameter is given, disable geolocation
     function getBreweries(noGeo) {
@@ -184,19 +193,18 @@ angular.module('beeround.beer', [])
 
           $scope.breweries = result;
 
-          // Update beer array
-          makeBeerList();
-
           $ionicLoading.hide();
-
 
           if (result) {
             $scope.noData = false;
+
+            // Update beer array
+            makeBeerList();
           }
 
           else {
             let alertPopup = $ionicPopup.alert({
-              title: 'Keine Brauerei gefunden!',
+              title: 'Suche nicht erfolgreich!',
               template: 'Bitte passe deine Suchanfrage an. '
             });
 
@@ -275,7 +283,51 @@ angular.module('beeround.beer', [])
 
     NgMap.getMap().then(function (map) {
       $scope.map = map;
-      loadMap();
+
+      switch ($rootScope.userSettings.radius) {
+        case 10:
+          $scope.zoom = 11;
+          break
+        case 20:
+          $scope.zoom = 10;
+          break
+        case 30:
+          $scope.zoom = 9;
+          break
+        case 40:
+          $scope.zoom = 9;
+          break
+        case 50:
+          $scope.zoom = 8;
+          break
+      }
+
+      $scope.zoomChanged = function(e) {
+        if (map.getZoom() < 8){
+          map.setZoom(8);
+        }
+
+        switch (map.getZoom()) {
+
+          case 8:
+            loadMap(50);
+            break;
+          case 9:
+            loadMap(30);
+            break;
+          case 10:
+            loadMap(20);
+            break;
+          case 11:
+            loadMap(10);
+            break;
+          default:
+            break
+
+
+        }
+      };
+
     });
 
 
@@ -289,48 +341,39 @@ angular.module('beeround.beer', [])
     $rootScope.$on('$stateChangeStart',
       function (event, toState, toParams, fromState, fromParams) {
         if (toState.name == "tabs.map") {
-          loadMap();
+          loadMap($rootScope.userSettings.radius);
         }
       });
 
 
-    function loadMap() {
+    function loadMap(radius) {
+
+      $rootScope.userSettings.radius = radius;
       $scope.markers = [];
-
-      if ($rootScope.userSettings) {
-
-        if ($rootScope.userSettings.radius == 10) {
-          $scope.zoom = 11;
-        }
-        if ($rootScope.userSettings.radius == 20) {
-          $scope.zoom = 10;
-        }
-        if ($rootScope.userSettings.radius == 30) {
-          $scope.zoom = 9;
-        }
-        if ($rootScope.userSettings.radius > 40) {
-          $scope.zoom = 8;
-        }
-      }
 
       //GET Breweries around
       beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(location => {
-        location.map((result, index) => {
 
-          $scope.markers.push({
-            id: result.brewery.id,
-            name: result.brewery.nameShortDisplay,
-            lat: result.latitude,
-            lng: result.longitude
+        if(location){
+
+          location.map((result, index) => {
+
+            $scope.markers.push({
+              id: result.brewery.id,
+              name: result.brewery.nameShortDisplay,
+              lat: result.latitude,
+              lng: result.longitude
+            });
+
+            // Hide loading
+            $ionicLoading.hide();
+
+
+          }, function (error) {
+            console.log("Could not get location");
           });
+        }
 
-          // Hide loading
-          $ionicLoading.hide();
-
-
-        }, function (error) {
-          console.log("Could not get location");
-        });
       })
     }
   })
