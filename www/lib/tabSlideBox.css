@@ -1,0 +1,32 @@
+.tabbed-slidebox .slider {
+    height: 100%;
+}
+.tabbed-slidebox.btm .slider {
+    margin-bottom: -50px;
+}
+.tabbed-slidebox .slider-slides {
+    width: 100%;
+}
+
+.tabbed-slidebox .slider-slide {
+    padding-top: 0px;
+    color: #000;
+    background-color: #fff;
+    text-align: center;
+    font-weight: 300;
+}
+.tabbed-slidebox a {
+  margin: 0 20px;
+  color: #C8C6C5;
+}
+.tabbed-slidebox a.active {
+  color: #000;}
+
+.tsb-icons {
+  background-color: grey;
+  padding: 15px 0;
+}
+.tsb-ic-wrp {
+  transform: none!Important;
+}
+

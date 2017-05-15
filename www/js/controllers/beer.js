@@ -1,6 +1,20 @@
 angular.module('beeround.beer', [])
 
-  .controller('breweriesListCtrl', function ($scope, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
+  .controller('breweriesListCtrl', function ($scope, $rootScope, $ionicPopover, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
+
+    // Handle PopOver
+    $ionicPopover.fromTemplateUrl('filter.html', {
+      scope: $scope
+    }).then(function(popover) {
+      $scope.popover = popover;
+    });
+
+    $scope.openPopover = function() {
+      $scope.popover.show();
+    };
+    $scope.closePopover = function() {
+      $scope.popover.hide();
+    };
 
     let details = {'email': 'xxx@web.de', 'password': '123123123'};
 
@@ -16,20 +30,18 @@ angular.module('beeround.beer', [])
      }
      });*/
 
+    $scope.tabs = [
+      {"text" : "Brauereien"},
+      {"text" : "Biere"},
+      {"text" : "Events"},
+    ];
+    $scope.currentListView = $scope.tabs[0].text;
+
+
     $scope.place = undefined;
 
     //INIT set default variable for locationType
     $scope.filterLocationType = 'allLocationTypes';
-
-    //INIT set default variable for brewery and beer list
-    $scope.listTypeSelect = "breweryList";
-
-    // INIT FILTER
-    $scope.radiusSelect = "30 km";
-
-    // INIT radius var and set to  50
-    //$scope.radius = 50;
-
 
     // Only show locations in DE
     $scope.autocompleteOptions = {
@@ -44,50 +56,42 @@ angular.module('beeround.beer', [])
     // Start sorting function
     $scope.activeSorting = "distance";
 
+
+    // Change variable on slide
+    $scope.onSlideMove = function (data) {
+      $scope.currentListView = $scope.tabs[data.index].text;
+
+      if(data.index == 1) {
+        makeBeerList();
+      }
+    };
+
     $scope.sortBy = function (propertyName) {
       $scope.activeSorting = propertyName;
 
       //TODO Save sorting onchange
-      if ($scope.listTypeSelect === 'breweryList') {
-        console.log($scope.listTypeSelect);
 
         if (propertyName === 'name') {
           $scope.breweries.sort(function (a, b) {
             if (a.brewery.name < b.brewery.name) return -1;
             if (a.brewery.name > b.brewery.name) return 1;
             return 0;
-          })
-        }
-        else if (propertyName === 'rating') {
-          //TODO
-        }
-        else if (propertyName === 'distance') {
-          $scope.breweries.sort(function (a, b) {
-            if (a.distance < b.distance) return -1;
-            if (a.distance > b.distance) return 1;
-            return 0;
-          })
-        }
-      } else {
-        if (propertyName === 'name') {
+          });
+
           makeBeerList();
-
-
         }
         else if (propertyName === 'rating') {
           //TODO
         }
         else if (propertyName === 'distance') {
-
           $scope.allBeers = undefined;
+
           $scope.breweries.sort(function (a, b) {
             if (a.distance < b.distance) return -1;
             if (a.distance > b.distance) return 1;
             return 0;
-
           })
         }
-      }
     };
 
 
@@ -120,22 +124,34 @@ angular.module('beeround.beer', [])
 
     // filters
     //Filter: Get the selected radius from users position
-    $scope.showSelectValue = function (radiusSelect) {
-      var str = radiusSelect;
-      str = radiusSelect.substring(0, str.length - 3);
+
+    $scope.setRadius = function (radius) {
 
       // Write new radius in variable
-      $rootScope.userSettings.radius = str;
+      $rootScope.userSettings.radius = radius;
 
       // Reload breweries
       getBreweries("noGeo");
     };
 
+    //Filter: Set new type
+
+    $scope.setType = function (type) {
+
+      //If new type is equal to current type
+
+      if($scope.filterLocationType == type){
+        $scope.filterLocationType = 'allLocationTypes';
+      }
+      else {
+        $scope.filterLocationType = type;
+      }
+    };
+
     //Filter: Get the selected location Type and push it to getBreweries function
     $scope.showLocationType = function (listTypeSelect) {
-      let str = listTypeSelect;
 
-      $scope.listTypeSelect = str;
+      $scope.listTypeSelect = listTypeSelect;
 
       makeBeerList();
 
@@ -294,16 +310,16 @@ angular.module('beeround.beer', [])
       switch ($rootScope.userSettings.radius) {
         case 10:
           $scope.zoom = 11;
-          break
+          break;
         case 20:
           $scope.zoom = 10;
-          break
+          break;
         case 30:
           $scope.zoom = 9;
-          break
+          break;
         case 40:
           $scope.zoom = 9;
-          break
+          break;
         case 50:
           $scope.zoom = 8;
           break

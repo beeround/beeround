@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
-angular.module('beeround', ['ionic','ionic.cloud','ngCordova','ngMap', 'google.places','beeround.index', 'beeround.beer', 'beeround.services', 'angular.filter'])
+angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngMap', 'google.places','beeround.index', 'beeround.beer', 'beeround.services', 'angular.filter'])
 .run(function($ionicPlatform, $state, $stateParams, $rootScope) {
 
   $ionicPlatform.ready(function() {
@@ -45,7 +45,7 @@ angular.module('beeround', ['ionic','ionic.cloud','ngCordova','ngMap', 'google.p
       url: '/list',
       views: {
         'tab-list': {
-          templateUrl: 'templates/listBreweries.html',
+          templateUrl: 'templates/listSlider.html',
           controller: 'breweriesListCtrl'
         }
       }
