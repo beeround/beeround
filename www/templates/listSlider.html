@@ -27,7 +27,12 @@
                   <p>Entfernung:
                     <strong>{{location.distance}}km</strong>
                   </p>
-                  <p ng-show="location.openToPublic == 'Y'">Zugänglich für Öffentlichkeit</p>
+                  <p ng-show="(location.openToPublic == 'Y') &&
+                      (location.locationType == 'restaurant' ||
+                       location.locationType == 'brewpub' ||
+                       location.locationType == 'tasting')">Hier gibts was zum futtern</p>
+                  <p ng-show="(location.openToPublic == 'Y') &&
+                      (location.locationType !== 'office')">Hier kansch dich besaufen</p>
                   <p>{{location.beers.length}} Biere</p>
                 </a>
               </ion-item>
@@ -52,6 +57,7 @@
                     <a class="item item-thumbnail-left" ng-href="#/tab/details/beer/{{beer.id}}">
                       <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
                       <p>{{beer.name}}</p>
+                      <p ng-show="beer.style.abvMin">Zwischen {{beer.style.abvMin}}% und {{beer.style.abvMax}}%</p>
                     </a>
                   </ion-item>
                 </ion-item>
@@ -61,6 +67,7 @@
                 <ion-item ng-repeat="beer in allBeers">
                   <a class="item item-thumbnail-left" ng-href="#/tab/details/beer/{{beer.id}}">
                     <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
+                    <p ng-show="beer.style.abvMin">Zwischen {{beer.style.abvMin}}% und {{beer.style.abvMax}}%</p>
                     <p>{{beer.name}}</p>
                   </a>
                 </ion-item>
