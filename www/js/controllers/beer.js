@@ -71,6 +71,8 @@ angular.module('beeround.beer', [])
       } else {
         if (propertyName === 'name') {
           makeBeerList();
+
+
         }
         else if (propertyName === 'rating') {
           //TODO
@@ -161,7 +163,6 @@ angular.module('beeround.beer', [])
       if($scope.activeSorting == "name" && $scope.breweries){
         $scope.allBeers = [];
 
-
         $scope.breweries.map(function (brewery) {
           if (brewery.beers) {
             brewery.beers.map(function (beer) {
@@ -169,6 +170,12 @@ angular.module('beeround.beer', [])
             });
           }
         });
+
+        $scope.allBeers.sort(function (a, b) {
+          if (a.name < b.name) return -1;
+          if (a.name > b.name) return 1;
+          return 0;
+        })
       }
 
     }
