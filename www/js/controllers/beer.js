@@ -1,6 +1,6 @@
 angular.module('beeround.beer', [])
 
-  .controller('breweriesListCtrl', function ($scope, $rootScope, $ionicPopover, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
+  .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
 
     // Handle PopOver
     $ionicPopover.fromTemplateUrl('filter.html', {
@@ -57,6 +57,10 @@ angular.module('beeround.beer', [])
     $scope.activeSorting = "distance";
 
 
+    // Load breweries on start
+    getBreweries();
+
+
     // Change variable on slide
     $scope.onSlideMove = function (data) {
       $scope.currentListView = $scope.tabs[data.index].text;
@@ -68,6 +72,9 @@ angular.module('beeround.beer', [])
 
     $scope.sortBy = function (propertyName) {
       $scope.activeSorting = propertyName;
+
+      // Scroll to top
+      $ionicScrollDelegate.scrollTop();
 
       //TODO Save sorting onchange
 
@@ -103,9 +110,6 @@ angular.module('beeround.beer', [])
         }
       });
 
-    // Load breweries on start
-    getBreweries();
-
 
     // on manual location change
     $scope.$on('g-places-autocomplete:select', function (event, place) {
@@ -138,8 +142,10 @@ angular.module('beeround.beer', [])
 
     $scope.setType = function (type) {
 
-      //If new type is equal to current type
+      // Scroll to top
+      $ionicScrollDelegate.scrollTop();
 
+      //If new type is equal to current type
       if($scope.filterLocationType == type){
         $scope.filterLocationType = 'allLocationTypes';
       }
@@ -147,30 +153,6 @@ angular.module('beeround.beer', [])
         $scope.filterLocationType = type;
       }
     };
-
-    //Filter: Get the selected location Type and push it to getBreweries function
-    $scope.showLocationType = function (listTypeSelect) {
-
-      $scope.listTypeSelect = listTypeSelect;
-
-      makeBeerList();
-
-      // Reload breweries
-      //getBreweries("noGeo");
-    };
-
-
-    //Filter: Get the users select if open or closed and push it to getBreweries function
-    $scope.showOpenOrClosedLocations = function (openClosedSelect) {
-      var str = openClosedSelect;
-      console.log(str);
-
-      //TODO: Reload Filter with new Select
-
-      // Reload breweries
-      getBreweries("noGeo");
-    };
-
 
 
     // Init beer for name sorting
@@ -221,6 +203,9 @@ angular.module('beeround.beer', [])
           if (result) {
             $scope.noData = false;
 
+            // Resize
+            $ionicScrollDelegate.resize();
+
             // Update beer array
             makeBeerList();
           }
@@ -264,6 +249,9 @@ angular.module('beeround.beer', [])
                 $scope.breweries = result;
                 $ionicLoading.hide();
 
+                // Resize
+                $ionicScrollDelegate.resize();
+
               });
             }, function (err) {
               $scope.connectionError = true;
@@ -275,7 +263,8 @@ angular.module('beeround.beer', [])
       }
     }
   })
-  .controller('beerListCtrl', function ($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
+
+  .controller('beerListCtrl', function ($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover) {
     const breweryId = $stateParams.brewery;
 
     // Get beers
@@ -287,7 +276,6 @@ angular.module('beeround.beer', [])
       }
       else {
         $scope.noData = true;
-
       }
     });
 
@@ -300,24 +288,36 @@ angular.module('beeround.beer', [])
 
   })
 
-  .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading) {
+  .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover) {
 
     $scope.markers = [];
 
+    // Handle PopOver
+    $ionicPopover.fromTemplateUrl('filter.html', {
+      scope: $scope
+    }).then(function(popover) {
+      $scope.popover = popover;
+    });
+
+    $scope.openPopover = function() {
+      $scope.popover.show();
+    };
+    $scope.closePopover = function() {
+      $scope.popover.hide();
+    };
+
+
+
     NgMap.getMap().then(function (map) {
+      google.maps.event.trigger(map, 'resize');
+
       $scope.map = map;
 
       switch ($rootScope.userSettings.radius) {
         case 10:
-          $scope.zoom = 11;
-          break;
-        case 20:
           $scope.zoom = 10;
           break;
         case 30:
-          $scope.zoom = 9;
-          break;
-        case 40:
           $scope.zoom = 9;
           break;
         case 50:
@@ -339,9 +339,6 @@ angular.module('beeround.beer', [])
             loadMap(30);
             break;
           case 10:
-            loadMap(20);
-            break;
-          case 11:
             loadMap(10);
             break;
           default:
@@ -364,7 +361,7 @@ angular.module('beeround.beer', [])
     $rootScope.$on('$stateChangeStart',
       function (event, toState, toParams, fromState, fromParams) {
         if (toState.name == "tabs.map") {
-          loadMap($rootScope.userSettings.radius);
+         loadMap($rootScope.userSettings.radius);
         }
       });
 
@@ -372,6 +369,7 @@ angular.module('beeround.beer', [])
     function loadMap(radius) {
 
       $rootScope.userSettings.radius = radius;
+
       $scope.markers = [];
 
       //GET Breweries around
