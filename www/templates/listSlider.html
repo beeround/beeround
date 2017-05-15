@@ -20,16 +20,16 @@
             <!--Get a list from all breweries around the users location-->
             <ion-list>
               <ion-item ng-repeat="location in breweries" ng-show="(location.locationType == filterLocationType || filterLocationType == 'allLocationTypes')" >
-                <a class="item item-thumbnail-left divider" ng-href="#/tab/list/{{location.brewery.id}}">
+                <a class="item item-thumbnail-left" ng-href="#/tab/list/{{location.brewery.id}}">
                   <img ng-src="{{location.brewery.images.icon || '/img/no-image-placeholder.png'}}">
                   <h2>{{location.brewery.name}}</h2>
                   <p>{{location.locality}}</p>
-                  <div class="infoicons">
-                    <span><i class="icon ion-android-radio-button-on"></i> {{location.distance}} km</span>
-                    <span><i class="icon beeround-icon beeround-count"></i> {{location.beers.length}}</span>
-                    <span ng-show="location.openToPublic == 'Y'"><i class="icon ion-android-people"></i> öffentlich</span>                  </div>
+                  <p>Entfernung:
+                    <strong>{{location.distance}}km</strong>
+                  </p>
+                  <p ng-show="location.openToPublic == 'Y'">Zugänglich für Öffentlichkeit</p>
+                  <p>{{location.beers.length}} Biere</p>
                 </a>
-
               </ion-item>
             </ion-list>
 
@@ -46,13 +46,12 @@
 
               <ion-list ng-show="!allBeers">
                 <ion-item ng-repeat="location in breweries">
+                  <h2>{{location.brewery.name}}</h2>
 
                   <ion-item ng-repeat="beer in location.beers">
-                    <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
+                    <a class="item item-thumbnail-left" ng-href="#/tab/details/beer/{{beer.id}}">
                       <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
-                      <h2>{{beer.name}}</h2>
-                      <p>{{location.brewery.name}}</p>
-
+                      <p>{{beer.name}}</p>
                     </a>
                   </ion-item>
                 </ion-item>
@@ -60,7 +59,7 @@
 
               <ion-list ng-show="allBeers">
                 <ion-item ng-repeat="beer in allBeers">
-                  <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
+                  <a class="item item-thumbnail-left" ng-href="#/tab/details/beer/{{beer.id}}">
                     <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
                     <p>{{beer.name}}</p>
                   </a>
