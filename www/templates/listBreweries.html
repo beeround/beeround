@@ -64,9 +64,10 @@
           </div>
           <select ng-model="filterLocationType">
             <option selected value="allLocationTypes">Alle Typen</option>
-            <option value="micro">Kleinbrauerei</option>
-            <option value="brewpub">Brauerei mit Restaurant</option>
-            <option value="restaurant">Restaurant</option>
+            <option ng-repeat="location in breweries | unique:'locationType'">{{location.locationType}}</option>
+            <!--<option value="micro">Kleinbrauerei</option>-->
+            <!--<option value="brewpub">Brauerei mit Restaurant</option>-->
+            <!--<option value="restaurant">Restaurant ohne Brauerei</option>-->
           </select>
         </label>
       </div>
@@ -82,7 +83,8 @@
 
     <!--Get a list from all breweries around the users location-->
     <ion-list ng-show="listTypeSelect == 'breweryList'">
-      <ion-item ng-repeat="location in breweries">
+      <ion-item ng-show="(location.locationType == filterLocationType || filterLocationType == 'allLocationTypes')"
+                ng-repeat="location in breweries">
         <a class="item item-thumbnail-left" ng-href="#/tab/list/{{location.brewery.id}}">
           <img ng-src="{{location.brewery.images.icon || '/img/no-image-placeholder.png'}}">
           <h2>{{location.brewery.name}}</h2>
