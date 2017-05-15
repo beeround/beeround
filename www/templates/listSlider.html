@@ -5,6 +5,22 @@
   </ion-nav-buttons>
 
   <ion-content scroll="false">
+    <div class="row">
+      <div class="col col-75 list list-inset">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input id="searchLocation" g-places-autocomplete force-selection="true" options="autocompleteOptions" ng-model="place" type="text"
+                   placeholder="Standort eingeben">
+          </label>
+      </div>
+      <div class="col list list-inset">
+        <span class="button button-dark" ng-click="newGeolocation()">
+          <i class="ion-ios-location"></i>
+        </span>
+      </div>
+    </div>
+
+
     <tab-slide-box tab="0">
       <div class="tsb-icons">
         <div class="tsb-ic-wrp">

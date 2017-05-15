@@ -2,6 +2,14 @@ angular.module('beeround.beer', [])
 
   .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
 
+    // REFRESH Breweries on change view
+    $rootScope.$on('$stateChangeStart',
+      function (event, toState, toParams, fromState, fromParams) {
+        if (toState.name == "tabs.breweryList") {
+          getBreweries("noGeo");
+        }
+      });
+
     // Handle PopOver
     $ionicPopover.fromTemplateUrl('filter.html', {
       scope: $scope
@@ -61,6 +69,15 @@ angular.module('beeround.beer', [])
     getBreweries();
 
 
+    // New geolocation
+    $scope.newGeolocation = function () {
+      // Clear text field
+      document.getElementById('searchLocation').value = "";
+
+      getBreweries();
+
+    };
+
     // Change variable on slide
     $scope.onSlideMove = function (data) {
       $scope.currentListView = $scope.tabs[data.index].text;
@@ -102,14 +119,6 @@ angular.module('beeround.beer', [])
     };
 
 
-    // REFRESH Breweries on change view
-    $rootScope.$on('$stateChangeStart',
-      function (event, toState, toParams, fromState, fromParams) {
-        if (toState.name == "tabs.breweryList") {
-          getBreweries("noGeo");
-        }
-      });
-
 
     // on manual location change
     $scope.$on('g-places-autocomplete:select', function (event, place) {
@@ -121,8 +130,8 @@ angular.module('beeround.beer', [])
       $rootScope.location = {
         town: place.formatted_address
       };
-
       getBreweries("noGeo");
+
     });
 
 
