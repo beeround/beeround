@@ -13,14 +13,14 @@ angular.module('beeround.beer', [])
     // Handle PopOver
     $ionicPopover.fromTemplateUrl('filter.html', {
       scope: $scope
-    }).then(function(popover) {
+    }).then(function (popover) {
       $scope.popover = popover;
     });
 
-    $scope.openPopover = function() {
+    $scope.openPopover = function () {
       $scope.popover.show();
     };
-    $scope.closePopover = function() {
+    $scope.closePopover = function () {
       $scope.popover.hide();
     };
 
@@ -39,9 +39,9 @@ angular.module('beeround.beer', [])
      });*/
 
     $scope.tabs = [
-      {"text" : "Brauereien"},
-      {"text" : "Biere"},
-      {"text" : "Events"},
+      {"text": "Brauereien"},
+      {"text": "Biere"},
+      {"text": "Events"},
     ];
     $scope.currentListView = $scope.tabs[0].text;
 
@@ -82,7 +82,7 @@ angular.module('beeround.beer', [])
     $scope.onSlideMove = function (data) {
       $scope.currentListView = $scope.tabs[data.index].text;
 
-      if(data.index == 1) {
+      if (data.index == 1) {
         makeBeerList();
       }
     };
@@ -95,29 +95,28 @@ angular.module('beeround.beer', [])
 
       //TODO Save sorting onchange
 
-        if (propertyName === 'name') {
-          $scope.breweries.sort(function (a, b) {
-            if (a.brewery.name < b.brewery.name) return -1;
-            if (a.brewery.name > b.brewery.name) return 1;
-            return 0;
-          });
+      if (propertyName === 'name') {
+        $scope.breweries.sort(function (a, b) {
+          if (a.brewery.name < b.brewery.name) return -1;
+          if (a.brewery.name > b.brewery.name) return 1;
+          return 0;
+        });
 
-          makeBeerList();
-        }
-        else if (propertyName === 'rating') {
-          //TODO
-        }
-        else if (propertyName === 'distance') {
-          $scope.allBeers = undefined;
+        makeBeerList();
+      }
+      else if (propertyName === 'rating') {
+        //TODO
+      }
+      else if (propertyName === 'distance') {
+        $scope.allBeers = undefined;
 
-          $scope.breweries.sort(function (a, b) {
-            if (a.distance < b.distance) return -1;
-            if (a.distance > b.distance) return 1;
-            return 0;
-          })
-        }
+        $scope.breweries.sort(function (a, b) {
+          if (a.distance < b.distance) return -1;
+          if (a.distance > b.distance) return 1;
+          return 0;
+        })
+      }
     };
-
 
 
     // on manual location change
@@ -155,7 +154,7 @@ angular.module('beeround.beer', [])
       $ionicScrollDelegate.scrollTop();
 
       //If new type is equal to current type
-      if($scope.filterLocationType == type){
+      if ($scope.filterLocationType == type) {
         $scope.filterLocationType = 'allLocationTypes';
       }
       else {
@@ -165,9 +164,9 @@ angular.module('beeround.beer', [])
 
 
     // Init beer for name sorting
-    function makeBeerList () {
+    function makeBeerList() {
 
-      if($scope.activeSorting == "name" && $scope.breweries){
+      if ($scope.activeSorting == "name" && $scope.breweries) {
         $scope.allBeers = [];
 
         $scope.breweries.map(function (brewery) {
@@ -194,6 +193,7 @@ angular.module('beeround.beer', [])
       $scope.breweries = [];
 
       // TODO ERROR HANDLING
+
       // Setup the loader
       $ionicLoading.show({
         content: 'Loading',
@@ -304,17 +304,16 @@ angular.module('beeround.beer', [])
     // Handle PopOver
     $ionicPopover.fromTemplateUrl('filter.html', {
       scope: $scope
-    }).then(function(popover) {
+    }).then(function (popover) {
       $scope.popover = popover;
     });
 
-    $scope.openPopover = function() {
+    $scope.openPopover = function () {
       $scope.popover.show();
     };
-    $scope.closePopover = function() {
+    $scope.closePopover = function () {
       $scope.popover.hide();
     };
-
 
 
     NgMap.getMap().then(function (map) {
@@ -322,41 +321,43 @@ angular.module('beeround.beer', [])
 
       $scope.map = map;
 
-      switch ($rootScope.userSettings.radius) {
-        case 10:
-          $scope.zoom = 10;
-          break;
-        case 30:
-          $scope.zoom = 9;
-          break;
-        case 50:
-          $scope.zoom = 8;
-          break
-      }
+      if ($rootScope.userSettings) {
 
-      $scope.zoomChanged = function(e) {
-        if (map.getZoom() < 8){
-          map.setZoom(8);
-        }
-
-        switch (map.getZoom()) {
-
-          case 8:
-            loadMap(50);
-            break;
-          case 9:
-            loadMap(30);
-            break;
+        switch ($rootScope.userSettings.radius) {
           case 10:
-            loadMap(10);
+            $scope.zoom = 10;
             break;
-          default:
+          case 30:
+            $scope.zoom = 9;
+            break;
+          case 50:
+            $scope.zoom = 8;
             break
-
-
         }
-      };
 
+        $scope.zoomChanged = function (e) {
+          if (map.getZoom() < 8) {
+            map.setZoom(8);
+          }
+
+          switch (map.getZoom()) {
+
+            case 8:
+              loadMap(50);
+              break;
+            case 9:
+              loadMap(30);
+              break;
+            case 10:
+              loadMap(10);
+              break;
+            default:
+              break
+
+
+          }
+        };
+      }
     });
 
 
@@ -370,41 +371,53 @@ angular.module('beeround.beer', [])
     $rootScope.$on('$stateChangeStart',
       function (event, toState, toParams, fromState, fromParams) {
         if (toState.name == "tabs.map") {
-         loadMap($rootScope.userSettings.radius);
+          loadMap($rootScope.userSettings.radius);
         }
       });
 
 
     function loadMap(radius) {
 
-      $rootScope.userSettings.radius = radius;
+      if (radius) {
 
-      $scope.markers = [];
+        // Setup the loader
+        $ionicLoading.show({
+          content: 'Loading',
+          animation: 'fade-in',
+        });
 
-      //GET Breweries around
-      beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(location => {
+        $rootScope.userSettings.radius = radius;
 
-        if(location){
+        $scope.markers = [];
 
-          location.map((result, index) => {
+        //GET Breweries around
+        beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(location => {
 
-            $scope.markers.push({
-              id: result.brewery.id,
-              name: result.brewery.nameShortDisplay,
-              lat: result.latitude,
-              lng: result.longitude
+          if (location) {
+
+            location.map((result, index) => {
+
+              $scope.markers.push({
+                id: result.brewery.id,
+                name: result.brewery.nameShortDisplay,
+                lat: result.latitude,
+                lng: result.longitude
+              });
+
+              // Hide loading
+              $ionicLoading.hide();
+
+
+            }, function (error) {
+              console.log("Could not get location");
             });
-
-            // Hide loading
+          }
+          else {
             $ionicLoading.hide();
+          }
 
-
-          }, function (error) {
-            console.log("Could not get location");
-          });
-        }
-
-      })
+        })
+      }
     }
   })
 

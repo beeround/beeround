@@ -31,7 +31,7 @@
       <ion-slide-box show-pager="false"
                      on-slide-changed="slideHasChanged($index)">
         <ion-slide>
-          <ion-scroll style="height:100%" delegate-handle="slide1Scroll">
+          <ion-scroll style="height:80%" delegate-handle="slide1Scroll">
 
             <!--Get a list from all breweries around the users location-->
             <ion-list>
@@ -68,7 +68,7 @@
           </ion-scroll>
         </ion-slide>
         <ion-slide>
-          <ion-scroll style="height:100%">
+          <ion-scroll style="height:80%">
 
             <ion-list ng-show="!allBeers">
               <ion-item ng-repeat="location in breweries">
