@@ -193,8 +193,13 @@ a .item .divider{
 }
 
 .beeround-count{
-    content: url('../img/beeround-count.svg');
-    font-size: 14px;
+   content: url('../img/beeround-count.svg');
+   font-size: 14px;
+ }
+
+.restaurant{
+  content: url('../img/beeround_food.svg');
+  font-size: 14px;
 }
 
 
