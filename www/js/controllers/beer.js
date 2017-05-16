@@ -64,6 +64,8 @@ angular.module('beeround.beer', [])
     // Start sorting function
     $scope.activeSorting = "distance";
 
+    $scope.filterLocationType = "drinking";
+
 
     // Load breweries on start
     getBreweries();

@@ -66,7 +66,7 @@ ion-header-bar.bar.bar-stable{
 }
 
 .tsb-ic-wrp{
-    box-shadow: 0px 1px 13px #ddd;
+    box-shadow: 0px 1px 4px #ddd;
     padding-bottom: 0px;
 }
 
@@ -122,13 +122,10 @@ div.list-inset{
 }
 
 .list-inset .item:last-child{
-    border: 1px solid #FFFFFF;
    border-radius: 4px;
 }
 
-.list-inset button{
-    border: 1px solid #FFFFFF;
-}
+
 
 .searchbox{
     background-color: #773D17;
@@ -138,6 +135,18 @@ div.list-inset{
 
 
 
+/*POPOVER*/
+
+.card{
+    padding: 15px 5px 15px 5px;
+}
+
+div.item.item-text-wrap{
+    padding-bottom: 15px;
+}
+
+.close{
+}
 
 /*FONTS*/
 
@@ -173,12 +182,14 @@ button{
     color: #F1A435;
     font-weight: lighter;
     background: #FFFFFF;
-    border:1px solid #F1A435;
+    border:0px;
     border-radius: 4px;
     min-width:25px;
     margin: 5px;
     min-height:25px;
     line-height: initial;
+    box-shadow: 0px 1px 3px #ccc;
+
 }
 
 button.active{
@@ -200,15 +211,13 @@ button.back-button{
 
 .button-geolocation{
 
-    height: 37px;
-    min-width: 37px;
+    height: 34px;
+    min-width: 34px;
     margin: 0px;
-
+    box-shadow: none;
 }
 
-button.sortorder{
-    width: 100px;
-}
+
 /*ITEM*/
 
 .item{
@@ -283,6 +292,11 @@ i.icon.ion-navicon-round{
 }
 
 
+.ion-close-round{
+    float: right;
+}
+
+
 .beeround-icon{
     width: 14px;
 }
@@ -319,6 +333,7 @@ ng-map {
     padding-right: 0px;
     margin: 0px 0px 0px 10px;
     }
+
 .no-padding-left{
     margin: 0px;
 }
