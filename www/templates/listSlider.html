@@ -65,13 +65,12 @@
                      <i class="icon ion-android-people"></i> Öffentlich</span>
 
 
-                    <span ng-show="(location.openToPublic == 'Y') &&
+                    <span ng-show="((location.openToPublic == 'Y') &&
                     (location.locationType == 'restaurant' ||
                      location.locationType == 'brewpub' ||
-                     location.locationType == 'tasting')">
+                     location.locationType == 'tasting'))">
                       <i class="icon beeround-icon restaurant"></i> Restaurant</span>
                   </div>
-
 
                 </a>
               </ion-item>
