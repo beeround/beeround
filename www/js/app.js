@@ -25,9 +25,6 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
 
   });
 })
-  .constant('ApiEndpoint', {
-    url: 'http://localhost:8100/v2'
-  })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicCloudProvider) {
   $stateProvider

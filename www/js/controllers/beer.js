@@ -264,11 +264,14 @@ angular.module('beeround.beer', [])
                 $ionicScrollDelegate.resize();
 
               }, function () {
+                $ionicLoading.hide();
+
                 alert("err")
               });
             }, function (err) {
-              $scope.connectionError = true;
               $ionicLoading.hide();
+
+              $scope.connectionError = true;
 
               //TODO ERROR: NO INTERNET; NO GPS OR ELSE
             });
