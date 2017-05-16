@@ -57,27 +57,7 @@
   <ion-side-menus>
 
     <!-- Left menu -->
-    <ion-side-menu side="left" ng-controller="NavCtrl">
-      <ion-header-bar class="bar bar-header ">
-        <h1 class="title">Community</h1>
-      </ion-header-bar>
-      <ion-content has-header="true">
-        <ion-list>
-          <ion-item menu-close="" ng-click="login()">
-            Login
-          </ion-item>
-          <ion-item menu-close="" href="#/profile">
-            Profil
-          </ion-item>
-          <ion-item menu-close="" href="#/statistics">
-            Statistik
-          </ion-item>
-          <ion-item menu-close="" ng-click="logout()">
-            Logout
-          </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-side-menu>
+
 
 
     <!-- VIEW -->
@@ -86,10 +66,7 @@
         <ion-nav-back-button>
         </ion-nav-back-button>
 
-        <ion-nav-buttons side="left">
-          <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-          </button>
-        </ion-nav-buttons>
+
         <ion-nav-buttons side="right">
           <a class="button button-icon button-clear ion-beer" href="#/tab/list" ng-show="current != '/list' &&current != '/map'">
           </a>
