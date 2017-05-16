@@ -257,8 +257,8 @@ angular.module('beeround.beer', [])
               // GET BREWERIES
               beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
 
-                alert(result);
                 $scope.breweries = result;
+                console.log(result);
                 $ionicLoading.hide();
 
                 // Resize

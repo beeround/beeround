@@ -1,6 +1,6 @@
 angular.module('beeround.services', [])
-  .service('beerService', ['$http', '$q', '$timeout', 'ApiEndpoint',
-    function ($http, $q, $timeout, ApiEndpoint) {
+  .service('beerService', ['$http', '$q', '$timeout',
+    function ($http, $q, $timeout) {
 
       let breweries;
       let userSettings;
@@ -32,7 +32,7 @@ angular.module('beeround.services', [])
 
             console.log("New Filter - loading data from api");
             return new Promise(function (resolve, reject) {
-              $http.get('http://api.brewerydb.com/v2/brewery/search/geo/point?lat=' + clientSettings.lat + '&lng=' + clientSettings.lng + '&radius=' + clientSettings.radius + '&unit=km&key=7802f26125b23378098b3c32911adcce').then(function (res) {
+              $http.get('http://api.brewerydb.com/v2/search/geo/point?lat=' + clientSettings.lat + '&lng=' + clientSettings.lng + '&radius=' + clientSettings.radius + '&unit=km&key=7802f26125b23378098b3c32911adcce').then(function (res) {
 
                 // Check, if data is available
                 if(res.data.data){
@@ -60,19 +60,19 @@ angular.module('beeround.services', [])
         },
 
         getBeersByBrewery: function (breweryId) {
-          return $http.get(ApiEndpoint.url+'/brewery/' + breweryId + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
+          return $http.get('http://api.brewerydb.com/v2//brewery/' + breweryId + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
             return res.data;
           });
         },
 
         getBreweryById: function (breweryId) {
-          return $http.get(ApiEndpoint.url+'/brewery/' + breweryId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
+          return $http.get('http://api.brewerydb.com/v2//brewery/' + breweryId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
             return res.data;
           });
         },
 
         getBeerDetails: function (beerId) {
-          return $http.get(ApiEndpoint.url+'/beer/' + beerId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
+          return $http.get('http://api.brewerydb.com/v2/beer/' + beerId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
             return res.data;
           });
         }
