@@ -50,6 +50,7 @@ ion-header-bar.bar.bar-stable{
     background: none;
     color: #000000;
     text-align: center;
+    padding-top: 0px;
 }
 
 .tabbed-slidebox a{
@@ -142,11 +143,15 @@ button.back-button{
 
 .item{
    border-style: none;
+    padding-top:0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 a.item {
     border-style: none;
-    margin-top: 14px;
+    padding-top: 8px;
 }
 
 .item .divider{
@@ -187,6 +192,10 @@ a .item .divider{
 
 .ion-android-people{
     font-size: 16px;
+}
+
+.ion-funnel{
+    font-size: 14px;
 }
 
 .beeround-icon{
