@@ -64,7 +64,7 @@ angular.module('beeround.beer', [])
     // Start sorting function
     $scope.activeSorting = "distance";
 
-    $scope.filterLocationType = "drinking";
+    $scope.filterLocationType = "allLocationTypes";
 
 
     // Load breweries on start
@@ -238,6 +238,11 @@ angular.module('beeround.beer', [])
         // Don't wait till death
         let posOptions = {timeout: 20000, enableHighAccuracy: false};
 
+        // Setup the loader
+        $ionicLoading.show({
+          content: 'Loading',
+          animation: 'fade-in',
+        });
 
         // Geolocation
         $cordovaGeolocation
@@ -258,7 +263,6 @@ angular.module('beeround.beer', [])
               beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
 
                 $scope.breweries = result;
-                console.log(result);
                 $ionicLoading.hide();
 
                 // Resize
