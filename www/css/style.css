@@ -40,7 +40,9 @@ ion-header-bar.bar.bar-stable{
     text-transform: uppercase;
     font-weight: bold;
     font-size: 20px;
-
+    text-align: center;
+    right:0 !important;
+    left:0 !important;
 }
 
 
@@ -61,17 +63,20 @@ ion-header-bar.bar.bar-stable{
     color: #F1A435;
     border-bottom: 2px solid #F1A435;
     padding-bottom: 3px;
+}
 
+.tsb-ic-wrp{
+    box-shadow: 0px 1px 13px #ddd;
+    padding-bottom: 0px;
 }
 
 /*FOOTER*/
-
 
 .tabs-striped .tabs {
     background: #773D17;
     color: #FFFFFF;
     border: none;
-    padding-top: 9px;
+    padding-top: 2px;
     opacity: 1;
 }
 
@@ -96,16 +101,46 @@ ion-header-bar.bar.bar-stable{
 }
 
 
+/*Android specific*/
+
+.tabs{
+    background-color: #773D17;
+    color: #FFFFFF;
+    border-style: none;
+    background-image: none;
+}
+
+.tab-item{
+    padding-top: 5px;
+}
+
+
 /*SEARCHBOX*/
 
+div.list-inset{
+    background-color: transparent;
+}
+
 .list-inset .item:last-child{
-    border: 1px solid #F3A522;
+    border: 1px solid #FFFFFF;
    border-radius: 4px;
+}
+
+.list-inset button{
+    border: 1px solid #FFFFFF;
+}
+
+.searchbox{
+    background-color: #773D17;
+    padding: 0px 5px 5px 5px;
+    margin-top: -5px;
 }
 
 
 
+
 /*FONTS*/
+
 
 h1{
     color: #FFFFFF;
@@ -171,6 +206,9 @@ button.back-button{
 
 }
 
+button.sortorder{
+    width: 100px;
+}
 /*ITEM*/
 
 .item{
@@ -231,7 +269,7 @@ i.icon{
 }
 
 
-span.button.button-icon.button-clear.ion-funnel:before{
+span.button.button-icon.button-clear.ion-android-more-vertical:before{
     font-size: 24px;
 }
 
@@ -279,5 +317,8 @@ ng-map {
 
 .no-padding-right{
     padding-right: 0px;
-    margin-right: 0px;
+    margin: 0px 0px 0px 10px;
+    }
+.no-padding-left{
+    margin: 0px;
 }

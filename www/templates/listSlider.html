@@ -1,49 +1,51 @@
-<ion-view title="Beers">
+<ion-view title="beeround">
   <ion-nav-buttons side="right">
-    <span class="button button-icon button-clear ion-funnel" ng-click="openPopover()">
+    <span class="button button-icon button-clear ion-android-more-vertical" ng-click="openPopover()">
     </span>
   </ion-nav-buttons>
 
   <ion-content scroll="false">
-    <div class="row">
-      <div class="col col-75 list list-inset no-padding-right">
+    <div class="row searchbox">
+      <div class="col col-80 list list-inset no-padding-right">
           <label class="item item-input">
             <i class="icon ion-search placeholder-icon"></i>
             <input id="searchLocation" g-places-autocomplete force-selection="true" options="autocompleteOptions" ng-model="place" type="text"
                    placeholder="Standort eingeben">
           </label>
       </div>
-      <div class="col col-10list list-inset">
+      <div class="col col-10list list-inset no-padding-left">
         <button class="button-geolocation" ng-click="newGeolocation()">
           <i class="ion-ios-location"></i>
         </button>
       </div>
     </div>
 
-    <div class="item item-text-wrap">
-      <div ng-model="sortingOptions">
-        <button ng-click="sortBy('name')" class="sortorder" ng-class="{active: activeSorting == 'name'}">Name
-        </button>
-        <button ng-click="sortBy('rating')" class="sortorder" ng-class="{active: activeSorting == 'rating'}">
-          Bewertung
-        </button>
-        <button ng-click="sortBy('distance')" class="sortorder" ng-class="{active: activeSorting == 'distance'}">
-          Entfernung
-        </button>
-      </div>
-    </div>
+
 
 
     <tab-slide-box tab="0">
       <div class="tsb-icons">
-        <div class="tsb-ic-wrp">
-          <a href="javascript:" class="{{tab.icon}}" ng-repeat="tab in tabs"
+        <div class="tsb-ic-wrp row">
+          <a href="javascript:" class="{{tab.icon}} col" ng-repeat="tab in tabs"
              on-finish-render="test()">{{tab.text}}</a>
         </div>
       </div>
       <ion-slide-box show-pager="false"
                      on-slide-changed="slideHasChanged($index)">
         <ion-slide>
+
+          <div class="item item-text-wrap">
+            <div ng-model="sortingOptions">
+              <button ng-click="sortBy('name')" class="sortorder" ng-class="{active: activeSorting == 'name'}">Name
+              </button>
+              <button ng-click="sortBy('rating')" class="sortorder" ng-class="{active: activeSorting == 'rating'}">
+                Bewertung
+              </button>
+              <button ng-click="sortBy('distance')" class="sortorder" ng-class="{active: activeSorting == 'distance'}">
+                Entfernung
+              </button>
+            </div>
+          </div>
           <ion-scroll style="height:80%" delegate-handle="slide1Scroll">
 
             <!--Get a list from all breweries around the users location-->
@@ -84,6 +86,21 @@
           </ion-scroll>
         </ion-slide>
         <ion-slide>
+
+          <div class="item item-text-wrap">
+            <div ng-model="sortingOptions">
+              <button ng-click="sortBy('name')" class="sortorder" ng-class="{active: activeSorting == 'name'}">Name
+              </button>
+              <button ng-click="sortBy('rating')" class="sortorder" ng-class="{active: activeSorting == 'rating'}">
+                Bewertung
+              </button>
+              <button ng-click="sortBy('distance')" class="sortorder" ng-class="{active: activeSorting == 'distance'}">
+                Entfernung
+              </button>
+            </div>
+          </div>
+
+
           <ion-scroll style="height:80%">
 
             <ion-list ng-show="!allBeers">
