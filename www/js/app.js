@@ -29,7 +29,7 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
     url: 'http://localhost:8100/v2'
   })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider,$ionicCloudProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicCloudProvider) {
   $stateProvider
   .state('profile', {
     url: '/profile',

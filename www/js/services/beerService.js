@@ -7,7 +7,7 @@ angular.module('beeround.services', [])
 
       function getBeers(brewery) {
         return new Promise(function (resolve, reject) {
-          $http.get(ApiEndpoint.url+'/brewery/' + brewery.brewery.id + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
+          $http.get('http://api.brewerydb.com/v2/brewery/' + brewery.brewery.id + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
             brewery.beers = res.data.data;
             return resolve(brewery);
           });
@@ -32,9 +32,8 @@ angular.module('beeround.services', [])
 
             console.log("New Filter - loading data from api");
             return new Promise(function (resolve, reject) {
-              $http.get(ApiEndpoint.url+'/search/geo/point?lat=' + clientSettings.lat + '&lng=' + clientSettings.lng + '&radius=' + clientSettings.radius + '&unit=km&key=7802f26125b23378098b3c32911adcce').then(function (res) {
+              $http.get('http://api.brewerydb.com/v2/brewery/search/geo/point?lat=' + clientSettings.lat + '&lng=' + clientSettings.lng + '&radius=' + clientSettings.radius + '&unit=km&key=7802f26125b23378098b3c32911adcce').then(function (res) {
 
-                console.log(res.data);
                 // Check, if data is available
                 if(res.data.data){
                   let promises = res.data.data.map(function (obj) {
@@ -52,7 +51,7 @@ angular.module('beeround.services', [])
 
                 else {
                   breweries = undefined;
-                  resolve()
+                  reject()
                 }
 
               });

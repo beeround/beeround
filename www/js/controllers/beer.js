@@ -197,10 +197,10 @@ angular.module('beeround.beer', [])
       // TODO ERROR HANDLING
 
       // Setup the loader
-      $ionicLoading.show({
+      /*$ionicLoading.show({
         content: 'Loading',
         animation: 'fade-in',
-      });
+      });*/
 
       if (noGeo) {
         console.log("Abfrage ohne Ortung");
@@ -238,6 +238,7 @@ angular.module('beeround.beer', [])
         // Don't wait till death
         let posOptions = {timeout: 20000, enableHighAccuracy: false};
 
+
         // Geolocation
         $cordovaGeolocation
           .getCurrentPosition(posOptions)
@@ -250,22 +251,26 @@ angular.module('beeround.beer', [])
               radius: 30 // standard
             };
 
-            $http.get('http://nominatim.openstreetmap.org/reverse?lat=' + $rootScope.userSettings.lat + '&lon=' + $rootScope.userSettings.lng + '&format=json').then(result => {
+            $http.get('https://nominatim.openstreetmap.org/reverse?lat=' + $rootScope.userSettings.lat + '&lon=' + $rootScope.userSettings.lng + '&format=json').then(result => {
               $rootScope.location = result.data.address;
-
 
               // GET BREWERIES
               beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
 
+                alert(result);
                 $scope.breweries = result;
                 $ionicLoading.hide();
 
                 // Resize
                 $ionicScrollDelegate.resize();
 
+              }, function () {
+                alert("err")
               });
             }, function (err) {
               $scope.connectionError = true;
+              $ionicLoading.hide();
+
               //TODO ERROR: NO INTERNET; NO GPS OR ELSE
             });
 
