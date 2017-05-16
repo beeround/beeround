@@ -155,13 +155,8 @@ angular.module('beeround.beer', [])
       // Scroll to top
       $ionicScrollDelegate.scrollTop();
 
-      //If new type is equal to current type
-      if ($scope.filterLocationType == type) {
-        $scope.filterLocationType = 'allLocationTypes';
-      }
-      else {
-        $scope.filterLocationType = type;
-      }
+      $scope.filterLocationType = type;
+
     };
 
 
