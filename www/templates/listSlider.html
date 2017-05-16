@@ -20,6 +20,19 @@
       </div>
     </div>
 
+    <div class="item item-text-wrap">
+      <div ng-model="sortingOptions">
+        <button ng-click="sortBy('name')" class="sortorder" ng-class="{active: activeSorting == 'name'}">Name
+        </button>
+        <button ng-click="sortBy('rating')" class="sortorder" ng-class="{active: activeSorting == 'rating'}">
+          Bewertung
+        </button>
+        <button ng-click="sortBy('distance')" class="sortorder" ng-class="{active: activeSorting == 'distance'}">
+          Entfernung
+        </button>
+      </div>
+    </div>
+
 
     <tab-slide-box tab="0">
       <div class="tsb-icons">
@@ -125,20 +138,6 @@
             <button ng-class="{'active' : filterLocationType == 'brewpub'}" ng-click="setType('brewpub')">mit
               Restaurant
             </button>
-          </div>
-
-          <div class="item item-text-wrap">
-            <h5>Sortieren</h5>
-            <div ng-model="sortingOptions">
-              <button ng-click="sortBy('name')" class="sortorder" ng-class="{active: activeSorting == 'name'}">Name
-              </button>
-              <button ng-click="sortBy('rating')" class="sortorder" ng-class="{active: activeSorting == 'rating'}">
-                Bewertung
-              </button>
-              <button ng-click="sortBy('distance')" class="sortorder" ng-class="{active: activeSorting == 'distance'}">
-                Entfernung
-              </button>
-            </div>
           </div>
 
           <div class="item item-text-wrap">

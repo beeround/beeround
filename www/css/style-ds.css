@@ -1,0 +1,10 @@
+.rating i {
+  font-size: 40px;
+  color: #C8C6C5;
+  margin:0 5px;
+}
+
+.rating button.control {
+  width: auto;
+  height:auto;
+}

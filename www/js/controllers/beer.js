@@ -426,7 +426,6 @@ angular.module('beeround.beer', [])
 
     beerService.getBeerDetails(beerId).then(result => {
       $scope.beer = result.data;
-
     })
 
   });
