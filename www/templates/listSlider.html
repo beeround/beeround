@@ -43,16 +43,10 @@
                   <p>{{location.locality}}</p>
                   <div class="infoicons">
                     <span><i class="icon ion-android-radio-button-on"></i> {{location.distance}} km</span>
-                    <span><i class="icon beeround-icon beeround-count"></i> {{location.beers.length}}</span>
-                    <span ng-show="(location.openToPublic == 'Y')" ng-hide="location.locationType == 'restaurant' ||
+                    <span ng-show="location.beers.length > 0"><i class="icon beeround-icon beeround-count"></i> {{location.beers.length}}</span>
+                    <span ng-show="(location.openToPublic == 'Y') && location.locationType == 'restaurant' ||
                        location.locationType == 'brewpub' || location.locationType == 'tasting'">
-                      <i class="icon ion-android-people"></i> Öffentlich</span>
-
-                    <span ng-show="(location.openToPublic == 'Y') &&
-                      (location.locationType == 'restaurant' ||
-                       location.locationType == 'brewpub' ||
-                       location.locationType == 'tasting')"><i
-                      class="icon beeround-icon restaurant"></i> Restaurant</span>
+                      <i class="icon beeround-icon restaurant"></i> Bewirtung</span>
                   </div>
 
                 </a>

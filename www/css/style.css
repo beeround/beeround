@@ -178,6 +178,7 @@ a .item .divider{
     font-size: 14px;
     padding-top: 5px;
     padding-bottom: 15px;
+    text-align: left;
 }
 
 .infoicons > span {
