@@ -52,10 +52,13 @@
             <ion-list>
               <ion-item ng-repeat="location in breweries"
                         ng-show="(location.locationType == filterLocationType || filterLocationType == 'allLocationTypes')">
-                <a class="item item-thumbnail-left divider" ng-href="#/tab/list/{{location.brewery.id}}">
+
+                  <a class="item item-thumbnail-left divider" ng-href="#/tab/list/{{location.brewery.id}}">
                   <img ng-src="{{location.brewery.images.icon || '/img/no-image-placeholder.png'}}">
-                  <h2>{{location.brewery.name}}</h2>
-                  <p>{{location.locality}}</p>
+
+                      <h2>{{location.brewery.name}}</h2>
+                      <p>{{location.locality}} </p>
+                      <i class="icon ion-chevron-right"></i>
                   <div class="infoicons">
                     <span><i class="icon ion-android-radio-button-on"></i> {{location.distance}} km</span>
                     <span ng-show="location.beers.length > 0"><i class="icon beeround-icon beeround-count"></i> {{location.beers.length}}</span>
@@ -72,7 +75,9 @@
                       <i class="icon beeround-icon restaurant"></i> Restaurant</span>
                   </div>
 
-                </a>
+                  </a>
+
+
               </ion-item>
             </ion-list>
 
