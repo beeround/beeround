@@ -22,7 +22,7 @@ body{
 
 
 /*HEADER*/
-
+/* Hier fehlt ein Punkt?*/
 ion-header-bar.bar.bar-stable{
     background: #773D17;
     color: #FFFFFF;
@@ -321,9 +321,6 @@ i.icon.ion-navicon-round{
     top: 50%;
 }
 
-.ion-ios-pint.big {
-    padding: 0px 2px;
-}
 .beeround-icon{
     width: 14px;
 }
@@ -375,22 +372,6 @@ span.back-text{
     display: none;
 }
 
-.full-width{
-    box-shadow: 0px 2px 3px #ccc;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-
-}
-
-
-.right{
-    float: right;
-}
-
-.big{
-    font-size: 20px;
-}
 /*BREWERY*/
 ion-item.brewery-thumbnail.item{
     padding-left: 5px;
@@ -399,7 +380,6 @@ ion-item.brewery-thumbnail.item{
 .brewery-image{
     width: 100%;
     margin-bottom: 15px;
-    border-radius: 4px;
 }
 
 .brewery-thumbnail{
@@ -410,12 +390,26 @@ a.call-brewery p.col-75 {
     padding-top: 9px;
 }
 
+.contact-button{
+    box-sizing: border-box;
+    position: absolute;
+    /* z-index: 2; */
+    margin: -45px 0 0 25px;
+    background: none;
+    padding-bottom: 5px;
+    right: 5px;
+}
 
+.contact-button button {
+    background-color: #F1A435;
+    color:#ffffff;
+    min-width: 45px;
+    min-height: 40px;
 
-/*BEERDETAIL*/
+}
 
-.beerdetail-image {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.contact-button button:hover{
+    background-color: #ffffff;
+    color:#F1A435;
+    border-color: #F1A435;
 }
