@@ -1,6 +1,6 @@
-angular.module('beeround.services', [])
-  .service('beerService', ['$http', '$q', '$timeout',
-    function ($http, $q, $timeout) {
+angular.module('breweryDB.service', [])
+  .service('breweryDB', ['$http', '$q', '$timeout', 'beeroundService',
+    function ($http, $q, $timeout, beeroundService) {
 
       let breweries;
       let userSettings;
@@ -10,8 +10,46 @@ angular.module('beeround.services', [])
           $http.get('http://api.brewerydb.com/v2/brewery/' + brewery.brewery.id + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
             brewery.beers = res.data.data;
             return resolve(brewery);
+
           });
         });
+      }
+
+      function getBeerRating(breweries) {
+
+        return new Promise(function (resolve, reject) {
+
+          breweries.map((obj, firstIndex) => {
+
+            if(obj.beers){
+
+              let beerRatingMapping = obj.beers.map((beer,secondIndex)=> {
+                return beeroundService.getBeerRating(beer.id).then(result => {
+
+                    breweries[firstIndex].beers[secondIndex].rating = result;
+                    return beer
+
+                })
+            });
+
+            // Save to var and give back, if function has ended
+            Promise.all(beerRatingMapping).then(function () {
+              $timeout(function () {
+                resolve(breweries);
+
+              },5000);
+
+            });
+
+            }
+
+
+
+          });
+
+
+        });
+
       }
 
       return {
@@ -44,8 +82,10 @@ angular.module('beeround.services', [])
 
                   // Save to var and give back, if function has ended
                   Promise.all(promises).then(function (results) {
-                    breweries = results;
-                    resolve(results);
+                    return getBeerRating(results).then(allData => {
+                      breweries = allData;
+                      resolve(allData)
+                    });
                   });
                 }
 
@@ -73,7 +113,11 @@ angular.module('beeround.services', [])
 
         getBeerDetails: function (beerId) {
           return $http.get('http://api.brewerydb.com/v2/beer/' + beerId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
-            return res.data;
+
+            return beeroundService.getBeerRating(beerId).then(rating => {
+              res.data.data.rating = rating;
+              return res.data;
+            })
           });
         }
       }

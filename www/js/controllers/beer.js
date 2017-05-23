@@ -1,6 +1,6 @@
 angular.module('beeround.beer', [])
 
-  .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, beerService, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
+  .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
 
     // REFRESH Breweries on change view
     $rootScope.$on('$stateChangeStart',
@@ -200,7 +200,7 @@ angular.module('beeround.beer', [])
       if (noGeo) {
         console.log("Abfrage ohne Ortung");
 
-        beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
+        breweryDB.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
 
           $scope.breweries = result;
 
@@ -255,7 +255,7 @@ angular.module('beeround.beer', [])
               $rootScope.location = result.data.address;
 
               // GET BREWERIES
-              beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
+              breweryDB.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
 
                 $scope.breweries = result;
                 $ionicLoading.hide();
@@ -282,11 +282,11 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerListCtrl', function ($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover) {
+  .controller('beerListCtrl', function ($scope, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover) {
     const breweryId = $stateParams.brewery;
 
     // Get beers
-    beerService.getBeersByBrewery(breweryId).then(result => {
+    breweryDB.getBeersByBrewery(breweryId).then(result => {
       if (result.data) {
         $scope.beerList = result.data;
         $scope.noData = false;
@@ -298,7 +298,7 @@ angular.module('beeround.beer', [])
     });
 
     // Get brewery informations
-    beerService.getBreweryById(breweryId).then(result => {
+    breweryDB.getBreweryById(breweryId).then(result => {
       $scope.brewery = result.data;
     });
 
@@ -306,7 +306,7 @@ angular.module('beeround.beer', [])
 
   })
 
-  .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, beerService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover) {
+  .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover) {
 
     $scope.markers = [];
 
@@ -400,7 +400,7 @@ angular.module('beeround.beer', [])
         $scope.markers = [];
 
         //GET Breweries around
-        beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(location => {
+        breweryDB.getBreweriesNearCoordinates($rootScope.userSettings).then(location => {
 
           if (location) {
 
@@ -430,12 +430,40 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerDetailsCtrl', function ($scope, beerService, $http, $cordovaGeolocation, $stateParams, $state) {
+  .controller('beerDetailsCtrl', function ($scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state) {
     const beerId = $stateParams.beerId;
 
-    beerService.getBeerDetails(beerId).then(result => {
+    $scope.currentRating = 0;
+
+    breweryDB.getBeerDetails(beerId).then(result => {
       $scope.beer = result.data;
-    })
+    });
+
+    // TODO Select rating on beer click
+
+    $scope.positivRating = function () {
+      if($scope.currentRating < 5) {
+        $scope.currentRating++;
+      }
+    };
+
+    $scope.negativeRating = function () {
+      if($scope.currentRating > 0){
+        $scope.currentRating--;
+
+      }
+    };
+
+
+    function sendRating(){
+      let data = {
+
+      };
+
+      beeroundService.sendBeerRating(data).then(result => {
+
+      })
+    }
 
   });
 
