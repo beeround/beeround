@@ -77,7 +77,9 @@
                   <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
                     <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
                     <h2>{{beer.name}}</h2>
-                    <p ng-show="beer.style.abvMin">Zwischen {{beer.style.abvMin}}% und {{beer.style.abvMax}}%</p>
+                    <p ng-show="beer.style.abvMin" class="promille-number">
+                      <i class="icon beeround-icon promille"></i>{{beer.style.abvMax}}
+                    </p>
                   </a>
                 </ion-item>
               </ion-item>
@@ -88,7 +90,9 @@
                 <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
                   <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
                   <p>{{beer.name}}</p>
-                  <p ng-show="beer.style.abvMin">Zwischen {{beer.style.abvMin}}% und {{beer.style.abvMax}}%</p>
+                  <p ng-show="beer.style.abvMin" class="promille-number">
+                    <i class="icon beeround-icon promille"></i>{{beer.style.abvMax}}
+                  </p>
                 </a>
               </ion-item>
             </ion-list>

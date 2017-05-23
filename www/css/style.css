@@ -202,8 +202,16 @@ a .item .divider{
   font-size: 14px;
 }
 
+.promille-number{
+  color: #F1A435!important;
+  font-weight: bold!important;
+}
 
 
+.promille {
+  content: url('../img/beeround_promille.svg');
+  font-size: 14px;
+}
 
 
 
