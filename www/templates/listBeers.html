@@ -18,7 +18,7 @@
   <ion-item>
   <ion-item class="brewery-thumbnail">
     <h1>{{brewery.nameShortDisplay}}</h1>
-    <img class="brewery-image" src="/img/brauerei_thumbnail.png">
+    <img class="brewery-image" src="img/brauerei_thumbnail.png">
     <a class="navigate-to-brewery">
       <div class="row">
           <p class="col-66">{{brewery.locations[0].streetAddress}}<br>{{brewery.locations[0].postalCode}} {{brewery.locations[0].locality}}</p>
@@ -38,7 +38,7 @@
     <ion-list>
       <ion-item ng-repeat="beer in beerList">
         <a class="item item-thumbnail-left divider"  ng-href="#/tab/details/beer/{{beer.id}}">
-          <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
+          <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
           <h2>{{beer.nameDisplay}}</h2>
           <div class="infoicons">
             <span><i class="icon ion-android-radio-button-on"></i> {{location.distance}} km</span>

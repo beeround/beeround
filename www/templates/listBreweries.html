@@ -86,7 +86,7 @@
       <ion-item ng-show="(location.locationType == filterLocationType || filterLocationType == 'allLocationTypes')"
                 ng-repeat="location in breweries">
         <a class="item item-thumbnail-left" ng-href="#/tab/list/{{location.brewery.id}}">
-          <img ng-src="{{location.brewery.images.icon || '/img/no-image-placeholder.png'}}">
+          <img ng-src="{{location.brewery.images.icon || 'img/no-image-placeholder.png'}}">
           <h2>{{location.brewery.name}}</h2>
           <p>{{location.locality}}</p>
           <div class="infoicons">
@@ -108,7 +108,7 @@
 
         <ion-item ng-repeat="beer in location.beers">
           <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
-            <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
+            <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
             <p>{{beer.name}}</p>
           </a>
         </ion-item>
@@ -118,7 +118,7 @@
     <ion-list ng-show="listTypeSelect == 'beerList' && allBeers">
         <ion-item ng-repeat="beer in allBeers">
           <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
-            <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
+            <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
             <p>{{beer.name}}</p>
           </a>
         </ion-item>

@@ -2,7 +2,7 @@
 
   <ion-content>
     <h1>{{beer.nameDisplay}}</h1>
-    <div class="item"><img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
+    <div class="item"><img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
       <p>{{beer.name}}</p>
       <p ng-show="beer.style.abvMin">Zwischen {{beer.style.abvMin}}% und {{beer.style.abvMax}}%</p>
     </div>
