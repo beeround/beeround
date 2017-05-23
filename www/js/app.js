@@ -50,11 +50,11 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
         }
       }
     })
-    .state('tabs.beerList', {
+    .state('tabs.breweryDetails', {
       url: '/list/:brewery',
       views: {
         'tab-list': {
-          templateUrl: 'templates/listBeers.html',
+          templateUrl: 'templates/breweryDetails.html',
           controller: 'beerListCtrl'
         }
       }

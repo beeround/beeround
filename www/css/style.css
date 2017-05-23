@@ -140,6 +140,9 @@ div.list-inset{
 
 .card{
     padding: 15px 5px 15px 5px;
+    margin-top: 40px;
+    width: 75%;
+    float: right;
 }
 
 div.item.item-text-wrap{
@@ -343,6 +346,9 @@ i.icon.ion-navicon-round{
   font-size: 14px;
 }
 
+
+/*GENERAL STUFF*/
+
 .scroll {
   height: 100%;
 }
@@ -362,7 +368,11 @@ ng-map {
     margin: 0px;
 }
 
+span.back-text{
+    display: none;
+}
 
+/*BREWERY*/
 ion-item.brewery-thumbnail.item{
     padding-left: 5px;
 }

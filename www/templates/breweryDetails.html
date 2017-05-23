@@ -1,6 +1,6 @@
-<ion-view title="BIERE">
+<ion-view title="Brauerei">
 
-  <ion-content>
+  <ion-content scroll="false">
     <div class="row searchbox">
       <div class="col col-80 list list-inset no-padding-right">
         <label class="item item-input">
@@ -15,7 +15,10 @@
         </button>
       </div>
     </div>
-  <ion-item>
+
+    <ion-scroll style="height:90%">
+
+    <ion-item>
   <ion-item class="brewery-thumbnail">
     <h1>{{brewery.nameShortDisplay}}</h1>
     <img class="brewery-image" src="img/brauerei_thumbnail.png">
@@ -34,6 +37,7 @@
     </a>
 
   </ion-item>
+
 
     <ion-list>
       <ion-item ng-repeat="beer in beerList">
@@ -58,6 +62,8 @@
       </ion-item>
     </ion-list>
   </ion-item>
+    </ion-scroll>
+
 
     <ion-list ng-show="noData">
       <ion-item>
