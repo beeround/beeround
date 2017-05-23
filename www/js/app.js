@@ -26,7 +26,7 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider,$ionicCloudProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicCloudProvider) {
   $stateProvider
   .state('profile', {
     url: '/profile',
@@ -64,6 +64,15 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
       views: {
         'tab-list': {
           templateUrl: 'templates/beerDetails.html',
+          controller: 'beerDetailsCtrl'
+        }
+      }
+    })
+    .state('tabs.rateBeer', {
+      url: '/details/beer/:beerId/rate',
+      views: {
+        'tab-list': {
+          templateUrl: 'templates/rateBeer.html',
           controller: 'beerDetailsCtrl'
         }
       }

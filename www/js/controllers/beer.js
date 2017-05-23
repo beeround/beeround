@@ -64,6 +64,8 @@ angular.module('beeround.beer', [])
     // Start sorting function
     $scope.activeSorting = "distance";
 
+    $scope.filterLocationType = "allLocationTypes";
+
 
     // Load breweries on start
     getBreweries();
@@ -153,13 +155,8 @@ angular.module('beeround.beer', [])
       // Scroll to top
       $ionicScrollDelegate.scrollTop();
 
-      //If new type is equal to current type
-      if ($scope.filterLocationType == type) {
-        $scope.filterLocationType = 'allLocationTypes';
-      }
-      else {
-        $scope.filterLocationType = type;
-      }
+      $scope.filterLocationType = type;
+
     };
 
 
@@ -195,10 +192,10 @@ angular.module('beeround.beer', [])
       // TODO ERROR HANDLING
 
       // Setup the loader
-      $ionicLoading.show({
+      /*$ionicLoading.show({
         content: 'Loading',
         animation: 'fade-in',
-      });
+      });*/
 
       if (noGeo) {
         console.log("Abfrage ohne Ortung");
@@ -236,6 +233,12 @@ angular.module('beeround.beer', [])
         // Don't wait till death
         let posOptions = {timeout: 20000, enableHighAccuracy: false};
 
+        // Setup the loader
+        $ionicLoading.show({
+          content: 'Loading',
+          animation: 'fade-in',
+        });
+
         // Geolocation
         $cordovaGeolocation
           .getCurrentPosition(posOptions)
@@ -248,9 +251,8 @@ angular.module('beeround.beer', [])
               radius: 30 // standard
             };
 
-            $http.get('http://nominatim.openstreetmap.org/reverse?lat=' + $rootScope.userSettings.lat + '&lon=' + $rootScope.userSettings.lng + '&format=json').then(result => {
+            $http.get('https://nominatim.openstreetmap.org/reverse?lat=' + $rootScope.userSettings.lat + '&lon=' + $rootScope.userSettings.lng + '&format=json').then(result => {
               $rootScope.location = result.data.address;
-
 
               // GET BREWERIES
               beerService.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
@@ -261,9 +263,16 @@ angular.module('beeround.beer', [])
                 // Resize
                 $ionicScrollDelegate.resize();
 
+              }, function () {
+                $ionicLoading.hide();
+
+                alert("err")
               });
             }, function (err) {
+              $ionicLoading.hide();
+
               $scope.connectionError = true;
+
               //TODO ERROR: NO INTERNET; NO GPS OR ELSE
             });
 
@@ -426,7 +435,6 @@ angular.module('beeround.beer', [])
 
     beerService.getBeerDetails(beerId).then(result => {
       $scope.beer = result.data;
-
     })
 
   });

@@ -1,0 +1,36 @@
+<ion-view title="Bier kommentieren">
+
+  <ion-content>
+    <h3>{{beer.nameDisplay}}</h3>
+
+    <div class="rating">
+      <h4>Bewertung</h4>
+      <hr>
+      <div class="row">
+        <div class="col col-20 text-center">
+          <button class="control">-</button>
+        </div>
+        <div class="col col-60 text-center">
+          <i class="ion-ios-pint"></i>
+          <i class="ion-ios-pint"></i>
+          <i class="ion-ios-pint"></i>
+          <i class="ion-ios-pint"></i>
+          <i class="ion-ios-pint"></i>
+
+        </div>
+        <div class="col col-20 text-center">
+          <button class="control" >+</button>
+        </div>
+      </div>
+
+
+
+      <hr>
+    </div>
+
+    <h4>Kommentar</h4>
+    <p>{{beer | json}}</p>
+
+  </ion-content>
+
+</ion-view>

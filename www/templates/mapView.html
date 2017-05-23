@@ -5,9 +5,6 @@
       <div class="item item-text-wrap">
         <h3>{{location.town || location.village}}</h3>
         <h3>Radius: {{userSettings.radius}}km</h3>
-        <h3>Zoom: {{zoom}}</h3>
-        <h3>{{userSettings}}</h3>
-
       </div>
     </div>
     <ng-map on-zoom_changed="zoomChanged()" zoom="{{zoom}}" center="{{userSettings.lat}}, {{userSettings.lng}}">
@@ -19,7 +16,6 @@
           <p>{{boxContent.lat}}, {{boxContent.lng}}</p>
         </div>
       </info-window>
-
     </ng-map>
 
     <script id="filter.html" type="text/ng-template">

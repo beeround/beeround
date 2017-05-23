@@ -6,7 +6,10 @@
       <p>{{beer.name}}</p>
       <p ng-show="beer.style.abvMin">Zwischen {{beer.style.abvMin}}% und {{beer.style.abvMax}}%</p>
     </div>
+    <a class="button" ng-href="#/tab/details/beer/{{beer.id}}/rate">Jetzt trinken</a>
+
     <pre>{{beer | json}}</pre>
+
   </ion-content>
 
 </ion-view>

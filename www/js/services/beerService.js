@@ -15,7 +15,6 @@ angular.module('beeround.services', [])
       }
 
       return {
-
         getBreweriesNearCoordinates: function (clientSettings) {
 
           if(angular.equals(userSettings, clientSettings)){
@@ -33,9 +32,8 @@ angular.module('beeround.services', [])
 
             console.log("New Filter - loading data from api");
             return new Promise(function (resolve, reject) {
-              $http.get('http://api.brewerydb.com/v2//search/geo/point?lat=' + clientSettings.lat + '&lng=' + clientSettings.lng + '&radius=' + clientSettings.radius + '&unit=km&key=7802f26125b23378098b3c32911adcce').then(function (res) {
+              $http.get('http://api.brewerydb.com/v2/search/geo/point?lat=' + clientSettings.lat + '&lng=' + clientSettings.lng + '&radius=' + clientSettings.radius + '&unit=km&key=7802f26125b23378098b3c32911adcce').then(function (res) {
 
-                console.log(res.data);
                 // Check, if data is available
                 if(res.data.data){
                   let promises = res.data.data.map(function (obj) {
@@ -53,7 +51,7 @@ angular.module('beeround.services', [])
 
                 else {
                   breweries = undefined;
-                  resolve()
+                  reject()
                 }
 
               });
@@ -62,13 +60,13 @@ angular.module('beeround.services', [])
         },
 
         getBeersByBrewery: function (breweryId) {
-          return $http.get('http://api.brewerydb.com/v2/brewery/' + breweryId + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
+          return $http.get('http://api.brewerydb.com/v2//brewery/' + breweryId + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
             return res.data;
           });
         },
 
         getBreweryById: function (breweryId) {
-          return $http.get('http://api.brewerydb.com/v2/brewery/' + breweryId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
+          return $http.get('http://api.brewerydb.com/v2//brewery/' + breweryId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
             return res.data;
           });
         },

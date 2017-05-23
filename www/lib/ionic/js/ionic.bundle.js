@@ -250,7 +250,7 @@ window.ionic.version = '1.3.3';
         do {
           curtop += el.offsetTop;
           el = el.offsetParent;
-        } while (el)
+        } while (el);
         return curtop;
       }
     },
@@ -11022,7 +11022,7 @@ ionic.views.Slider = ionic.views.View.inherit({
               s.createLoop();
             }, 50);
           }
-        }
+        };
 
         s.getSlideDataIndex = function(slideIndex){
           // this is an Ionic custom function
@@ -11036,7 +11036,7 @@ ionic.views.Slider = ionic.views.View.inherit({
           var slide = s.slides.eq(slideIndex);
           var attributeIndex = angular.element(slide).attr("data-swiper-slide-index");
           return parseInt(attributeIndex);
-        }
+        };
 
         /*=========================
           Loop
@@ -55024,8 +55024,8 @@ IonicModule
     },
 
     tabs: {
-      style: 'striped',
-      position: 'top'
+      style: 'standard',
+      position: 'bottom'
     },
 
     templates: {
@@ -55073,8 +55073,8 @@ IonicModule
     },
 
     tabs: {
-      style: 'standard',
-      position: 'bottom'
+      style: 'striped',
+      position: 'top'
     },
 
     scrolling: {

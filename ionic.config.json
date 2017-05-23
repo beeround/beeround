@@ -3,8 +3,8 @@
   "app_id": "9b8ef8c6",
   "proxies": [
     {
-      "path": "/app",
-      "proxyUrl": "http://cors.api.com/api"
+      "path": "/v2",
+      "proxyUrl": "http://api.brewerydb.com/v2"
     }
   ]
 }

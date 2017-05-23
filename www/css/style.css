@@ -28,9 +28,8 @@ ion-header-bar.bar.bar-stable{
     color: #FFFFFF;
 }
 
-.bar-stable .button.button-clear.ion-navicon{
-    width: 100%;
-}
+
+
 
 .bar-stable .button.button-clear{
     color: #FFFFFF;
@@ -41,7 +40,9 @@ ion-header-bar.bar.bar-stable{
     text-transform: uppercase;
     font-weight: bold;
     font-size: 20px;
-
+    text-align: center;
+    right:0 !important;
+    left:0 !important;
 }
 
 
@@ -50,49 +51,112 @@ ion-header-bar.bar.bar-stable{
     background: none;
     color: #000000;
     text-align: center;
+    padding-top: 0px;
 }
+
 
 .tabbed-slidebox a{
     text-decoration: none;
+    margin: 0px 0px 0px 20px;
 }
 
 .tabbed-slidebox a.active{
     color: #F1A435;
     border-bottom: 2px solid #F1A435;
     padding-bottom: 3px;
+}
 
+.tsb-ic-wrp{
+    box-shadow: 0px 1px 4px #ddd;
+    padding-bottom: 0px;
 }
 
 /*FOOTER*/
-
 
 .tabs-striped .tabs {
     background: #773D17;
     color: #FFFFFF;
     border: none;
+    padding-top: 2px;
+    opacity: 1;
 }
+
+
 
 .tabs-striped .tab-item.tab-item-active {
     color: #F3A522;
+    border-style: none;
+    margin-top: 0px;
 }
 
+.tab-title{
+    display: none;
+}
+
+.tab-item .icon{
+    font-size: 30px;
+}
+
+.tabs-icon-top > .tabs .tab-item{
+    opacity: 1;
+}
+
+
+/*Android specific*/
+
+.tabs{
+    background-color: #773D17;
+    color: #FFFFFF;
+    border-style: none;
+    background-image: none;
+}
+
+.tab-item{
+    padding-top: 5px;
+}
 
 
 /*SEARCHBOX*/
 
+div.list-inset{
+    background-color: transparent;
+}
+
 .list-inset .item:last-child{
-    border: 1px solid #F3A522;
    border-radius: 4px;
 }
 
 
 
+.searchbox{
+    background-color: #773D17;
+    padding: 0px 5px 5px 5px;
+    margin-top: -5px;
+}
+
+
+
+/*POPOVER*/
+
+.card{
+    padding: 15px 5px 15px 5px;
+}
+
+div.item.item-text-wrap{
+    padding-bottom: 15px;
+}
+
+.close{
+}
+
 /*FONTS*/
 
+
 h1{
-    color: #FFFFFF;
+    color: #000000;
     font-size: 20px;
     font-weight: bold;
+    padding-top: 15px;
 
 }
 
@@ -108,6 +172,10 @@ p{
 text-align: left;
 }
 
+a{
+    text-decoration: none;
+}
+
 /*LINKS*/
 
 
@@ -120,14 +188,23 @@ button{
     color: #F1A435;
     font-weight: lighter;
     background: #FFFFFF;
-    border:1px solid #F1A435;
+    border:0px;
     border-radius: 4px;
-    width:100px;
+    min-width:25px;
     margin: 5px;
-    height:40px;
+    height:25px;
+    line-height: initial;
+    box-shadow: 0px 1px 3px #ccc;
+
 }
 
 button.active{
+    background: #F1A435;
+    color: #FFFFFF;
+    font-weight: normal;
+}
+
+button:hover{
     background: #F1A435;
     color: #FFFFFF;
     font-weight: normal;
@@ -138,15 +215,35 @@ button.back-button{
     display: inherit;
 }
 
+.button-geolocation{
+
+    height: 34px;
+    min-width: 34px;
+    margin: 0px;
+    box-shadow: none;
+}
+
+.item-button-right{
+    padding-right: 8px;
+    margin-right: 0px;
+    float: right;
+    width: 100%;
+}
+
 /*ITEM*/
 
 .item{
    border-style: none;
+    padding-top:0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
 }
 
 a.item {
     border-style: none;
-    margin-top: 14px;
+    padding-top: 8px;
 }
 
 .item .divider{
@@ -169,6 +266,10 @@ a .item .divider{
 
 /*ICONS*/
 
+i.icon{
+    vertical-align: middle;
+}
+
 .icon{
     vertical-align: middle;
 }
@@ -176,16 +277,45 @@ a .item .divider{
 .infoicons{
     color: #F1A435;
     font-size: 14px;
-    padding-top: 5px;
-    padding-bottom: 15px;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    text-align: left;
 }
 
 .infoicons > span {
-    padding-right: 25px;
+    padding-right: 15px;
 }
 
 .ion-android-people{
     font-size: 16px;
+}
+
+
+span.button.button-icon.button-clear.ion-android-more-vertical:before{
+    font-size: 24px;
+}
+
+.ion-ios-location{
+    font-size: 18px;
+}
+
+i.icon.ion-navicon-round{
+    font-size: 33px;
+    height: 30px;
+}
+
+
+.ion-close-round{
+    float: right;
+}
+
+.ion-chevron-right{
+    float: right;
+}
+
+.ion-chevron-right:before {
+    transform: translate(0px, -8px);
+    top: 50%;
 }
 
 .beeround-icon{
@@ -227,3 +357,31 @@ ng-map {
   height: 100%;
 }
 
+
+.no-padding-right{
+    padding-right: 0px;
+    margin: 0px 0px 0px 10px;
+    }
+
+.no-padding-left{
+    margin: 0px;
+}
+
+
+ion-item.brewery-thumbnail.item{
+    padding-left: 5px;
+}
+
+.brewery-image{
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.brewery-thumbnail{
+    padding-bottom: 20px;
+}
+
+a.call-brewery p.col-75 {
+    padding-top: 9px;
+}
