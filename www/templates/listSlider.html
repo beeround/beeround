@@ -115,7 +115,7 @@
                     <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
                     <h2>{{beer.name}}</h2>
                     <p ng-show="beer.style.abvMin" class="promille-number">
-                      <i class="icon beeround-icon promille"></i>{{beer.style.abvMax}}
+                      {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>
                     </p>
                   </a>
                 </ion-item>
@@ -128,7 +128,7 @@
                   <img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
                   <p>{{beer.name}}</p>
                   <p ng-show="beer.style.abvMin" class="promille-number">
-                    <i class="icon beeround-icon promille"></i>{{beer.style.abvMax}}
+                    {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>
                   </p>
                 </a>
               </ion-item>
