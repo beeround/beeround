@@ -2,6 +2,7 @@
   font-size: 30px;
   color: #C8C6C5;
   margin:0px;
+  text-align: left;
 }
 
 .rating button.control {
@@ -11,4 +12,8 @@
 
 .rating i.active {
   color: #F1A435;
+}
+
+div.col.rating{
+  text-align: left;
 }
