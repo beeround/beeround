@@ -85,7 +85,13 @@ angular.module('beeround.beer', [])
     $scope.onSlideMove = function (data) {
       $scope.currentListView = $scope.tabs[data.index].text;
 
+      if(data.index == 0) {
+        if($scope.activeSorting == "rating"){
+          $scope.sortBy("distance");
+        }
+      }
       if (data.index == 1) {
+        $scope.currentListView = $scope.tabs[0].text;
         makeBeerList();
       }
       if (data.index == 2) {
@@ -189,6 +195,7 @@ angular.module('beeround.beer', [])
       if ($scope.activeSorting == "rating" && $scope.breweries) {
         $scope.allBeers = [];
 
+
         $scope.breweries.map(function (brewery) {
           if (brewery.beers) {
             brewery.beers.map(function (beer) {
@@ -197,11 +204,15 @@ angular.module('beeround.beer', [])
           }
         });
 
-        $scope.allBeers.sort(function (a, b) {
-          if (a.rating > b.rating) return -1;
-          if (a.rating < b.rating) return 1;
-          return 0;
-        })
+
+        $timeout(function () {
+          $scope.allBeers.sort(function (a, b) {
+            if (a.rating > b.rating) return -1;
+            if (a.rating < b.rating) return 1;
+            return 0;
+          })
+        },2000)
+
       }
 
     }
@@ -236,7 +247,10 @@ angular.module('beeround.beer', [])
             $ionicScrollDelegate.resize();
 
             // Update beer array
+
             makeBeerList();
+
+            console.log($scope.activeSorting);
           }
 
           else {
@@ -457,6 +471,7 @@ angular.module('beeround.beer', [])
           }
           else {
             $ionicLoading.hide();
+
           }
 
         })
