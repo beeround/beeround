@@ -233,6 +233,29 @@ button.back-button{
     width: 100%;
 }
 
+.contact-button{
+    box-sizing: border-box;
+    position: absolute;
+    margin: -45px 0 0 25px !important;
+    background: none;
+    padding-bottom: 5px !important;
+    right: 5px;
+}
+
+.contact-button button {
+    background-color: #F1A435;
+    color:#ffffff;
+    min-width: 45px;
+    min-height: 40px;
+
+}
+
+.contact-button button:hover{
+    background-color: #ffffff;
+    color:#F1A435;
+    border-color: #F1A435;
+}
+
 /*ITEM*/
 
 .item{
@@ -386,26 +409,3 @@ ion-item.brewery-thumbnail.item{
     padding-bottom: 20px;
 }
 
-.contact-button{
-    box-sizing: border-box;
-    position: absolute;
-    /* z-index: 2; */
-    margin: -45px 0 0 25px;
-    background: none;
-    padding-bottom: 5px;
-    right: 5px;
-}
-
-.contact-button button {
-    background-color: #F1A435;
-    color:#ffffff;
-    min-width: 45px;
-    min-height: 40px;
-
-}
-
-.contact-button button:hover{
-    background-color: #ffffff;
-    color:#F1A435;
-    border-color: #F1A435;
-}

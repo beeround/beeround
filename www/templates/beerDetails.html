@@ -4,6 +4,10 @@
     <h1>{{beer.nameDisplay}}</h1>
     <div class="item"><img ng-src="{{beer.images.icon || '/img/no-image-placeholder.png'}}">
 
+      <p ng-show="beer.style.abvMin" class="promille-number">
+        {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>
+      </p>
+
       <div class="row">
         <div class="col">
           Bewertung
@@ -17,9 +21,7 @@
         </div>
       </div>
 
-      <p ng-show="beer.style.abvMin" class="promille-number">
-        {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>
-      </p>
+
     </div>
     <a class="button" ng-href="#/tab/details/beer/{{beer.id}}/rate">Jetzt trinken</a>
 

@@ -1,7 +1,7 @@
 .rating i {
-  font-size: 40px;
+  font-size: 30px;
   color: #C8C6C5;
-  margin:0 5px;
+  margin:0px;
 }
 
 .rating button.control {

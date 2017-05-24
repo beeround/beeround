@@ -42,20 +42,18 @@
                         <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
                             <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
                             <h2>{{beer.nameDisplay}}</h2>
-                            <div class="infoicons">
-                                <span><i class="icon ion-android-radio-button-on"></i> {{location.distance}} km</span>
-            <span ng-show="(location.openToPublic == 'Y')" ng-hide="location.locationType == 'restaurant' ||
-                     location.locationType == 'brewpub' || location.locationType == 'tasting'">
-
-                     <i class="icon ion-android-people"></i> Öffentlich</span>
-
-
-            <span ng-show="((location.openToPublic == 'Y') &&
-                    (location.locationType == 'restaurant' ||
-                     location.locationType == 'brewpub' ||
-                     location.locationType == 'tasting'))">
-                      <i class="icon beeround-icon restaurant"></i> Restaurant</span>
-                            </div>
+                          <p>{{brewery.nameShortDisplay}}</p>
+                          <i class="icon ion-chevron-right"></i>
+                              <p ng-show="beer.style.abvMin" class="promille-number">
+                                {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>
+                              </p>
+                              <div class="col rating">
+                                <i class="ion-ios-pint" ng-class="{'active': beer.rating > 0}"></i>
+                                <i class="ion-ios-pint" ng-class="{'active': beer.rating > 1}"></i>
+                                <i class="ion-ios-pint" ng-class="{'active': beer.rating > 2}"></i>
+                                <i class="ion-ios-pint" ng-class="{'active': beer.rating > 3}"></i>
+                                <i class="ion-ios-pint" ng-class="{'active': beer.rating > 4}"></i>
+                              </div>
                         </a>
                     </ion-item>
                 </ion-list>
