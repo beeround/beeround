@@ -114,9 +114,11 @@
                   <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
                     <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
                     <h2>{{beer.name}}</h2>
-                    <p>{{location.brewery.name}}</p>
+                    <p>{{brewery.nameShortDisplay}}</p>
                     <i class="icon ion-chevron-right"></i>
-
+                    <p ng-show="beer.style.abvMin" class="promille-number">
+                      {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>
+                    </p>
                     <div class="col rating">
                       <i class="ion-ios-pint" ng-class="{'active': beer.rating > 0}"></i>
                       <i class="ion-ios-pint" ng-class="{'active': beer.rating > 1}"></i>
@@ -124,9 +126,6 @@
                       <i class="ion-ios-pint" ng-class="{'active': beer.rating > 3}"></i>
                       <i class="ion-ios-pint" ng-class="{'active': beer.rating > 4}"></i>
                     </div>
-                    <p ng-show="beer.style.abvMin" class="promille-number">
-                      {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>
-                    </p>
                   </a>
                 </ion-item>
               </ion-item>
