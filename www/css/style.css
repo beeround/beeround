@@ -300,6 +300,7 @@ button.back-button{
     padding-bottom: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
+    left: -4px;
 
 }
 
@@ -324,6 +325,10 @@ a .item .divider{
 
 .item-thumbnail-left >img:first-child {
     left: 0;
+}
+
+div.comment > label.item-input{
+    min-height: 100px;
 }
 
 /*ICONS*/
@@ -408,6 +413,8 @@ i.icon.ion-navicon-round{
 
 /*GENERAL STUFF*/
 
+
+
 .full-width img{
     position: relative;
     display: block;
@@ -477,4 +484,24 @@ ion-item.brewery-thumbnail.item{
 
 .brewery-thumbnail{
     padding-bottom: 20px;
+}
+
+
+/*BEERDETAILS*/
+
+.information{
+    text-align: center;
+    padding-top: 20px;
+}
+
+.information button{
+    background: #773D17;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.rateBeer{
+    position: absolute;
+    bottom: 0;
+    width: 100%
 }
