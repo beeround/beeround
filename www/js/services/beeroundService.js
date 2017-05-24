@@ -72,8 +72,6 @@ angular.module('beeround.service', [])
             //TODO REMOVE breweryid in DB
 
           };
-          console.log(data);
-
 
           return $http.post('http://www.beeround.de/api/beers?transform=1', data).then(result => {
             console.log("POST: "+result.data);
