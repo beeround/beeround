@@ -108,7 +108,9 @@ angular.module('beeround.beer', [])
         makeBeerList();
       }
       else if (propertyName === 'rating') {
-        //TODO
+
+        makeBeerList();
+
       }
       else if (propertyName === 'distance') {
         $scope.allBeers = undefined;
@@ -178,6 +180,24 @@ angular.module('beeround.beer', [])
         $scope.allBeers.sort(function (a, b) {
           if (a.name < b.name) return -1;
           if (a.name > b.name) return 1;
+          return 0;
+        })
+      }
+
+      if ($scope.activeSorting == "rating" && $scope.breweries) {
+        $scope.allBeers = [];
+
+        $scope.breweries.map(function (brewery) {
+          if (brewery.beers) {
+            brewery.beers.map(function (beer) {
+              $scope.allBeers.push(beer);
+            });
+          }
+        });
+
+        $scope.allBeers.sort(function (a, b) {
+          if (a.rating < b.rating) return -1;
+          if (a.rating > b.rating) return 1;
           return 0;
         })
       }
