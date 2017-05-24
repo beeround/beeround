@@ -1,11 +1,11 @@
-<ion-view title="Bier kommentieren">
+<ion-view title="bewertung">
 
   <ion-content>
+    <ion-item>
     <h3>{{beer.nameDisplay}}</h3>
 
-    <div class="rating">
-      <h4>Bewertung</h4>
-      <hr>
+    <div class="rating divider">
+      <h3>Bewertung</h3>
       <div class="row">
         <div class="col col-20 text-center">
           <button ng-click="negativeRating()" class="control">-</button>
@@ -21,15 +21,13 @@
           <button ng-click="positivRating()" class="control" >+</button>
         </div>
       </div>
-
-
-
-      <hr>
     </div>
 
-    <h4>Kommentar</h4>
-    <p>{{beer | json}}</p>
 
+
+    <h3>Kommentar</h3>
+
+    </ion-item>
   </ion-content>
 
 </ion-view>

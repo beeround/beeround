@@ -8,6 +8,8 @@
 .rating button.control {
   width: auto;
   height:auto;
+  font-size: 22px;
+  padding: 3px;
 }
 
 .rating i.active {

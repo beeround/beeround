@@ -101,6 +101,10 @@ ion-header-bar.bar.bar-stable{
     opacity: 1;
 }
 
+a.tab-item.tab-item-active{
+    color: #F1A435;
+}
+
 
 /*Android specific*/
 
