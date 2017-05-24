@@ -1,6 +1,6 @@
 angular.module('beeround.beer', [])
 
-  .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
+  .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
 
     // REFRESH Breweries on change view
     $rootScope.$on('$stateChangeStart',
@@ -88,6 +88,10 @@ angular.module('beeround.beer', [])
       if (data.index == 1) {
         makeBeerList();
       }
+      if (data.index == 2) {
+        getBeerEvents();
+      }
+
     };
 
     $scope.sortBy = function (propertyName) {
@@ -108,9 +112,7 @@ angular.module('beeround.beer', [])
         makeBeerList();
       }
       else if (propertyName === 'rating') {
-
         makeBeerList();
-
       }
       else if (propertyName === 'distance') {
         $scope.allBeers = undefined;
@@ -196,8 +198,8 @@ angular.module('beeround.beer', [])
         });
 
         $scope.allBeers.sort(function (a, b) {
-          if (a.rating < b.rating) return -1;
-          if (a.rating > b.rating) return 1;
+          if (a.rating > b.rating) return -1;
+          if (a.rating < b.rating) return 1;
           return 0;
         })
       }
@@ -300,6 +302,16 @@ angular.module('beeround.beer', [])
 
           })
       }
+    }
+
+    function getBeerEvents() {
+      $scope.beerEvents = [];
+
+      beeroundService.getBreweryEvent().then(result => {
+        console.log(result.events);
+        $scope.beerEvents = result.events;
+
+      });
     }
   })
 

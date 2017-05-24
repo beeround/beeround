@@ -44,6 +44,12 @@ angular.module('beeround.service', [])
 
         },
 
+        getBreweryEvent: function () {
+          return $http.get('http://www.beeround.de/api/events?transform=1').then(result => {
+            return result.data;
+          })
+        },
+
         getRatingByUser: function (bID, uID) {
           return $http.get('http://www.beeround.de/api/ratings?transform=1&filter[]=beerid,eq,'+bID+'&filter[]=userid,eq,'+uID+'&satisfy=all').then(result => {
 

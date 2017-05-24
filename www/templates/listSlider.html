@@ -155,7 +155,41 @@
           </ion-scroll>
         </ion-slide>
         <ion-slide>
-          <h3>Events</h3>
+          <div class="item item-text-wrap">
+            <div ng-model="sortingOptions">
+              <button ng-click="sortBy('name')" class="sortorder" ng-class="{active: activeSorting == 'name'}">A -Z
+              </button>
+              <button ng-click="sortBy('distance')" class="sortorder" ng-class="{active: activeSorting == 'distance'}">
+                <i class="icon ion-android-radio-button-on"> km</i>
+              </button>
+            </div>
+          </div>
+          <ion-scroll style="height:80%" delegate-handle="slide1Scroll">
+
+            <!--Get a list from all breweries around the users location-->
+            <ion-item ng-repeat="beerEvent in beerEvents">
+              <a class="item item-thumbnail-left divider" ng-href="#/tab/list/{{}}">
+                <img ng-src="{{beerEvent.image || 'img/no-image-placeholder.png'}}">
+                <h2>{{beerEvent.name}}</h2>
+                <p>{{beerEvent.city}} </p>
+                <p>Beginn: {{beerEvent.start_date | date : "mm.MMM.yy"}} um {{beerEvent.end_time | date : "HH:mm"}} Uhr</p>
+                <p>Ende: {{beerEvent.end_date | date : "mm.MMM.yy"}} um {{beerEvent.end_time}} Uhr</p>
+                <i class="icon ion-chevron-right"></i>
+                <div class="infoicons">
+                  <span><i class="icon ion-android-radio-button-on"></i> 1 km</span>
+                  <span><i class="icon ion-android-people"></i> Öffentlich</span>
+                  <span><i class="icon ion-android-people"> Restaurant</i></span>
+                </div>
+              </a>
+            </ion-item>
+
+            <ion-list ng-show="noData">
+              <ion-item>
+                <p>Keine Events vorhanden</p>
+              </ion-item>
+            </ion-list>
+
+          </ion-scroll>
         </ion-slide>
 
       </ion-slide-box>
