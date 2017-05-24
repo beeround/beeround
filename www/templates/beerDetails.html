@@ -1,4 +1,4 @@
-<ion-view title="">
+<ion-view cache-view="false" title="">
 
   <ion-content>
     <h1>{{beer.nameDisplay}}</h1>
@@ -12,6 +12,7 @@
         <div class="col">
           Bewertung
         </div>
+
         <div class="col rating">
           <i class="ion-ios-pint" ng-class="{'active': beer.rating > 0}"></i>
           <i class="ion-ios-pint" ng-class="{'active': beer.rating > 1}"></i>

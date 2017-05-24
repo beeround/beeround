@@ -15,7 +15,7 @@ angular.module('breweryDB.service', [])
         });
       }
 
-      function getBeerRating(breweries) {
+      function getRatingByBreweries(breweries) {
 
         return new Promise(function (resolve, reject) {
 
@@ -34,11 +34,7 @@ angular.module('breweryDB.service', [])
 
             // Save to var and give back, if function has ended
             Promise.all(beerRatingMapping).then(function () {
-              $timeout(function () {
                 resolve(breweries);
-
-              },5000);
-
             });
 
             }
@@ -52,6 +48,30 @@ angular.module('breweryDB.service', [])
 
       }
 
+      function getRatingByBeers(beers) {
+
+        return new Promise(function (resolve, reject) {
+
+            if(beers){
+
+              let beerRatingMapping = beers.map((beer,index)=> {
+                return beeroundService.getBeerRating(beer.id).then(result => {
+                  beers[index].rating = result;
+                  return beer
+
+                })
+              });
+
+              // Save to var and give back, if function has ended
+              Promise.all(beerRatingMapping).then(function () {
+                  resolve(beers);
+              });
+
+            }
+        });
+
+      }
+
       return {
         getBreweriesNearCoordinates: function (clientSettings) {
 
@@ -61,8 +81,23 @@ angular.module('breweryDB.service', [])
             // TODO Implement Beer request
 
             return new Promise(function(resolve, reject) {
-              resolve(breweries)
-            });
+
+              // Check, if data is available
+                let promises = breweries.map(function (obj) {
+                  return getBeers(obj).then(result => {
+                    return result
+                  });
+                });
+
+                // Save to var and give back, if function has ended
+                Promise.all(promises).then(function (results) {
+                  return getRatingByBreweries(results).then(allData => {
+                    breweries = allData;
+                    resolve(allData);
+                  });
+                });
+
+          });
           }
           else {
             // New usersettings, so reload
@@ -82,7 +117,7 @@ angular.module('breweryDB.service', [])
 
                   // Save to var and give back, if function has ended
                   Promise.all(promises).then(function (results) {
-                    return getBeerRating(results).then(allData => {
+                    return getRatingByBreweries(results).then(allData => {
                       breweries = allData;
                       resolve(allData)
                     });
@@ -101,7 +136,10 @@ angular.module('breweryDB.service', [])
 
         getBeersByBrewery: function (breweryId) {
           return $http.get('http://api.brewerydb.com/v2//brewery/' + breweryId + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
-            return res.data;
+
+            return getRatingByBeers(res.data.data).then(result => {
+              return result
+            });
           });
         },
 
