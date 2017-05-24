@@ -1,25 +1,49 @@
 <ion-view cache-view="false" view-title="Map">
+  <ion-nav-buttons side="right">
+    <span class="button button-icon button-clear ion-android-more-vertical" ng-click="openPopover()">
+    </span>
+  </ion-nav-buttons>
 
-  <ion-content>
-    <div class="card">
+  <ion-content scroll="false">
+    <div class="row searchbox">
+      <div class="col col-80 list list-inset no-padding-right">
+        <label class="item item-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input id="searchLocation" g-places-autocomplete force-selection="true" options="autocompleteOptions" ng-model="place" type="text"
+                 placeholder="Standort eingeben">
+        </label>
+      </div>
+      <div class="col col-10list list-inset no-padding-left">
+        <button class="button-geolocation" ng-click="newGeolocation()">
+          <i class="ion-ios-location"></i>
+        </button>
+      </div>
+    </div>
+
+    <!--<div class="card">
       <div class="item item-text-wrap">
         <h3>{{location.town || location.village}}</h3>
         <h3>Radius: {{userSettings.radius}}km</h3>
       </div>
     </div>
+    -->
+
     <ng-map on-zoom_changed="zoomChanged()" zoom="{{zoom}}" center="{{userSettings.lat}}, {{userSettings.lng}}">
       <marker position="{{userSettings.lat}}, {{userSettings.lng}}" animation="Animation.BOUNCE" centered="true"></marker>
       <marker ng-repeat="marker in markers" id="{{marker.id}}" position="{{marker.lat}},{{marker.lng}}" on-click="showTextbox({{marker}})"></marker>
       <info-window id="overlay">
+
         <div>
           <h5>{{boxContent.name}}</h5>
           <p>{{boxContent.lat}}, {{boxContent.lng}}</p>
+          <p>{{boxContent.lat}}, {{boxContent.lng}}</p>
         </div>
+
       </info-window>
     </ng-map>
 
     <script id="filter.html" type="text/ng-template">
-      <ion-popover-view">
+      <ion-popover-view>
 
       <ion-content>
 
