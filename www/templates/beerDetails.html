@@ -17,7 +17,9 @@
         </div>
       </div>
 
-      <p ng-show="beer.style.abvMin">Zwischen {{beer.style.abvMin}}% und {{beer.style.abvMax}}%</p>
+      <p ng-show="beer.style.abvMin" class="promille-number">
+        {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>
+      </p>
     </div>
     <a class="button" ng-href="#/tab/details/beer/{{beer.id}}/rate">Jetzt trinken</a>
 
