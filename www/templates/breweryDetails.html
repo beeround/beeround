@@ -1,4 +1,4 @@
-<ion-view title="Brauerei">
+<ion-view  cache-view="false"  title="Brauerei">
 
     <ion-content scroll="false">
         <div class="row searchbox">
@@ -47,7 +47,7 @@
                               <p ng-show="beer.style.abvMin" class="promille-number">
                                 {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>
                               </p>
-                              <div class="col rating">
+                          <div class="col rating">
                                 <i class="ion-ios-pint" ng-class="{'active': beer.rating > 0}"></i>
                                 <i class="ion-ios-pint" ng-class="{'active': beer.rating > 1}"></i>
                                 <i class="ion-ios-pint" ng-class="{'active': beer.rating > 2}"></i>

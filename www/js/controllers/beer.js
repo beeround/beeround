@@ -7,6 +7,7 @@ angular.module('beeround.beer', [])
       function (event, toState, toParams, fromState, fromParams) {
         if (toState.name == "tabs.breweryList") {
           getBreweries("noGeo");
+
         }
       });
 
@@ -192,10 +193,10 @@ angular.module('beeround.beer', [])
       // TODO ERROR HANDLING
 
       // Setup the loader
-      /*$ionicLoading.show({
+      $ionicLoading.show({
         content: 'Loading',
         animation: 'fade-in',
-      });*/
+      });
 
       if (noGeo) {
         console.log("Abfrage ohne Ortung");
@@ -287,8 +288,9 @@ angular.module('beeround.beer', [])
 
     // Get beers
     breweryDB.getBeersByBrewery(breweryId).then(result => {
-      if (result.data) {
-        $scope.beerList = result.data;
+
+      if (result) {
+        $scope.beerList = result;
         $scope.noData = false;
 
       }
@@ -431,37 +433,49 @@ angular.module('beeround.beer', [])
   })
 
   .controller('beerDetailsCtrl', function ($scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state) {
-    const beerId = $stateParams.beerId;
+    let beerId = $stateParams.beerId;
 
-    $scope.currentRating = 0;
+    beeroundService.getRatingByUser(beerId, 666).then(rating => {
+      $scope.currentRating = rating;
+
+    });
 
     breweryDB.getBeerDetails(beerId).then(result => {
       $scope.beer = result.data;
+
+      beeroundService.postBeer(result.data).then(function (result) {
+        console.log(result);
+      })
     });
+
 
     // TODO Select rating on beer click
 
     $scope.positivRating = function () {
       if($scope.currentRating < 5) {
         $scope.currentRating++;
+        sendRating()
+
       }
     };
 
     $scope.negativeRating = function () {
       if($scope.currentRating > 0){
         $scope.currentRating--;
-
+        sendRating()
       }
     };
 
 
     function sendRating(){
       let data = {
-
+        beerid : beerId,
+        userid : 666,
+        rating : $scope.currentRating
       };
 
       beeroundService.sendBeerRating(data).then(result => {
-
+        console.log("Rating send");
       })
     }
 
