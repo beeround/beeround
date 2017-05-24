@@ -5,6 +5,8 @@ angular.module('beeround.beer', [])
     // REFRESH Breweries on change view
     $rootScope.$on('$stateChangeStart',
       function (event, toState, toParams, fromState, fromParams) {
+        document.getElementById('searchLocation').value = "";
+
         if (toState.name == "tabs.breweryList") {
           getBreweries("noGeo");
 
@@ -358,24 +360,35 @@ angular.module('beeround.beer', [])
 
   })
 
-  .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover) {
+  .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover) {
 
+    // IF NO USERSETTING
+    if(!$rootScope.userSettings){
+      console.log("Local Settings")
+      $rootScope.userSettings = {
+        lat:"49.34891529999999" ,
+        lng:"9.129382899999996"
+      };
+      loadMap(30);
+
+    }
     $scope.markers = [];
 
-    // Handle PopOver
-    $ionicPopover.fromTemplateUrl('filter.html', {
-      scope: $scope
-    }).then(function (popover) {
-      $scope.popover = popover;
+
+    // on manual location change
+    $scope.$on('g-places-autocomplete:select', function (event, place) {
+
+      const location = JSON.parse(JSON.stringify(place.geometry.location));
+      console.log(location)
+        $rootScope.userSettings.lat = location.lat;
+        $rootScope.userSettings.lng = location.lng;
+        $rootScope.location = {
+          town: place.formatted_address
+
+      };
+      loadMap($rootScope.userSettings.radius);
+
     });
-
-    $scope.openPopover = function () {
-      $scope.popover.show();
-    };
-    $scope.closePopover = function () {
-      $scope.popover.hide();
-    };
-
 
     NgMap.getMap().then(function (map) {
       google.maps.event.trigger(map, 'resize');
@@ -421,12 +434,40 @@ angular.module('beeround.beer', [])
       }
     });
 
-
     $scope.showTextbox = function (e, data) {
       $scope.boxContent = data;
       $scope.map.showInfoWindow('overlay', data.id);
     };
 
+    // New geolocation
+    $scope.newGeolocation = function () {
+
+      // Clear text field
+      document.getElementById('searchLocation').value = "";
+
+      let posOptions = {timeout: 20000, enableHighAccuracy: false};
+
+      // Setup the loader
+      $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+      });
+
+
+      // Geolocation
+      $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+
+
+          $rootScope.userSettings = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            radius: 30 // standard
+          };
+
+          loadMap($rootScope.userSettings.radius);
+
+        })
+    }
 
     // REFRESH Markers on change view
     $rootScope.$on('$stateChangeStart',
@@ -481,6 +522,38 @@ angular.module('beeround.beer', [])
         })
       }
     }
+
+    function getBeerEvents() {
+      $scope.beerEvents = [];
+
+      beeroundService.getBreweryEvent().then(result => {
+        console.log(result.events);
+        $scope.beerEvents = result.events;
+
+      });
+    }
+  })
+
+  .controller('beerListCtrl', function ($scope, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover) {
+    const breweryId = $stateParams.brewery;
+
+    // Get beers
+    breweryDB.getBeersByBrewery(breweryId).then(result => {
+
+      if (result) {
+        $scope.beerList = result;
+        $scope.noData = false;
+
+      }
+      else {
+        $scope.noData = true;
+      }
+    });
+
+    // Get brewery informations
+    breweryDB.getBreweryById(breweryId).then(result => {
+      $scope.brewery = result.data;
+    });
   })
 
   .controller('beerDetailsCtrl', function ($scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state) {
