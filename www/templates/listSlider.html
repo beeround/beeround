@@ -170,15 +170,14 @@
           </div>
           <ion-scroll style="height:80%" delegate-handle="slide1Scroll">
 
-            <!--
-            &lt;!&ndash;Get a list from all breweries around the users location&ndash;&gt;
+            <!-- Beer Events around position !-->
             <ion-item ng-repeat="beerEvent in beerEvents">
               <a class="item item-thumbnail-left divider" ng-href="#/tab/list/{{}}">
                 <img ng-src="{{beerEvent.image || 'img/no-image-placeholder.png'}}">
                 <h2>{{beerEvent.name}}</h2>
                 <p>{{beerEvent.city}} </p>
-                <p>Beginn: {{beerEvent.start_date | date : "mm.MMM.yy"}} um {{beerEvent.end_time | date : "HH:mm"}} Uhr</p>
-                <p>Ende: {{beerEvent.end_date | date : "mm.MMM.yy"}} um {{beerEvent.end_time}} Uhr</p>
+                <p>Beginn: {{beerEvent.start_date | date : "dd.MMM.yyyy"}}</p>
+                <p>Ende: {{beerEvent.end_date | date : "dd.MMM.yyyy"}}</p>
                 <i class="icon ion-chevron-right"></i>
                 <div class="infoicons">
                   <span><i class="icon ion-android-radio-button-on"></i> 1 km</span>
@@ -192,7 +191,7 @@
               <ion-item>
                 <p>Keine Events vorhanden</p>
               </ion-item>
-            </ion-list>-->
+            </ion-list>
 
           </ion-scroll>
         </ion-slide>

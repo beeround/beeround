@@ -610,12 +610,12 @@ angular.module('beeround.beer', [])
     $scope.form = [];
 
     $scope.signup = function () {
-      var details = {'username': $scope.form.username,'email': $scope.form.email, 'password': $scope.form.password, 'image': $scope.form.image};
+      let details = {'username': $scope.form.username,'email': $scope.form.email, 'password': $scope.form.password};
       console.log(details);
       $ionicAuth.signup(details).then(function() {
         // `$ionicUser` is now registered
       }, function(err) {
-        for (var e of err.details) {
+        for (let e of err.details) {
           if (e === 'conflict_email') {
             alert('Email already exists.');
           }
@@ -638,6 +638,32 @@ angular.module('beeround.beer', [])
         }
       });
     }
+  })
+
+  .controller('loginCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $stateParams) {
+    $scope.form = [];
+
+    $scope.login = function () {
+      let details = {'email': $scope.form.email, 'password': $scope.form.password};
+      console.log(details);
+
+      $ionicAuth.login('basic', details).then(function () {
+        //SUCCESS
+        console.log($ionicUser);
+
+        $state.go("tabs.profile");
+      }, function (err) {
+        console.log(err);
+      });
+
+    }
+  })
+
+  .controller('profilCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $stateParams) {
+    $scope.test = $ionicUser.details;
+
+
+
   });
 
 

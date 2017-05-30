@@ -28,10 +28,7 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicCloudProvider) {
   $stateProvider
-  .state('profile', {
-    url: '/profile',
-    templateUrl: 'templates/profile.html'
-  })
+
   .state('statistics', {
       url: '/statistics',
       templateUrl: 'templates/statistics.html'
@@ -87,14 +84,31 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
       }
     })
     .state('tabs.signup', {
-      url: '/signup',
+      url: '/account/signup',
       views: {
-        'tab-signup': {
+        'tab-account': {
           templateUrl: 'templates/signup.html',
           controller: 'signUpCtrl'
         }
       }
-    });
+    })
+    .state('tabs.login', {
+      url: '/account/login',
+      views: {
+        'tab-account': {
+          templateUrl: 'templates/login.html',
+          controller: 'loginCtrl'
+        }
+      }
+    })
+    .state('tabs.profile', {
+      url: '/account/profile',
+      views: {
+        'tab-account': {
+          templateUrl: 'templates/profile.html',
+          controller: 'profilCtrl'
+        }
+      }});
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/list');
 
