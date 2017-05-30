@@ -85,7 +85,15 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
           controller: 'mapCtrl'
         }
       }
-
+    })
+    .state('tabs.signup', {
+      url: '/signup',
+      views: {
+        'tab-signup': {
+          templateUrl: 'templates/signup.html',
+          controller: 'signUpCtrl'
+        }
+      }
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/list');

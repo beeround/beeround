@@ -30,6 +30,7 @@ angular.module('beeround.beer', [])
     let details = {'email': 'xxx@web.de', 'password': '123123123'};
 
     /* $ionicAuth.signup(details).then(function() {
+
      // `$ionicUser` is now registered
      }, function(err) {
      for (var e of err.details) {
@@ -214,7 +215,7 @@ angular.module('beeround.beer', [])
             if (a.rating > b.rating) return -1;
             if (a.rating < b.rating) return 1;
             return 0;
-          })
+          });
           console.log($scope.allBeers)
 
         },2000)
@@ -364,7 +365,7 @@ angular.module('beeround.beer', [])
 
     // IF NO USERSETTING
     if(!$rootScope.userSettings){
-      console.log("Local Settings")
+      console.log("Local Settings");
       $rootScope.userSettings = {
         lat:"49.34891529999999" ,
         lng:"9.129382899999996"
@@ -379,7 +380,7 @@ angular.module('beeround.beer', [])
     $scope.$on('g-places-autocomplete:select', function (event, place) {
 
       const location = JSON.parse(JSON.stringify(place.geometry.location));
-      console.log(location)
+      console.log(location);
         $rootScope.userSettings.lat = location.lat;
         $rootScope.userSettings.lng = location.lng;
         $rootScope.location = {
@@ -467,7 +468,7 @@ angular.module('beeround.beer', [])
           loadMap($rootScope.userSettings.radius);
 
         })
-    }
+    };
 
     // REFRESH Markers on change view
     $rootScope.$on('$stateChangeStart',
@@ -603,7 +604,16 @@ angular.module('beeround.beer', [])
       })
     }
 
+  })
+
+  .controller('signUpCtrl', function ($scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state) {
+    $scope.form = [];
+
+    $scope.signup = function () {
+      console.log($scope.form);
+    }
   });
+
 
 
 
