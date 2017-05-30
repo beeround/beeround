@@ -3,10 +3,26 @@
   <ion-content scroll="false">
     <h4>Signup</h4>
     <form ng-submit="signup()">
-      <input type="text" ng-model="form.user">
-      <input type="submit" value="senden">
+
+      <div class="list list-inset">
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Benutzername</span>
+          <input ng-model="form.username"  name="username" type="text" placeholder="Benutzername" >
+        </label>
+
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Email</span>
+          <input ng-model="form.email" type="email" placeholder="Email" >
+        </label>
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Passwort</span>
+          <input ng-model="form.password" type="password" placeholder="Passwort" >
+        </label>
+        <ion-list>
+          <ion-radio ng-model="choice" ng-value="'Y'">Ja, ich bestätige, <br>dass ich mindestens 16 Jahre alt bin.</ion-radio>
+        </ion-list>
+        <button type="submit" class="button button-stable">senden</button>
+      </div>
     </form>
   </ion-content>
-
-
 </ion-view>

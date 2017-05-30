@@ -606,11 +606,23 @@ angular.module('beeround.beer', [])
 
   })
 
-  .controller('signUpCtrl', function ($scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state) {
+  .controller('signUpCtrl', function ($scope, $http, $ionicAuth, $ionicUser) {
     $scope.form = [];
 
     $scope.signup = function () {
-      console.log($scope.form);
+      var details = {'username': $scope.form.username,'email': $scope.form.email, 'password': $scope.form.password};
+      console.log(details);
+      $ionicAuth.signup(details).then(function() {
+        // `$ionicUser` is now registered
+      }, function(err) {
+        for (var e of err.details) {
+          if (e === 'conflict_email') {
+            alert('Email already exists.');
+          } else {
+            // handle other errors
+          }
+        }
+      });
     }
   });
 
