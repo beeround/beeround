@@ -610,7 +610,7 @@ angular.module('beeround.beer', [])
     $scope.form = [];
 
     $scope.signup = function () {
-      var details = {'username': $scope.form.username,'email': $scope.form.email, 'password': $scope.form.password};
+      var details = {'username': $scope.form.username,'email': $scope.form.email, 'password': $scope.form.password, 'image': $scope.form.image};
       console.log(details);
       $ionicAuth.signup(details).then(function() {
         // `$ionicUser` is now registered
@@ -618,7 +618,21 @@ angular.module('beeround.beer', [])
         for (var e of err.details) {
           if (e === 'conflict_email') {
             alert('Email already exists.');
-          } else {
+          }
+          else if (e === 'conflict_username'){
+            alert('Username already exists.')
+          }
+          else if (e === 'required_password'){
+            alert('Please choose a password.')
+          }
+          else if (e === 'required_email'){
+            alert('Please insert your email address.')
+          }
+          else if (e === 'invalid_email'){
+            alert('Please insert your right email address.')
+          }
+
+          else {
             // handle other errors
           }
         }
