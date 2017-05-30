@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
-angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngMap', 'google.places','beeround.index', 'beeround.beer', 'breweryDB.service', 'beeround.service', 'angular.filter'])
+angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngMap', 'google.places','beeround.index', 'beeround.beer', 'beeround.account', 'breweryDB.service', 'beeround.service', 'angular.filter'])
 .run(function($ionicPlatform, $state, $stateParams, $rootScope) {
 
   $ionicPlatform.ready(function() {
@@ -51,7 +51,7 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
       url: '/list/:brewery',
       views: {
         'tab-list': {
-          templateUrl: 'templates/breweryDetails.html',
+          templateUrl: 'templates/brewery/breweryDetails.html',
           controller: 'beerListCtrl'
         }
       }
@@ -60,7 +60,7 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
       url: '/details/beer/:beerId',
       views: {
         'tab-list': {
-          templateUrl: 'templates/beerDetails.html',
+          templateUrl: 'templates/beer/beerDetails.html',
           controller: 'beerDetailsCtrl'
         }
       }
@@ -69,7 +69,7 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
       url: '/details/beer/:beerId/rate',
       views: {
         'tab-list': {
-          templateUrl: 'templates/rateBeer.html',
+          templateUrl: 'templates/beer/rateBeer.html',
           controller: 'beerDetailsCtrl'
         }
       }
@@ -87,7 +87,7 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
       url: '/account/signup',
       views: {
         'tab-account': {
-          templateUrl: 'templates/signup.html',
+          templateUrl: 'templates/account/signup.html',
           controller: 'signUpCtrl'
         }
       }
@@ -96,7 +96,7 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
       url: '/account/login',
       views: {
         'tab-account': {
-          templateUrl: 'templates/login.html',
+          templateUrl: 'templates/account/login.html',
           controller: 'loginCtrl'
         }
       }
@@ -105,7 +105,7 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
       url: '/account/profile',
       views: {
         'tab-account': {
-          templateUrl: 'templates/profile.html',
+          templateUrl: 'templates/account/profile.html',
           controller: 'profilCtrl'
         }
       }});
