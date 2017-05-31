@@ -412,8 +412,13 @@ i.icon.ion-navicon-round{
   font-size: 14px;
 }
 
+i.small-icon.ion-ios-pint{
+    font-size: 18px;
+}
+
 
 /*GENERAL STUFF*/
+
 
 
 
@@ -471,6 +476,10 @@ ion-item.item-thumbnail-left.item{
 ion-item.item-thumbnail-left.item > img.small-img{
     max-width: 40px;
     max-height: 40px;
+}
+
+ion-item.feed.item-thumbnail-left{
+    min-height: 60px;
 }
 
 

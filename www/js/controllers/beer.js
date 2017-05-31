@@ -339,12 +339,12 @@ angular.module('beeround.beer', [])
            title: 'Space Race',
            location: 'The Moon',
            notes: 'Bring sandwiches',
-           startDate: new Date(16, 7, 17, 18, 30, 0, 0, 0),
-           endDate: new Date(16, 7, 17, 19, 30, 0, 0, 0)
+             startDate: new Date(2017, 5, 17, 18, 30, 0, 0, 0),
+             endDate: new Date(2017, 5, 17, 19, 30, 0, 0, 0)
          }).then(function (result) {
-           alert("supi")
+           alert("PROST!")
          }, function (err) {
-           alert("Fehlgeschlagen")
+           alert("Hnzufügen fehlgeschlagen")
          })
        }, function (err) {
          // error
