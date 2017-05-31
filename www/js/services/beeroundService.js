@@ -5,9 +5,6 @@ angular.module('beeround.service', [])
       return {
         sendBeerRating: function (data) {
 
-         //data.beerid = "17uR4";
-         //data.userid = "12345";
-
           return $http.get('http://www.beeround.de/api/ratings?transform=1&filter[]=beerid,eq,'+data.beerid+'&filter[]=userid,eq,'+data.userid+'&satisfy=all').then(result => {
 
             if(result.data.ratings.length > 0){
@@ -44,12 +41,8 @@ angular.module('beeround.service', [])
 
         },
 
-        getBreweryEvent: function () {
-          let lng = 0;
-          let lat = 0;
-          let radius = 30;
-
-          return $http.get('http://www.beeround.de/getevents.php?longitude='+lng+'&latitude='+lat+'&radius='+radius).then(result => {
+        getBreweryEvent: function (userdata) {
+          return $http.get('http://www.beeround.de/getevents.php?longitude='+userdata.lng+'&latitude='+userdata.lat+'&radius='+userdata.radius).then(result => {
             return result.data;
           })
         },

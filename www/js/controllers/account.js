@@ -71,7 +71,7 @@ angular.module('beeround.account', [])
         $state.go("tabs.profile");
 
       }, function (err) {
-        var alertPopup = $ionicPopup.alert({
+        let alertPopup = $ionicPopup.alert({
           title: 'Login fehlgeschlagen!',
           template: 'Bitte überprüfe deine Eingaben!'
         });

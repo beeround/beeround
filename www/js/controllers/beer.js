@@ -133,6 +133,7 @@ angular.module('beeround.beer', [])
         town: place.formatted_address
       };
       getBreweries("noGeo");
+      getBeerEvents();
 
     });
 
@@ -147,6 +148,10 @@ angular.module('beeround.beer', [])
 
       // Reload breweries
       getBreweries("noGeo");
+
+      // Reload events
+      getBeerEvents();
+
     };
 
     //Filter: Set new type
@@ -316,25 +321,35 @@ angular.module('beeround.beer', [])
     function getBeerEvents() {
       $scope.beerEvents = [];
 
-      beeroundService.getBreweryEvent().then(result => {
-        $scope.beerEvents = result.events;
+      beeroundService.getBreweryEvent($rootScope.userSettings).then(result => {
+
+        $scope.beerEvents = result;
 
       });
     }
 
 
      $scope.createEvent = function () {
-            $cordovaCalendar.createEvent({
-                title: 'Space Race',
-                location: 'The Moon',
-                notes: 'Bring sandwiches',
-                startDate: new Date(16, 7, 17, 18, 30, 0, 0, 0),
-                endDate: new Date(16, 7, 17, 19, 30, 0, 0, 0)
-            }).then(function (result) {
-                alert("supi")
-            }, function (err) {
-                alert("Fehlgeschlagen")
-            })
+
+       $cordovaCalendar.createCalendar({
+         calendarName: 'Beeround',
+         calendarColor: '#FF0000'
+       }).then(function (result) {
+         $cordovaCalendar.createEvent({
+           title: 'Space Race',
+           location: 'The Moon',
+           notes: 'Bring sandwiches',
+           startDate: new Date(16, 7, 17, 18, 30, 0, 0, 0),
+           endDate: new Date(16, 7, 17, 19, 30, 0, 0, 0)
+         }).then(function (result) {
+           alert("supi")
+         }, function (err) {
+           alert("Fehlgeschlagen")
+         })
+       }, function (err) {
+         // error
+       });
+
         }
   })
 
