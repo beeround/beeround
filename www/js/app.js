@@ -31,7 +31,7 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
 
   .state('statistics', {
       url: '/statistics',
-      templateUrl: 'templates/statistics.html'
+      templateUrl: 'templates/account/statistics.html'
     })
     .state('tabs', {
       url: "/tab",

@@ -336,31 +336,6 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerListCtrl', function ($scope, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover) {
-    const breweryId = $stateParams.brewery;
-
-    // Get beers
-    breweryDB.getBeersByBrewery(breweryId).then(result => {
-
-      if (result) {
-        $scope.beerList = result;
-        $scope.noData = false;
-
-      }
-      else {
-        $scope.noData = true;
-      }
-    });
-
-    // Get brewery informations
-    breweryDB.getBreweryById(breweryId).then(result => {
-      $scope.brewery = result.data;
-    });
-
-    // TODO ERROR HANDLING
-
-  })
-
   .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover) {
 
     // IF NO USERSETTING
@@ -555,6 +530,11 @@ angular.module('beeround.beer', [])
     breweryDB.getBreweryById(breweryId).then(result => {
       $scope.brewery = result.data;
     });
+
+    $scope.formatNumber = function (phonenumber) {
+      alert(phonenumber)
+      // Vany stuff
+    }
   })
 
   .controller('beerDetailsCtrl', function ($scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state) {
@@ -716,6 +696,10 @@ angular.module('beeround.beer', [])
 
   .controller('loginCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $stateParams) {
     $scope.form = [];
+
+    if($ionicUser.details){
+      $state.go("tabs.profile");
+    }
 
     $scope.login = function () {
       let details = {'email': $scope.form.email, 'password': $scope.form.password};
