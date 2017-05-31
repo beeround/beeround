@@ -606,8 +606,77 @@ angular.module('beeround.beer', [])
 
   })
 
-  .controller('signUpCtrl', function ($scope, $http, $ionicAuth, $ionicUser) {
+  .controller('signUpCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopup) {
     $scope.form = [];
+
+
+    $scope.showAlert = function() {
+
+      if ($scope.formError == 'conflict_email'){
+        var alertPopup = $ionicPopup.alert({
+          title: 'Fehler',
+          template: 'Username already exists.'
+        });
+
+        alertPopup.then(function (res) {
+          // Custom functionality....
+        });
+
+      }
+
+      else if ($scope.formError == 'conflict_username'){
+        var alertPopup = $ionicPopup.alert({
+          title: 'Fehler',
+          template: 'Benutzername existiert bereits'
+        });
+
+        alertPopup.then(function (res) {
+          // Custom functionality....
+        });
+
+      }
+
+      else if ($scope.formError == 'required_password'){
+        var alertPopup = $ionicPopup.alert({
+          title: 'Fehler',
+          template: 'Passwort stimmt nicht'
+        });
+
+        alertPopup.then(function (res) {
+          // Custom functionality....
+        });
+
+      }
+
+      else if ($scope.formError == 'required_email') {
+
+        var alertPopup = $ionicPopup.alert({
+          title: 'Fehler',
+          template: 'Email Adresse fehlt'
+        });
+
+        alertPopup.then(function (res) {
+          // Custom functionality....
+        });
+      }
+
+
+      else if ($scope.formError == 'invalid_email'){
+        var alertPopup = $ionicPopup.alert({
+          title: 'Fehler',
+          template: 'Please insert your right email address.'
+        });
+
+        alertPopup.then(function (res) {
+          // Custom functionality....
+        });
+
+      }
+
+
+    };
+
+    $scope.formError = 'noError';
 
     $scope.signup = function () {
       let details = {'username': $scope.form.username,'email': $scope.form.email, 'password': $scope.form.password};
@@ -617,19 +686,24 @@ angular.module('beeround.beer', [])
       }, function(err) {
         for (let e of err.details) {
           if (e === 'conflict_email') {
-            alert('Email already exists.');
+            $scope.formError = 'conflict_email';
+            //alert('Email already exists.');
           }
           else if (e === 'conflict_username'){
-            alert('Username already exists.')
+            $scope.formError = 'conflict_username';
+           // alert('Username already exists.')
           }
           else if (e === 'required_password'){
-            alert('Please choose a password.')
+            $scope.formError = 'conflict_email';
+           // alert('Please choose a password.')
           }
           else if (e === 'required_email'){
-            alert('Please insert your email address.')
+            $scope.formError = 'required_email';
+            //alert('Please insert your email address.')
           }
           else if (e === 'invalid_email'){
-            alert('Please insert your right email address.')
+            $scope.formError = 'invalid_email';
+           // alert('Please insert your right email address.')
           }
 
           else {

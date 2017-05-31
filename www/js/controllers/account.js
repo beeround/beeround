@@ -1,7 +1,11 @@
 angular.module('beeround.account', [])
 
-  .controller('signUpCtrl', function ($scope, $http, $ionicAuth, $ionicUser) {
+  .controller('signUpCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopup) {
     $scope.form = [];
+
+
+
+
 
     $scope.signup = function () {
       let details = {'username': $scope.form.username,'email': $scope.form.email, 'password': $scope.form.password};
@@ -10,21 +14,38 @@ angular.module('beeround.account', [])
         // `$ionicUser` is now registered
       }, function(err) {
         for (let e of err.details) {
-          if (e === 'conflict_email') {
-            alert('Email already exists.');
+        if (e === 'conflict_username'){
+            var alertPopup = $ionicPopup.alert({
+              title: 'Benutzername überprüfen',
+              template: 'Benutzername existiert bereits.'
+            });
           }
-          else if (e === 'conflict_username'){
-            alert('Username already exists.')
+          else if (e === 'conflict_email') {
+            var alertPopup = $ionicPopup.alert({
+              title: 'E-Mail Adresse überprüfen',
+              template: 'E-Mail Adresse existiert bereits.'
+            });
           }
+        else if (e === 'required_email'){
+          var alertPopup = $ionicPopup.alert({
+            title: 'Eingabe E-Mail Adresse',
+            template: 'Bitte gebe eine E-Mail Adresse ein.'
+          });
+        }
+        else if (e === 'invalid_email'){
+          var alertPopup = $ionicPopup.alert({
+            title: 'E-Mail Adresse überprüfen',
+            template: 'Bitte überprüfe deine E-Mail Adresse.'
+          });
+        }
+
           else if (e === 'required_password'){
-            alert('Please choose a password.')
+            var alertPopup = $ionicPopup.alert({
+              title: 'Fehlendes Passwort',
+              template: 'Bitte wähle ein Passwort.'
+            });
           }
-          else if (e === 'required_email'){
-            alert('Please insert your email address.')
-          }
-          else if (e === 'invalid_email'){
-            alert('Please insert your right email address.')
-          }
+
 
           else {
             // handle other errors
@@ -32,6 +53,9 @@ angular.module('beeround.account', [])
         }
       });
     }
+
+
+
   })
 
   .controller('loginCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $stateParams) {

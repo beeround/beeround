@@ -1,22 +1,21 @@
 <ion-view cache-view="false" view-title="Signup">
 
   <ion-content scroll="false">
-    <h4>Signup</h4>
     <form ng-submit="signup()">
 
       <div class="list list-inset">
         <label class="item item-input item-floating-label">
           <span class="input-label">Benutzername</span>
-          <input ng-model="form.username"  name="username" type="text" placeholder="Benutzername" >
+          <input ng-model="form.username"  name="username" type="text" placeholder="Benutzername" required >
         </label>
 
         <label class="item item-input item-floating-label">
           <span class="input-label">Email</span>
-          <input ng-model="form.email" type="email" placeholder="Email" >
+          <input ng-model="form.email" type="email" placeholder="Email" required>
         </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Passwort</span>
-          <input ng-model="form.password" type="password" placeholder="Passwort" >
+          <input ng-model="form.password" type="password" placeholder="Passwort" required >
         </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Profilbild</span>
@@ -24,9 +23,10 @@
         </label>
 
         <ion-list>
-          <ion-radio ng-model="choice" ng-value="'Y'">Ja, ich bestätige, <br>dass ich mindestens 16 Jahre alt bin.</ion-radio>
+          <ion-checkbox ng-model="choice" ng-value="'Y'">Ja, ich bestätige, <br>dass ich mindestens 16 Jahre alt bin.</ion-checkbox>
         </ion-list>
         <button type="submit" class="button button-stable">senden</button>
+        <!--<h2>{{formError}}</h2> -->
       </div>
     </form>
 
