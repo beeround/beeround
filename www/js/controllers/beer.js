@@ -325,6 +325,8 @@ angular.module('beeround.beer', [])
       }
     }
 
+
+
     function getBeerEvents() {
       $scope.beerEvents = [];
 
@@ -513,7 +515,28 @@ angular.module('beeround.beer', [])
   .controller('beerListCtrl', function ($scope, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover) {
     const breweryId = $stateParams.brewery;
 
-    // Get beers
+      //FORMAT PHONE NUMBER
+      $scope.formatPhoneNumber = function(phoneNumber) {
+
+          let formattedNumber = phoneNumber;
+
+          console.log(formattedNumber);
+
+          formattedNumber = formattedNumber.replace(/\s/g, '');
+          formattedNumber = formattedNumber.replace('-', '');
+          formattedNumber = formattedNumber.replace('\(', '');
+          formattedNumber = formattedNumber.replace('\)', '');
+
+          if (formattedNumber.substr(0, 1) == "0") {
+              formattedNumber = formattedNumber.substr(1);
+          }
+
+          console.log(formattedNumber);
+
+      };
+
+
+      // Get beers
     breweryDB.getBeersByBrewery(breweryId).then(result => {
 
       if (result) {
@@ -531,9 +554,30 @@ angular.module('beeround.beer', [])
       $scope.brewery = result.data;
     });
 
-    $scope.formatNumber = function (phonenumber) {
-      alert(phonenumber)
-      // Vany stuff
+      //FORMAT PHONE NUMBER
+
+      $scope.formatNumber = function (phonenumber) {
+
+          let formattedNumber = phonenumber;
+          formattedNumber = formattedNumber.replace(/\s/g, '');
+          formattedNumber = formattedNumber.replace(/-/g, '');
+          formattedNumber = formattedNumber.replace(/\//g, '');
+          formattedNumber = formattedNumber.replace(/\)/g, '');
+          formattedNumber = formattedNumber.replace(/\(/g, '');
+
+            console.log(formattedNumber);
+
+          if (formattedNumber.substr(0, 2) == "49") {
+              formattedNumber = formattedNumber.substr(2);
+          }
+
+          else if(formattedNumber.substr(0,1) == "+"){
+              formattedNumber = formattedNumber.substr(3);
+          }
+
+
+            console.log(formattedNumber);
+            window.location.href="tel://"+formattedNumber;
     }
   })
 

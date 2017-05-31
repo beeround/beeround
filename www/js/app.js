@@ -29,10 +29,10 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicCloudProvider) {
   $stateProvider
 
-  .state('statistics', {
+  /*.state('statistics', {
       url: '/statistics',
       templateUrl: 'templates/account/statistics.html'
-    })
+    })*/
     .state('tabs', {
       url: "/tab",
       abstract: true,
