@@ -2,13 +2,8 @@ angular.module('beeround.account', [])
 
   .controller('signUpCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopup) {
     $scope.form = [];
-
-
-
-
-
     $scope.signup = function () {
-      let details = {'username': $scope.form.username,'email': $scope.form.email, 'password': $scope.form.password};
+      let details = {'username': $scope.form.username,'email': $scope.form.email, 'password': $scope.form.password };
       console.log(details);
       $ionicAuth.signup(details).then(function() {
         // `$ionicUser` is now registered
@@ -53,8 +48,6 @@ angular.module('beeround.account', [])
         }
       });
     }
-
-
 
   })
 
