@@ -19,12 +19,23 @@ angular.module('beeround.beer', [])
       $scope.popover = popover;
     });
 
-    $scope.openPopover = function () {
+
+
+
+      $scope.openPopover = function () {
       $scope.popover.show();
-    };
-    $scope.closePopover = function () {
+          $scope.appBackground = document.getElementsByClassName('appBackground');
+          console.log($scope.appBackground[0]);
+        $scope.appBackground[0].setAttribute('class', 'blur');
+      };
+
+
+
+      $scope.closePopover = function () {
       $scope.popover.hide();
-    };
+          $scope.appBackground = document.getElementsByClassName('blur');
+          $scope.appBackground[0].setAttribute('class', 'view appBackground');
+      };
 
     $scope.tabs = [
       {"text": "Brauereien"},
@@ -368,12 +379,12 @@ angular.module('beeround.beer', [])
            title: 'Space Race',
            location: 'The Moon',
            notes: 'Bring sandwiches',
-           startDate: new Date(2017, 5, 17, 18, 30, 0, 0, 0),
-           endDate: new Date(2017, 5, 17, 19, 30, 0, 0, 0)
+             startDate: new Date(2017, 5, 17, 18, 30, 0, 0, 0),
+             endDate: new Date(2017, 5, 17, 19, 30, 0, 0, 0)
          }).then(function (result) {
-           alert("supi")
+           alert("PROST!")
          }, function (err) {
-           alert("Fehlgeschlagen")
+           alert("Hnzufügen fehlgeschlagen")
          })
        }, function (err) {
          // error
