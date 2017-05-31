@@ -17,8 +17,8 @@
           <span class="input-label">Passwort</span>
           <input type="password" name="password" ng-model="form.password" placeholder="Passwort"
                  password-strength="form.password"/>
-          <span ng-show="form.password" class="help-inline" data-ng-show='passwordForm.password.$valid && passwordForm.password.$dirty'
-                data-ng-class="strength">Das Password ist {{strength}}</span>
+          <div class="progressbar" ng-style="progressbar" ng-show="form.password" data-ng-show='passwordForm.password.$valid && passwordForm.password.$dirty'
+               data-ng-class="strength"><p>{{strength}}</p></div>
         </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Profilbild</span>

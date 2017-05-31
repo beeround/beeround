@@ -137,11 +137,26 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
       scope.$watch(attrs.passwordStrength, function(value) {
         if(angular.isDefined(value)){
           if (value.length > 8) {
-            scope.strength = 'perfekt';
-          } else if (value.length > 3) {
-            scope.strength = 'nur mittel gut.';
+            scope.strength = "Sicher";
+            scope.progressbar = {
+                "width" : "100%",
+                "background-color" : "green",
+                "border-radius" : "10px"
+            };
+          } else if (value.length > 4) {
+            scope.strength = "Nicht so sicher";
+            scope.progressbar = {
+              "width" : "50%",
+              "background-color" : "orange",
+              "border-radius" : "10px"
+            };
           } else {
-            scope.strength = 'zu schwach';
+            scope.strength = "Unsicher";
+            scope.progressbar = {
+              "width" : "20%",
+              "background-color" : "red",
+              "border-radius" : "10px"
+            };
           }
         }
       });
