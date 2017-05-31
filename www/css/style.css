@@ -217,7 +217,7 @@ a{
 
 button{
     font-family: "Proxima Nova", "Roboto","Helvetica","sans-serif";
-    font-size: 14px;
+    font-size: 30px;
     color: #F1A435;
     font-weight: lighter;
     background: #FFFFFF;
@@ -362,7 +362,7 @@ span.button.button-icon.button-clear.ion-android-more-vertical:before{
 }
 
 .ion-ios-location{
-    font-size: 18px;
+    font-size: 26px;
 }
 
 i.icon.ion-navicon-round{
