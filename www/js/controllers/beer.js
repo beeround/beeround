@@ -571,9 +571,13 @@ angular.module('beeround.beer', [])
               formattedNumber = formattedNumber.substr(2);
           }
 
-          else if(formattedNumber.substr(0,1) == "+"){
-              formattedNumber = formattedNumber.substr(3);
+          else if(formattedNumber.substr(0,1) == "+49"){
+              formattedNumber = formattedNumber.replace('+49', '0');
           }
+
+
+
+
 
 
             console.log(formattedNumber);
