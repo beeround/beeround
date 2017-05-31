@@ -27,26 +27,12 @@ angular.module('beeround.beer', [])
       $scope.popover.hide();
     };
 
-    let details = {'email': 'xxx@web.de', 'password': '123123123'};
-
-    /* $ionicAuth.signup(details).then(function() {
-
-     // `$ionicUser` is now registered
-     }, function(err) {
-     for (var e of err.details) {
-     if (e === 'conflict_email') {
-     alert('Email already exists.');
-     } else {
-     // handle other errors
-     }
-     }
-     });*/
-
     $scope.tabs = [
       {"text": "Brauereien"},
       {"text": "Biere"},
       {"text": "Events"},
     ];
+
     $scope.currentListView = $scope.tabs[0].text;
 
 
@@ -331,14 +317,13 @@ angular.module('beeround.beer', [])
       $scope.beerEvents = [];
 
       beeroundService.getBreweryEvent().then(result => {
-        console.log(result.events);
         $scope.beerEvents = result.events;
 
       });
     }
   })
 
-  .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover) {
+  .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover, $ionicUser) {
 
     // IF NO USERSETTING
     if(!$rootScope.userSettings){
@@ -512,7 +497,7 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerListCtrl', function ($scope, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover) {
+  .controller('beerListCtrl', function ($scope, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover, $ionicUser) {
     const breweryId = $stateParams.brewery;
 
       //FORMAT PHONE NUMBER
@@ -585,10 +570,13 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerDetailsCtrl', function ($scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state) {
+  .controller('beerDetailsCtrl', function ($scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser) {
     let beerId = $stateParams.beerId;
 
-    beeroundService.getRatingByUser(beerId, 666).then(rating => {
+    // Make User data output available in view
+    $scope.$ionicUser = $ionicUser;
+
+    beeroundService.getRatingByUser(beerId, $ionicUser.id).then(rating => {
       $scope.currentRating = rating;
 
     });
@@ -623,7 +611,7 @@ angular.module('beeround.beer', [])
     function sendRating(){
       let data = {
         beerid : beerId,
-        userid : 666,
+        userid : $ionicUser.id,
         rating : $scope.currentRating
       };
 
@@ -631,144 +619,6 @@ angular.module('beeround.beer', [])
         console.log("Rating send");
       })
     }
-
-  })
-
-  .controller('signUpCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopup) {
-    $scope.form = [];
-
-
-    $scope.showAlert = function() {
-
-      if ($scope.formError == 'conflict_email'){
-        var alertPopup = $ionicPopup.alert({
-          title: 'Fehler',
-          template: 'Username already exists.'
-        });
-
-        alertPopup.then(function (res) {
-          // Custom functionality....
-        });
-
-      }
-
-      else if ($scope.formError == 'conflict_username'){
-        var alertPopup = $ionicPopup.alert({
-          title: 'Fehler',
-          template: 'Benutzername existiert bereits'
-        });
-
-        alertPopup.then(function (res) {
-          // Custom functionality....
-        });
-
-      }
-
-      else if ($scope.formError == 'required_password'){
-        var alertPopup = $ionicPopup.alert({
-          title: 'Fehler',
-          template: 'Passwort stimmt nicht'
-        });
-
-        alertPopup.then(function (res) {
-          // Custom functionality....
-        });
-
-      }
-
-      else if ($scope.formError == 'required_email') {
-
-        var alertPopup = $ionicPopup.alert({
-          title: 'Fehler',
-          template: 'Email Adresse fehlt'
-        });
-
-        alertPopup.then(function (res) {
-          // Custom functionality....
-        });
-      }
-
-
-      else if ($scope.formError == 'invalid_email'){
-        var alertPopup = $ionicPopup.alert({
-          title: 'Fehler',
-          template: 'Please insert your right email address.'
-        });
-
-        alertPopup.then(function (res) {
-          // Custom functionality....
-        });
-
-      }
-
-
-    };
-
-    $scope.formError = 'noError';
-
-    $scope.signup = function () {
-      let details = {'username': $scope.form.username,'email': $scope.form.email, 'password': $scope.form.password};
-      console.log(details);
-      $ionicAuth.signup(details).then(function() {
-        // `$ionicUser` is now registered
-      }, function(err) {
-        for (let e of err.details) {
-          if (e === 'conflict_email') {
-            $scope.formError = 'conflict_email';
-            //alert('Email already exists.');
-          }
-          else if (e === 'conflict_username'){
-            $scope.formError = 'conflict_username';
-           // alert('Username already exists.')
-          }
-          else if (e === 'required_password'){
-            $scope.formError = 'conflict_email';
-           // alert('Please choose a password.')
-          }
-          else if (e === 'required_email'){
-            $scope.formError = 'required_email';
-            //alert('Please insert your email address.')
-          }
-          else if (e === 'invalid_email'){
-            $scope.formError = 'invalid_email';
-           // alert('Please insert your right email address.')
-          }
-
-          else {
-            // handle other errors
-          }
-        }
-      });
-    }
-  })
-
-  .controller('loginCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $stateParams) {
-    $scope.form = [];
-
-    if($ionicUser.details){
-      $state.go("tabs.profile");
-    }
-
-    $scope.login = function () {
-      let details = {'email': $scope.form.email, 'password': $scope.form.password};
-      console.log(details);
-
-      $ionicAuth.login('basic', details).then(function () {
-        //SUCCESS
-        console.log($ionicUser);
-
-        $state.go("tabs.profile");
-      }, function (err) {
-        console.log(err);
-      });
-
-    }
-  })
-
-  .controller('profilCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $stateParams) {
-    $scope.test = $ionicUser.details;
-
-
 
   });
 

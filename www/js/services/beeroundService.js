@@ -45,7 +45,11 @@ angular.module('beeround.service', [])
         },
 
         getBreweryEvent: function () {
-          return $http.get('http://www.beeround.de/api/events?transform=1').then(result => {
+          let lng = 0;
+          let lat = 0;
+          let radius = 30;
+
+          return $http.get('http://www.beeround.de/getevents.php?longitude='+lng+'&latitude='+lat+'&radius='+radius).then(result => {
             return result.data;
           })
         },
