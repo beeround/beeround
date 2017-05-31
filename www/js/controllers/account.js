@@ -43,6 +43,11 @@ angular.module('beeround.account', [])
 
 
           else {
+
+          var alertPopup = $ionicPopup.alert({
+            title: 'Login fehlgeschlagen!',
+            template: 'Bitte überprüfe deine Eingaben!'
+          });
             // handle other errors
           }
         }
@@ -51,7 +56,7 @@ angular.module('beeround.account', [])
 
   })
 
-  .controller('loginCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $stateParams) {
+  .controller('loginCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $ionicPopup, $stateParams) {
     $scope.form = [];
 
     $scope.login = function () {
@@ -64,7 +69,12 @@ angular.module('beeround.account', [])
 
         $state.go("tabs.profile");
       }, function (err) {
-        console.log(err);
+        var alertPopup = $ionicPopup.alert({
+          title: 'Login fehlgeschlagen!',
+          template: 'Bitte überprüfe deine Eingaben!'
+        });
+
+        //console.log(err);
       });
 
     }

@@ -1,17 +1,16 @@
 <ion-view hide-back-button="true"   cache-view="false" view-title="Login">
 
   <ion-content scroll="false">
-    <h4>Login</h4>
     <form ng-submit="login()">
 
       <div class="list list-inset">
         <label class="item item-input item-floating-label">
           <span class="input-label">Email</span>
-          <input ng-model="form.email" type="email" placeholder="Email" required >
+          <input ng-model="form.email" type="email" placeholder="Email">
         </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Passwort</span>
-          <input ng-model="form.password" type="password" placeholder="Passwort" required >
+          <input ng-model="form.password" type="password" placeholder="Passwort">
         </label>
         <button type="submit" class="button button-stable">senden</button>
       </div>
