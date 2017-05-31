@@ -217,7 +217,7 @@ a{
 
 button{
     font-family: "Proxima Nova", "Roboto","Helvetica","sans-serif";
-    font-size: 30px;
+    font-size: 14px;
     color: #F1A435;
     font-weight: lighter;
     background: #FFFFFF;
@@ -270,6 +270,10 @@ button.back-button{
     background: none;
     padding-bottom: 5px !important;
     right: 5px;
+}
+
+.contact-button button {
+    font-size: 30px;
 }
 
 .invert-button  {
@@ -362,7 +366,7 @@ span.button.button-icon.button-clear.ion-android-more-vertical:before{
 }
 
 .ion-ios-location{
-    font-size: 26px;
+    font-size: 18px;
 }
 
 i.icon.ion-navicon-round{
