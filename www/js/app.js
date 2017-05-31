@@ -128,5 +128,23 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
 
   });
 
-});
+})
 
+.directive("passwordStrength", function(){
+  return {
+    restrict: 'A',
+    link: function(scope, element, attrs){
+      scope.$watch(attrs.passwordStrength, function(value) {
+        if(angular.isDefined(value)){
+          if (value.length > 8) {
+            scope.strength = 'perfekt';
+          } else if (value.length > 3) {
+            scope.strength = 'nur mittel gut.';
+          } else {
+            scope.strength = 'zu schwach';
+          }
+        }
+      });
+    }
+  };
+});
