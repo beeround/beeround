@@ -20,12 +20,23 @@ angular.module('beeround.beer', [])
       $scope.popover = popover;
     });
 
-    $scope.openPopover = function () {
+
+
+
+      $scope.openPopover = function () {
       $scope.popover.show();
-    };
-    $scope.closePopover = function () {
+          $scope.appBackground = document.getElementsByClassName('appBackground');
+          console.log($scope.appBackground[0]);
+        $scope.appBackground[0].setAttribute('class', 'blur');
+      };
+
+
+
+      $scope.closePopover = function () {
       $scope.popover.hide();
-    };
+          $scope.appBackground = document.getElementsByClassName('blur');
+          $scope.appBackground[0].setAttribute('class', 'view appBackground');
+      };
 
     $scope.tabs = [
       {"text": "Brauereien"},
