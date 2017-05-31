@@ -38,11 +38,7 @@ angular.module('breweryDB.service', [])
             });
 
             }
-
-
-
           });
-
 
         });
 
@@ -73,6 +69,7 @@ angular.module('breweryDB.service', [])
       }
 
       return {
+
         getBreweriesNearCoordinates: function (clientSettings) {
 
           if(angular.equals(userSettings, clientSettings)){
@@ -83,21 +80,19 @@ angular.module('breweryDB.service', [])
             return new Promise(function(resolve, reject) {
 
               // Check, if data is available
-                let promises = breweries.map(function (obj) {
-                  return getBeers(obj).then(result => {
-                    return result
-                  });
+              let promises = breweries.map(function (obj) {
+                return getBeers(obj).then(result => {
+                  return result
                 });
+              });
 
-                // Save to var and give back, if function has ended
-                Promise.all(promises).then(function (results) {
-                  return getRatingByBreweries(results).then(allData => {
-                    breweries = allData;
-                    resolve(allData);
-                  });
-                });
+              // Save to var and give back, if function has ended
+              Promise.all(promises).then(function (results) {
+                breweries = results;
+                resolve(breweries);
+              });
 
-          });
+            });
           }
           else {
             // New usersettings, so reload
@@ -117,10 +112,8 @@ angular.module('breweryDB.service', [])
 
                   // Save to var and give back, if function has ended
                   Promise.all(promises).then(function (results) {
-                    return getRatingByBreweries(results).then(allData => {
-                      breweries = allData;
-                      resolve(allData)
-                    });
+                    breweries = results;
+                    resolve(breweries);
                   });
                 }
 
@@ -134,6 +127,7 @@ angular.module('breweryDB.service', [])
           }
         },
 
+
         getBeersByBrewery: function (breweryId) {
           return $http.get('http://api.brewerydb.com/v2//brewery/' + breweryId + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
 
@@ -142,6 +136,7 @@ angular.module('breweryDB.service', [])
             });
           });
         },
+
 
         getBreweryById: function (breweryId) {
           return $http.get('http://api.brewerydb.com/v2//brewery/' + breweryId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {

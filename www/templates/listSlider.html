@@ -1,4 +1,4 @@
-<ion-view  title="beeround">
+<ion-view title="beeround">
   <ion-nav-buttons side="right">
     <span class="button button-icon button-clear ion-android-more-vertical" ng-click="openPopover()">
     </span>
@@ -36,10 +36,10 @@
 
           <div class="item item-text-wrap">
             <div ng-model="sortingOptions">
-              <button ng-click="sortBy('distance')" class="sortorder" ng-class="{active: activeSorting == 'distance'}">
+              <button ng-click="sortBreweries('distance')" class="sortorder" ng-class="{active: activeSorting == 'distance'}">
                 <i class="icon ion-android-radio-button-on"> km</i>
               </button>
-              <button ng-click="sortBy('name')" class="sortorder" ng-class="{active: activeSorting == 'name'}">A -Z
+              <button ng-click="sortBreweries('name')" class="sortorder" ng-class="{active: activeSorting == 'name'}">A -Z
               </button>
             </div>
           </div>
@@ -90,13 +90,13 @@
 
           <div class="item item-text-wrap">
             <div ng-model="sortingOptions">
-              <button ng-click="sortBy('distance')" class="sortorder" ng-class="{active: activeSorting == 'distance'}">
+              <button ng-click="sortBeers('distance')" class="sortorder" ng-class="{active: activeSorting == 'distance'}">
                 <i class="icon ion-android-radio-button-on"> km</i>
               </button>
-              <button ng-click="sortBy('rating')" class="sortorder " ng-class="{active: activeSorting == 'rating'}">&nbsp;
+              <button ng-click="sortBeers('rating')" class="sortorder " ng-class="{active: activeSorting == 'rating'}">&nbsp;
                 <i class="icon ion-ios-pint"></i><i class="icon ion-ios-pint"></i><i class="icon ion-ios-pint" style="color: #C8C6C5"></i>
                 &nbsp;</button>
-              <button ng-click="sortBy('name')" class="sortorder" ng-class="{active: activeSorting == 'name'}">A -Z
+              <button ng-click="sortBeers('name')" class="sortorder" ng-class="{active: activeSorting == 'name'}">A -Z
               </button>
             </div>
           </div>

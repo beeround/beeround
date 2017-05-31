@@ -9,7 +9,6 @@ angular.module('beeround.beer', [])
 
         if (toState.name == "tabs.breweryList") {
           getBreweries("noGeo");
-
         }
       });
 
@@ -33,7 +32,7 @@ angular.module('beeround.beer', [])
       {"text": "Events"},
     ];
 
-    $scope.currentListView = $scope.tabs[0].text;
+   // $scope.currentListView = $scope.tabs[0].text;
 
 
     $scope.place = undefined;
@@ -72,16 +71,19 @@ angular.module('beeround.beer', [])
 
     // Change variable on slide
     $scope.onSlideMove = function (data) {
-      $scope.currentListView = $scope.tabs[data.index].text;
+
+      $rootScope.currentListView = $scope.tabs[data.index].text;
+
 
       if(data.index == 0) {
         if($scope.activeSorting == "rating"){
-          $scope.sortBy("distance");
+          $scope.sortBreweries("distance");
         }
       }
       if (data.index == 1) {
-        $scope.currentListView = $scope.tabs[0].text;
-        makeBeerList();
+        beeroundService.getBeerRatingByBrewerielist($scope.breweries).then(result => {
+          $scope.breweries = result;
+        })
       }
       if (data.index == 2) {
         getBeerEvents();
@@ -89,13 +91,12 @@ angular.module('beeround.beer', [])
 
     };
 
-    $scope.sortBy = function (propertyName) {
+    // Sort Breweries
+    $scope.sortBreweries = function (propertyName) {
       $scope.activeSorting = propertyName;
 
       // Scroll to top
       $ionicScrollDelegate.scrollTop();
-
-      //TODO Save sorting onchange
 
       if (propertyName === 'name') {
         $scope.breweries.sort(function (a, b) {
@@ -104,20 +105,40 @@ angular.module('beeround.beer', [])
           return 0;
         });
 
-        makeBeerList();
-      }
-      else if (propertyName === 'rating') {
-
-        makeBeerList();
       }
       else if (propertyName === 'distance') {
-        $scope.allBeers = undefined;
 
         $scope.breweries.sort(function (a, b) {
           if (a.distance < b.distance) return -1;
           if (a.distance > b.distance) return 1;
           return 0;
         })
+      }
+    };
+
+    // Sort Breweries
+    $scope.sortBeers = function (propertyName) {
+      $scope.activeSorting = propertyName;
+
+      // Scroll to top
+      $ionicScrollDelegate.scrollTop();
+
+      if (propertyName === 'name') {
+        $scope.allBeers = [];
+        makeBeerList();
+      }
+      else if (propertyName === 'distance') {
+        $scope.allBeers = undefined;
+        $scope.breweries.sort(function (a, b) {
+          if (a.distance < b.distance) return -1;
+          if (a.distance > b.distance) return 1;
+          return 0;
+        })
+      }
+
+      else if (propertyName === 'rating') {
+        $scope.allBeers = [];
+        makeBeerList();
       }
     };
 
@@ -188,28 +209,26 @@ angular.module('beeround.beer', [])
       }
 
       if ($scope.activeSorting == "rating" && $scope.breweries) {
+
+        //TODO SORT RATING BUGFIXING
         $scope.allBeers = [];
 
-        $scope.breweries;
         $scope.breweries.map(function (brewery) {
           if (brewery.beers) {
             brewery.beers.map(function (beer) {
               $scope.allBeers.push(beer);
+
             });
           }
         });
-
-
         $timeout(function () {
-
           $scope.allBeers.sort(function (a, b) {
             if (a.rating > b.rating) return -1;
             if (a.rating < b.rating) return 1;
             return 0;
           });
-          console.log($scope.allBeers)
 
-        },2000)
+        },4000)
 
       }
 
@@ -244,11 +263,13 @@ angular.module('beeround.beer', [])
             // Resize
             $ionicScrollDelegate.resize();
 
-            // Update beer array
-
-            makeBeerList();
-
-            console.log($scope.activeSorting);
+            // Update beer array, if beer screen is shown
+            if($rootScope.currentListView == "Biere"){
+              beeroundService.getBeerRatingByBrewerielist($scope.breweries).then(result => {
+                $scope.breweries = result;
+                makeBeerList();
+              })
+            }
           }
 
           else {
@@ -295,6 +316,14 @@ angular.module('beeround.beer', [])
                 $scope.breweries = result;
                 $ionicLoading.hide();
 
+                // Update beer array, if beer screen is shown
+                if($rootScope.currentListView == "Biere"){
+                  beeroundService.getBeerRatingByBrewerielist($scope.breweries).then(result => {
+                    $scope.breweries = result;
+                    makeBeerList();
+                  })
+                }
+
                 // Resize
                 $ionicScrollDelegate.resize();
 
@@ -339,8 +368,8 @@ angular.module('beeround.beer', [])
            title: 'Space Race',
            location: 'The Moon',
            notes: 'Bring sandwiches',
-           startDate: new Date(16, 7, 17, 18, 30, 0, 0, 0),
-           endDate: new Date(16, 7, 17, 19, 30, 0, 0, 0)
+           startDate: new Date(2017, 5, 17, 18, 30, 0, 0, 0),
+           endDate: new Date(2017, 5, 17, 19, 30, 0, 0, 0)
          }).then(function (result) {
            alert("supi")
          }, function (err) {
