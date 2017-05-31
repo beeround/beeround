@@ -1,6 +1,6 @@
 angular.module('beeround.beer', [])
 
-  .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
+  .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, beeroundService, $http, $cordovaGeolocation, $cordovaCalendar, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
 
     // REFRESH Breweries on change view
     $rootScope.$on('$stateChangeStart',
@@ -321,6 +321,21 @@ angular.module('beeround.beer', [])
 
       });
     }
+
+
+     $scope.createEvent = function () {
+            $cordovaCalendar.createEvent({
+                title: 'Space Race',
+                location: 'The Moon',
+                notes: 'Bring sandwiches',
+                startDate: new Date(16, 7, 17, 18, 30, 0, 0, 0),
+                endDate: new Date(16, 7, 17, 19, 30, 0, 0, 0)
+            }).then(function (result) {
+                alert("supi")
+            }, function (err) {
+                alert("Fehlgeschlagen")
+            })
+        }
   })
 
   .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover, $ionicUser) {
