@@ -97,7 +97,14 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
       views: {
         'tab-account': {
           templateUrl: 'templates/account/login.html',
-          controller: 'loginCtrl'
+          controller: 'loginCtrl',
+
+        }
+      },
+      onEnter: function($state, $ionicUser){
+
+        if($ionicUser.id) {
+          $state.go('tabs.profile')
         }
       }
     })

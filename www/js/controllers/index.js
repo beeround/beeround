@@ -10,8 +10,8 @@ angular.module('beeround.index', [])
   })
   .controller('HomeTabCtrl', function($scope) {
   })
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state) {
-
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state, $ionicUser) {
+console.log($ionicUser);
 
   // GET CURRENT STATE
   $scope.$on('$stateChangeSuccess',

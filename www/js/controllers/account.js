@@ -78,8 +78,15 @@ angular.module('beeround.account', [])
   })
 
   .controller('profilCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $stateParams) {
-    $scope.test = $ionicUser.details;
+    $scope.userdata = $ionicUser.details;
 
+
+    $scope.logout = function () {
+      $ionicAuth.logout();
+      alert("logged out");
+      $state.go('tabs.login')
+
+    };
 
 
   });
