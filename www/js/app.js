@@ -123,7 +123,21 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
           templateUrl: 'templates/account/profile.html',
           controller: 'profilCtrl'
         }
-      }});
+      }})
+
+      .state('tabs.editProfile', {
+          url: '/account/editProfile',
+          views: {
+              'tab-account': {
+                  templateUrl: 'templates/account/editProfile.html',
+                  controller: 'profilCtrl'
+              }
+          }
+      })
+
+  ;
+
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/list');
 

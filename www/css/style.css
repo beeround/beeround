@@ -439,6 +439,17 @@ i.icon.ion-navicon-round{
     top: 50%;
 }
 
+a.button.button-clear.ion-edit:before{
+    font-size: 20px;
+    vertical-align: middle;
+    line-height: 20px;
+    padding: 7px;
+}
+
+.ion-ios-trash:before{
+    font-size: 25px;
+    padding: 2px;
+}
 
 .beeround-icon{
     width: 14px;

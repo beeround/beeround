@@ -1,0 +1,19 @@
+<ion-view hide-back-button="true"  view-title="Profil Bearbeiten">
+    <ion-nav-buttons side="right">
+    <a class="button button-clear ion-ios-trash" ng-click="openConfirmDeleteModal(user, $event)">
+    </a>
+    </ion-nav-buttons>
+    <ion-content>
+        <form ng-submit="userUpdate()">
+            <div class="list list-inset">
+
+                <input type="text"/>
+                <label class="item-input"><input ng-model="form.username" name="username" type="text" placeholder="{{userdata.username}}" required>
+                </label>
+                <label class="item-input">
+                    <input ng-model="form.email" type="email" placeholder="{{userdata.email}}" required>
+                </label>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

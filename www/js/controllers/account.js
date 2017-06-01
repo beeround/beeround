@@ -143,7 +143,7 @@ angular.module('beeround.account', [])
     }
   })
 
-  .controller('profilCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $stateParams) {
+  .controller('profilCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $state, $stateParams) {
     $scope.userdata = $ionicUser.details;
 
 
@@ -153,6 +153,30 @@ angular.module('beeround.account', [])
       $state.go('tabs.login')
 
     };
+
+
+      // Handle PopOver
+      $ionicPopover.fromTemplateUrl('filter.html', {
+          scope: $scope
+      }).then(function (popover) {
+          $scope.popover = popover;
+      });
+
+
+      $scope.openPopover = function () {
+          $scope.popover.show();
+          $scope.appBackground = document.getElementsByClassName('appBackground');
+          console.log($scope.appBackground[0]);
+          $scope.appBackground[0].setAttribute('class', 'blur');
+      };
+
+
+
+      $scope.closePopover = function () {
+          $scope.popover.hide();
+          $scope.appBackground = document.getElementsByClassName('blur');
+          $scope.appBackground[0].setAttribute('class', 'view appBackground');
+      };
 
 
   });
