@@ -370,29 +370,6 @@ angular.module('beeround.beer', [])
       });
     }
 
-
-     $scope.createEvent = function () {
-
-       $cordovaCalendar.createCalendar({
-         calendarName: 'Beeround',
-         calendarColor: '#FF0000'
-       }).then(function (result) {
-         $cordovaCalendar.createEvent({
-           title: 'Space Race',
-           location: 'The Moon',
-           notes: 'Bring sandwiches',
-             startDate: new Date(2017, 5, 1, 18, 30, 0, 0, 0),
-             endDate: new Date(2017, 5, 1, 19, 30, 0, 0, 0)
-         }).then(function (result) {
-           alert("PROST!")
-         }, function (err) {
-           alert("Hnzufügen fehlgeschlagen")
-         })
-       }, function (err) {
-         // error
-       });
-
-        }
   })
 
   .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover, $ionicUser) {

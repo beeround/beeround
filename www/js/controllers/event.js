@@ -8,19 +8,18 @@ angular.module('beeround.event', [])
 
     beeroundService.getEventDetail(id).then(result => {
       $scope.event = result;
-      console.log($scope.event.start_time);
-      console.log($filter('date')(new Date($scope.event.start), 'yyyy'), $filter('date')(new Date($scope.event.start), 'MM'), $filter('date')(new Date($scope.event.start), 'dd'), $filter('date')(new Date($scope.event.start), 'HH'), $filter('date')(new Date($scope.event.start), 'MM'), 0, 0, 0);
       return result;
     });
 
 
     $scope.createEvent = function () {
-      $cordovaCalendar.createEvent({
+      console.log(new Date(($filter('date')($scope.event.start, 'medium', '-0000'))));
+        $cordovaCalendar.createEvent({
         title: $scope.event.name,
         location: $scope.event.city,
         notes: $scope.event.description,
-        startDate: new Date(2017, 5, 1, 18, 30, 0, 0, 0),
-        endDate: new Date(2017, 5, 1, 19, 30, 0, 0, 0)
+        startDate: new Date(($filter('date')($scope.event.start, 'medium', '-0000'))),
+        endDate: new Date(($filter('date')($scope.event.end, 'medium', '-0000')))
       }).then(function (result) {
         alert("PROST!")
       }, function (err) {
