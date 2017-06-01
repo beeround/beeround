@@ -176,13 +176,13 @@
 
             <!-- Beer Events around position !-->
             <ion-item class="card" ng-repeat="beerEvent in beerEvents">
-              <a class="item item-thumbnail-left divider" ng-href="#/tab/details/event/{{beerEvent.id}}">
+              <a class="item" ng-href="#/tab/details/event/{{beerEvent.id}}">
                 <div class="item divider">
                   <h2>{{beerEvent.name}}</h2>
                   <p>{{beerEvent.city}} </p>
                   <i class="icon ion-chevron-right"></i>
-                  <p>Beginn: {{beerEvent.start_date | date : "dd.MMM.yyyy"}}</p>
-                  <p>Ende: {{beerEvent.end_date | date : "dd.MMM.yyyy"}}</p>
+                  <p>Beginn: {{beerEvent.start | date : "dd.MMM.yyyy HH:mm"}}Uhr</p>
+                  <p>Ende: {{beerEvent.end | date : "dd.MMM.yyyy HH:mm"}}Uhr</p>
                 </div>
               </a>
 

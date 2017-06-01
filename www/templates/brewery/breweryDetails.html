@@ -47,8 +47,8 @@
                     <h2>{{event.name}}</h2>
                     <p>{{event.city}} </p>
                     <i class="icon ion-chevron-right"></i>
-                    <p>Beginn: {{event.start_date | date : "dd.MMM.yyyy"}}</p>
-                    <p>Ende: {{event.end_date | date : "dd.MMM.yyyy"}}</p>
+                    <p>Beginn: {{event.start | date : "dd.MMM.yyyy HH:mm"}}</p>
+                    <p>Ende: {{event.end | date : "dd.MMM.yyyy HH:mm"}}</p>
                   </div>
                 </a>
               </ion-item>

@@ -569,7 +569,7 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerListCtrl', function ($scope, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover, $ionicUser) {
+  .controller('beerListCtrl', function ($scope, breweryDB, beeroundService, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover, $ionicUser) {
     const breweryId = $stateParams.brewery;
 
     $scope.activeWindow = 'beer';
@@ -613,6 +613,11 @@ angular.module('beeround.beer', [])
       $scope.brewery = result.data;
     });
 
+    beeroundService.getEventByBrewery(breweryId).then(results => {
+      $scope.eventList = results;
+
+    });
+
       //FORMAT PHONE NUMBER
 
       $scope.formatNumber = function (phonenumber) {
@@ -633,12 +638,6 @@ angular.module('beeround.beer', [])
           else if(formattedNumber.substr(0,1) == "+49"){
               formattedNumber = formattedNumber.replace('+49', '0');
           }
-
-
-
-
-
-
             console.log(formattedNumber);
             window.location.href="tel://"+formattedNumber;
     }
@@ -680,16 +679,13 @@ angular.module('beeround.beer', [])
 
 
     beeroundService.getCharacteristicsByUser(beerId, $ionicUser.id).then(result => {
-      console.log(result);
-      if(result == 0){
-        // No results
-      }
-      else {
+
         $scope.sliderSueffig = {value: result.sueffig};
         $scope.sliderMalzig = {value: result.malzig};
         $scope.sliderHerb = {value: result.herb};
         $scope.sliderErfrischend = {value: result.erfrischend};
-      }
+
+
     });
 
 
