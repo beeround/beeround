@@ -572,6 +572,8 @@ angular.module('beeround.beer', [])
   .controller('beerListCtrl', function ($scope, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover, $ionicUser) {
     const breweryId = $stateParams.brewery;
 
+    $scope.activeWindow = 'beer';
+
       //FORMAT PHONE NUMBER
       $scope.formatPhoneNumber = function(phoneNumber) {
 

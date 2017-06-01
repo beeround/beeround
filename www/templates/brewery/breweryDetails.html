@@ -1,10 +1,10 @@
 <ion-view cache-view="false"  title="Brauerei">
 
-    <ion-content scroll="false" ng-controller="beerListCtrl">
+    <ion-content scroll="false">
         <ion-scroll style="height:100%">
             <img class="brewery-image" src="img/brauerei_thumbnail.png">
             <ion-item class="contact-button">
-              <button type="button" ng-click="formatNumber(brewery.locations[0].phone)" class="invert-button icon ion-ios-telephone"></button>
+              <button ng-show="brewery.locations[0].phone" type="button" ng-click="formatNumber(brewery.locations[0].phone)" class="invert-button icon ion-ios-telephone"></button>
                 <a ng-href="https://www.google.com/maps/dir/?api=1&destination={{brewery.locations[0].latitude}},{{brewery.locations[0].longitude}}">
                     <button class="invert-button icon ion-ios-location"></button>
                 </a>
@@ -18,8 +18,9 @@
                     <p>{{brewery.locations[0].phone}}</p>
                 </ion-item>
 
-
-                <ion-list>
+              <div><button ng-click="activeWindow = 'beer'" ng-class="{'active':activeWindow=='beer'}">Biere</button>
+                <button ng-click="activeWindow = 'events'">Events</button></div>
+                <ion-list ng-show="activeWindow == 'beer'">
                     <ion-item ng-repeat="beer in beerList">
                         <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
                             <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
@@ -39,6 +40,20 @@
                         </a>
                     </ion-item>
                 </ion-list>
+            <ion-list ng-show="activeWindow == 'events'">
+              <ion-item class="card" ng-repeat="event in eventList">
+                <a class="item item-thumbnail-left divider" ng-href="#/tab/details/event/{{event.id}}">
+                  <div class="item divider">
+                    <h2>{{event.name}}</h2>
+                    <p>{{event.city}} </p>
+                    <i class="icon ion-chevron-right"></i>
+                    <p>Beginn: {{event.start_date | date : "dd.MMM.yyyy"}}</p>
+                    <p>Ende: {{event.end_date | date : "dd.MMM.yyyy"}}</p>
+                  </div>
+                </a>
+              </ion-item>
+            </ion-list>
+
             </ion-item>
         </ion-scroll>
 
