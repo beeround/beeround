@@ -21,7 +21,7 @@ body{
 }
 
 /*HEADER*/
-/* Hier fehlt ein Punkt?*/
+
 ion-header-bar.bar.bar-stable{
     background: #773D17;
     color: #FFFFFF;
@@ -129,12 +129,25 @@ div.list-inset{
    border-radius: 4px;
 }
 
+div.no-padding-right{
+    width: 100%;
+}
 
+
+.no-padding-right{
+    padding: 0px 5px 0px 5px;
+    margin: 0px;
+}
+
+.no-padding-left{
+    margin: 0px;
+    padding: 0px 5px 0px 5px;
+}
 
 .searchbox{
     background-color: #773D17;
-    padding: 0px 5px 5px 5px;
-    margin-top: -5px;
+    padding: 0px 5px 10px 5px;
+    width: 100%;
 }
 
 
@@ -208,6 +221,15 @@ a{
     text-decoration: none;
 }
 
+.yellow-link{
+    color: #F1A435;
+    font-size: 13px;
+    text-decoration: underline;
+    float: right;
+    margin-right: 20px;
+
+}
+
 /*LINKS*/
 
 
@@ -253,6 +275,7 @@ button.back-button{
     min-width: 34px;
     margin: 0px;
     box-shadow: none;
+    float: right;
 }
 
 .item-button-right{
@@ -295,6 +318,19 @@ button.back-button{
     text-transform: uppercase;
     margin-bottom: 20px;
 }
+
+
+.border-button{
+    background: none;
+    border: 2px solid #F1A435;
+    color: #F1A435;
+    font-weight: bold;
+    box-shadow: none;
+    text-transform: uppercase;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
 /*ITEM*/
 
 .item{
@@ -329,8 +365,24 @@ a .item .divider{
     left: 0;
 }
 
+
 div.comment > label.item-input{
     min-height: 100px;
+}
+
+
+ion-item.item-thumbnail-left.item{
+    padding-left: 50px;
+    padding-top: 10px;
+}
+
+ion-item.item-thumbnail-left.item > img.small-img{
+    max-width: 40px;
+    max-height: 40px;
+}
+
+ion-item.feed.item-thumbnail-left{
+    min-height: 60px;
 }
 
 /*ICONS*/
@@ -419,7 +471,13 @@ i.small-icon.ion-ios-pint{
 
 /*GENERAL STUFF*/
 
-
+.blur{
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+}
 
 
 .full-width img{
@@ -442,19 +500,12 @@ ng-map {
 }
 
 
-.no-padding-right{
-    padding-right: 0px;
-    margin: 0px 0px 0px 10px;
-    }
-
-.no-padding-left{
-    margin: 0px;
-}
-
 span.back-text{
     display: none;
 }
 
+
+/*IMAGE SLIDER*/
 ion-slides{
     height:200px;
 }
@@ -468,19 +519,6 @@ ion-slides{
 }
 
 
-ion-item.item-thumbnail-left.item{
-    padding-left: 50px;
-    padding-top: 10px;
-}
-
-ion-item.item-thumbnail-left.item > img.small-img{
-    max-width: 40px;
-    max-height: 40px;
-}
-
-ion-item.feed.item-thumbnail-left{
-    min-height: 60px;
-}
 
 
 /*BREWERY*/
@@ -517,16 +555,35 @@ ion-item.brewery-thumbnail.item{
     width: 100%
 }
 
+/*REGISTER*/
+
 .strong   { color: #060; border-color: #0F0;}
 .medium   { color: #C60; border-color: #FC0;}
 .weak     { color: #900; border-color: #F00;}
 .strength { padding: 1px 10px; border: 2px solid; color: #FFF;}
 
 
-.blur{
-    filter: blur(5px);
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    -o-filter: blur(5px);
-    -ms-filter: blur(5px);
+
+
+/*LOGIN*/
+
+.login{
+    background-image: url('../img/beeround_white_yellow.svg');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 60%;
+    margin-bottom: 70px;
+}
+
+
+ion-content.login label.item-input{
+    background: #FFFFFF;
+    margin: 15px;
+    border-radius: 4px;
+    clear: both;
+}
+
+.brown-background{
+    background: #773D17;
+    color: #FFFFFF;
 }
