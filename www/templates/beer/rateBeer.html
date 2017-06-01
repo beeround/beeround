@@ -24,16 +24,54 @@
     </div>
 
 
+      <div class="information">
+
+      <!--CSS STYLE
+      .characteristics.row.col-25{ padding-top: 10px;}
+      .rzslider .rz-pointer {background-color:#F1A435;}
+      .rzslider .rz-pointer:after {background-color:#773D17;}
+      .rzslider .rz-tick {background:#C8C6C5;}
+      .rzslider {margin: 15px 0 35px 0;}
+      -->
+        <p>{{sliderSueffig}}</p>
+
+      <button ng-click="changeCharacteristicsWindow()"><i class="icon ion-android-favorite"></i> Eigenschaften</button>
+      <div ng-show="characteristicsWindow" class="characteristics">
+      <div class="row">
+        <div class="col col-25"><span>sueffig</span></div>
+        <div class="col col-75">
+          <rzslider rz-slider-model="sliderSueffig"  rz-slider-options="slider.options"></rzslider>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-25"><span>malzig</span></div>
+        <div class="col col-75">
+          <rzslider rz-slider-model="sliderMalzig"  rz-slider-options="slider.options"></rzslider>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-25"><span>herb</span></div>
+        <div class="col col-75">
+          <rzslider rz-slider-model="sliderHerb"  rz-slider-options="slider.options"></rzslider>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-25"><span>erfrischend</span></div>
+        <div class="col col-75">
+          <rzslider rz-slider-model="sliderErfrischend"  rz-slider-options="slider.options"></rzslider>
+        </div>
+      </div>
+      </div>
+
+
+        <button><i class="icon ion-android-image"></i> Bild/Foto</button>
+        <button><i class="icon ion-ios-location"></i> Ich trinke hier</button>
+
+    </div>
+
   <div class="comment divider">
     <h3>Kommentar</h3>
         <textarea name="comments" ng-model="form.comment" id="comment" cols="30" rows="10"></textarea>
-  </div>
-
-
-  <div class="information">
-    <button><i class="icon ion-android-favorite"></i> Eigenschaften</button>
-    <button><i class="icon ion-android-image"></i> Bild/Foto</button>
-    <button><i class="icon ion-ios-location"></i> Ich trinke hier</button>
   </div>
 
     </ion-item>

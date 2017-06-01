@@ -642,7 +642,7 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerDetailsCtrl', function ($location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser) {
+  .controller('beerDetailsCtrl', function ($location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout) {
     let beerId = $stateParams.beerId;
 
     // Make User data output available in view
@@ -668,6 +668,52 @@ angular.module('beeround.beer', [])
     });
 
 
+
+
+    // beerrating range
+    $scope.changeCharacteristicsWindow =function(){
+      if ($scope.characteristicsWindow){
+
+        $scope.characteristicsWindow = false;
+
+      }
+      else {
+        $scope.characteristicsWindow = true;
+      }
+    };
+    $scope.characteristicsWindow = false;
+
+    let SliderDefaultValue = 50;
+    $scope.sliderSueffig = SliderDefaultValue;
+    $scope.sliderMalzig = SliderDefaultValue;
+    $scope.sliderHerb = SliderDefaultValue;
+    $scope.sliderErfrischend = SliderDefaultValue;
+
+
+    $scope.$on("slideEnded", function() {
+      $timeout(function(){
+        console.log($scope.sliderSueffig);
+      },0);
+
+    });
+
+    $scope.slider = {
+      options: {
+        floor: 0,
+        ceil: 100,
+        step: 25,
+        hidePointerLabels: true,
+        hideLimitLabels: true,
+        showTicks: true,
+        stepsArray: [
+          {value: 0, legend: '-'},
+          {value: 25},
+          {value: 50, legend:'o'},
+          {value: 75},
+          {value: 100, legend: '+'}
+        ]
+      }
+    };
 
 
     // TODO Select rating on beer click
