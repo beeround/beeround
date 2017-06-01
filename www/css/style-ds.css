@@ -75,3 +75,41 @@ ion-item.brown-background > label {
   background: #F1A435;
   border-color: #F1A435;
 }
+
+/* rateBeer*/
+
+.commentTitle{
+  padding-left: 0px !important;
+  height:60px;
+}
+
+.commentTitle input {
+  padding: 0px;
+  border-bottom: none !important;
+
+}
+
+.commentTitle input:focus {
+  transition: border-bottom 1s ease-out;
+  border-bottom: 1px solid #F1A435 !important;
+  box-shadow: 0 1px 0 0 #F1A435 !important
+}
+
+.commentText{
+  padding-left: 0px;
+  height:120px;
+}
+
+.commentText textarea{
+  height: 75%;
+}
+
+
+.ratingComment{
+  padding-top: 10px;
+}
+
+.rating .row {
+  padding-top: 15px;
+}
+

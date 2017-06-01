@@ -2,10 +2,10 @@
 
   <ion-content>
     <ion-item>
-    <h1>{{beer.nameDisplay}}</h1>
+    <!--<h1>{{beer.nameDisplay}}</h1> -->
 
-    <div class="rating divider">
-      <h3>Bewertung</h3>
+    <div class="rating">
+      <h3>{{beer.nameDisplay}}</h3>
       <div class="row">
         <div class="col col-20 text-center">
           <button ng-click="negativeRating()" class="control">-</button>
@@ -23,6 +23,16 @@
       </div>
     </div>
 
+      <div class="list divider ratingComment">
+        <label class="item item-input item-floating-label commentTitle">
+          <span class="input-label">Titel deiner Bewertung</span>
+          <input type="text" placeholder="Titel deiner Bewertung" ng-model="form.commentTitle">
+        </label>
+        <label class="item item-input item-floating-label commentText">
+          <span class="input-label"> Dein Kommentar </span>
+          <textarea placeholder="Dein Kommentar" ng-model="form.comment"></textarea>
+        </label>
+      </div>
 
       <div class="information">
 
@@ -67,10 +77,7 @@
 
     </div>
 
-  <div class="comment divider">
-    <h3>Kommentar</h3>
-        <textarea name="comments" ng-model="form.comment" id="comment" cols="30" rows="10"></textarea>
-  </div>
+
 
     </ion-item>
 
