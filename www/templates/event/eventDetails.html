@@ -1,0 +1,26 @@
+<ion-view cache-view="false" title="Eventdetails">
+  <ion-content>
+    <ion-slides options="data.sliderOptions" slider="data.sliderDelegate">
+      <ion-slide-page>
+        <div class="full-width">
+          <img ng-src="{{beer.images.icon || 'img/beerdetail_v1.jpg'}}">
+        </div>
+      </ion-slide-page>
+      <ion-slide-page>
+        <div class="full-width">
+          <img ng-src="{{beer.images.icon || 'img/beerdetail_v1.jpg'}}">
+        </div>
+      </ion-slide-page>
+      <ion-slide-page>
+        <div class="full-width">
+          <img ng-src="{{beer.images.icon || 'img/beerdetail_v1.jpg'}}">
+        </div>
+      </ion-slide-page>
+    </ion-slides>
+
+    <ion-item>
+      <pre>{{event}}</pre>
+    </ion-item>
+
+  </ion-content>
+</ion-view>
