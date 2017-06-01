@@ -53,24 +53,17 @@
     </ion-item>
 
 
+
     <ion-item>
     <div class="item">
       <ion-list>
-        <ion-item class="feed item-thumbnail-left">
-          <img class="small-img" ng-src="{{user.profileImage || 'img/no-image-placeholder.png'}}">
-          <h4>Testuser</h4>
-          <p>Komentar xyz lorem isum tralala</p>
+        <ion-item class="feed item-thumbnail-left" ng-repeat="comment in comments">
+          <img class="small-img" ng-src="{{comment.userimage || 'img/no-image-placeholder.png'}}">
+          <p>{{comment.commentcreated | date : "dd.MM.yyyy - HH:mm" : '-0000'}}</p>
+          <h4>{{comment.username}}</h4>
+          <p>{{comment.comment}}</p>
         </ion-item>
-        <ion-item class="feed item-thumbnail-left">
-          <img class="small-img" ng-src="{{user.profileImage || 'img/no-image-placeholder.png'}}">
-          <h4>Testuser</h4>
-          <p>Komentar xyz lorem isum tralala</p>
-        </ion-item>
-        <ion-item class="feed item-thumbnail-left">
-          <img class="small-img" ng-src="{{user.profileImage || 'img/no-image-placeholder.png'}}">
-          <h4>Testuser</h4>
-          <p>Komentar xyz lorem isum tralala</p>
-        </ion-item>
+
       </ion-list>
     </div>
     </ion-item>

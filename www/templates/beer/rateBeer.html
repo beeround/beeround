@@ -26,10 +26,7 @@
 
   <div class="comment divider">
     <h3>Kommentar</h3>
-      <label class="item item-input">
-        <span class="input-label"></span>
-        <input type="text">
-      </label>
+        <textarea name="comments" ng-model="form.comment" id="comment" cols="30" rows="10"></textarea>
   </div>
 
 
@@ -42,7 +39,7 @@
     </ion-item>
 
     <ion-item class="rateBeer">
-      <button class="button-block invert-button">bier bewerten</button>
+      <button ng-click="sendComment()" class="button-block invert-button">bier bewerten</button>
     </ion-item>
   </ion-content>
 

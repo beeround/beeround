@@ -642,11 +642,12 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerDetailsCtrl', function ($scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser) {
+  .controller('beerDetailsCtrl', function ($location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser) {
     let beerId = $stateParams.beerId;
 
     // Make User data output available in view
     $scope.$ionicUser = $ionicUser;
+    $scope.form = [];
 
     beeroundService.getRatingByUser(beerId, $ionicUser.id).then(rating => {
       $scope.currentRating = rating;
@@ -660,6 +661,13 @@ angular.module('beeround.beer', [])
         console.log(result);
       })
     });
+
+
+    beeroundService.getComments(beerId).then(function (result) {
+      $scope.comments = result.data.comments;
+    });
+
+
 
 
     // TODO Select rating on beer click
@@ -679,11 +687,35 @@ angular.module('beeround.beer', [])
       }
     };
 
+    $scope.sendComment = function () {
+      let data = {
+        beerid : beerId,
+        userid : $ionicUser.id,
+        username: $ionicUser.details.username,
+        comment : $scope.form.comment
+      };
+
+      beeroundService.postComment(data).then(function () {
+        alert("success");
+        $scope.form.comment = "";
+        $state.go('tabs.beerDetails', {beerId: beerId});
+
+        // TODO CUSTOM FEEDBACK
+
+      }, function () {
+        // FAIL
+        alert("Fehlgeschlagen")
+
+        //TODO ERROR HANDLING
+      })
+    };
+
 
     function sendRating(){
       let data = {
         beerid : beerId,
         userid : $ionicUser.id,
+        userimage : $ionicUser.image,
         rating : $scope.currentRating
       };
 

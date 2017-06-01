@@ -52,7 +52,7 @@ angular.module('beeround.service', [])
                   return $http.get('http://www.beeround.de/api/beers?transform=1&filter=beers.beerid,eq,'+beer.id).then(result => {
 
                     if(result.data.beers[0]){
-                      breweries[firstIndex].beers[secondIndex].rating = result.data.beers[0].avg_rating;;
+                      breweries[firstIndex].beers[secondIndex].rating = result.data.beers[0].avg_rating;
                       return beer
                     }
 
@@ -66,7 +66,7 @@ angular.module('beeround.service', [])
 
                 // Save to var and give back, if function has ended
                 Promise.all(beerRatingMapping).then(function () {
-                  console.log("Brewery")
+                  console.log("Brewery");
                   resolve(breweries);
                 });
 
@@ -110,6 +110,18 @@ angular.module('beeround.service', [])
             return result.data;
           });
 
+        },
+
+        getComments : function (bID) {
+            return $http.get('http://www.beeround.de/api/comments?transform=1&order=commentcreated,DESC&filter[]=beerid,eq,'+bID).then(result => {
+              return result;
+            });
+        },
+
+        postComment : function (data) {
+          return $http.post('http://www.beeround.de/api/comments', data).then(result => {
+            return result;
+          });
         }
       }
     }
