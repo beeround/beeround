@@ -620,8 +620,9 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerDetailsCtrl', function ($location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout) {
+  .controller('beerDetailsCtrl', function ($cordovaFileTransfer, $ionicActionSheet, $cordovaCamera,$ionicPopup ,$location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout) {
     let beerId = $stateParams.beerId;
+    $scope.image = null;
 
     // Make User data output available in view
     $scope.$ionicUser = $ionicUser;
@@ -666,8 +667,6 @@ angular.module('beeround.beer', [])
     });
 
 
-
-
     // Characteristics range
     $scope.changeCharacteristicsWindow =function(){
       if ($scope.characteristicsWindow){
@@ -677,8 +676,6 @@ angular.module('beeround.beer', [])
         $scope.characteristicsWindow = true;
       }
     };
-
-
 
     $scope.$on("slideEnded", function() {
 
@@ -713,9 +710,6 @@ angular.module('beeround.beer', [])
         ],
       }
     };
-
-
-    // TODO Select rating on beer click
 
     $scope.positivRating = function () {
       if($scope.currentRating < 5) {
@@ -756,6 +750,91 @@ angular.module('beeround.beer', [])
     };
 
 
+
+    // IMAGE
+    // Triggered on a button click, or some other target
+    $scope.showOptions = function() {
+
+      // Show the action sheet
+      $ionicActionSheet.show({
+        buttons: [
+          { text: 'Kamera' },
+          { text: 'Galerie' }
+        ],
+        titleText: 'Bild wählen',
+        cancelText: 'Cancel',
+        cancel: function() {
+          // add cancel code..
+        },
+        buttonClicked: function(index) {
+          if(index == 0){
+            $scope.startCamera()
+          }
+          return true;
+        }
+      });
+
+    };
+
+
+    $scope.startCamera = function () {
+      var options = {
+        quality: 80,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+      };
+
+      $cordovaCamera.getPicture(options).then(function(imageURI) {
+        $timeout(function () {
+          $scope.srcImage = imageURI;
+        },500);
+
+      }, function(err) {
+
+        alert(err)
+        // error
+      });
+    };
+
+    $scope.pathForImage = function(image) {
+      if (image === null) {
+        return '';
+      } else {
+        return cordova.file.dataDirectory + image;
+      }
+    };
+
+    $scope.uploadImage = function() {
+      // Destination URL
+      var url = "http://beeround.domi-speh.de/upload.php";
+
+      // File for Upload
+      var targetPath = $scope.srcImage;
+
+
+
+      var options = {
+        fileKey: "file",
+        fileName: "image"+new Date().getTime(),
+        chunkedMode: false,
+        mimeType: "multipart/form-data",
+        params : {'fileName': "image"+new Date().getTime()}
+      };
+
+      $cordovaFileTransfer.upload(url, targetPath, options).then(function(result) {
+        alert(result.response);
+        $scope.resultdata = result.response;
+      }, function () {
+        alert("err")
+      });
+    };
+
+
+
+
+
     function sendRating(){
       let data = {
         beerid : beerId,
@@ -770,7 +849,6 @@ angular.module('beeround.beer', [])
     }
 
   });
-
 
 
 

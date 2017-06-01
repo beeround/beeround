@@ -22,8 +22,8 @@
         <h1>{{event.name}}</h1>
         <p>{{event.price}} €</p>
         <p>{{event.description}}</p>
-        <p>Beginn: {{event.start | date : "dd.MM.yyyy"}} um {{event.start | date : "HH.mm"}} Uhr</p>
-        <p>Ende: {{event.end | date : "dd.MM.yyyy"}} um {{event.end | date : "HH.mm"}} Uhr</p>
+        <p>Beginn: {{event.start | date : "dd.MM.yyyy" : "-0000"}} um {{event.start | date : "HH.mm"}} Uhr</p>
+        <p>Ende: {{event.end | date : "dd.MM.yyyy" : "-0000"}} um {{event.end | date : "HH.mm"}} Uhr</p>
         <br>
         <p>Email: {{event.email}}</p>
         <p>Telefon: {{event.phone}}</p>

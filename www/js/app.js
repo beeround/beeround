@@ -139,7 +139,7 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
 
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/list');
+  $urlRouterProvider.otherwise('/tab/details/beer/EyPvxC/rate');
 
   $ionicConfigProvider.tabs.position('bottom');
 

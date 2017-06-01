@@ -129,7 +129,7 @@ angular.module('breweryDB.service', [])
 
 
         getBeersByBrewery: function (breweryId) {
-          return $http.get('http://api.brewerydb.com/v2//brewery/' + breweryId + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
+          return $http.get('http://api.brewerydb.com/v2/brewery/' + breweryId + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
 
             return getRatingByBeers(res.data.data).then(result => {
               return result
@@ -148,8 +148,6 @@ angular.module('breweryDB.service', [])
           return $http.get('http://api.brewerydb.com/v2/beer/' + beerId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
 
             return beeroundService.getBeerRating(beerId).then(obj => {
-
-
               res.data.data.rating = obj.avg_rating;
               res.data.data.ratingCount = obj.rating_count;
               res.data.data.avgErfrischend = obj.avg_erfrischend;

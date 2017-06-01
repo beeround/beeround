@@ -7,6 +7,7 @@ angular.module('beeround.service', [])
 
           return $http.get('http://www.beeround.de/api/ratings?transform=1&filter[]=beerid,eq,'+data.beerid+'&filter[]=userid,eq,'+data.userid+'&satisfy=all').then(result => {
 
+            //TODO DELETE IF 0
             if(result.data.ratings.length > 0){
               console.log("Data available");
 

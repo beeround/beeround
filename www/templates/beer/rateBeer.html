@@ -72,12 +72,22 @@
       </div>
 
 
-        <button><i class="icon ion-android-image"></i> Bild/Foto</button>
+        <button ng-click="showOptions()"><i class="icon ion-android-image"></i> Bild/Foto</button>
         <button><i class="icon ion-ios-location"></i> Ich trinke hier</button>
 
     </div>
 
 
+  <div class="divider">
+    <button ng-click="uploadImage()">UPLOAD </button>
+    <img ng-src="{{srcImage}}" id="srcImage" width="250 " height="250" style="display: block; margin: 0 auto;"/><br/>
+    <p>{{resultdata}}</p>
+
+  </div>
+  <div class="comment divider">
+    <h3>Kommentar</h3>
+        <textarea name="comments" ng-model="form.comment" id="comment" cols="30" rows="10"></textarea>
+  </div>
 
     </ion-item>
 

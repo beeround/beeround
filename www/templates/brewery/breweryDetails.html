@@ -31,11 +31,11 @@
                                 {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>
                               </p>
                           <div class="col rating">
-                                <i class="ion-ios-pint" ng-class="{'active': beer.rating > 0}"></i>
-                                <i class="ion-ios-pint" ng-class="{'active': beer.rating > 1}"></i>
-                                <i class="ion-ios-pint" ng-class="{'active': beer.rating > 2}"></i>
-                                <i class="ion-ios-pint" ng-class="{'active': beer.rating > 3}"></i>
-                                <i class="ion-ios-pint" ng-class="{'active': beer.rating > 4}"></i>
+                                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 0}"></i>
+                                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 1}"></i>
+                                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 2}"></i>
+                                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 3}"></i>
+                                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 4}"></i>
                               </div>
                         </a>
                     </ion-item>
