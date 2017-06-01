@@ -37,6 +37,39 @@
     </ion-item>
 
     <ion-item>
+
+      <button ng-click="changeCharacteristicsWindow()"><i class="icon ion-android-favorite"></i> Eigenschaften <sup>{{beer.characteristicsCount}}</sup></button>
+        <div ng-show="characteristicsWindow" class="characteristics">
+          <div class="row">
+
+            <div class="col col-25"><span>sueffig</span></div>
+            <div class="col col-75">
+              <div ng-style="{'width' : beer.avgSueffig+'%', 'background' : '#773D17', 'height' : '10px' }"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-25"><span>malzig</span></div>
+            <div class="col col-75">
+              <div ng-style="{ 'width' : beer.avgMalzig+'%', 'background' : '#773D17', 'height' : '10px' }"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-25"><span>herb</span></div>
+            <div class="col col-75">
+              <div ng-style="{ 'width' : beer.avgHerb+'%', 'background' : '#773D17', 'height' : '10px' }"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-25"><span>erfrischend</span></div>
+            <div class="col col-75">
+              <div ng-style="{ 'width' : beer.avgErfrischend+'%', 'background' : '#773D17', 'height' : '10px' }"></div>
+            </div>
+          </div>
+        </div>
+
+    </ion-item>
+
+    <ion-item>
       <div class="row">
         <div class="col">
           <h2>{{beer.nameDisplay}}</h2>
