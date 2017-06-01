@@ -21,7 +21,7 @@ body{
 }
 
 /*HEADER*/
-/* Hier fehlt ein Punkt?*/
+
 ion-header-bar.bar.bar-stable{
     background: #773D17;
     color: #FFFFFF;
@@ -208,6 +208,15 @@ a{
     text-decoration: none;
 }
 
+.yellow-link{
+    color: #F1A435;
+    font-size: 13px;
+    text-decoration: underline;
+    float: right;
+    margin-right: 20px;
+
+}
+
 /*LINKS*/
 
 
@@ -295,6 +304,19 @@ button.back-button{
     text-transform: uppercase;
     margin-bottom: 20px;
 }
+
+
+.border-button{
+    background: none;
+    border: 2px solid #F1A435;
+    color: #F1A435;
+    font-weight: bold;
+    box-shadow: none;
+    text-transform: uppercase;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
 /*ITEM*/
 
 .item{
@@ -328,6 +350,9 @@ a .item .divider{
 .item-thumbnail-left >img:first-child {
     left: 0;
 }
+
+
+
 
 div.comment > label.item-input{
     min-height: 100px;
@@ -529,4 +554,28 @@ ion-item.brewery-thumbnail.item{
     -moz-filter: blur(5px);
     -o-filter: blur(5px);
     -ms-filter: blur(5px);
+}
+
+
+/*LOGIN*/
+
+.login{
+    background-image: url('../img/beeround_white_yellow.svg');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 60%;
+    margin-bottom: 70px;
+}
+
+
+ion-content.login label.item-input{
+    background: #FFFFFF;
+    margin: 15px;
+    border-radius: 4px;
+    clear: both;
+}
+
+.brown-background{
+    background: #773D17;
+    color: #FFFFFF;
 }
