@@ -670,7 +670,7 @@ angular.module('beeround.beer', [])
 
 
 
-    // beerrating range
+    // Characteristics range
     $scope.changeCharacteristicsWindow =function(){
       if ($scope.characteristicsWindow){
 
@@ -683,16 +683,20 @@ angular.module('beeround.beer', [])
     };
     $scope.characteristicsWindow = false;
 
-    let SliderDefaultValue = 50;
-    $scope.sliderSueffig = SliderDefaultValue;
-    $scope.sliderMalzig = SliderDefaultValue;
-    $scope.sliderHerb = SliderDefaultValue;
-    $scope.sliderErfrischend = SliderDefaultValue;
+    $scope.sliderSueffig = {value: 50};
+    $scope.sliderMalzig = {value: 50};
+    $scope.sliderHerb = {value: 50};
+    $scope.sliderErfrischend = {value: 50};
 
 
     $scope.$on("slideEnded", function() {
       $timeout(function(){
-        console.log($scope.sliderSueffig);
+        /*
+        $scope.sliderSueffig.value
+        $scope.sliderMalzig.value
+        $scope.sliderHerb.value
+        $scope.sliderErfrischend.value
+        */
       },0);
 
     });
