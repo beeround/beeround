@@ -50,7 +50,7 @@
             <ion-list>
               <ion-item ng-repeat="location in breweries"
                         ng-show="(location.locationType == filterLocationType || filterLocationType == 'allLocationTypes')">
-
+              <ion-item>
                 <a class="item item-thumbnail-left divider" ng-href="#/tab/list/{{location.brewery.id}}">
                   <img ng-src="{{location.brewery.images.icon || 'img/no-image-placeholder.png'}}">
 
@@ -75,7 +75,7 @@
 
                 </a>
 
-
+              </ion-item>
               </ion-item>
             </ion-list>
 
@@ -138,6 +138,7 @@
             <!-- List for sorting by alphabet and rating !-->
             <ion-list ng-show="allBeers">
               <ion-item ng-repeat="beer in allBeers">
+                <ion-item>
                 <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
                   <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
                   <h2>{{beer.name}}</h2>
@@ -156,6 +157,7 @@
                   </div>
 
                 </a>
+                </ion-item>
               </ion-item>
             </ion-list>
           </ion-scroll>

@@ -3,6 +3,7 @@
   <ion-content scroll="true" class="signup">
     <form ng-submit="signup()">
       <div class="signup_image text-center">
+        <img src="{{uploadme}}">
         <i class="ion-ios-contact-outline"></i>
       </div>
       <div class="add_image text-center">
@@ -12,7 +13,8 @@
       <div class="list list-inset">
 
         <input type="file" fileread="uploadme" id="file" class="inputfile"/>
-        <img src="{{uploadme}}" width="50" height="auto" alt="Vorschau">
+        <div class="">
+        </div>
         <label class="item-input">
           <input ng-model="form.username" name="username" type="text" placeholder="Benutzername" required>
         </label>

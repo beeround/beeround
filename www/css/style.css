@@ -648,6 +648,24 @@ ion-content.login label.item-input{
 
 }
 
+.signup_image{
+    width: 100px;
+    height:100px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.circleimage{
+    width: 100px;
+    height: auto;
+    background-size: cover;
+    display: block;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+}
+
 .small-thumbnail-left{
     padding: 10px;
 }
