@@ -1,6 +1,6 @@
 angular.module('beeround.beer', [])
 
-  .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
+  .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, beeroundService, $http, $cordovaGeolocation, $cordovaCalendar, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
 
     // REFRESH Breweries on change view
     $rootScope.$on('$stateChangeStart',
@@ -9,7 +9,6 @@ angular.module('beeround.beer', [])
 
         if (toState.name == "tabs.breweryList") {
           getBreweries("noGeo");
-
         }
       });
 
@@ -20,34 +19,31 @@ angular.module('beeround.beer', [])
       $scope.popover = popover;
     });
 
-    $scope.openPopover = function () {
+
+
+
+      $scope.openPopover = function () {
       $scope.popover.show();
-    };
-    $scope.closePopover = function () {
+          $scope.appBackground = document.getElementsByClassName('appBackground');
+          console.log($scope.appBackground[0]);
+        $scope.appBackground[0].setAttribute('class', 'blur');
+      };
+
+
+
+      $scope.closePopover = function () {
       $scope.popover.hide();
-    };
-
-    let details = {'email': 'xxx@web.de', 'password': '123123123'};
-
-    /* $ionicAuth.signup(details).then(function() {
-
-     // `$ionicUser` is now registered
-     }, function(err) {
-     for (var e of err.details) {
-     if (e === 'conflict_email') {
-     alert('Email already exists.');
-     } else {
-     // handle other errors
-     }
-     }
-     });*/
+          $scope.appBackground = document.getElementsByClassName('blur');
+          $scope.appBackground[0].setAttribute('class', 'view appBackground');
+      };
 
     $scope.tabs = [
       {"text": "Brauereien"},
       {"text": "Biere"},
       {"text": "Events"},
     ];
-    $scope.currentListView = $scope.tabs[0].text;
+
+   // $scope.currentListView = $scope.tabs[0].text;
 
 
     $scope.place = undefined;
@@ -86,16 +82,19 @@ angular.module('beeround.beer', [])
 
     // Change variable on slide
     $scope.onSlideMove = function (data) {
-      $scope.currentListView = $scope.tabs[data.index].text;
+
+      $rootScope.currentListView = $scope.tabs[data.index].text;
+
 
       if(data.index == 0) {
         if($scope.activeSorting == "rating"){
-          $scope.sortBy("distance");
+          $scope.sortBreweries("distance");
         }
       }
       if (data.index == 1) {
-        $scope.currentListView = $scope.tabs[0].text;
-        makeBeerList();
+        beeroundService.getBeerRatingByBrewerielist($scope.breweries).then(result => {
+          $scope.breweries = result;
+        })
       }
       if (data.index == 2) {
         getBeerEvents();
@@ -103,13 +102,12 @@ angular.module('beeround.beer', [])
 
     };
 
-    $scope.sortBy = function (propertyName) {
+    // Sort Breweries
+    $scope.sortBreweries = function (propertyName) {
       $scope.activeSorting = propertyName;
 
       // Scroll to top
       $ionicScrollDelegate.scrollTop();
-
-      //TODO Save sorting onchange
 
       if (propertyName === 'name') {
         $scope.breweries.sort(function (a, b) {
@@ -118,20 +116,38 @@ angular.module('beeround.beer', [])
           return 0;
         });
 
-        makeBeerList();
-      }
-      else if (propertyName === 'rating') {
-
-        makeBeerList();
       }
       else if (propertyName === 'distance') {
-        $scope.allBeers = undefined;
 
         $scope.breweries.sort(function (a, b) {
           if (a.distance < b.distance) return -1;
           if (a.distance > b.distance) return 1;
           return 0;
         })
+      }
+    };
+
+    // Sort Breweries
+    $scope.sortBeers = function (propertyName) {
+      $scope.activeSorting = propertyName;
+
+      // Scroll to top
+      $ionicScrollDelegate.scrollTop();
+
+      if (propertyName === 'name') {
+        makeBeerList();
+      }
+      else if (propertyName === 'distance') {
+        $scope.allBeers = undefined;
+        $scope.breweries.sort(function (a, b) {
+          if (a.distance < b.distance) return -1;
+          if (a.distance > b.distance) return 1;
+          return 0;
+        })
+      }
+
+      else if (propertyName === 'rating') {
+        makeBeerList();
       }
     };
 
@@ -147,6 +163,7 @@ angular.module('beeround.beer', [])
         town: place.formatted_address
       };
       getBreweries("noGeo");
+      getBeerEvents();
 
     });
 
@@ -161,6 +178,10 @@ angular.module('beeround.beer', [])
 
       // Reload breweries
       getBreweries("noGeo");
+
+      // Reload events
+      getBeerEvents();
+
     };
 
     //Filter: Set new type
@@ -181,9 +202,11 @@ angular.module('beeround.beer', [])
       if ($scope.activeSorting == "name" && $scope.breweries) {
         $scope.allBeers = [];
 
-        $scope.breweries.map(function (brewery) {
+
+        $scope.breweries.map(function (brewery, index) {
           if (brewery.beers) {
             brewery.beers.map(function (beer) {
+              beer.brewery = brewery.brewery.name;
               $scope.allBeers.push(beer);
             });
           }
@@ -199,26 +222,26 @@ angular.module('beeround.beer', [])
       if ($scope.activeSorting == "rating" && $scope.breweries) {
         $scope.allBeers = [];
 
-        $scope.breweries;
+        //TODO SORT RATING BUGFIXING
+
         $scope.breweries.map(function (brewery) {
           if (brewery.beers) {
             brewery.beers.map(function (beer) {
+              beer.brewery = brewery.brewery.name;
+
               $scope.allBeers.push(beer);
+
             });
           }
         });
-
-
         $timeout(function () {
-
           $scope.allBeers.sort(function (a, b) {
             if (a.rating > b.rating) return -1;
             if (a.rating < b.rating) return 1;
             return 0;
           });
-          console.log($scope.allBeers)
 
-        },2000)
+        },4000)
 
       }
 
@@ -253,11 +276,13 @@ angular.module('beeround.beer', [])
             // Resize
             $ionicScrollDelegate.resize();
 
-            // Update beer array
-
-            makeBeerList();
-
-            console.log($scope.activeSorting);
+            // Update beer array, if beer screen is shown
+            if($rootScope.currentListView == "Biere"){
+              beeroundService.getBeerRatingByBrewerielist(result).then(newList => {
+                $scope.breweries = newList;
+                makeBeerList();
+              })
+            }
           }
 
           else {
@@ -304,6 +329,14 @@ angular.module('beeround.beer', [])
                 $scope.breweries = result;
                 $ionicLoading.hide();
 
+                // Update beer array, if beer screen is shown
+                if($rootScope.currentListView == "Biere"){
+                  beeroundService.getBeerRatingByBrewerielist($scope.breweries).then(result => {
+                    $scope.breweries = result;
+                    makeBeerList();
+                  })
+                }
+
                 // Resize
                 $ionicScrollDelegate.resize();
 
@@ -330,15 +363,39 @@ angular.module('beeround.beer', [])
     function getBeerEvents() {
       $scope.beerEvents = [];
 
-      beeroundService.getBreweryEvent().then(result => {
-        console.log(result.events);
-        $scope.beerEvents = result.events;
+      beeroundService.getBreweryEvent($rootScope.userSettings).then(result => {
+
+        $scope.beerEvents = result;
 
       });
     }
+
+
+     $scope.createEvent = function () {
+
+       $cordovaCalendar.createCalendar({
+         calendarName: 'Beeround',
+         calendarColor: '#FF0000'
+       }).then(function (result) {
+         $cordovaCalendar.createEvent({
+           title: 'Space Race',
+           location: 'The Moon',
+           notes: 'Bring sandwiches',
+             startDate: new Date(2017, 5, 17, 18, 30, 0, 0, 0),
+             endDate: new Date(2017, 5, 17, 19, 30, 0, 0, 0)
+         }).then(function (result) {
+           alert("PROST!")
+         }, function (err) {
+           alert("Hnzufügen fehlgeschlagen")
+         })
+       }, function (err) {
+         // error
+       });
+
+        }
   })
 
-  .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover) {
+  .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover, $ionicUser) {
 
     // IF NO USERSETTING
     if(!$rootScope.userSettings){
@@ -512,7 +569,7 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerListCtrl', function ($scope, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover) {
+  .controller('beerListCtrl', function ($scope, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover, $ionicUser) {
     const breweryId = $stateParams.brewery;
 
       //FORMAT PHONE NUMBER
@@ -585,10 +642,13 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerDetailsCtrl', function ($scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state) {
+  .controller('beerDetailsCtrl', function ($scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser) {
     let beerId = $stateParams.beerId;
 
-    beeroundService.getRatingByUser(beerId, 666).then(rating => {
+    // Make User data output available in view
+    $scope.$ionicUser = $ionicUser;
+
+    beeroundService.getRatingByUser(beerId, $ionicUser.id).then(rating => {
       $scope.currentRating = rating;
 
     });
@@ -623,7 +683,7 @@ angular.module('beeround.beer', [])
     function sendRating(){
       let data = {
         beerid : beerId,
-        userid : 666,
+        userid : $ionicUser.id,
         rating : $scope.currentRating
       };
 
@@ -631,144 +691,6 @@ angular.module('beeround.beer', [])
         console.log("Rating send");
       })
     }
-
-  })
-
-  .controller('signUpCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopup) {
-    $scope.form = [];
-
-
-    $scope.showAlert = function() {
-
-      if ($scope.formError == 'conflict_email'){
-        var alertPopup = $ionicPopup.alert({
-          title: 'Fehler',
-          template: 'Username already exists.'
-        });
-
-        alertPopup.then(function (res) {
-          // Custom functionality....
-        });
-
-      }
-
-      else if ($scope.formError == 'conflict_username'){
-        var alertPopup = $ionicPopup.alert({
-          title: 'Fehler',
-          template: 'Benutzername existiert bereits'
-        });
-
-        alertPopup.then(function (res) {
-          // Custom functionality....
-        });
-
-      }
-
-      else if ($scope.formError == 'required_password'){
-        var alertPopup = $ionicPopup.alert({
-          title: 'Fehler',
-          template: 'Passwort stimmt nicht'
-        });
-
-        alertPopup.then(function (res) {
-          // Custom functionality....
-        });
-
-      }
-
-      else if ($scope.formError == 'required_email') {
-
-        var alertPopup = $ionicPopup.alert({
-          title: 'Fehler',
-          template: 'Email Adresse fehlt'
-        });
-
-        alertPopup.then(function (res) {
-          // Custom functionality....
-        });
-      }
-
-
-      else if ($scope.formError == 'invalid_email'){
-        var alertPopup = $ionicPopup.alert({
-          title: 'Fehler',
-          template: 'Please insert your right email address.'
-        });
-
-        alertPopup.then(function (res) {
-          // Custom functionality....
-        });
-
-      }
-
-
-    };
-
-    $scope.formError = 'noError';
-
-    $scope.signup = function () {
-      let details = {'username': $scope.form.username,'email': $scope.form.email, 'password': $scope.form.password};
-      console.log(details);
-      $ionicAuth.signup(details).then(function() {
-        // `$ionicUser` is now registered
-      }, function(err) {
-        for (let e of err.details) {
-          if (e === 'conflict_email') {
-            $scope.formError = 'conflict_email';
-            //alert('Email already exists.');
-          }
-          else if (e === 'conflict_username'){
-            $scope.formError = 'conflict_username';
-           // alert('Username already exists.')
-          }
-          else if (e === 'required_password'){
-            $scope.formError = 'conflict_email';
-           // alert('Please choose a password.')
-          }
-          else if (e === 'required_email'){
-            $scope.formError = 'required_email';
-            //alert('Please insert your email address.')
-          }
-          else if (e === 'invalid_email'){
-            $scope.formError = 'invalid_email';
-           // alert('Please insert your right email address.')
-          }
-
-          else {
-            // handle other errors
-          }
-        }
-      });
-    }
-  })
-
-  .controller('loginCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $stateParams) {
-    $scope.form = [];
-
-    if($ionicUser.details){
-      $state.go("tabs.profile");
-    }
-
-    $scope.login = function () {
-      let details = {'email': $scope.form.email, 'password': $scope.form.password};
-      console.log(details);
-
-      $ionicAuth.login('basic', details).then(function () {
-        //SUCCESS
-        console.log($ionicUser);
-
-        $state.go("tabs.profile");
-      }, function (err) {
-        console.log(err);
-      });
-
-    }
-  })
-
-  .controller('profilCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $stateParams) {
-    $scope.test = $ionicUser.details;
-
-
 
   });
 

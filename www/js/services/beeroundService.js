@@ -5,9 +5,6 @@ angular.module('beeround.service', [])
       return {
         sendBeerRating: function (data) {
 
-         //data.beerid = "17uR4";
-         //data.userid = "12345";
-
           return $http.get('http://www.beeround.de/api/ratings?transform=1&filter[]=beerid,eq,'+data.beerid+'&filter[]=userid,eq,'+data.userid+'&satisfy=all').then(result => {
 
             if(result.data.ratings.length > 0){
@@ -44,8 +41,43 @@ angular.module('beeround.service', [])
 
         },
 
-        getBreweryEvent: function () {
-          return $http.get('http://www.beeround.de/api/events?transform=1').then(result => {
+        getBeerRatingByBrewerielist: function(breweries){
+          return new Promise(function (resolve, reject) {
+
+            breweries.map((obj, firstIndex) => {
+
+              if(obj.beers){
+
+                let beerRatingMapping = obj.beers.map((beer,secondIndex)=> {
+                  return $http.get('http://www.beeround.de/api/beers?transform=1&filter=beers.beerid,eq,'+beer.id).then(result => {
+
+                    if(result.data.beers[0]){
+                      breweries[firstIndex].beers[secondIndex].rating = result.data.beers[0].avg_rating;;
+                      return beer
+                    }
+
+                    else {
+                      return 0
+                    }
+
+                  });
+
+                });
+
+                // Save to var and give back, if function has ended
+                Promise.all(beerRatingMapping).then(function () {
+                  console.log("Brewery")
+                  resolve(breweries);
+                });
+
+              }
+            });
+
+          });
+        },
+
+        getBreweryEvent: function (userdata) {
+          return $http.get('http://www.beeround.de/getevents.php?longitude='+userdata.lng+'&latitude='+userdata.lat+'&radius='+userdata.radius).then(result => {
             return result.data;
           })
         },

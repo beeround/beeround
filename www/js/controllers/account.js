@@ -1,11 +1,14 @@
 angular.module('beeround.account', [])
 
-  .controller('signUpCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopup) {
+  .controller('signUpCtrl', function ($scope, $http, $ionicAuth, $state, $stateParams, $ionicUser, $ionicPopup) {
     $scope.form = [];
     $scope.signup = function () {
       let details = {'username': $scope.form.username,'email': $scope.form.email, 'password': $scope.form.password };
       console.log(details);
       $ionicAuth.signup(details).then(function() {
+        alert("Sign Up");
+        $state.go("tabs.login");
+
         // `$ionicUser` is now registered
       }, function(err) {
         for (let e of err.details) {
@@ -43,6 +46,11 @@ angular.module('beeround.account', [])
 
 
           else {
+
+          var alertPopup = $ionicPopup.alert({
+            title: 'Login fehlgeschlagen!',
+            template: 'Bitte überprüfe deine Eingaben!'
+          });
             // handle other errors
           }
         }
@@ -51,7 +59,7 @@ angular.module('beeround.account', [])
 
   })
 
-  .controller('loginCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $stateParams) {
+  .controller('loginCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $ionicPopup, $stateParams) {
     $scope.form = [];
 
     $scope.login = function () {
@@ -60,11 +68,15 @@ angular.module('beeround.account', [])
 
       $ionicAuth.login('basic', details).then(function () {
         //SUCCESS
-        console.log($ionicUser);
-
         $state.go("tabs.profile");
+
       }, function (err) {
-        console.log(err);
+        let alertPopup = $ionicPopup.alert({
+          title: 'Login fehlgeschlagen!',
+          template: 'Bitte überprüfe deine Eingaben!'
+        });
+
+        //console.log(err);
       });
 
     }
