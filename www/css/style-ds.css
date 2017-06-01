@@ -19,3 +19,59 @@
 div.col.rating{
   text-align: left;
 }
+
+
+/*Luisa Code */
+
+/* Popups*/
+
+.popup {
+  border-radius: 10px !important;
+  font-family: "Proxima Nova", "Roboto", "Helvetica", "sans-serif" !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
+
+}
+
+.popup-buttons .button.button-positive {
+  background-color: #F1A435;
+
+}
+
+
+/* Register*/
+
+ion-content.signup label.item-input{
+  background: #FFFFFF;
+  margin: 15px;
+  border-radius: 4px;
+  clear: both;
+}
+
+ion-item.brown-background > label {
+  background: none;
+  color: white;
+  padding: 10px 10px 10px 50px;
+}
+
+.signup_image .ion-ios-contact-outline {
+  font-size: 120px;
+  z-index:1;
+  position: relative;
+}
+
+.add_image {
+  color:#F1A435;
+  z-index: 2;
+  font-size: 25px;
+  position: absolute;
+  left: 211px;
+  top: 89px;
+
+}
+
+/* Checkboxen*/
+
+.checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
+  background: #F1A435;
+  border-color: #F1A435;
+}
