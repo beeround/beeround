@@ -129,6 +129,43 @@ angular.module('beeround.service', [])
           return $http.post('http://www.beeround.de/api/comments', data).then(result => {
             return result;
           });
+        },
+
+        getCharacteristicsByUser: function (bID, uID) {
+          return $http.get('http://www.beeround.de/api/characteristics?transform=1&filter[]=beerid,eq,'+bID+'&filter[]=userid,eq,'+uID+'&satisfy=all').then(result => {
+
+            if(result.data.characteristics.length > 0){
+              return result.data.characteristics[0]
+            }
+            else {
+              return 0
+            }
+          })
+        },
+
+        postCharacteristics: function (data) {
+
+          return $http.get('http://www.beeround.de/api/characteristics?transform=1&filter[]=beerid,eq,'+data.beerid+'&filter[]=userid,eq,'+data.userid+'&satisfy=all').then(result => {
+
+            if(result.data.characteristics.length > 0){
+              console.log("Data available");
+
+              $http.put('http://www.beeround.de/api/characteristics/'+result.data.characteristics[0].characteristicsid, data).then(result => {
+                console.log("PUT: "+result);
+
+              });
+
+            }
+            else {
+              console.log("No DATA");
+              console.log(data);
+              $http.post('http://www.beeround.de/api/characteristics', data).then(result => {
+                console.log("POST: "+result.data);
+              });
+            }
+
+          });
+
         }
       }
     }

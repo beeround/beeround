@@ -649,6 +649,15 @@ angular.module('beeround.beer', [])
     $scope.$ionicUser = $ionicUser;
     $scope.form = [];
 
+
+    // INIT RATE BEER
+    $scope.characteristicsWindow = false;
+
+    $scope.sliderSueffig = {value: 50};
+    $scope.sliderMalzig = {value: 50};
+    $scope.sliderHerb = {value: 50};
+    $scope.sliderErfrischend = {value: 50};
+
     beeroundService.getRatingByUser(beerId, $ionicUser.id).then(rating => {
       $scope.currentRating = rating;
 
@@ -662,9 +671,23 @@ angular.module('beeround.beer', [])
       })
     });
 
-
     beeroundService.getComments(beerId).then(function (result) {
       $scope.comments = result.data.comments;
+    });
+
+
+
+    beeroundService.getCharacteristicsByUser(beerId, $ionicUser.id).then(result => {
+      console.log(result);
+      if(result == 0){
+        // No results
+      }
+      else {
+        $scope.sliderSueffig = {value: result.sueffig};
+        $scope.sliderMalzig = {value: result.malzig};
+        $scope.sliderHerb = {value: result.herb};
+        $scope.sliderErfrischend = {value: result.erfrischend};
+      }
     });
 
 
@@ -673,32 +696,29 @@ angular.module('beeround.beer', [])
     // Characteristics range
     $scope.changeCharacteristicsWindow =function(){
       if ($scope.characteristicsWindow){
-
         $scope.characteristicsWindow = false;
-
       }
       else {
         $scope.characteristicsWindow = true;
       }
     };
-    $scope.characteristicsWindow = false;
 
-    $scope.sliderSueffig = {value: 50};
-    $scope.sliderMalzig = {value: 50};
-    $scope.sliderHerb = {value: 50};
-    $scope.sliderErfrischend = {value: 50};
 
 
     $scope.$on("slideEnded", function() {
-      $timeout(function(){
-        /*
-        $scope.sliderSueffig.value
-        $scope.sliderMalzig.value
-        $scope.sliderHerb.value
-        $scope.sliderErfrischend.value
-        */
-      },0);
 
+        let data = {
+          userid : $ionicUser.id,
+          beerid : beerId,
+          sueffig : $scope.sliderSueffig.value,
+          malzig : $scope.sliderMalzig.value,
+          herb : $scope.sliderHerb.value,
+          erfrischend : $scope.sliderErfrischend.value,
+        };
+
+        beeroundService.postCharacteristics(data).then(function () {
+          console.log("success");
+        })
     });
 
     $scope.slider = {
@@ -715,7 +735,7 @@ angular.module('beeround.beer', [])
           {value: 50, legend:'o'},
           {value: 75},
           {value: 100, legend: '+'}
-        ]
+        ],
       }
     };
 
