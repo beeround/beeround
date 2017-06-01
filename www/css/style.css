@@ -584,7 +584,7 @@ ion-item.brewery-thumbnail.item{
     background:#C8C6C5;
 }
 
-.rz-active:after{
+.rzslider .rz-pointer.rz-active:after{
     background: #FFFFFF;
 }
 .rzslider {
