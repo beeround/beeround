@@ -1,35 +1,34 @@
 <ion-view cache-view="false" view-title="Signup">
 
-  <ion-content scroll="false">
+  <ion-content scroll="true">
     <form ng-submit="signup()">
-
       <div class="list list-inset">
+        <input type="file" fileread="uploadme"/>
+        <img src="{{uploadme}}" width="50" height="auto" alt="Vorschau">
         <label class="item item-input item-floating-label">
           <span class="input-label">Benutzername</span>
-          <input ng-model="form.username"  name="username" type="text" placeholder="Benutzername">
+          <input ng-model="form.username" name="username" type="text" placeholder="Benutzername" required>
         </label>
-
         <label class="item item-input item-floating-label">
           <span class="input-label">Email</span>
-          <input ng-model="form.email" type="email" placeholder="Email">
+          <input ng-model="form.email" type="email" placeholder="Email" required>
         </label>
         <label class="item item-input item-floating-label control-label">
           <span class="input-label">Passwort</span>
           <input type="password" name="password" ng-model="form.password" placeholder="Passwort"
                  password-strength="form.password"/>
-          <div class="progressbar" ng-style="progressbar" ng-show="form.password" data-ng-show='passwordForm.password.$valid && passwordForm.password.$dirty'
+          <div class="progressbar" ng-style="progressbar" ng-show="form.password"
+               data-ng-show='passwordForm.password.$valid && passwordForm.password.$dirty'
                data-ng-class="strength"><p>{{strength}}</p></div>
         </label>
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Profilbild</span>
-          <input ng-model="form.image" type="file" placeholder="hase.jpg" >
-        </label>
-
         <ion-list>
           <ion-checkbox ng-model="checked"
-                        ng-required="true" ng-value="'Y'">Ja, ich bestätige, <br>dass ich mindestens 16 Jahre alt bin.</ion-checkbox>
+                        ng-required="true" ng-value="'Y'">Ja, ich bestätige, <br>dass ich mindestens 16 Jahre alt bin.
+          </ion-checkbox>
         </ion-list>
-        <button type="submit" id="register" ng-disabled="!checked" class="button button-stable" >senden</button>
+        <button type="submit" ng-click="uploadImage(uploadme)" id="register" ng-disabled="!checked"
+                class="button button-stable">senden
+        </button>
         <!--<h2>{{formError}}</h2> -->
       </div>
     </form>
