@@ -17,9 +17,24 @@
         </div>
       </ion-slide-page>
     </ion-slides>
+    <ion-item class="brewery-contact">
+      <ion-item class="brewery-thumbnail">
+        <h1>{{event.name}}</h1>
+        <p>{{event.price}} €</p>
+        <p>{{event.description}}</p>
+        <p>Beginn: {{event.start | date : "dd.MM.yyyy"}} um {{event.start | date : "HH.mm"}} Uhr</p>
+        <p>Ende: {{event.end | date : "dd.MM.yyyy"}} um {{event.end | date : "HH.mm"}} Uhr</p>
+        <br>
+        <p>Email: {{event.email}}</p>
+        <p>Telefon: {{event.phone}}</p>
+        <br>
+        <p>Adresse:</p>
+        <a ng-href="{{event.website}}">Website</a><br>
+        <a ng-href="{{event.facebook}}">Facebook</a>
+        <p>{{event.street}} {{event.street_number}}<br>{{event.postal_code}} {{event.city}}</p>
 
-    <ion-item>
-      <pre>{{event}}</pre>
+        <button class="button-block" ng-click="createEvent()">zu kalender hinzufügen</button>
+      </ion-item>
     </ion-item>
 
   </ion-content>
