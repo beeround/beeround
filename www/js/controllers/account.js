@@ -145,20 +145,78 @@ angular.module('beeround.account', [])
     }
   })
 
-  .controller('profilCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $stateParams) {
+  .controller('profilCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $state, $stateParams) {
     $scope.userdata = $ionicUser.details;
 
+    console.log($ionicUser);
+    $scope.editform = [];
+    $scope.editProfile = function () {
+      if ($scope.editform.username !== undefined) {
+        if ($scope.editform.username.length !== 0) {
+          $ionicUser.details.username = $scope.editform.username;
+          $ionicUser.save();
+          console.log('Username geändert!');
+        }
+      }
+      if ($scope.editform.email !== undefined) {
+        if ($scope.editform.email.length !== 0) {
+          $ionicUser.details.email = $scope.editform.email;
+          $ionicUser.save();
+          console.log('Email geändert!');
+        }
+      }
+      if ($scope.editform.password !== undefined) {
+        if ($scope.editform.password.length !== 0) {
+          $ionicUser.details.password = $scope.editform.password;
+          $ionicUser.save();
+          console.log('Passwort geändert!');
+        }
+      }
+      /*if ($scope.editform.image !== undefined){
+       if($scope.editform.image.length !== 0 ) {
+       $ionicUser.details.username = $scope.editform.image;
+       $ionicUser.save();
+       console.log('Image geändert');
+       }}*/
+
+
+    };
+
+    //Password Reset Url
+    $scope.passwordResetUrl = $ionicAuth.passwordResetUrl;
 
     $scope.logout = function () {
       $ionicAuth.logout();
       alert("logged out");
       $state.go('tabs.login')
-
     };
 
 
+// Handle PopOver
+    $ionicPopover.fromTemplateUrl('filter.html', {
+      scope: $scope
+    }).then(function (popover) {
+      $scope.popover = popover;
+    });
 
-  });
+
+    $scope.openPopover = function () {
+      $scope.popover.show();
+      $scope.appBackground = document.getElementsByClassName('appBackground');
+      console.log($scope.appBackground[0]);
+      $scope.appBackground[0].setAttribute('class', 'blur');
+    };
+
+
+    $scope.closePopover = function () {
+      $scope.popover.hide();
+      $scope.appBackground = document.getElementsByClassName('blur');
+      $scope.appBackground[0].setAttribute('class', 'view appBackground');
+    };
+
+
+  })
+;
 
 
 
