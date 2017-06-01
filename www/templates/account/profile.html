@@ -1,8 +1,37 @@
 <ion-view hide-back-button="true"  view-title="Profil">
   <ion-content>
-    <h1>Profil</h1>
-    <p> {{userdata}}</p>
+    <ion-item>
 
-    <button ng-click="logout()" class="button button-assertive">Logout</button>
+          <img class="profilepicture" ng-src="{{userdata.image || 'img/no-image-placeholder.png'}}">
+      <h1>{{userdata.username}}</h1>
+
+              <ion-list>
+
+               <ion-item class="small-thumbnail-left divider">
+                 <i class="icon beeround-favorite"></i>
+                      <p>Meine Biere<i class="icon ion-chevron-right"></i></p>
+               </ion-item>
+
+               <ion-item class="small-thumbnail-left divider">
+                 <i class="icon beeround-beerstory"></i>
+
+                 <p>Bierstory<i class="icon ion-chevron-right"></i></p>
+               </ion-item>
+
+                <ion-item class="small-thumbnail-left divider">
+                  <i class="icon beeround-satistic"></i>
+
+                  <p>Statistik<i class="icon ion-chevron-right"></i></p>
+                </ion-item>
+
+            </ion-list>
+
+    </ion-item>
+
+    <ion-item class="bottom">
+      <button ng-click="logout()" class="button-block invert-button">Logout</button>
+    </ion-item>
+
+
   </ion-content>
 </ion-view>

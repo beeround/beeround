@@ -158,7 +158,7 @@ div.overlay{
     margin: 0px;
     width: 100%;
     height: 100%;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.7);
     position: relative;
 
 }
@@ -439,14 +439,29 @@ i.icon.ion-navicon-round{
     top: 50%;
 }
 
+
 .beeround-icon{
     width: 14px;
 }
 
 .beeround-count{
    content: url('../img/beeround-count.svg');
-   font-size: 14px;
  }
+
+.beeround-favorite{
+    content: url('../img/beeround_favorite.svg');
+    width: 40px;
+}
+
+.beeround-satistic{
+    content: url('../img/beeround_statistic.svg');
+    width: 40px;
+}
+
+.beeround-beerstory{
+    content: url('../img/beeround_beerstory.svg');
+    width: 40px;
+}
 
 .restaurant{
   content: url('../img/beeround_food.svg');
@@ -471,12 +486,19 @@ i.small-icon.ion-ios-pint{
 
 /*GENERAL STUFF*/
 
+.bottom{
+    position: absolute;
+    bottom: 0;
+    width: 100%
+}
+
+
 .blur{
-    filter: blur(5px);
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    -o-filter: blur(5px);
-    -ms-filter: blur(5px);
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
 }
 
 
@@ -549,11 +571,26 @@ ion-item.brewery-thumbnail.item{
     font-weight: bold;
 }
 
-.rateBeer{
-    position: absolute;
-    bottom: 0;
-    width: 100%
+.characteristics.row.col-25{
+    padding-top: 10px;
 }
+.rzslider .rz-pointer {
+    background-color:#F1A435;
+}
+.rzslider .rz-pointer:after {
+    background-color:#773D17;
+}
+.rzslider .rz-tick {
+    background:#C8C6C5;
+}
+
+.rz-active:after{
+    background: #FFFFFF;
+}
+.rzslider {
+    margin: 15px 0 35px 0;
+}
+
 
 /*REGISTER*/
 
@@ -587,3 +624,33 @@ ion-content.login label.item-input{
     background: #773D17;
     color: #FFFFFF;
 }
+
+
+/*PROFIL*/
+
+.profilepicture{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    min-width: 100px;
+    padding-top: 20px;
+
+}
+
+.small-thumbnail-left{
+    padding: 10px;
+}
+
+.small-thumbnail-left > p {
+    transform: translate(0px, 15px);
+}
+ion-item.small-thumbnail-left > i{
+    float: left;
+}
+
+ion-item.small-thumbnail-left > p i.icon.ion-chevron-right:before  {
+    transform: translate(0px, 0px);
+}
+
+
+
