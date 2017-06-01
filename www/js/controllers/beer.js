@@ -620,7 +620,7 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerDetailsCtrl', function ($cordovaFileTransfer, $ionicActionSheet, $cordovaCamera,$ionicPopup ,$location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout) {
+  .controller('beerDetailsCtrl', function ($cordovaImagePicker,$ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera,$ionicPopup ,$location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout) {
     let beerId = $stateParams.beerId;
     $scope.image = null;
 
@@ -752,6 +752,19 @@ angular.module('beeround.beer', [])
 
 
     // IMAGE
+
+    //MODAL Image Preview
+    $ionicModal.fromTemplateUrl('image-preview.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+    };
+
     // Triggered on a button click, or some other target
     $scope.showOptions = function() {
 
@@ -761,8 +774,8 @@ angular.module('beeround.beer', [])
           { text: 'Kamera' },
           { text: 'Galerie' }
         ],
-        titleText: 'Bild wählen',
-        cancelText: 'Cancel',
+        titleText: 'Bitte wählen',
+        cancelText: 'abbrechen',
         cancel: function() {
           // add cancel code..
         },
@@ -770,12 +783,35 @@ angular.module('beeround.beer', [])
           if(index == 0){
             $scope.startCamera()
           }
+          if( index == 1){
+            $scope.showLibrary();
+          }
           return true;
         }
       });
 
     };
 
+
+    $scope.showLibrary = function () {
+      let options = {
+        maximumImagesCount: 1,
+        width: 800,
+        quality: 80
+      };
+
+      $cordovaImagePicker.getPictures(options)
+        .then(function (results) {
+
+          $scope.modal.show();
+
+          $timeout(function () {
+            $scope.srcImage = results[0];
+          },500);
+        }, function(error) {
+          alert(error)
+        });
+    };
 
     $scope.startCamera = function () {
       var options = {
@@ -787,6 +823,8 @@ angular.module('beeround.beer', [])
       };
 
       $cordovaCamera.getPicture(options).then(function(imageURI) {
+        $scope.modal.show();
+
         $timeout(function () {
           $scope.srcImage = imageURI;
         },500);
@@ -798,13 +836,6 @@ angular.module('beeround.beer', [])
       });
     };
 
-    $scope.pathForImage = function(image) {
-      if (image === null) {
-        return '';
-      } else {
-        return cordova.file.dataDirectory + image;
-      }
-    };
 
     $scope.uploadImage = function() {
       // Destination URL
@@ -824,8 +855,8 @@ angular.module('beeround.beer', [])
       };
 
       $cordovaFileTransfer.upload(url, targetPath, options).then(function(result) {
-        alert(result.response);
-        $scope.resultdata = result.response;
+        $scope.modal.hide();
+
       }, function () {
         alert("err")
       });

@@ -78,12 +78,6 @@
     </div>
 
 
-  <div class="divider">
-    <button ng-click="uploadImage()">UPLOAD </button>
-    <img ng-src="{{srcImage}}" id="srcImage" width="250 " height="250" style="display: block; margin: 0 auto;"/><br/>
-    <p>{{resultdata}}</p>
-
-  </div>
   <div class="comment divider">
     <h3>Kommentar</h3>
         <textarea name="comments" ng-model="form.comment" id="comment" cols="30" rows="10"></textarea>
@@ -94,6 +88,23 @@
     <ion-item class="bottom">
       <button ng-click="sendComment()" class="button-block invert-button">bier bewerten</button>
     </ion-item>
+
+
+    <script id="image-preview.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header">
+          <h1 class="title">Bildupload</h1>
+          <button class="button button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content>
+          <img ng-src="{{srcImage}}" id="srcImage" width="250" style="display: block; margin: 40px auto;"/><br/>
+          <hr>
+          <button ng-click="uploadImage()">Bild hochladen </button>
+          <button ng-click="showOptions()">Wiederholen</button>
+
+        </ion-content>
+      </ion-modal-view>
+    </script>
   </ion-content>
 
 </ion-view>
