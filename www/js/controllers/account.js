@@ -16,7 +16,6 @@ angular.module('beeround.account', [])
             };
             reader.readAsDataURL(changeEvent.target.files[0]);
             console.log(changeEvent.target.files[0]);
-            scope.profilImage = changeEvent.target.files[0];
           });
         }
       }
@@ -28,6 +27,7 @@ angular.module('beeround.account', [])
     $scope.uploadme = undefined;
 
     $scope.uploadImage = function(uploadme) {
+
       let fd = new FormData();
       let imgBlob = dataURItoBlob(uploadme);
       fd.append('file', imgBlob);

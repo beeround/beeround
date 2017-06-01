@@ -82,6 +82,13 @@ angular.module('beeround.service', [])
           })
         },
 
+        getEventDetail: function (eventid) {
+          return $http.get('http://www.beeround.de/api/events?transform=1&filter=events.id,eq,'+eventid).then(result => {
+            console.log(result.data['events'][0]);
+            return result.data['events'][0];
+          })
+        },
+
         getRatingByUser: function (bID, uID) {
           return $http.get('http://www.beeround.de/api/ratings?transform=1&filter[]=beerid,eq,'+bID+'&filter[]=userid,eq,'+uID+'&satisfy=all').then(result => {
 
