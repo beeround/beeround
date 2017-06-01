@@ -136,7 +136,7 @@
                 <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
                   <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
                   <h2>{{beer.name}}</h2>
-                  <p>{{location.brewery.name}}</p>
+                  <p>{{beer.brewery}}</p>
                   <i class="icon ion-chevron-right"></i>
                   <p ng-show="beer.style.abvMin" class="promille-number">
                     {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>

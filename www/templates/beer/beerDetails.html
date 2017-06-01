@@ -80,11 +80,11 @@
 
     <ion-item class="rateBeer">
       <div ng-show="$ionicUser.id">
-        <button ng-href="#/tab/details/beer/{{beer.id}}/rate" class="text-center button-block invert-button">beerate</button>
+        <a ng-href="#/tab/details/beer/{{beer.id}}/rate" class="text-center button-block invert-button">beerate</a>
       </div>
 
       <div ng-show="!$ionicUser.id">
-        <button ng-href="#/tab/account/login" class="text-center button-block invert-button">beer in to rate</button>
+        <a ng-href="#/tab/account/login" class="text-center button-block invert-button">beer in to rate</a>
       </div>
     </ion-item>
   </ion-content>

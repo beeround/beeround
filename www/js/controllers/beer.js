@@ -135,7 +135,6 @@ angular.module('beeround.beer', [])
       $ionicScrollDelegate.scrollTop();
 
       if (propertyName === 'name') {
-        $scope.allBeers = [];
         makeBeerList();
       }
       else if (propertyName === 'distance') {
@@ -148,7 +147,6 @@ angular.module('beeround.beer', [])
       }
 
       else if (propertyName === 'rating') {
-        $scope.allBeers = [];
         makeBeerList();
       }
     };
@@ -204,9 +202,11 @@ angular.module('beeround.beer', [])
       if ($scope.activeSorting == "name" && $scope.breweries) {
         $scope.allBeers = [];
 
-        $scope.breweries.map(function (brewery) {
+
+        $scope.breweries.map(function (brewery, index) {
           if (brewery.beers) {
             brewery.beers.map(function (beer) {
+              beer.brewery = brewery.brewery.name;
               $scope.allBeers.push(beer);
             });
           }
@@ -220,13 +220,15 @@ angular.module('beeround.beer', [])
       }
 
       if ($scope.activeSorting == "rating" && $scope.breweries) {
+        $scope.allBeers = [];
 
         //TODO SORT RATING BUGFIXING
-        $scope.allBeers = [];
 
         $scope.breweries.map(function (brewery) {
           if (brewery.beers) {
             brewery.beers.map(function (beer) {
+              beer.brewery = brewery.brewery.name;
+
               $scope.allBeers.push(beer);
 
             });
@@ -276,8 +278,8 @@ angular.module('beeround.beer', [])
 
             // Update beer array, if beer screen is shown
             if($rootScope.currentListView == "Biere"){
-              beeroundService.getBeerRatingByBrewerielist($scope.breweries).then(result => {
-                $scope.breweries = result;
+              beeroundService.getBeerRatingByBrewerielist(result).then(newList => {
+                $scope.breweries = newList;
                 makeBeerList();
               })
             }
