@@ -1,23 +1,22 @@
 <ion-view hide-back-button="true" view-title="Profil Bearbeiten">
   <ion-nav-buttons side="right">
-    <a class="button button-clear ion-ios-trash" ng-click="openConfirmDeleteModal(userid, $event)">
+    <a class="button button-clear ion-ios-trash" ng-click="deleteUser()">
     </a>
   </ion-nav-buttons>
   <ion-content>
-
-
     <form ng-submit="editProfile()">
-      <label class="item-input">
-        <input ng-model="editform.username" name="username" type="text" ng-value="userdata.username">
-      </label>
-      <label class="item-input">
-        <input ng-model="editform.email" name="email" ng-value="userdata.email" type="email">
-      </label>
-      <label class="item-input">
-        <input ng-model="editform.password" name="password" type="password" placeholder="Password ändern">
-      </label>
-
-      <button type="submit" class="button border-button">Daten ändern</button>
+      <div class="list list-inset">
+        <label class="item-input">
+          <input ng-model="editform.username" name="username" type="text" placeholder="Neuer Benutzername eingeben">
+        </label>
+        <label class="item-input">
+          <input ng-model="editform.email" name="email" placeholder="Neue Email eingeben" type="email">
+        </label>
+        <label class="item-input">
+          <input ng-model="editform.password" name="password" type="password" placeholder="Password ändern">
+        </label>
+        <button type="submit" class="button border-button">Daten ändern</button>
+      </div>
     </form>
     <a class="button" ng-href="#/tab/account/profile">Profil</a>
   </ion-content>

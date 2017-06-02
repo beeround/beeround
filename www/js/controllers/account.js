@@ -70,7 +70,7 @@ angular.module('beeround.account', [])
       console.log(details);
       $ionicAuth.signup(details).then(function () {
         alert("Sign Up");
-        $state.go("tabs.login");
+        $state.go("tabs.profile");
 
         // `$ionicUser` is now registered
       }, function (err) {
@@ -145,10 +145,10 @@ angular.module('beeround.account', [])
     }
   })
 
-  .controller('profilCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $state, $stateParams) {
+  .controller('profilCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams) {
     $scope.userdata = $ionicUser.details;
 
-    console.log($ionicUser);
+
     $scope.editform = [];
     $scope.editProfile = function () {
       if ($scope.editform.username !== undefined) {
@@ -178,12 +178,35 @@ angular.module('beeround.account', [])
        $ionicUser.save();
        console.log('Image geändert');
        }}*/
+    };
 
+
+    $scope.deleteUser = function() {
+
+      let confirmPopup = $ionicPopup.confirm({
+        title: 'Konto löschen',
+        template: 'Bist du dir sicher, dass du dein Konto löschen willst?',
+        okText: 'Sicher',
+        cancelText: 'Lieber nicht'
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+          console.log($ionicUser.id);
+          $ionicUser.delete();
+          alert("Dein Konto mit dem Namen "+ $scope.userdata.username + " wurde gelöscht." );
+          $state.go('tabs.breweryList')
+        } else {
+
+        }
+      });
 
     };
 
+
     //Password Reset Url
     $scope.passwordResetUrl = $ionicAuth.passwordResetUrl;
+    console.log($scope.passwordResetUrl);
 
     $scope.logout = function () {
       $ionicAuth.logout();
