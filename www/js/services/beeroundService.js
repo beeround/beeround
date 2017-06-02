@@ -174,6 +174,12 @@ angular.module('beeround.service', [])
 
           });
 
+        },
+
+        postBeerImage: function (data) {
+          return $http.post('http://www.beeround.de/api/comments', data).then(result => {
+            return result;
+          });
         }
       }
     }

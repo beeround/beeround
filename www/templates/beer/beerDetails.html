@@ -18,13 +18,13 @@
             </div>
           </ion-slide-page>
         </ion-slides>
-
     <ion-item class="card">
       <div class="row">
         <div class="col-66">
           <p>
             Deine Bewertung
           </p>
+
         </div>
         <div class="col rating">
           <i class="small-icon ion-ios-pint" ng-class="{'active': currentRating > 0}"></i>
@@ -94,7 +94,12 @@
           <img class="small-img" ng-src="{{comment.userimage || 'img/no-image-placeholder.png'}}">
           <p>{{comment.commentcreated | date : "dd.MM.yyyy - HH:mm" : '-0000'}}</p>
           <h4>{{comment.username}}</h4>
-          <p>{{comment.comment}}</p>
+          <div ng-show="comment.image">
+            <img ng-src="{{comment.image}}" alt="" width="250">
+          </div>
+          <div ng-show="!comment.image">
+            <p>{{comment.comment}}</p>
+          </div>
         </ion-item>
 
       </ion-list>

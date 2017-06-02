@@ -731,6 +731,7 @@ angular.module('beeround.beer', [])
         beerid : beerId,
         userid : $ionicUser.id,
         username: $ionicUser.details.username,
+        userimage: $ionicUser.details.image,
         comment : $scope.form.comment
       };
 
@@ -855,7 +856,19 @@ angular.module('beeround.beer', [])
       };
 
       $cordovaFileTransfer.upload(url, targetPath, options).then(function(result) {
-        $scope.modal.hide();
+
+        let data = {
+          beerid : beerId,
+          userid : $ionicUser.id,
+          username: $ionicUser.details.username,
+          userimage: $ionicUser.details.image,
+          image : "http://beeround.domi-speh.de/uploads/"+options.fileName
+        };
+        beeroundService.postBeerImage(data).then(function () {
+          //SUCCESS
+          $scope.modal.hide();
+
+        });
 
       }, function () {
         alert("err")
