@@ -20,6 +20,10 @@ body{
     text-align: left;
 }
 
+.yellow{
+    color: #F1A435;
+}
+
 /*HEADER*/
 
 ion-header-bar.bar.bar-stable{
@@ -451,6 +455,14 @@ a.button.button-clear.ion-edit:before{
     padding: 2px;
 }
 
+.ion-android-cancel:before{
+    position: absolute;
+    z-index: 3;
+    top: 6px;
+    left: 367px;
+
+}
+
 .beeround-icon{
     width: 14px;
 }
@@ -552,7 +564,9 @@ ion-slides{
 }
 
 
-
+ion-item >ion-item.item{
+    padding-left: 0px;
+}
 
 /*BREWERY*/
 ion-item.brewery-thumbnail.item{
@@ -582,6 +596,19 @@ ion-item.brewery-thumbnail.item{
     font-weight: bold;
 }
 
+.characteristicsCount{
+    color: #F1A435;
+    font-size: 12px;
+    float: right;
+}
+
+.characteristicBar{
+    background: #773D17;
+    height:10px;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
 .characteristics.row.col-25{
     padding-top: 10px;
 }
@@ -600,6 +627,18 @@ ion-item.brewery-thumbnail.item{
 }
 .rzslider {
     margin: 15px 0 35px 0;
+}
+
+.box{
+    position: absolute;
+    z-index: 2;
+    top:10px;
+    left:142px;
+}
+
+.commentDate{
+    float: right;
+    font-size: 11px !important;
 }
 
 

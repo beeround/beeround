@@ -621,6 +621,9 @@ angular.module('beeround.beer', [])
   })
 
   .controller('beerDetailsCtrl', function ($cordovaImagePicker,$ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera,$ionicPopup ,$location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout) {
+
+
+
     let beerId = $stateParams.beerId;
     $scope.image = null;
 

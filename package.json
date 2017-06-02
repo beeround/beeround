@@ -4,6 +4,7 @@
   "description": "Find the best rated beers close to your geo location.",
   "dependencies": {
     "@ionic/cloud": "^0.16.0",
+    "angular-animate": "^1.6.4",
     "bluebird": "^3.5.0",
     "cordova-plugin-calendar": "git+https://github.com/EddyVerbruggen/Calendar-PhoneGap-Plugin.git",
     "gulp": "^3.5.6",
