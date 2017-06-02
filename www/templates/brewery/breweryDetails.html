@@ -18,8 +18,10 @@
                     <p>{{brewery.locations[0].phone}}</p>
                 </ion-item>
 
-              <div><button ng-click="activeWindow = 'beer'" ng-class="{'active':activeWindow=='beer'}">Biere</button>
-                <button ng-click="activeWindow = 'events'">Events</button></div>
+              <button ng-show="beerList.length > 0" ng-click="activeWindow = 'beer'" ng-class="{'active':activeWindow=='beer'}">Biere</button>
+              <button ng-show="eventList.length > 0" ng-click="activeWindow = 'events'">Events</button></div>
+
+
                 <ion-list ng-show="activeWindow == 'beer'">
                     <ion-item ng-repeat="beer in beerList">
                         <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">

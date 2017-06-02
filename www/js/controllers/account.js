@@ -70,7 +70,7 @@ angular.module('beeround.account', [])
       console.log(details);
       $ionicAuth.signup(details).then(function () {
         alert("Sign Up");
-        $state.go("tabs.profile");
+        $state.go("tabs.login");
 
         // `$ionicUser` is now registered
       }, function (err) {

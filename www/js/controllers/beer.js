@@ -799,27 +799,29 @@ angular.module('beeround.beer', [])
 
     $scope.showLibrary = function () {
       let options = {
-        maximumImagesCount: 1,
-        width: 800,
-        quality: 80
+        quality: 100,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
       };
 
-      $cordovaImagePicker.getPictures(options)
-        .then(function (results) {
+      $cordovaCamera.getPicture(options).then(function(imageURI) {
+        $scope.modal.show();
+        $timeout(function () {
+          $scope.srcImage = imageURI;
+        },500);
 
-          $scope.modal.show();
+      }, function(err) {
 
-          $timeout(function () {
-            $scope.srcImage = results[0];
-          },500);
-        }, function(error) {
-          alert(error)
-        });
+        alert(err)
+        // error
+      });
     };
 
     $scope.startCamera = function () {
-      var options = {
-        quality: 80,
+      let options = {
+        quality: 100,
         destinationType: Camera.DestinationType.FILE_URI,
         sourceType: Camera.PictureSourceType.CAMERA,
         allowEdit: true,
