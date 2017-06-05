@@ -110,7 +110,7 @@
           <ion-scroll style="height:80%">
 
             <!-- List for sorting by distance !-->
-            <ion-list ng-show="!allBeers">
+            <ion-list ng-show="activeSorting == 'distance'">
               <ion-item ng-repeat="location in breweries">
 
                 <ion-item ng-repeat="beer in location.beers">
@@ -135,10 +135,10 @@
             </ion-list>
 
 
-            <!-- List for sorting by alphabet and rating !-->
-            <ion-list ng-show="allBeers">
-              <ion-item ng-repeat="beer in allBeers">
-                <ion-item>
+
+            <ion-list>
+              <ion-item ng-repeat="beer in allBeers | orderObjectBy:activeSorting: (activeSorting == 'rating')" >
+              <ion-item>
                 <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
                   <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
                   <h2>{{beer.name}}</h2>
@@ -157,9 +157,10 @@
                   </div>
 
                 </a>
-                </ion-item>
+              </ion-item>
               </ion-item>
             </ion-list>
+
           </ion-scroll>
         </ion-slide>
 

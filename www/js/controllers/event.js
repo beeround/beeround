@@ -13,13 +13,13 @@ angular.module('beeround.event', [])
 
 
     $scope.createEvent = function () {
-      console.log(new Date(($filter('date')($scope.event.start, 'medium', '-0000'))));
+      console.log(new Date(($filter('date')($scope.event.start, 'medium', '+0200'))));
         $cordovaCalendar.createEvent({
         title: $scope.event.name,
         location: $scope.event.city,
         notes: $scope.event.description,
-        startDate: new Date(($filter('date')($scope.event.start, 'medium', '-0000'))),
-        endDate: new Date(($filter('date')($scope.event.end, 'medium', '-0000')))
+        startDate: new Date(($filter('date')($scope.event.start, 'medium', '+0200'))),
+        endDate: new Date(($filter('date')($scope.event.end, 'medium', '+0200')))
       }).then(function (result) {
         alert("PROST!")
       }, function (err) {

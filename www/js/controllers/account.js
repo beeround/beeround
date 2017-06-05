@@ -22,52 +22,122 @@ angular.module('beeround.account', [])
     }
   ])
 
-  .controller('signUpCtrl', function ($scope, $http, $ionicAuth, $state, $stateParams, $ionicUser, $ionicPopup) {
-
-
-
-    $scope.uploadme = undefined;
-
-    $scope.uploadImage = function(uploadme) {
-
-      let fd = new FormData();
-      let imgBlob = dataURItoBlob(uploadme);
-      fd.append('file', imgBlob);
-
-      // $http.post('imageURL', fd, {transformRequest: angular.identity, headers: {'Content-Type': undefined
-      // }})
-      //   .success(function(response) {
-      //     console.log('success', response);
-      //   })
-      //   .error(function(response) {
-      //     console.log('error', response);
-      //   });
-    };
-
-
-    //you need this function to convert the dataURI
-    function dataURItoBlob(dataURI) {
-      let binary = atob(dataURI.split(',')[1]);
-      let mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-      let array = [];
-      for (var i = 0; i < binary.length; i++) {
-        array.push(binary.charCodeAt(i));
-      }
-      return new Blob([new Uint8Array(array)], {
-        type: mimeString
-      });
-    }
+  .controller('signUpCtrl', function ($timeout, $cordovaFileTransfer, beeroundService, $cordovaCamera, $scope, $http, $ionicAuth, $state, $stateParams, $ionicUser, $ionicPopup, $ionicActionSheet) {
 
 
     $scope.form = [];
+    // Triggered on a button click, or some other target
+    $scope.showOptions = function() {
+
+      // Show the action sheet
+      $ionicActionSheet.show({
+        buttons: [
+          { text: 'Kamera' },
+          { text: 'Galerie' }
+        ],
+        titleText: 'Bitte wählen',
+        cancelText: 'abbrechen',
+        cancel: function() {
+          // add cancel code..
+        },
+        buttonClicked: function(index) {
+          if(index == 0){
+            $scope.startCamera()
+          }
+          if( index == 1){
+            $scope.showLibrary();
+          }
+          return true;
+        }
+      });
+
+    };
+
+
+    $scope.showLibrary = function () {
+      let options = {
+        quality: 100,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+      };
+
+      $cordovaCamera.getPicture(options).then(function(imageURI) {
+
+        $timeout(function () {
+          $scope.srcImage = imageURI;
+          uploadImage();
+
+        },500);
+
+      }, function(err) {
+
+        alert(err)
+        // error
+      });
+    };
+
+    $scope.startCamera = function () {
+      let options = {
+        quality: 100,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+      };
+
+      $cordovaCamera.getPicture(options).then(function(imageURI) {
+        alert(imageURI);
+
+        $timeout(function () {
+          $scope.srcImage = imageURI;
+          uploadImage();
+
+        },500);
+
+      }, function(err) {
+
+        alert(err)
+        // error
+      });
+    };
+
+    function uploadImage() {
+      // Destination URL
+      var url = "http://beeround.domi-speh.de/upload.php";
+
+      // File for Upload
+      var targetPath = $scope.srcImage;
+
+
+
+      var options = {
+        fileKey: "file",
+        fileName: "profile"+new Date().getTime(),
+        chunkedMode: false,
+        mimeType: "multipart/form-data",
+        params : {'fileName': "profile"+new Date().getTime()}
+      };
+
+      $cordovaFileTransfer.upload(url, targetPath, options).then(function(result) {
+
+        $scope.image = "http://beeround.domi-speh.de/uploads/"+options.fileName;
+
+
+      }, function () {
+        alert("err")
+      });
+    }
     $scope.signup = function () {
+
       let details = {
         'image': $scope.image,
         'username': $scope.form.username,
         'email': $scope.form.email,
         'password': $scope.form.password
       };
-      console.log(details);
+
       $ionicAuth.signup(details).then(function () {
         alert("Sign Up");
         $state.go("tabs.login");
@@ -120,6 +190,8 @@ angular.module('beeround.account', [])
       });
     }
 
+
+
   })
 
   .controller('loginCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $ionicPopup, $stateParams) {
@@ -156,6 +228,8 @@ angular.module('beeround.account', [])
           $ionicUser.details.username = $scope.editform.username;
           $ionicUser.save();
           console.log('Username geändert!');
+
+          $state.go("tabs.profile");
         }
       }
       if ($scope.editform.email !== undefined) {
@@ -163,6 +237,9 @@ angular.module('beeround.account', [])
           $ionicUser.details.email = $scope.editform.email;
           $ionicUser.save();
           console.log('Email geändert!');
+
+          $state.go("tabs.profile");
+
         }
       }
       if ($scope.editform.password !== undefined) {
@@ -170,6 +247,9 @@ angular.module('beeround.account', [])
           $ionicUser.details.password = $scope.editform.password;
           $ionicUser.save();
           console.log('Passwort geändert!');
+
+          $state.go("tabs.profile");
+
         }
       }
       /*if ($scope.editform.image !== undefined){
@@ -195,7 +275,8 @@ angular.module('beeround.account', [])
           console.log($ionicUser.id);
           $ionicUser.delete();
           alert("Dein Konto mit dem Namen "+ $scope.userdata.username + " wurde gelöscht." );
-          $state.go('tabs.breweryList')
+          $ionicAuth.logout();
+          $state.go('tabs.login')
         } else {
 
         }

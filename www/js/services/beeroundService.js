@@ -5,14 +5,14 @@ angular.module('beeround.service', [])
       return {
         sendBeerRating: function (data) {
 
-          return $http.get('http://www.beeround.de/api/ratings?transform=1&filter[]=beerid,eq,'+data.beerid+'&filter[]=userid,eq,'+data.userid+'&satisfy=all').then(result => {
+          return $http.get('http://www.beeround.de/api/ratings?transform=1&filter[]=beerid,eq,' + data.beerid + '&filter[]=userid,eq,' + data.userid + '&satisfy=all').then(result => {
 
             //TODO DELETE IF 0
-            if(result.data.ratings.length > 0){
+            if (result.data.ratings.length > 0) {
               console.log("Data available");
 
-              $http.put('http://www.beeround.de/api/ratings/'+result.data.ratings[0].ratingid, data).then(result => {
-                console.log("PUT: "+result);
+              $http.put('http://www.beeround.de/api/ratings/' + result.data.ratings[0].ratingid, data).then(result => {
+                console.log("PUT: " + result);
 
               });
 
@@ -21,16 +21,16 @@ angular.module('beeround.service', [])
               console.log("No DATA");
               console.log(data);
               $http.post('http://www.beeround.de/api/ratings', data).then(result => {
-                console.log("POST: "+result.data);
+                console.log("POST: " + result.data);
               });
             }
           })
         },
 
         getBeerRating: function (beerID) {
-          return $http.get('http://www.beeround.de/api/beers?transform=1&filter=beers.beerid,eq,'+beerID).then(result => {
+          return $http.get('http://www.beeround.de/api/beers?transform=1&filter=beers.beerid,eq,' + beerID).then(result => {
 
-            if(result.data.beers[0]){
+            if (result.data.beers[0]) {
               return result.data.beers[0];
             }
 
@@ -42,22 +42,26 @@ angular.module('beeround.service', [])
 
         },
 
-        getBeerRatingByBrewerielist: function(breweries){
+        getBeerRatingByBrewerielist: function (breweries) {
           return new Promise(function (resolve, reject) {
 
             breweries.map((obj, firstIndex) => {
 
-              if(obj.beers){
+              if (obj.beers) {
 
-                let beerRatingMapping = obj.beers.map((beer,secondIndex)=> {
-                  return $http.get('http://www.beeround.de/api/beers?transform=1&filter=beers.beerid,eq,'+beer.id).then(result => {
+                let beerRatingMapping = obj.beers.map((beer, secondIndex) => {
+                  return $http.get('http://www.beeround.de/api/beers?transform=1&filter=beers.beerid,eq,' + beer.id).then(result => {
 
-                    if(result.data.beers[0]){
+                    if (result.data.beers[0]) {
+
                       breweries[firstIndex].beers[secondIndex].rating = result.data.beers[0].avg_rating;
                       return beer
+
                     }
 
+
                     else {
+                      breweries[firstIndex].beers[secondIndex].rating = 0;
                       return 0
                     }
 
@@ -78,30 +82,30 @@ angular.module('beeround.service', [])
         },
 
         getBreweryEvent: function (userdata) {
-          return $http.get('http://www.beeround.de/getevents.php?longitude='+userdata.lng+'&latitude='+userdata.lat+'&radius='+userdata.radius).then(result => {
+          return $http.get('http://www.beeround.de/getevents.php?longitude=' + userdata.lng + '&latitude=' + userdata.lat + '&radius=' + userdata.radius).then(result => {
             return result.data;
           })
         },
 
         getEventDetail: function (eventid) {
-          return $http.get('http://www.beeround.de/api/events?transform=1&filter=events.id,eq,'+eventid).then(result => {
+          return $http.get('http://www.beeround.de/api/events?transform=1&filter=events.id,eq,' + eventid).then(result => {
             console.log(result.data['events'][0]);
             return result.data['events'][0];
           })
         },
 
         getEventByBrewery: function (breweryId) {
-          return $http.get('http://www.beeround.de/api/events?transform=1&filter=breweryid,eq,'+breweryId).then(result => {
+          return $http.get('http://www.beeround.de/api/events?transform=1&filter=breweryid,eq,' + breweryId).then(result => {
             console.log(result.data['events']);
             return result.data['events'];
           })
         },
 
         getRatingByUser: function (bID, uID) {
-          return $http.get('http://www.beeround.de/api/ratings?transform=1&filter[]=beerid,eq,'+bID+'&filter[]=userid,eq,'+uID+'&satisfy=all').then(result => {
+          return $http.get('http://www.beeround.de/api/ratings?transform=1&filter[]=beerid,eq,' + bID + '&filter[]=userid,eq,' + uID + '&satisfy=all').then(result => {
 
-            if(result.data.ratings.length > 0){
-             return result.data.ratings[0].rating
+            if (result.data.ratings.length > 0) {
+              return result.data.ratings[0].rating
 
             }
             else {
@@ -113,7 +117,7 @@ angular.module('beeround.service', [])
         postBeer: function (beer) {
 
           let data = {
-            beerid : beer.id,
+            beerid: beer.id,
             beername: beer.nameDisplay,
             breweryid: 1
             //TODO REMOVE breweryid in DB
@@ -121,28 +125,28 @@ angular.module('beeround.service', [])
           };
 
           return $http.post('http://www.beeround.de/api/beers?transform=1', data).then(result => {
-            console.log("POST: "+result.data);
+            console.log("POST: " + result.data);
             return result.data;
           });
 
         },
 
-        getComments : function (bID) {
-            return $http.get('http://www.beeround.de/api/comments?transform=1&order=commentcreated,DESC&filter[]=beerid,eq,'+bID).then(result => {
-              return result;
-            });
+        getComments: function (bID) {
+          return $http.get('http://www.beeround.de/api/comments?transform=1&order=commentcreated,DESC&filter[]=beerid,eq,' + bID).then(result => {
+            return result;
+          });
         },
 
-        postComment : function (data) {
+        postComment: function (data) {
           return $http.post('http://www.beeround.de/api/comments', data).then(result => {
             return result;
           });
         },
 
         getCharacteristicsByUser: function (bID, uID) {
-          return $http.get('http://www.beeround.de/api/characteristics?transform=1&filter[]=beerid,eq,'+bID+'&filter[]=userid,eq,'+uID+'&satisfy=all').then(result => {
+          return $http.get('http://www.beeround.de/api/characteristics?transform=1&filter[]=beerid,eq,' + bID + '&filter[]=userid,eq,' + uID + '&satisfy=all').then(result => {
 
-            if(result.data.characteristics.length > 0){
+            if (result.data.characteristics.length > 0) {
               return result.data.characteristics[0]
             }
             else {
@@ -153,13 +157,13 @@ angular.module('beeround.service', [])
 
         postCharacteristics: function (data) {
 
-          return $http.get('http://www.beeround.de/api/characteristics?transform=1&filter[]=beerid,eq,'+data.beerid+'&filter[]=userid,eq,'+data.userid+'&satisfy=all').then(result => {
+          return $http.get('http://www.beeround.de/api/characteristics?transform=1&filter[]=beerid,eq,' + data.beerid + '&filter[]=userid,eq,' + data.userid + '&satisfy=all').then(result => {
 
-            if(result.data.characteristics.length > 0){
+            if (result.data.characteristics.length > 0) {
               console.log("Data available");
 
-              $http.put('http://www.beeround.de/api/characteristics/'+result.data.characteristics[0].characteristicsid, data).then(result => {
-                console.log("PUT: "+result);
+              $http.put('http://www.beeround.de/api/characteristics/' + result.data.characteristics[0].characteristicsid, data).then(result => {
+                console.log("PUT: " + result);
 
               });
 
@@ -168,7 +172,7 @@ angular.module('beeround.service', [])
               console.log("No DATA");
               console.log(data);
               $http.post('http://www.beeround.de/api/characteristics', data).then(result => {
-                console.log("POST: "+result.data);
+                console.log("POST: " + result.data);
               });
             }
 

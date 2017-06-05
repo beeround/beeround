@@ -1,5 +1,6 @@
 angular.module('beeround.beer', [])
 
+
   .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, beeroundService, $http, $cordovaGeolocation, $cordovaCalendar, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
 
     // REFRESH Breweries on change view
@@ -12,39 +13,30 @@ angular.module('beeround.beer', [])
         }
       });
 
-    // Handle PopOver
+    // Handle PopOver Filter
     $ionicPopover.fromTemplateUrl('filter.html', {
       scope: $scope
     }).then(function (popover) {
       $scope.popover = popover;
     });
-
-
-
-
-      $scope.openPopover = function () {
+    $scope.openPopover = function () {
       $scope.popover.show();
-          $scope.appBackground = document.getElementsByClassName('appBackground');
-          console.log($scope.appBackground[0]);
-        $scope.appBackground[0].setAttribute('class', 'blur');
+      $scope.appBackground = document.getElementsByClassName('appBackground');
+      $scope.appBackground[0].setAttribute('class', 'blur');
       };
-
-
-
-      $scope.closePopover = function () {
+    $scope.closePopover = function () {
       $scope.popover.hide();
           $scope.appBackground = document.getElementsByClassName('blur');
           $scope.appBackground[0].setAttribute('class', 'view appBackground');
       };
 
+
+    // TABS
     $scope.tabs = [
       {"text": "Brauereien"},
       {"text": "Biere"},
       {"text": "Events"},
     ];
-
-   // $scope.currentListView = $scope.tabs[0].text;
-
 
     $scope.place = undefined;
 
@@ -63,7 +55,6 @@ angular.module('beeround.beer', [])
 
     // Start sorting function
     $scope.activeSorting = "distance";
-
     $scope.filterLocationType = "allLocationTypes";
 
 
@@ -94,6 +85,7 @@ angular.module('beeround.beer', [])
       if (data.index == 1) {
         beeroundService.getBeerRatingByBrewerielist($scope.breweries).then(result => {
           $scope.breweries = result;
+          console.log(result);
         })
       }
       if (data.index == 2) {
@@ -127,7 +119,7 @@ angular.module('beeround.beer', [])
       }
     };
 
-    // Sort Breweries
+    // Sort Beers
     $scope.sortBeers = function (propertyName) {
       $scope.activeSorting = propertyName;
 
@@ -138,7 +130,7 @@ angular.module('beeround.beer', [])
         makeBeerList();
       }
       else if (propertyName === 'distance') {
-        $scope.allBeers = undefined;
+
         $scope.breweries.sort(function (a, b) {
           if (a.distance < b.distance) return -1;
           if (a.distance > b.distance) return 1;
@@ -198,53 +190,15 @@ angular.module('beeround.beer', [])
 
     // Init beer for name sorting
     function makeBeerList() {
-
-      if ($scope.activeSorting == "name" && $scope.breweries) {
-        $scope.allBeers = [];
-
-
-        $scope.breweries.map(function (brewery, index) {
-          if (brewery.beers) {
-            brewery.beers.map(function (beer) {
-              beer.brewery = brewery.brewery.name;
-              $scope.allBeers.push(beer);
-            });
-          }
-        });
-
-        $scope.allBeers.sort(function (a, b) {
-          if (a.name < b.name) return -1;
-          if (a.name > b.name) return 1;
-          return 0;
-        })
-      }
-
-      if ($scope.activeSorting == "rating" && $scope.breweries) {
-        $scope.allBeers = [];
-
-        //TODO SORT RATING BUGFIXING
-
-        $scope.breweries.map(function (brewery) {
-          if (brewery.beers) {
-            brewery.beers.map(function (beer) {
-              beer.brewery = brewery.brewery.name;
-
-              $scope.allBeers.push(beer);
-
-            });
-          }
-        });
-        $timeout(function () {
-          $scope.allBeers.sort(function (a, b) {
-            if (a.rating > b.rating) return -1;
-            if (a.rating < b.rating) return 1;
-            return 0;
+      $scope.allBeers = [];
+      $scope.breweries.map(function (brewery, index) {
+        if (brewery.beers) {
+          brewery.beers.map(function (beer) {
+            beer.brewery = brewery.brewery.name;
+            $scope.allBeers.push(beer);
           });
-
-        },4000)
-
-      }
-
+        }
+      });
     }
 
     // Get breweries function
@@ -551,26 +505,6 @@ angular.module('beeround.beer', [])
 
     $scope.activeWindow = 'beer';
 
-      //FORMAT PHONE NUMBER
-      $scope.formatPhoneNumber = function(phoneNumber) {
-
-          let formattedNumber = phoneNumber;
-
-          console.log(formattedNumber);
-
-          formattedNumber = formattedNumber.replace(/\s/g, '');
-          formattedNumber = formattedNumber.replace('-', '');
-          formattedNumber = formattedNumber.replace('\(', '');
-          formattedNumber = formattedNumber.replace('\)', '');
-
-          if (formattedNumber.substr(0, 1) == "0") {
-              formattedNumber = formattedNumber.substr(1);
-          }
-
-          console.log(formattedNumber);
-
-      };
-
 
       // Get beers
     breweryDB.getBeersByBrewery(breweryId).then(result => {
@@ -597,7 +531,7 @@ angular.module('beeround.beer', [])
 
       //FORMAT PHONE NUMBER
 
-      $scope.formatNumber = function (phonenumber) {
+    $scope.formatNumber = function (phonenumber) {
 
           let formattedNumber = phonenumber;
           formattedNumber = formattedNumber.replace(/\s/g, '');
@@ -616,8 +550,22 @@ angular.module('beeround.beer', [])
               formattedNumber = formattedNumber.replace('+49', '0');
           }
             console.log(formattedNumber);
-            window.location.href="tel://"+formattedNumber;
+            window.open("tel://"+formattedNumber, '_system', 'location=yes');
+      };
+
+      // Navigate to location
+    $scope.navigateGoogleMaps = function (name, lat, lng) {
+      // TODO check device
+      if(ionic.Platform.isIOS()) {
+        window.open('http://maps.apple.com/?q='+name+'ll='+lat+','+lng, '_system', 'location=yes')
+      }
+      else {
+
+          window.open('geo:'+lat+','+lng+'?q='+name, '_system', 'location=yes')
+
+          }
     }
+
   })
 
   .controller('beerDetailsCtrl', function ($cordovaImagePicker,$ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera,$ionicPopup ,$location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout) {

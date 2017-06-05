@@ -61,7 +61,7 @@
     </ion-item>
 
     <ion-item>
-    <div ng-show="characteristicsWindow()" class="characteristics">
+    <div ng-show="beer.avgSueffig" class="characteristics">
       <div class="row">
 
         <div class="col col-25"><span>sueffig</span></div>
@@ -123,5 +123,21 @@
         <a ng-href="#/tab/account/login" class="button text-center button-block invert-button">beer in to rate</a>
       </div>
     </ion-item>
+
+    <script id="image-preview.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header">
+          <h1 class="title">Bildupload</h1>
+          <button class="button button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content>
+          <img ng-src="{{srcImage}}" id="srcImage" width="250" style="display: block; margin: 40px auto;"/><br/>
+          <hr>
+          <button ng-click="uploadImage()">Bild hochladen </button>
+          <button ng-click="showOptions()">Wiederholen</button>
+
+        </ion-content>
+      </ion-modal-view>
+    </script>
   </ion-content>
 </ion-view>

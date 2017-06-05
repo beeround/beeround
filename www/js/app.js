@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
-angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngMap', 'google.places','beeround.index', 'beeround.beer', 'beeround.account', 'beeround.event', 'breweryDB.service', 'beeround.service', 'angular.filter', 'rzModule'])
+angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngMap', 'google.places','beeround.index', 'beeround.beer', 'beeround.account', 'beeround.event', 'breweryDB.service', 'beeround.service', 'angular.filter', 'rzModule']);
 angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngMap', 'google.places','beeround.index', 'beeround.beer', 'beeround.account', 'beeround.event', 'breweryDB.service', 'beeround.service', 'angular.filter', 'rzModule'])
 .run(function($ionicPlatform, $state, $stateParams, $rootScope) {
   $ionicPlatform.ready(function() {
@@ -101,28 +101,22 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
         }
       }
     })
-    .state('tabs.login', {
-      url: '/account/login',
-      views: {
-        'tab-account': {
-          templateUrl: 'templates/account/login.html',
-          controller: 'loginCtrl',
-
-        }
-      },
-      onEnter: function($state, $ionicUser){
-
-        if($ionicUser.id) {
-          $state.go('tabs.profile')
-        }
-      }
-    })
     .state('tabs.profile', {
       url: '/account/profile',
       views: {
         'tab-account': {
           templateUrl: 'templates/account/profile.html',
           controller: 'profilCtrl'
+        },
+        onEnter: function($state, $ionicAuth, $ionicUser){
+
+          if (!$ionicUser.id) {
+
+            $state.transition.finally(() => {
+              $state.go('tabs.login')
+            });
+
+          }
         }
       }})
 
@@ -133,8 +127,38 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
                   templateUrl: 'templates/account/editProfile.html',
                   controller: 'profilCtrl'
               }
+          },
+        onEnter: function($state, $ionicAuth, $ionicUser){
+
+          if (!$ionicUser.id) {
+            $state.transition.finally(() => {
+              $state.go('tabs.login')
+            });
+
           }
+        }
       })
+
+    .state('tabs.login', {
+      url: '/account/login',
+      views: {
+        'tab-account': {
+          templateUrl: 'templates/account/login.html',
+          controller: 'loginCtrl',
+
+        }
+      },
+      onEnter: function($state, $ionicAuth, $ionicUser){
+
+        if ($ionicUser.id) {
+
+          $state.transition.finally(() => {
+            $state.go('tabs.profile')
+          });
+
+        }
+      }
+    })
 
   ;
 
@@ -151,6 +175,20 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
 
   });
 
+})
+
+.filter('orderObjectBy', function() {
+  return function(items, field, reverse) {
+    var filtered = [];
+    angular.forEach(items, function(item) {
+      filtered.push(item);
+    });
+    filtered.sort(function (a, b) {
+      return (a[field] > b[field] ? 1 : -1);
+    });
+    if(reverse) filtered.reverse();
+    return filtered;
+  };
 })
 
 .directive("passwordStrength", function(){

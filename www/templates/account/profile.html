@@ -1,4 +1,4 @@
-<ion-view hide-back-button="true"  view-title="Profil">
+<ion-view cache-view="false"  hide-back-button="true"  view-title="Profil">
     <ion-nav-buttons side="right">
     <a class="button  button-clear ion-edit" ng-href="#/tab/account/editProfile">
     </a>
@@ -6,7 +6,7 @@
   <ion-content>
     <ion-item>
 
-          <img class="profilepicture" ng-src="{{userdata.image || 'img/no-image-placeholder.png'}}">
+          <img width="150" class="profilepicture" ng-src="{{userdata.image || 'img/no-image-placeholder.png'}}">
       <h1>{{userdata.username}}</h1>
 
               <ion-list>

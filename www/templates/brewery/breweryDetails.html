@@ -5,7 +5,7 @@
             <img class="brewery-image" src="img/brauerei_thumbnail.png">
             <ion-item class="contact-button">
               <button ng-show="brewery.locations[0].phone" type="button" ng-click="formatNumber(brewery.locations[0].phone)" class="invert-button icon ion-ios-telephone"></button>
-                <a ng-href="https://www.google.com/maps/dir/?api=1&destination={{brewery.locations[0].latitude}},{{brewery.locations[0].longitude}}">
+                <a ng-click="navigateGoogleMaps(brewery.nameShortDisplay,brewery.locations[0].latitude,brewery.locations[0].longitude )">
                     <button class="invert-button icon ion-ios-location"></button>
                 </a>
             </ion-item>
