@@ -217,7 +217,7 @@ angular.module('beeround.account', [])
     }
   })
 
-  .controller('profilCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams) {
+  .controller('profilCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, $cordovaFileTransfer, beeroundService, $cordovaCamera, $ionicActionSheet) {
     $scope.userdata = $ionicUser.details;
 
 
@@ -259,6 +259,112 @@ angular.module('beeround.account', [])
        console.log('Image geändert');
        }}*/
     };
+
+    $scope.showOptions = function() {
+
+      // Show the action sheet
+      $ionicActionSheet.show({
+        buttons: [
+          { text: 'Kamera' },
+          { text: 'Galerie' }
+        ],
+        titleText: 'Bitte wählen',
+        cancelText: 'abbrechen',
+        cancel: function() {
+          // add cancel code..
+        },
+        buttonClicked: function(index) {
+          if(index == 0){
+            $scope.startCamera()
+          }
+          if( index == 1){
+            $scope.showLibrary();
+          }
+          return true;
+        }
+      });
+
+    };
+
+
+    $scope.showLibrary = function () {
+      let options = {
+        quality: 100,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+      };
+
+      $cordovaCamera.getPicture(options).then(function(imageURI) {
+
+        $timeout(function () {
+          $scope.srcImage = imageURI;
+          uploadImage();
+
+        },500);
+
+      }, function(err) {
+
+        alert(err)
+        // error
+      });
+    };
+
+    $scope.startCamera = function () {
+      let options = {
+        quality: 100,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+      };
+
+      $cordovaCamera.getPicture(options).then(function(imageURI) {
+        alert(imageURI);
+
+        $timeout(function () {
+          $scope.srcImage = imageURI;
+          uploadImage();
+
+        },500);
+
+      }, function(err) {
+
+        alert(err)
+        // error
+      });
+    };
+
+    function uploadImage() {
+      // Destination URL
+      var url = "http://beeround.domi-speh.de/upload.php";
+
+      // File for Upload
+      var targetPath = $scope.srcImage;
+
+
+
+      var options = {
+        fileKey: "file",
+        fileName: "profile"+new Date().getTime(),
+        chunkedMode: false,
+        mimeType: "multipart/form-data",
+        params : {'fileName': "profile"+new Date().getTime()}
+      };
+
+      $cordovaFileTransfer.upload(url, targetPath, options).then(function(result) {
+
+        $scope.image = "http://beeround.domi-speh.de/uploads/"+options.fileName;
+
+        $ionicUser.details.image = $scope.image;
+        $ionicUser.save();
+
+
+      }, function () {
+        alert("err")
+      });
+    }
 
 
     $scope.deleteUser = function() {

@@ -6,7 +6,10 @@
   <ion-content>
     <ion-item>
 
-          <img width="150" class="profilepicture" ng-src="{{userdata.image || 'img/no-image-placeholder.png'}}">
+          <img width="150" class="profilepicture" ng-src="{{image || userdata.image || 'img/no-image-placeholder.png'}}">
+      <div class="add_image text-center">
+        <i class="ion-ios-plus" ng-click="showOptions()"></i>
+      </div>
       <h1>{{userdata.username}}</h1>
 
               <ion-list>

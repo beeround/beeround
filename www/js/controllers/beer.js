@@ -568,7 +568,7 @@ angular.module('beeround.beer', [])
 
   })
 
-  .controller('beerDetailsCtrl', function ($cordovaImagePicker,$ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera,$ionicPopup ,$location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout) {
+  .controller('beerDetailsCtrl', function ($cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera,$ionicPopup ,$location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout) {
 
 
 
@@ -665,6 +665,8 @@ angular.module('beeround.beer', [])
     $scope.positivRating = function () {
       if($scope.currentRating < 5) {
         $scope.currentRating++;
+        $cordovaVibration.vibrate(30);
+
         sendRating()
 
       }
@@ -673,6 +675,8 @@ angular.module('beeround.beer', [])
     $scope.negativeRating = function () {
       if($scope.currentRating > 0){
         $scope.currentRating--;
+        $cordovaVibration.vibrate(30);
+
         sendRating()
       }
     };
