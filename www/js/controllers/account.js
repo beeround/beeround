@@ -67,7 +67,14 @@ angular.module('beeround.account', [])
 
         $timeout(function () {
           $scope.srcImage = imageURI;
-          uploadImage();
+
+          // Image Upload
+          beeroundService.uploadImage(imageURI).then(imageURL => {
+            $scope.image = imageURL;
+
+          }, err => {
+            alert("Fehler")
+          });
 
         },500);
 
@@ -88,13 +95,20 @@ angular.module('beeround.account', [])
       };
 
       $cordovaCamera.getPicture(options).then(function(imageURI) {
-        alert(imageURI);
 
         $timeout(function () {
           $scope.srcImage = imageURI;
-          uploadImage();
+
+          // Image Upload
+          beeroundService.uploadImage(imageURI).then(imageURL => {
+            $scope.image = imageURL;
+
+          }, err => {
+            alert("Fehler")
+          });
 
         },500);
+
 
       }, function(err) {
 
@@ -103,32 +117,6 @@ angular.module('beeround.account', [])
       });
     };
 
-    function uploadImage() {
-      // Destination URL
-      var url = "http://beeround.domi-speh.de/upload.php";
-
-      // File for Upload
-      var targetPath = $scope.srcImage;
-
-
-
-      var options = {
-        fileKey: "file",
-        fileName: "profile"+new Date().getTime(),
-        chunkedMode: false,
-        mimeType: "multipart/form-data",
-        params : {'fileName': "profile"+new Date().getTime()}
-      };
-
-      $cordovaFileTransfer.upload(url, targetPath, options).then(function(result) {
-
-        $scope.image = "http://beeround.domi-speh.de/uploads/"+options.fileName;
-
-
-      }, function () {
-        alert("err")
-      });
-    }
     $scope.signup = function () {
 
       let details = {
@@ -199,7 +187,7 @@ angular.module('beeround.account', [])
 
     $scope.login = function () {
       let details = {'email': $scope.form.email, 'password': $scope.form.password};
-      console.log(details);
+
 
       $ionicAuth.login('basic', details).then(function () {
         //SUCCESS
@@ -298,11 +286,22 @@ angular.module('beeround.account', [])
 
       $cordovaCamera.getPicture(options).then(function(imageURI) {
 
-        $timeout(function () {
-          $scope.srcImage = imageURI;
-          uploadImage();
+        $scope.srcImage = imageURI;
 
-        },500);
+        //Image Upload
+        beeroundService.uploadImage(imageURI).then(imageURL => {
+          alert("Erfolgreich hochgeladen");
+
+          $timeout(function () {
+            $ionicUser.details.image = imageURL;
+            $ionicUser.save();
+            $scope.image = imageURL;
+          },500);
+
+
+        }, err => {
+          alert("Fehler")
+        });
 
       }, function(err) {
 
@@ -313,7 +312,7 @@ angular.module('beeround.account', [])
 
     $scope.startCamera = function () {
       let options = {
-        quality: 100,
+        quality: 70,
         destinationType: Camera.DestinationType.FILE_URI,
         sourceType: Camera.PictureSourceType.CAMERA,
         allowEdit: true,
@@ -321,13 +320,23 @@ angular.module('beeround.account', [])
       };
 
       $cordovaCamera.getPicture(options).then(function(imageURI) {
-        alert(imageURI);
 
-        $timeout(function () {
-          $scope.srcImage = imageURI;
-          uploadImage();
+        $scope.srcImage = imageURI;
 
-        },500);
+        //Image Upload
+        beeroundService.uploadImage(imageURI).then(imageURL => {
+          alert("Erfolgreich hochgeladen");
+
+          $timeout(function () {
+            $ionicUser.details.image = imageURL;
+            $ionicUser.save();
+            $scope.image = imageURL;
+          },500);
+
+
+        }, err => {
+          alert("Fehler")
+        });
 
       }, function(err) {
 
@@ -335,36 +344,6 @@ angular.module('beeround.account', [])
         // error
       });
     };
-
-    function uploadImage() {
-      // Destination URL
-      var url = "http://beeround.domi-speh.de/upload.php";
-
-      // File for Upload
-      var targetPath = $scope.srcImage;
-
-
-
-      var options = {
-        fileKey: "file",
-        fileName: "profile"+new Date().getTime(),
-        chunkedMode: false,
-        mimeType: "multipart/form-data",
-        params : {'fileName': "profile"+new Date().getTime()}
-      };
-
-      $cordovaFileTransfer.upload(url, targetPath, options).then(function(result) {
-
-        $scope.image = "http://beeround.domi-speh.de/uploads/"+options.fileName;
-
-        $ionicUser.details.image = $scope.image;
-        $ionicUser.save();
-
-
-      }, function () {
-        alert("err")
-      });
-    }
 
 
     $scope.deleteUser = function() {

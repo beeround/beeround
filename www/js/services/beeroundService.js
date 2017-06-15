@@ -1,6 +1,6 @@
 angular.module('beeround.service', [])
-  .service('beeroundService', ['$http', '$q', '$timeout',
-    function ($http, $q, $timeout) {
+  .service('beeroundService', ['$http', '$q', '$timeout', '$cordovaFileTransfer',
+    function ($http, $q, $timeout, $cordovaFileTransfer) {
 
       return {
         sendBeerRating: function (data) {
@@ -184,6 +184,39 @@ angular.module('beeround.service', [])
           return $http.post('http://www.beeround.de/api/comments', data).then(result => {
             return result;
           });
+        },
+
+        uploadImage: function (path) {
+
+          return new Promise ((resolve, reject) => {
+
+            // Destination URL
+            let url = "http://beeround.domi-speh.de/upload.php";
+
+            // File for Upload
+            let targetPath = path;
+
+            let options = {
+              fileKey: "file",
+              fileName: "profile"+new Date().getTime(),
+              chunkedMode: false,
+              mimeType: "multipart/form-data",
+              params : {'fileName': "profile"+new Date().getTime()}
+            };
+
+
+            $cordovaFileTransfer.upload(url, targetPath, options).then(function(result) {
+              let imagePath = "http://beeround.domi-speh.de/uploads/"+options.fileName;
+
+              resolve(imagePath)
+
+
+            }, function () {
+              reject("error")
+            });
+
+          });
+
         }
       }
     }
