@@ -16,65 +16,29 @@
       </div>
     </div>
 
-    <!--<div class="card">
-      <div class="item item-text-wrap">
-        <h3>{{location.town || location.village}}</h3>
-        <h3>Radius: {{userSettings.radius}}km</h3>
-      </div>
-    </div>
-    -->
 
-    <ng-map on-zoom_changed="zoomChanged()" zoom="{{zoom}}" center="{{userSettings.lat}}, {{userSettings.lng}}">
+
+
+    <ng-map styles='[{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#747474"},{"lightness":"23"}]},{"featureType":"poi.attraction","elementType":"geometry.fill","stylers":[{"color":"#f38eb0"}]},{"featureType":"poi.government","elementType":"geometry.fill","stylers":[{"color":"#ced7db"}]},{"featureType":"poi.medical","elementType":"geometry.fill","stylers":[{"color":"#ffa5a8"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#c7e5c8"}]},{"featureType":"poi.place_of_worship","elementType":"geometry.fill","stylers":[{"color":"#d6cbc7"}]},{"featureType":"poi.school","elementType":"geometry.fill","stylers":[{"color":"#c4c9e8"}]},{"featureType":"poi.sports_complex","elementType":"geometry.fill","stylers":[{"color":"#b1eaf1"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":"100"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"},{"lightness":"100"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffd4a5"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffe9d2"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"weight":"3.00"}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"weight":"0.30"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#747474"},{"lightness":"36"}]},{"featureType":"road.local","elementType":"labels.text.stroke","stylers":[{"color":"#e9e5dc"},{"lightness":"30"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"},{"lightness":"100"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#d2e7f7"}]}]' on-zoom_changed="zoomChanged()" zoom="{{zoom}}" center="{{userSettings.lat}}, {{userSettings.lng}}">
       <marker position="{{userSettings.lat}}, {{userSettings.lng}}" animation="Animation.BOUNCE" centered="true"></marker>
-      <marker ng-repeat="marker in markers" id="{{marker.id}}" position="{{marker.lat}},{{marker.lng}}" on-click="showTextbox({{marker}})"></marker>
-      <info-window id="overlay">
-
-        <div>
-          <h5>{{boxContent.name}}</h5>
-          <p>{{boxContent.lat}}, {{boxContent.lng}}</p>
-          <p>{{boxContent | json}}</p>
-        </div>
-
-      </info-window>
+      <marker ng-repeat="marker in markers" id="{{marker.id}}" position="{{marker.lat}},{{marker.lng}}" on-click="showDetails(marker, $index)"></marker>
     </ng-map>
 
-    <script id="filter.html" type="text/ng-template">
-      <ion-popover-view>
+    <div ng-show="selectedBrewery" class="detailbox">
+      <span style="float:right" ng-click="closeDetails()">Schließen</span>
+      <h3>{{selectedBrewery.name}}</h3>
+      <p>{{selectedBrewery.address}}</p>
+      <p>{{selectedBrewery.plz}} {{selectedBrewery.city}}</p>
 
-      <ion-content>
+      <div ng-show="selectedBrewery.beers && selectedBrewery.events">
+        <a ng-href="#/tab/list/{{selectedBrewery.id}}">{{selectedBrewery.beers.length}} Biere</a>
+        <a ng-href="#/tab/list/{{selectedBrewery.id}}">{{selectedBrewery.events.length}} Events</a>
+      </div>
 
-        <!--Filter, in which radius the brewery should be away from the user-->
-        <div ng-show="userSettings.lat" class="card">
-          <div class="item item-text-wrap">
-            <h5>Radius</h5>
-            <button ng-class="{'active' : userSettings.radius == 10}" ng-click="setRadius(10)">10km</button>
-            <button ng-class="{'active' : userSettings.radius == 30}" ng-click="setRadius(30)">30km</button>
-            <button ng-class="{'active' : userSettings.radius == 50}" ng-click="setRadius(50)">50km</button>
-          </div>
 
-          <div class="item item-text-wrap">
-            <h5>Typ</h5>
-            <button ng-class="{'active' : filterLocationType == 'brewpub'}"  ng-click="setType('brewpub')">mit Restaurant</button>
-          </div>
 
-          <div class="item item-text-wrap">
-            <h5>Sortieren</h5>
-            <div ng-model="sortingOptions">
-              <button ng-click="sortBy('name')" class="sortorder" ng-class="{active: activeSorting == 'name'}">Name</button>
-              <button ng-click="sortBy('rating')" class="sortorder" ng-class="{active: activeSorting == 'rating'}">Bewertung</button>
-              <button ng-click="sortBy('distance')" class="sortorder" ng-class="{active: activeSorting == 'distance'}">Entfernung
-              </button>
-            </div>
-          </div>
+    </div>
 
-          <div class="item item-text-wrap">
-            <button ng-click="closePopover()">Schließen</button>
-          </div>
-
-        </div>
-      </ion-content>
-      </ion-popover-view>
-    </script>
 
   </ion-content>
 

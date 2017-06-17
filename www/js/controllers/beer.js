@@ -405,6 +405,35 @@ angular.module('beeround.beer', [])
       $scope.map.showInfoWindow('overlay', data.id);
     };
 
+    $scope.closeDetails = function () {
+      $scope.selectedBrewery = null;
+
+      for (let key in $scope.map.markers) {
+          $scope.map.markers[key].setMap($scope.map);
+      }
+    };
+
+    $scope.showDetails = function (e, data, index) {
+
+      for (let key in $scope.map.markers) {
+
+        if(index+1 != key){
+          $scope.map.markers[key].setMap(null);
+        }
+      }
+      $scope.selectedBrewery = data;
+      $scope.map.panTo(e.latLng);
+
+      breweryDB.getBeersByBrewery(data.breweryId).then(results => {
+        data.beers = results;
+
+        beeroundService.getEventByBrewery(data.breweryId).then(events => {
+          data.events = events;
+
+        })
+      });
+    };
+
     // New geolocation
     $scope.newGeolocation = function () {
 
@@ -464,12 +493,16 @@ angular.module('beeround.beer', [])
           if (location) {
 
             location.map((result, index) => {
+              console.log(result);
 
               $scope.markers.push({
-                id: result.brewery.id,
+                breweryId: result.brewery.id,
                 name: result.brewery.nameShortDisplay,
                 lat: result.latitude,
-                lng: result.longitude
+                lng: result.longitude,
+                address: result.streetAddress,
+                city: result.locality,
+                plz: result.postalCode
               });
 
               // Hide loading
