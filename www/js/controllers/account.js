@@ -277,6 +277,10 @@ angular.module('beeround.account', [])
       $state.go('tabs.myBeerStory');
     };
 
+    $scope.goToStatistics = function () {
+      $state.go('tabs.statistics');
+    };
+
     $scope.showLibrary = function () {
       let options = {
         quality: 100,
@@ -466,6 +470,105 @@ angular.module('beeround.account', [])
 
   })
 
+  .controller('myStatisticsCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService){
+
+    let currentDate = new Date();
+    let currentMonth = currentDate.getMonth();
+    function getMonthString(monthNumber) {
+      let MonthString = "";
+      switch (monthNumber){
+        case 0:
+          MonthString = "Januar";
+          break;
+        case 1:
+          MonthString = "Februar";
+          break;
+        case 2:
+          MonthString = "März";
+          break;
+        case 3:
+          MonthString = "April";
+          break;
+        case 4:
+          MonthString = "Mai";
+          break;
+        case 5:
+          MonthString = "Juni";
+          break;
+        case 6:
+          MonthString = "Juli";
+          break;
+        case 7:
+        case -5:
+          MonthString = "August";
+          break;
+        case 8:
+        case -4:
+          MonthString = "September";
+          break;
+        case 9:
+        case -3:
+          MonthString = "Oktober";
+          break;
+        case 10:
+        case -2:
+          MonthString = "November";
+          break;
+        case 11:
+        case -1:
+          MonthString = "Dezember";
+          break;
+      }
+      return MonthString;
+    }
+    let statisticData = [];
+
+    beeroundService.getBeerDataByMonth($ionicUser.id, currentDate, 5).then(function (result) {
+      statisticData.push(result);
+      beeroundService.getBeerDataByMonth($ionicUser.id, currentDate, 4).then(function (result) {
+        statisticData.push(result);
+        beeroundService.getBeerDataByMonth($ionicUser.id, currentDate, 3).then(function (result) {
+          statisticData.push(result);
+          beeroundService.getBeerDataByMonth($ionicUser.id, currentDate, 2).then(function (result) {
+            statisticData.push(result);
+            beeroundService.getBeerDataByMonth($ionicUser.id, currentDate, 1).then(function (result) {
+              statisticData.push(result);
+              beeroundService.getBeerDataByMonth($ionicUser.id, currentDate, 0).then(function (result) {
+                statisticData.push(result);
+              });
+            });
+          });
+        });
+      });
+    });
+
+
+    $scope.labels = [ getMonthString((currentMonth -5)), getMonthString((currentMonth -4)), getMonthString((currentMonth -3)), getMonthString((currentMonth -2)), getMonthString((currentMonth -1)), getMonthString(currentMonth)];
+    $scope.series = ['Biere'];
+    $scope.data = [
+      statisticData,
+    ];
+    $scope.onClick = function (points, evt) {
+      console.log(points, evt);
+    };
+    $scope.datasetOverride = [{borderColor:'#773D17', pointRadius: 7, pointHitRadius: 10, pointHoverRadius: 10, backgroundColor: '#F2F0CE', pointBackgroundColor: '#F1A435', pointHoverBackgroundColor: '#F1A435'}];
+    $scope.options = {
+      scales: {
+        yAxes: [
+          {
+            id: 'y-axis-1',
+            type: 'linear',
+            display: true,
+            position: 'left',
+            ticks: {
+              suggestedMin: 0
+            }
+          },
+
+        ]
+      }
+    };
+  })
 ;
 
 

@@ -242,9 +242,21 @@ angular.module('beeround.service', [])
           })
         },
 
-        getBeerDataByMonth: function (uid, timestamp) {
+        getBeerDataByMonth: function (uid, timestamp, value) {
+
+          let month = (timestamp.getMonth()+1-value);
+          if(month < 1)
+          {
+            month = month + 12
+          }
+          if(month < 10){
+            month = '0'+month
+          }
+          let year = (timestamp.getYear()+1900);
+          timestamp = year+'-'+month;
           return $http.get('http://www.beeround.de/api/drinkinghabits?transform=1&filter[]=userid,eq,'+uid+'&filter[]=timestamp,cs,'+timestamp).then(result => {
-            return result.data.drinkinghabits;
+            return result.data.drinkinghabits.length;
+
           })
         }
       }
