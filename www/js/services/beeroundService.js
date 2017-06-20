@@ -217,7 +217,13 @@ angular.module('beeround.service', [])
 
           });
 
-        }
+        },
+
+        deleteBeer: function (data) {
+          return $http.post('http://www.beeround.de/api/delete', data).then(result => {
+            console.log("POST: " + result.data);
+          });
+        },
       }
     }
   ]);

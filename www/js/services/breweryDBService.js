@@ -160,7 +160,16 @@ angular.module('breweryDB.service', [])
               return res.data;
             })
           });
-        }
+        },
+
+        putBeerDetails: function (beerId, data) {
+          console.log(data);
+
+          // $http.put('http://api.brewerydb.com/v2/beer/' + beerId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y', data).then(result => {
+          //   console.log("PUT: " + result.data);
+          // });
+        },
+
       }
     }
 

@@ -1,43 +1,49 @@
 <ion-view cache-view="false" title="Bierdetails">
+  <ion-nav-buttons side="right">
+    <div ng-show="$ionicUser.id">
+    <a ng-click="showOptions()" class="button button-clear ion-edit">
+    </a>
+    </div>
 
+  </ion-nav-buttons>
   <ion-content>
-        <ion-slides options="data.sliderOptions" slider="data.sliderDelegate">
-          <ion-slide-page>
-            <div class="full-width">
-              <img ng-src="{{beer.images.icon || 'img/beerdetail_v1.jpg'}}">
-            </div>
-          </ion-slide-page>
-          <ion-slide-page>
-            <div class="full-width">
-              <img ng-src="{{beer.images.icon || 'img/beerdetail_v1.jpg'}}">
-            </div>
-          </ion-slide-page>
-          <ion-slide-page>
-            <div class="full-width">
-              <img ng-src="{{beer.images.icon || 'img/beerdetail_v1.jpg'}}">
-            </div>
-          </ion-slide-page>
-        </ion-slides>
-
-    <div class="fadein" ng-click="showDiv=true" ng-show="!showDiv" >
-    <i class="icon ion-android-cancel"></i>
-    <ion-item class="card box">
-
-      <div class="row">
-        <div class="col col-66">
-          <p>
-            Deine Bewertung
-          </p>
+    <ion-slides options="data.sliderOptions" slider="data.sliderDelegate">
+      <ion-slide-page>
+        <div class="full-width">
+          <img ng-src="{{beer.images.icon || 'img/beerdetail_v1.jpg'}}">
         </div>
-        <div class="col rating">
-          <i class="small-icon ion-ios-pint" ng-class="{'active': currentRating > 0}"></i>
-          <i class="small-icon ion-ios-pint" ng-class="{'active': currentRating > 1}"></i>
-          <i class="small-icon ion-ios-pint" ng-class="{'active': currentRating > 2}"></i>
-          <i class="small-icon ion-ios-pint" ng-class="{'active': currentRating > 3}"></i>
-          <i class="small-icon ion-ios-pint" ng-class="{'active': currentRating > 4}"></i>
+      </ion-slide-page>
+      <ion-slide-page>
+        <div class="full-width">
+          <img ng-src="{{beer.images.icon || 'img/beerdetail_v1.jpg'}}">
         </div>
-      </div>
-    </ion-item>
+      </ion-slide-page>
+      <ion-slide-page>
+        <div class="full-width">
+          <img ng-src="{{beer.images.icon || 'img/beerdetail_v1.jpg'}}">
+        </div>
+      </ion-slide-page>
+    </ion-slides>
+
+    <div class="fadein" ng-click="showDiv=true" ng-show="!showDiv">
+      <i class="icon ion-android-cancel"></i>
+      <ion-item class="card box">
+
+        <div class="row">
+          <div class="col col-66">
+            <p>
+              Deine Bewertung
+            </p>
+          </div>
+          <div class="col rating">
+            <i class="small-icon ion-ios-pint" ng-class="{'active': currentRating > 0}"></i>
+            <i class="small-icon ion-ios-pint" ng-class="{'active': currentRating > 1}"></i>
+            <i class="small-icon ion-ios-pint" ng-class="{'active': currentRating > 2}"></i>
+            <i class="small-icon ion-ios-pint" ng-class="{'active': currentRating > 3}"></i>
+            <i class="small-icon ion-ios-pint" ng-class="{'active': currentRating > 4}"></i>
+          </div>
+        </div>
+      </ion-item>
     </div>
 
 
@@ -61,62 +67,61 @@
     </ion-item>
 
     <ion-item>
-    <div ng-show="beer.avgSueffig" class="characteristics">
-      <div class="row">
+      <div ng-show="beer.avgSueffig" class="characteristics">
+        <div class="row">
 
-        <div class="col col-25"><span>sueffig</span></div>
-        <div class="col col-75">
-          <div class="characteristicBar" ng-style="{ 'width' : beer.avgSueffig+'%'}"></div>
+          <div class="col col-25"><span>sueffig</span></div>
+          <div class="col col-75">
+            <div class="characteristicBar" ng-style="{ 'width' : beer.avgSueffig+'%'}"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-25"><span>malzig</span></div>
+          <div class="col col-75">
+            <div class="characteristicBar" ng-style="{ 'width' : beer.avgMalzig+'%'}"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-25"><span>herb</span></div>
+          <div class="col col-75">
+            <div class="characteristicBar" ng-style="{ 'width' : beer.avgHerb+'%'}"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-25"><span>erfrischend</span></div>
+          <div class="col col-75">
+            <div class="characteristicBar" ng-style="{ 'width' : beer.avgErfrischend+'%'}"></div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col col-25"><span>malzig</span></div>
-        <div class="col col-75">
-          <div class="characteristicBar" ng-style="{ 'width' : beer.avgMalzig+'%'}"></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col col-25"><span>herb</span></div>
-        <div class="col col-75">
-          <div class="characteristicBar" ng-style="{ 'width' : beer.avgHerb+'%'}"></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col col-25"><span>erfrischend</span></div>
-        <div class="col col-75">
-          <div class="characteristicBar" ng-style="{ 'width' : beer.avgErfrischend+'%'}"></div>
-        </div>
-      </div>
-    </div>
     </ion-item>
 
 
     <ion-item>
-    <div class="item">
-      <ion-list>
-        <h3 class="yellow">Kommentare</h3>
-        <ion-item class="feed item-thumbnail-left divider" ng-repeat="comment in comments">
-          <img class="small-img" ng-src="{{comment.userimage || 'img/no-image-placeholder.png'}}">
-          <p class="commentDate">{{comment.commentcreated | date : "dd.MM.yyyy - HH:mm" : '-0000'}}</p>
-          <h4>{{comment.username}}</h4>
-          <div ng-show="comment.image">
-            <img ng-src="{{comment.image}}" alt="" width="250">
-          </div>
-          <div ng-show="!comment.image">
-            <p>{{comment.comment}}</p>
-          </div>
-        </ion-item>
+      <div class="item">
+        <ion-list>
+          <h3 class="yellow">Kommentare</h3>
+          <ion-item class="feed item-thumbnail-left divider" ng-repeat="comment in comments">
+            <img class="small-img" ng-src="{{comment.userimage || 'img/no-image-placeholder.png'}}">
+            <p class="commentDate">{{comment.commentcreated | date : "dd.MM.yyyy - HH:mm" : '-0000'}}</p>
+            <h4>{{comment.username}}</h4>
+            <div ng-show="comment.image">
+              <img ng-src="{{comment.image}}" alt="" width="250">
+            </div>
+            <div ng-show="!comment.image">
+              <p>{{comment.comment}}</p>
+            </div>
+          </ion-item>
 
-      </ion-list>
-    </div>
+        </ion-list>
+      </div>
     </ion-item>
-
-
 
 
     <ion-item class="rateBeer">
       <div ng-show="$ionicUser.id">
-        <a ng-href="#/tab/details/beer/{{beer.id}}/rate" class="button text-center button-block invert-button">Bewerten</a>
+        <a ng-href="#/tab/details/beer/{{beer.id}}/rate"
+           class="button text-center button-block invert-button">Bewerten</a>
       </div>
 
       <div ng-show="!$ionicUser.id">
@@ -133,7 +138,7 @@
         <ion-content>
           <img ng-src="{{srcImage}}" id="srcImage" width="250" style="display: block; margin: 40px auto;"/><br/>
           <hr>
-          <button ng-click="uploadImage()">Bild hochladen </button>
+          <button ng-click="uploadImage()">Bild hochladen</button>
           <button ng-click="showOptions()">Wiederholen</button>
 
         </ion-content>

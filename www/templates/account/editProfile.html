@@ -1,23 +1,23 @@
-<ion-view cache-view="false" hide-back-button="true" view-title="Profil Bearbeiten">
+<ion-view cache-view="false" view-title="Profil Bearbeiten">
   <ion-nav-buttons side="right">
     <a class="button button-clear ion-ios-trash" ng-click="deleteUser()">
     </a>
   </ion-nav-buttons>
+
   <ion-content>
     <form ng-submit="editProfile()">
       <div class="list list-inset">
-        <label class="item-input">
-          <input ng-model="editform.username" name="username" type="text" placeholder="Neuer Benutzername eingeben">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Email ändern</span>
+          <input ng-model="editform.email" name="email" placeholder="max@mustermann.de" type="email">
         </label>
-        <label class="item-input">
-          <input ng-model="editform.email" name="email" placeholder="Neue Email eingeben" type="email">
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Passwort ändern</span>
+          <input ng-model="editform.password" name="password" placeholder="**********" type="password">
         </label>
-        <label class="item-input">
-          <input ng-model="editform.password" name="password" type="password" placeholder="Password ändern">
-        </label>
-        <button type="submit" class="button border-button">Daten ändern</button>
+        <button type="submit" class="button border-button">Absenden</button>
       </div>
     </form>
-    <a class="button" ng-href="#/tab/account/profile">Profil</a>
   </ion-content>
 </ion-view>

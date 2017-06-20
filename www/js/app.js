@@ -4,7 +4,6 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
-angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngMap', 'google.places','beeround.index', 'beeround.beer', 'beeround.account', 'beeround.event', 'breweryDB.service', 'beeround.service', 'angular.filter', 'rzModule']);
 angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngMap', 'google.places','beeround.index', 'beeround.beer', 'beeround.account', 'beeround.event', 'breweryDB.service', 'beeround.service', 'angular.filter', 'rzModule'])
 .run(function($ionicPlatform, $state, $stateParams, $rootScope) {
   $ionicPlatform.ready(function() {
@@ -61,6 +60,15 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
       views: {
         'tab-list': {
           templateUrl: 'templates/beer/beerDetails.html',
+          controller: 'beerDetailsCtrl'
+        }
+      }
+    })
+    .state('tabs.editBeer', {
+      url: '/details/beer/:beerId/edit',
+      views: {
+        'tab-list': {
+          templateUrl: 'templates/beer/editBeer.html',
           controller: 'beerDetailsCtrl'
         }
       }

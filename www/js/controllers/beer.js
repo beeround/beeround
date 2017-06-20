@@ -643,9 +643,7 @@ angular.module('beeround.beer', [])
 
   })
 
-  .controller('beerDetailsCtrl', function ($cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera,$ionicPopup ,$location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout) {
-
-
+  .controller('beerDetailsCtrl', function ($cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera,$ionicPopup ,$location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout, $location) {
 
     let beerId = $stateParams.beerId;
     $scope.image = null;
@@ -907,10 +905,6 @@ angular.module('beeround.beer', [])
       });
     };
 
-
-
-
-
     function sendRating(){
       let data = {
         beerid : beerId,
@@ -923,6 +917,76 @@ angular.module('beeround.beer', [])
         console.log("Rating send");
       })
     }
+
+    // Show the action sheet
+
+    $scope.showOptions = function() {
+      // Show the action sheet
+      $ionicActionSheet.show({
+        buttons: [
+          { text: 'Bier bearbeiten' },
+          { text: 'Bier löschen' }
+        ],
+        titleText: 'Bitte wählen',
+        cancelText: 'abbrechen',
+        cancel: function() {
+          // add cancel code..
+        },
+        buttonClicked: function(index) {
+          if(index == 0){
+            $location.url('/tab/details/beer/' + beerId +'/edit');
+          }
+          if( index == 1){
+            $scope.deleteBeer();
+          }
+          return true;
+        }
+      });
+
+    };
+
+    $scope.editBeer = function () {
+      $scope.beerform = [];
+
+      let data = {
+        styleId : $scope.beer.styleId,
+        name : beerform.name,
+        description: beerform.description,
+        abv: beerform.abv,
+        year: beerform.year,
+      };
+
+      breweryDB.putBeerDetails(beerId, data);
+
+    };
+
+    $scope.deleteBeer = function () {
+      let confirmPopup = $ionicPopup.confirm({
+        title: 'Bier löschen',
+        template: 'Bist du dir sicher, dass das Bier nicht mehr existiert und gelöscht werden sollte?',
+        okText: 'Sicher',
+        cancelText: 'Lieber nicht'
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+
+          let data = {
+            beerid : beerId,
+            userid : $ionicUser.id,
+            username: $ionicUser.details.username,
+            useremail: $ionicUser.details.email,
+            beername: $scope.beer.name,
+            url: 'http://api.brewerydb.com/v2/beer/' + beerId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y'
+          };
+
+          beeroundService.deleteBeer(data);
+
+          alert("Danke! Wir prüfen deine Anfrage und werden das Bier löschen, sollte es nicht mehr existieren.");
+        } else {
+        }
+      });
+    };
 
   });
 

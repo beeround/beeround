@@ -211,15 +211,6 @@ angular.module('beeround.account', [])
 
     $scope.editform = [];
     $scope.editProfile = function () {
-      if ($scope.editform.username !== undefined) {
-        if ($scope.editform.username.length !== 0) {
-          $ionicUser.details.username = $scope.editform.username;
-          $ionicUser.save();
-          console.log('Username geändert!');
-
-          $state.go("tabs.profile");
-        }
-      }
       if ($scope.editform.email !== undefined) {
         if ($scope.editform.email.length !== 0) {
           $ionicUser.details.email = $scope.editform.email;
