@@ -668,6 +668,8 @@ angular.module('beeround.beer', [])
 
     breweryDB.getBeerDetails(beerId).then(result => {
       $scope.beer = result.data;
+      $scope.beerform = [];
+      $scope.beerform.name = $scope.beer.name;
 
       breweryDB.getBreweryByBeerId(beerId).then(brewery => {
         $scope.beer.brewery = brewery.data[0].nameShortDisplay;
@@ -986,7 +988,7 @@ angular.module('beeround.beer', [])
 
     };
 
-    $scope.beerform = [];
+
 
     $scope.editBeer = function () {
       let data = {
