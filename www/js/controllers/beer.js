@@ -989,7 +989,6 @@ angular.module('beeround.beer', [])
     };
 
 
-
     $scope.editBeer = function () {
       let data = {
         beerid: beerId,
@@ -999,8 +998,14 @@ angular.module('beeround.beer', [])
       };
 
       breweryDB.putBeerDetails(data);
-      alert("Danke für deine Hilfe! Deine Anfrage wird nun geprüft und freigegeben wenn alles passt.");
-      $location.url('/tab/details/beer/' + beerId);
+
+      let alertPopup = $ionicPopup.alert({
+        title: 'Danke für deine Hilfe.',
+        template: 'Wir prüfen deine Anfrage und werden das Bier updaten, wenn alles passt!',
+      });
+      alertPopup.then(function (res) {
+        $location.url('/tab/details/beer/' + beerId);
+      });
     };
 
     $scope.deleteBeer = function () {
@@ -1025,41 +1030,21 @@ angular.module('beeround.beer', [])
 
           beeroundService.deleteBeer(data);
 
-          alert("Danke! Wir prüfen deine Anfrage und werden das Bier löschen, sollte es nicht mehr existieren.");
-        } else {
+          let alertPopup = $ionicPopup.alert({
+            title: 'Danke für deine Hilfe.',
+            template: 'Wir prüfen deine Anfrage und werden das Bier löschen, sollte es nicht mehr existieren.',
+          });
+          alertPopup.then(function (res) {
+            $location.url('/tab/details/beer/' + beerId);
+          });
         }
       });
     };
+
     //Get Styles
     // breweryDB.getBeerStyles().then(result => {
     //   $scope.beerStyles = result.data;
     // });
-
-    $scope.takePictures = function() {
-
-      // Show the action sheet
-      $ionicActionSheet.show({
-        buttons: [
-          { text: 'Kamera' },
-          { text: 'Galerie' }
-        ],
-        titleText: 'Bitte wählen',
-        cancelText: 'abbrechen',
-        cancel: function() {
-          // add cancel code..
-        },
-        buttonClicked: function(index) {
-          if(index == 0){
-            $scope.startCamera()
-          }
-          if( index == 1){
-            $scope.showLibrary();
-          }
-          return true;
-        }
-      });
-
-    };
   });
 
 

@@ -172,9 +172,9 @@ angular.module('breweryDB.service', [])
         putBeerDetails: function (data) {
           console.log(data);
 
-          $http.put('http://api.brewerydb.com/v2/beer/' + data.beerid + '?key=7802f26125b23378098b3c32911adcce', data).then(result => {
-             console.log(result);
-          });
+          // $http.put('http://api.brewerydb.com/v2/beer/' + data.beerid + '?key=7802f26125b23378098b3c32911adcce', data).then(result => {
+          //    console.log(result);
+          // });
         },
 
         // getBeerStyles: function () {
