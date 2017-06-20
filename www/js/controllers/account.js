@@ -433,6 +433,12 @@ angular.module('beeround.account', [])
 
         beeroundService.getBeerCounts($ionicUser.id).then(result => {
           $scope.beerList = result;
+          $rootScope.isLocked = true;
+
+          $timeout(function () {
+            $rootScope.isLocked = false;
+          },100000);
+
           console.log(result)
         });
 

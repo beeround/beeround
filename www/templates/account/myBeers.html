@@ -14,7 +14,7 @@
           <div class="col-20">
             <p>{{beer.count}}</p>
           </div>
-          <div class="col-20">
+          <div class="col-20" ng-hide="isLocked">
             <button ng-click="logBeer(beer.beerid,beer.breweryname, beer.beername)" class="control" >+</button>
           </div>
         </div>

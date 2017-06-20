@@ -686,12 +686,19 @@ angular.module('beeround.beer', [])
 
 
     beeroundService.getCharacteristicsByUser(beerId, $ionicUser.id).then(result => {
-
-      $scope.sliderSueffig = {value: result.sueffig};
-      $scope.sliderMalzig = {value: result.malzig};
-      $scope.sliderHerb = {value: result.herb};
-      $scope.sliderErfrischend = {value: result.erfrischend};
-
+      console.log(result);
+      if((result.sueffig == 0 && result.malzig == 0 && result.herb == 0 && result.erfrischend == 0) || result.sueffig == undefined){
+        $scope.sliderSueffig = {value: 50};
+        $scope.sliderMalzig = {value: 50};
+        $scope.sliderHerb = {value: 50};
+        $scope.sliderErfrischend = {value: 50};
+      }
+      else {
+        $scope.sliderSueffig = {value: result.sueffig};
+        $scope.sliderMalzig = {value: result.malzig};
+        $scope.sliderHerb = {value: result.herb};
+        $scope.sliderErfrischend = {value: result.erfrischend};
+      }
 
     });
 
@@ -745,8 +752,6 @@ angular.module('beeround.beer', [])
         $scope.currentRating++;
         sendRating();
         $cordovaVibration.vibrate(30);
-
-
       }
     };
 
@@ -755,7 +760,6 @@ angular.module('beeround.beer', [])
         $scope.currentRating--;
         sendRating();
         $cordovaVibration.vibrate(30);
-
       }
     };
 
