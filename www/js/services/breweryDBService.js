@@ -137,6 +137,13 @@ angular.module('breweryDB.service', [])
           });
         },
 
+        getBreweryByBeerId: function (beerId) {
+
+          return $http.get('http://api.brewerydb.com/v2/beer/' + beerId + '/breweries?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
+            return res.data;
+          });
+
+        },
 
         getBreweryById: function (breweryId) {
           return $http.get('http://api.brewerydb.com/v2//brewery/' + breweryId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
@@ -150,12 +157,13 @@ angular.module('breweryDB.service', [])
             return beeroundService.getBeerRating(beerId).then(obj => {
               res.data.data.rating = obj.avg_rating;
               res.data.data.ratingCount = obj.rating_count;
+
+              // TODO AVG to default 50
               res.data.data.avgErfrischend = obj.avg_erfrischend;
               res.data.data.avgMalzig = obj.avg_malzig;
               res.data.data.avgSueffig = obj.avg_sueffig;
               res.data.data.avgHerb = obj.avg_herb;
               res.data.data.characteristicsCount = obj.characteristics_count;
-              console.log(res.data);
 
               return res.data;
             })

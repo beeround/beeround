@@ -205,7 +205,7 @@ angular.module('beeround.account', [])
     }
   })
 
-  .controller('profilCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, $cordovaFileTransfer, beeroundService, $cordovaCamera, $ionicActionSheet) {
+  .controller('profilCtrl', function ($location, $scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, $cordovaFileTransfer, beeroundService, $cordovaCamera, $ionicActionSheet) {
     $scope.userdata = $ionicUser.details;
 
 
@@ -265,6 +265,14 @@ angular.module('beeround.account', [])
 
     };
 
+
+    $scope.goToMyBeers = function () {
+      $state.go('tabs.myBeers');
+    };
+
+    $scope.goToMyBeerStory = function () {
+      $state.go('tabs.myBeerStory');
+    };
 
     $scope.showLibrary = function () {
       let options = {
@@ -396,6 +404,26 @@ angular.module('beeround.account', [])
 
 
   })
+
+  .controller('myBeersCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet) {
+
+  })
+
+  .controller('myBeerStoryCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet) {
+
+    beeroundService.getBeerStory($ionicUser.id).then(result => {
+
+      $scope.userBeerStory = result;
+
+      console.log(result);
+
+    }, err => {
+      //TODO ERROR Handling
+      console.log(err);
+    })
+
+  })
+
 ;
 
 

@@ -28,10 +28,6 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicCloudProvider) {
   $stateProvider
 
-  /*.state('statistics', {
-      url: '/statistics',
-      templateUrl: 'templates/account/statistics.html'
-    })*/
     .state('tabs', {
       url: "/tab",
       abstract: true,
@@ -147,6 +143,43 @@ angular.module('beeround', ['ionic','ionic.cloud','tabSlideBox','ngCordova','ngM
         }
       })
 
+    .state('tabs.myBeers', {
+      url: '/account/myBeers',
+      views: {
+        'tab-account': {
+          templateUrl: 'templates/account/myBeers.html',
+          controller: 'myBeersCtrl'
+        }
+      },
+      onEnter: function($state, $ionicAuth, $ionicUser){
+
+        if (!$ionicUser.id) {
+          $state.transition.finally(() => {
+            $state.go('tabs.login')
+          });
+
+        }
+      }
+    })
+
+    .state('tabs.myBeerStory', {
+      url: '/account/myBeerStory',
+      views: {
+        'tab-account': {
+          templateUrl: 'templates/account/beerStory.html',
+          controller: 'myBeerStoryCtrl'
+        }
+      },
+      onEnter: function($state, $ionicAuth, $ionicUser){
+
+        if (!$ionicUser.id) {
+          $state.transition.finally(() => {
+            $state.go('tabs.login')
+          });
+
+        }
+      }
+    })
     .state('tabs.login', {
       url: '/account/login',
       views: {

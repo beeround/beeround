@@ -643,7 +643,7 @@ angular.module('beeround.beer', [])
 
   })
 
-  .controller('beerDetailsCtrl', function ($cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera,$ionicPopup ,$location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout, $location) {
+  .controller('beerDetailsCtrl', function ($rootScope, $cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera,$ionicPopup ,$location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout) {
 
     let beerId = $stateParams.beerId;
     $scope.image = null;
@@ -666,8 +666,13 @@ angular.module('beeround.beer', [])
 
     });
 
+
     breweryDB.getBeerDetails(beerId).then(result => {
       $scope.beer = result.data;
+
+      breweryDB.getBreweryByBeerId(beerId).then(brewery => {
+        $scope.beer.brewery = brewery.data[0].nameShortDisplay;
+      });
 
       beeroundService.postBeer(result.data).then(function (result) {
         console.log(result);
@@ -738,9 +743,9 @@ angular.module('beeround.beer', [])
     $scope.positivRating = function () {
       if($scope.currentRating < 5) {
         $scope.currentRating++;
+        sendRating();
         $cordovaVibration.vibrate(30);
 
-        sendRating()
 
       }
     };
@@ -748,9 +753,9 @@ angular.module('beeround.beer', [])
     $scope.negativeRating = function () {
       if($scope.currentRating > 0){
         $scope.currentRating--;
+        sendRating();
         $cordovaVibration.vibrate(30);
 
-        sendRating()
       }
     };
 
@@ -903,6 +908,46 @@ angular.module('beeround.beer', [])
       }, function () {
         alert("err")
       });
+    };
+
+
+    $scope.logBeer = function() {
+
+
+      let data = {
+        beerid : beerId,
+        userid : $ionicUser.id,
+        latitude: $rootScope.userSettings.lat,
+        longitude: $rootScope.userSettings.lng,
+        breweryname: $scope.beer.brewery,
+        beername: $scope.beer.nameDisplay
+
+      };
+
+      beeroundService.logBeer(data).then(function () {
+        // SUCCESS
+
+        let confirmPopup = $ionicPopup.confirm({
+          title: 'Das Bier wurde deinen Bieren hinzugefügt!',
+          template: '<small>Möchtest du das Bier noch bewerten oder ein Bild posten?</small>',
+          buttons: [
+            { text: 'abbrechen' },
+            {
+              text: 'Bewerten',
+              type: 'button-positive',
+              onTap: function(e) {
+                $state.go('tabs.rateBeer', {beerId: beerId});
+
+              }
+            }
+          ]
+        });
+
+      }, function () {
+        // TODO ERROR HANDLING
+        console.log("error");
+      });
+
     };
 
     function sendRating(){

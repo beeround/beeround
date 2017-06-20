@@ -1,0 +1,16 @@
+<ion-view cache-view="false" view-title="Bierstory">
+  <ion-content>
+    <h1>Meine Bierstory</h1>
+
+    <ion-list>
+
+      <ion-item class="small-thumbnail-left divider" ng-repeat="beer in userBeerStory">
+        <p>{{beer.beername}} </p>
+        <p>{{beer.breweryname}}</p>
+        <p>{{beer.timestamp | date : "dd.MM.yyyy - HH:mm" : '-0000'}}</p>
+
+      </ion-item>
+
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -37,9 +37,7 @@ angular.module('beeround.service', [])
             else {
               return 0
             }
-
           })
-
         },
 
         getBeerRatingByBrewerielist: function (breweries) {
@@ -188,7 +186,7 @@ angular.module('beeround.service', [])
 
         uploadImage: function (path) {
 
-          return new Promise ((resolve, reject) => {
+          return new Promise((resolve, reject) => {
 
             // Destination URL
             let url = "http://beeround.domi-speh.de/upload.php";
@@ -198,15 +196,15 @@ angular.module('beeround.service', [])
 
             let options = {
               fileKey: "file",
-              fileName: "profile"+new Date().getTime(),
+              fileName: "profile" + new Date().getTime(),
               chunkedMode: false,
               mimeType: "multipart/form-data",
-              params : {'fileName': "profile"+new Date().getTime()}
+              params: {'fileName': "profile" + new Date().getTime()}
             };
 
 
-            $cordovaFileTransfer.upload(url, targetPath, options).then(function(result) {
-              let imagePath = "http://beeround.domi-speh.de/uploads/"+options.fileName;
+            $cordovaFileTransfer.upload(url, targetPath, options).then(function (result) {
+              let imagePath = "http://beeround.domi-speh.de/uploads/" + options.fileName;
 
               resolve(imagePath)
 
@@ -219,11 +217,24 @@ angular.module('beeround.service', [])
 
         },
 
+        logBeer: function (data) {
+          return $http.post('http://www.beeround.de/api/drinkinghabits', data).then(result => {
+            console.log("POST: " + result.data);
+          });
+        },
+
+        getBeerStory: function (uid) {
+
+          return $http.get('http://www.beeround.de/api/drinkinghabits?transform=1&order=drinkinghabitid,DESC&filter=userid,eq,' + uid).then(result => {
+            return result.data.drinkinghabits;
+          })
+        },
+
         deleteBeer: function (data) {
           return $http.post('http://www.beeround.de/api/delete', data).then(result => {
             console.log("POST: " + result.data);
           });
-        },
+        }
       }
-    }
+  }
   ]);

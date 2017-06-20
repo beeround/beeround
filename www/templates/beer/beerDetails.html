@@ -118,10 +118,11 @@
     </ion-item>
 
 
+
+
     <ion-item class="rateBeer">
       <div ng-show="$ionicUser.id">
-        <a ng-href="#/tab/details/beer/{{beer.id}}/rate"
-           class="button text-center button-block invert-button">Bewerten</a>
+        <a ng-click="logBeer()" class="button text-center button-block invert-button">Jetzt trinken</a>
       </div>
 
       <div ng-show="!$ionicUser.id">
