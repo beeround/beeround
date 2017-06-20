@@ -234,6 +234,12 @@ angular.module('beeround.service', [])
           return $http.post('http://www.beeround.de/api/delete', data).then(result => {
             console.log("POST: " + result.data);
           });
+        },
+
+        getBeerCounts: function (uid) {
+          return $http.get('http://www.beeround.de/api/drinkingstatistics?transform=1&order=count,DESC&filter=userid,eq,' + uid).then(result => {
+            return result.data.drinkingstatistics;
+          })
         }
       }
   }

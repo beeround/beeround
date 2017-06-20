@@ -407,6 +407,10 @@ angular.module('beeround.account', [])
 
   .controller('myBeersCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet) {
 
+    beeroundService.getBeerCounts($ionicUser.id).then(result => {
+      $scope.beerList = result;
+      console.log(result)
+    })
   })
 
   .controller('myBeerStoryCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet) {

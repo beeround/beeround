@@ -1,5 +1,15 @@
 <ion-view view-title="Meine Biere">
   <ion-content>
     <h1>Meine Biere</h1>
+
+    <ion-list>
+
+      <ion-item class="small-thumbnail-left divider" ng-repeat="beer in beerList">
+        <p>{{beer.beerid}}</p>
+        <p>{{beer.count}}</p>
+
+      </ion-item>
+
+    </ion-list>
   </ion-content>
 </ion-view>
