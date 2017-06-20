@@ -1,33 +1,38 @@
-<ion-view cache-view="false" view-title="Profil Bearbeiten">
+<ion-view cache-view="false" view-title="Bier bearbeiten">
   <ion-content>
 
     <form ng-submit="editBeer()">
       <div class="list">
         <label class="item item-input item-stacked-label">
           <span class="input-label">Biername</span>
-          <input ng-model="beerform.name" type="text">
+          <input ng-model="beerform.name" placeholder="{{beer.name}}" name="beerform.name" type="text" required>
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Biersorten
+          </div>
+          <select ng-model="beerform.styleId" required>
+            <option ng-value="75">Pils</option>
+            <option ng-value="48">Weizenbier</option>
+            <option ng-value="49">Kristallweizen</option>
+            <option ng-value="52">Dunkles Weizen</option>
+            <option ng-value="77">Lager</option>
+            <option ng-value="78">Helles</option>
+            <option ng-value="90">Starkbier</option>
+            <option ng-value="79">Export</option>
+            <option ng-value="45">Kölsch</option>
+            <option ng-value="84">Schwarzbier</option>
+            <option ng-value="81">Märzen</option>
+            <option ng-value="92">Zwickelbier</option>
+          </select>
         </label>
 
         <label class="item item-input item-stacked-label">
-          <span class="input-label">Beschreibung</span>
-          <input ng-model="beerform.description" type="text">
+          <span class="input-label">Promillegehalt</span>
+          <input ng-model="beerform.abv" placeholder="5.0" name="beerform.abv" type="text">
         </label>
-
-        <label class="item item-input item-stacked-label">
-          <span class="input-label">Promille</span>
-          <input ng-model="beerform.abv" type="text">
-        </label>
-
-        <label class="item item-input item-stacked-label">
-          <span class="input-label">Entstehungsjahr</span>
-          <input ng-model="beerform.year" type="text">
-        </label>
-        <div class="item">
         <button type="submit" class="button button-dark">Daten ändern</button>
-        </div>
       </div>
     </form>
-
-
   </ion-content>
 </ion-view>

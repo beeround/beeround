@@ -10,7 +10,6 @@ angular.module('breweryDB.service', [])
           $http.get('http://api.brewerydb.com/v2/brewery/' + brewery.brewery.id + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
             brewery.beers = res.data.data;
             return resolve(brewery);
-
           });
         });
       }
@@ -21,21 +20,21 @@ angular.module('breweryDB.service', [])
 
           breweries.map((obj, firstIndex) => {
 
-            if(obj.beers){
+            if (obj.beers) {
 
-              let beerRatingMapping = obj.beers.map((beer,secondIndex)=> {
+              let beerRatingMapping = obj.beers.map((beer, secondIndex) => {
                 return beeroundService.getBeerRating(beer.id).then(result => {
 
-                    breweries[firstIndex].beers[secondIndex].rating = result;
-                    return beer
+                  breweries[firstIndex].beers[secondIndex].rating = result;
+                  return beer
 
                 })
-            });
+              });
 
-            // Save to var and give back, if function has ended
-            Promise.all(beerRatingMapping).then(function () {
+              // Save to var and give back, if function has ended
+              Promise.all(beerRatingMapping).then(function () {
                 resolve(breweries);
-            });
+              });
 
             }
           });
@@ -48,22 +47,22 @@ angular.module('breweryDB.service', [])
 
         return new Promise(function (resolve, reject) {
 
-            if(beers){
+          if (beers) {
 
-              let beerRatingMapping = beers.map((beer,index)=> {
-                return beeroundService.getBeerRating(beer.id).then(result => {
-                  beers[index].rating = result;
-                  return beer
+            let beerRatingMapping = beers.map((beer, index) => {
+              return beeroundService.getBeerRating(beer.id).then(result => {
+                beers[index].rating = result;
+                return beer
 
-                })
-              });
+              })
+            });
 
-              // Save to var and give back, if function has ended
-              Promise.all(beerRatingMapping).then(function () {
-                  resolve(beers);
-              });
+            // Save to var and give back, if function has ended
+            Promise.all(beerRatingMapping).then(function () {
+              resolve(beers);
+            });
 
-            }
+          }
         });
 
       }
@@ -72,12 +71,12 @@ angular.module('breweryDB.service', [])
 
         getBreweriesNearCoordinates: function (clientSettings) {
 
-          if(angular.equals(userSettings, clientSettings)){
+          if (angular.equals(userSettings, clientSettings)) {
             console.log("Same Filter - loading data localy");
 
             // TODO Implement Beer request
 
-            return new Promise(function(resolve, reject) {
+            return new Promise(function (resolve, reject) {
 
               // Check, if data is available
               let promises = breweries.map(function (obj) {
@@ -103,7 +102,7 @@ angular.module('breweryDB.service', [])
               $http.get('http://api.brewerydb.com/v2/search/geo/point?lat=' + clientSettings.lat + '&lng=' + clientSettings.lng + '&radius=' + clientSettings.radius + '&unit=km&key=7802f26125b23378098b3c32911adcce').then(function (res) {
 
                 // Check, if data is available
-                if(res.data.data){
+                if (res.data.data) {
                   let promises = res.data.data.map(function (obj) {
                     return getBeers(obj).then(result => {
                       return result
@@ -170,13 +169,19 @@ angular.module('breweryDB.service', [])
           });
         },
 
-        putBeerDetails: function (beerId, data) {
+        putBeerDetails: function (data) {
           console.log(data);
 
-          // $http.put('http://api.brewerydb.com/v2/beer/' + beerId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y', data).then(result => {
+          // $http.put('http://api.brewerydb.com/v2/beer/' + data.beerId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y', data).then(result => {
           //   console.log("PUT: " + result.data);
           // });
         },
+
+        // getBeerStyles: function () {
+        //   return $http.get('http://api.brewerydb.com/v2/styles?key=7802f26125b23378098b3c32911adcce').then(function (res) {
+        //     return res.data;
+        //   });
+        // },
 
       }
     }

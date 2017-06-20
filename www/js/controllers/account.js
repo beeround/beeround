@@ -210,7 +210,10 @@ angular.module('beeround.account', [])
 
 
     $scope.editform = [];
+
     $scope.editProfile = function () {
+      console.log($scope.editform);
+
       if ($scope.editform.email !== undefined) {
         if ($scope.editform.email.length !== 0) {
           $ionicUser.details.email = $scope.editform.email;

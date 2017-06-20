@@ -23,12 +23,12 @@ angular.module('beeround.beer', [])
       $scope.popover.show();
       $scope.appBackground = document.getElementsByClassName('appBackground');
       $scope.appBackground[0].setAttribute('class', 'blur');
-      };
+    };
     $scope.closePopover = function () {
       $scope.popover.hide();
-          $scope.appBackground = document.getElementsByClassName('blur');
-          $scope.appBackground[0].setAttribute('class', 'view appBackground');
-      };
+      $scope.appBackground = document.getElementsByClassName('blur');
+      $scope.appBackground[0].setAttribute('class', 'view appBackground');
+    };
 
 
     // TABS
@@ -77,8 +77,8 @@ angular.module('beeround.beer', [])
       $rootScope.currentListView = $scope.tabs[data.index].text;
 
 
-      if(data.index == 0) {
-        if($scope.activeSorting == "rating"){
+      if (data.index == 0) {
+        if ($scope.activeSorting == "rating") {
           $scope.sortBreweries("distance");
         }
       }
@@ -231,7 +231,7 @@ angular.module('beeround.beer', [])
             $ionicScrollDelegate.resize();
 
             // Update beer array, if beer screen is shown
-            if($rootScope.currentListView == "Biere"){
+            if ($rootScope.currentListView == "Biere") {
               beeroundService.getBeerRatingByBrewerielist(result).then(newList => {
                 $scope.breweries = newList;
                 makeBeerList();
@@ -284,7 +284,7 @@ angular.module('beeround.beer', [])
                 $ionicLoading.hide();
 
                 // Update beer array, if beer screen is shown
-                if($rootScope.currentListView == "Biere"){
+                if ($rootScope.currentListView == "Biere") {
                   beeroundService.getBeerRatingByBrewerielist($scope.breweries).then(result => {
                     $scope.breweries = result;
                     makeBeerList();
@@ -313,7 +313,6 @@ angular.module('beeround.beer', [])
     }
 
 
-
     function getBeerEvents() {
       $scope.beerEvents = [];
 
@@ -329,11 +328,11 @@ angular.module('beeround.beer', [])
   .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover, $ionicUser) {
 
     // IF NO USERSETTING
-    if(!$rootScope.userSettings){
+    if (!$rootScope.userSettings) {
       console.log("Local Settings");
       $rootScope.userSettings = {
-        lat:"49.34891529999999" ,
-        lng:"9.129382899999996"
+        lat: "49.34891529999999",
+        lng: "9.129382899999996"
       };
       loadMap(30);
 
@@ -346,10 +345,10 @@ angular.module('beeround.beer', [])
 
       const location = JSON.parse(JSON.stringify(place.geometry.location));
       console.log(location);
-        $rootScope.userSettings.lat = location.lat;
-        $rootScope.userSettings.lng = location.lng;
-        $rootScope.location = {
-          town: place.formatted_address
+      $rootScope.userSettings.lat = location.lat;
+      $rootScope.userSettings.lng = location.lng;
+      $rootScope.location = {
+        town: place.formatted_address
 
       };
       loadMap($rootScope.userSettings.radius);
@@ -409,7 +408,7 @@ angular.module('beeround.beer', [])
       $scope.selectedBrewery = null;
 
       for (let key in $scope.map.markers) {
-          $scope.map.markers[key].setMap($scope.map);
+        $scope.map.markers[key].setMap($scope.map);
       }
     };
 
@@ -417,14 +416,14 @@ angular.module('beeround.beer', [])
 
       let newIndex = $scope.selectedBrewery.index + 1;
 
-      if(newIndex < $scope.markers.length){
+      if (newIndex < $scope.markers.length) {
 
-        $scope.showDetails("",$scope.markers[newIndex],newIndex);
+        $scope.showDetails("", $scope.markers[newIndex], newIndex);
 
       }
       else {
         newIndex = 0;
-        $scope.showDetails("",$scope.markers[newIndex],newIndex);
+        $scope.showDetails("", $scope.markers[newIndex], newIndex);
 
       }
 
@@ -434,14 +433,14 @@ angular.module('beeround.beer', [])
 
       let newIndex = $scope.selectedBrewery.index - 1;
 
-      if(newIndex >= 0){
+      if (newIndex >= 0) {
 
-        $scope.showDetails("",$scope.markers[newIndex],newIndex);
+        $scope.showDetails("", $scope.markers[newIndex], newIndex);
 
       }
       else {
-        newIndex = $scope.markers.length-1;
-        $scope.showDetails("",$scope.markers[newIndex],newIndex);
+        newIndex = $scope.markers.length - 1;
+        $scope.showDetails("", $scope.markers[newIndex], newIndex);
 
       }
     };
@@ -453,7 +452,7 @@ angular.module('beeround.beer', [])
       }
 
       for (let key in $scope.map.markers) {
-        if(index+1 != key){
+        if (index + 1 != key) {
           $scope.map.markers[key].setMap(null);
         }
       }
@@ -461,7 +460,7 @@ angular.module('beeround.beer', [])
 
       $scope.selectedBrewery = data;
       let coords = {
-        lat : data.lat,
+        lat: data.lat,
         lng: data.lng
       };
       $scope.map.panTo(coords);
@@ -495,15 +494,15 @@ angular.module('beeround.beer', [])
       $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
 
 
-          $rootScope.userSettings = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            radius: 30 // standard
-          };
+        $rootScope.userSettings = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          radius: 30 // standard
+        };
 
-          loadMap($rootScope.userSettings.radius);
+        loadMap($rootScope.userSettings.radius);
 
-        })
+      })
     };
 
     // REFRESH Markers on change view
@@ -581,7 +580,7 @@ angular.module('beeround.beer', [])
     $scope.activeWindow = 'beer';
 
 
-      // Get beers
+    // Get beers
     breweryDB.getBeersByBrewery(breweryId).then(result => {
 
       if (result) {
@@ -604,46 +603,46 @@ angular.module('beeround.beer', [])
 
     });
 
-      //FORMAT PHONE NUMBER
+    //FORMAT PHONE NUMBER
 
     $scope.formatNumber = function (phonenumber) {
 
-          let formattedNumber = phonenumber;
-          formattedNumber = formattedNumber.replace(/\s/g, '');
-          formattedNumber = formattedNumber.replace(/-/g, '');
-          formattedNumber = formattedNumber.replace(/\//g, '');
-          formattedNumber = formattedNumber.replace(/\)/g, '');
-          formattedNumber = formattedNumber.replace(/\(/g, '');
+      let formattedNumber = phonenumber;
+      formattedNumber = formattedNumber.replace(/\s/g, '');
+      formattedNumber = formattedNumber.replace(/-/g, '');
+      formattedNumber = formattedNumber.replace(/\//g, '');
+      formattedNumber = formattedNumber.replace(/\)/g, '');
+      formattedNumber = formattedNumber.replace(/\(/g, '');
 
-            console.log(formattedNumber);
+      console.log(formattedNumber);
 
-          if (formattedNumber.substr(0, 2) == "49") {
-              formattedNumber = formattedNumber.substr(2);
-          }
+      if (formattedNumber.substr(0, 2) == "49") {
+        formattedNumber = formattedNumber.substr(2);
+      }
 
-          else if(formattedNumber.substr(0,1) == "+49"){
-              formattedNumber = formattedNumber.replace('+49', '0');
-          }
-            console.log(formattedNumber);
-            window.open("tel://"+formattedNumber, '_system', 'location=yes');
-      };
+      else if (formattedNumber.substr(0, 1) == "+49") {
+        formattedNumber = formattedNumber.replace('+49', '0');
+      }
+      console.log(formattedNumber);
+      window.open("tel://" + formattedNumber, '_system', 'location=yes');
+    };
 
-      // Navigate to location
+    // Navigate to location
     $scope.navigateGoogleMaps = function (name, lat, lng) {
       // TODO check device
-      if(ionic.Platform.isIOS()) {
-        window.open('http://maps.apple.com/?q='+name+'ll='+lat+','+lng, '_system', 'location=yes')
+      if (ionic.Platform.isIOS()) {
+        window.open('http://maps.apple.com/?q=' + name + 'll=' + lat + ',' + lng, '_system', 'location=yes')
       }
       else {
 
-          window.open('geo:'+lat+','+lng+'?q='+name, '_system', 'location=yes')
+        window.open('geo:' + lat + ',' + lng + '?q=' + name, '_system', 'location=yes')
 
-          }
+      }
     }
 
   })
 
-  .controller('beerDetailsCtrl', function ($rootScope, $cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera,$ionicPopup ,$location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser,$timeout) {
+  .controller('beerDetailsCtrl', function ($rootScope, $cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera, $ionicPopup, $location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser, $timeout) {
 
     let beerId = $stateParams.beerId;
     $scope.image = null;
@@ -684,21 +683,20 @@ angular.module('beeround.beer', [])
     });
 
 
-
     beeroundService.getCharacteristicsByUser(beerId, $ionicUser.id).then(result => {
 
-        $scope.sliderSueffig = {value: result.sueffig};
-        $scope.sliderMalzig = {value: result.malzig};
-        $scope.sliderHerb = {value: result.herb};
-        $scope.sliderErfrischend = {value: result.erfrischend};
+      $scope.sliderSueffig = {value: result.sueffig};
+      $scope.sliderMalzig = {value: result.malzig};
+      $scope.sliderHerb = {value: result.herb};
+      $scope.sliderErfrischend = {value: result.erfrischend};
 
 
     });
 
 
     // Characteristics range
-    $scope.changeCharacteristicsWindow =function(){
-      if ($scope.characteristicsWindow){
+    $scope.changeCharacteristicsWindow = function () {
+      if ($scope.characteristicsWindow) {
         $scope.characteristicsWindow = false;
       }
       else {
@@ -706,20 +704,20 @@ angular.module('beeround.beer', [])
       }
     };
 
-    $scope.$on("slideEnded", function() {
+    $scope.$on("slideEnded", function () {
 
-        let data = {
-          userid : $ionicUser.id,
-          beerid : beerId,
-          sueffig : $scope.sliderSueffig.value,
-          malzig : $scope.sliderMalzig.value,
-          herb : $scope.sliderHerb.value,
-          erfrischend : $scope.sliderErfrischend.value,
-        };
+      let data = {
+        userid: $ionicUser.id,
+        beerid: beerId,
+        sueffig: $scope.sliderSueffig.value,
+        malzig: $scope.sliderMalzig.value,
+        herb: $scope.sliderHerb.value,
+        erfrischend: $scope.sliderErfrischend.value,
+      };
 
-        beeroundService.postCharacteristics(data).then(function () {
-          console.log("success");
-        })
+      beeroundService.postCharacteristics(data).then(function () {
+        console.log("success");
+      })
     });
 
     $scope.slider = {
@@ -733,7 +731,7 @@ angular.module('beeround.beer', [])
         stepsArray: [
           {value: 0, legend: '-'},
           {value: 25},
-          {value: 50, legend:'o'},
+          {value: 50, legend: 'o'},
           {value: 75},
           {value: 100, legend: '+'}
         ],
@@ -741,7 +739,7 @@ angular.module('beeround.beer', [])
     };
 
     $scope.positivRating = function () {
-      if($scope.currentRating < 5) {
+      if ($scope.currentRating < 5) {
         $scope.currentRating++;
         sendRating();
         $cordovaVibration.vibrate(30);
@@ -751,7 +749,7 @@ angular.module('beeround.beer', [])
     };
 
     $scope.negativeRating = function () {
-      if($scope.currentRating > 0){
+      if ($scope.currentRating > 0) {
         $scope.currentRating--;
         sendRating();
         $cordovaVibration.vibrate(30);
@@ -761,11 +759,11 @@ angular.module('beeround.beer', [])
 
     $scope.sendComment = function () {
       let data = {
-        beerid : beerId,
-        userid : $ionicUser.id,
+        beerid: beerId,
+        userid: $ionicUser.id,
         username: $ionicUser.details.username,
         userimage: $ionicUser.details.image,
-        comment : $scope.form.comment
+        comment: $scope.form.comment
       };
 
       beeroundService.postComment(data).then(function () {
@@ -784,23 +782,258 @@ angular.module('beeround.beer', [])
     };
 
 
-
     // IMAGE
 
     //MODAL Image Preview
     $ionicModal.fromTemplateUrl('image-preview.html', {
       scope: $scope,
       animation: 'slide-in-up'
-    }).then(function(modal) {
+    }).then(function (modal) {
       $scope.modal = modal;
     });
 
-    $scope.closeModal = function() {
+    $scope.closeModal = function () {
       $scope.modal.hide();
     };
 
     // Triggered on a button click, or some other target
-    $scope.showOptions = function() {
+    $scope.showOptions = function () {
+
+      // Show the action sheet
+      $ionicActionSheet.show({
+        buttons: [
+          {text: 'Kamera'},
+          {text: 'Galerie'}
+        ],
+        titleText: 'Bitte wählen',
+        cancelText: 'abbrechen',
+        cancel: function () {
+          // add cancel code..
+        },
+        buttonClicked: function (index) {
+          if (index == 0) {
+            $scope.startCamera()
+          }
+          if (index == 1) {
+            $scope.showLibrary();
+          }
+          return true;
+        }
+      });
+
+    };
+
+
+    $scope.showLibrary = function () {
+      let options = {
+        quality: 100,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+      };
+
+      $cordovaCamera.getPicture(options).then(function (imageURI) {
+        $scope.modal.show();
+        $timeout(function () {
+          $scope.srcImage = imageURI;
+        }, 500);
+
+      }, function (err) {
+
+        alert(err)
+        // error
+      });
+    };
+
+    $scope.startCamera = function () {
+      let options = {
+        quality: 100,
+        destinationType: Camera.DestinationType.FILE_URI,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+      };
+
+      $cordovaCamera.getPicture(options).then(function (imageURI) {
+        $scope.modal.show();
+
+        $timeout(function () {
+          $scope.srcImage = imageURI;
+        }, 500);
+
+      }, function (err) {
+
+        alert(err)
+        // error
+      });
+    };
+
+
+    $scope.uploadImage = function () {
+      // Destination URL
+      var url = "http://beeround.domi-speh.de/upload.php";
+
+      // File for Upload
+      var targetPath = $scope.srcImage;
+
+
+      var options = {
+        fileKey: "file",
+        fileName: "image" + new Date().getTime(),
+        chunkedMode: false,
+        mimeType: "multipart/form-data",
+        params: {'fileName': "image" + new Date().getTime()}
+      };
+
+      $cordovaFileTransfer.upload(url, targetPath, options).then(function (result) {
+
+        let data = {
+          beerid: beerId,
+          userid: $ionicUser.id,
+          username: $ionicUser.details.username,
+          userimage: $ionicUser.details.image,
+          image: "http://beeround.domi-speh.de/uploads/" + options.fileName
+        };
+        beeroundService.postBeerImage(data).then(function () {
+          //SUCCESS
+          $scope.modal.hide();
+
+        });
+
+      }, function () {
+        alert("err")
+      });
+    };
+
+
+    $scope.logBeer = function () {
+
+
+      let data = {
+        beerid: beerId,
+        userid: $ionicUser.id,
+        latitude: $rootScope.userSettings.lat,
+        longitude: $rootScope.userSettings.lng,
+        breweryname: $scope.beer.brewery,
+        beername: $scope.beer.nameDisplay
+
+      };
+
+      beeroundService.logBeer(data).then(function () {
+        // SUCCESS
+
+        let confirmPopup = $ionicPopup.confirm({
+          title: 'Das Bier wurde deinen Bieren hinzugefügt!',
+          template: '<small>Möchtest du das Bier noch bewerten oder ein Bild posten?</small>',
+          buttons: [
+            {text: 'abbrechen'},
+            {
+              text: 'Bewerten',
+              type: 'button-positive',
+              onTap: function (e) {
+                $state.go('tabs.rateBeer', {beerId: beerId});
+
+              }
+            }
+          ]
+        });
+
+      }, function () {
+        // TODO ERROR HANDLING
+        console.log("error");
+      });
+
+    };
+
+    function sendRating() {
+      let data = {
+        beerid: beerId,
+        userid: $ionicUser.id,
+        userimage: $ionicUser.image,
+        rating: $scope.currentRating
+      };
+
+      beeroundService.sendBeerRating(data).then(result => {
+        console.log("Rating send");
+      })
+    }
+
+    // Show the action sheet
+
+    $scope.showOptions = function () {
+      // Show the action sheet
+      $ionicActionSheet.show({
+        buttons: [
+          {text: 'Bier bearbeiten'},
+          {text: 'Bier löschen'}
+        ],
+        titleText: 'Bitte wählen',
+        cancelText: 'abbrechen',
+        cancel: function () {
+          // add cancel code..
+        },
+        buttonClicked: function (index) {
+          if (index == 0) {
+            $location.url('/tab/details/beer/' + beerId + '/edit');
+          }
+          if (index == 1) {
+            $scope.deleteBeer();
+          }
+          return true;
+        }
+      });
+
+    };
+
+    $scope.beerform = [];
+
+    $scope.editBeer = function () {
+      let data = {
+        beerid: beerId,
+        styleId: $scope.beerform.styleId,
+        name: $scope.beerform.name,
+        abv: $scope.beerform.abv,
+      };
+
+      breweryDB.putBeerDetails(data);
+      alert("Danke für deine Hilfe! Deine Anfrage wird nun geprüft und freigegeben wenn alles passt.");
+      $location.url('/tab/details/beer/' + beerId);
+    };
+
+    $scope.deleteBeer = function () {
+      let confirmPopup = $ionicPopup.confirm({
+        title: 'Bier löschen',
+        template: 'Bist du dir sicher, dass das Bier nicht mehr existiert und gelöscht werden sollte?',
+        okText: 'Sicher',
+        cancelText: 'Lieber nicht'
+      });
+
+      confirmPopup.then(function (res) {
+        if (res) {
+
+          let data = {
+            beerid: beerId,
+            userid: $ionicUser.id,
+            username: $ionicUser.details.username,
+            useremail: $ionicUser.details.email,
+            beername: $scope.beer.name,
+            url: 'http://api.brewerydb.com/v2/beer/' + beerId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y'
+          };
+
+          beeroundService.deleteBeer(data);
+
+          alert("Danke! Wir prüfen deine Anfrage und werden das Bier löschen, sollte es nicht mehr existieren.");
+        } else {
+        }
+      });
+    };
+    //Get Styles
+    // breweryDB.getBeerStyles().then(result => {
+    //   $scope.beerStyles = result.data;
+    // });
+
+    $scope.takePictures = function() {
 
       // Show the action sheet
       $ionicActionSheet.show({
@@ -825,214 +1058,6 @@ angular.module('beeround.beer', [])
       });
 
     };
-
-
-    $scope.showLibrary = function () {
-      let options = {
-        quality: 100,
-        destinationType: Camera.DestinationType.FILE_URI,
-        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-        allowEdit: true,
-        encodingType: Camera.EncodingType.JPEG,
-      };
-
-      $cordovaCamera.getPicture(options).then(function(imageURI) {
-        $scope.modal.show();
-        $timeout(function () {
-          $scope.srcImage = imageURI;
-        },500);
-
-      }, function(err) {
-
-        alert(err)
-        // error
-      });
-    };
-
-    $scope.startCamera = function () {
-      let options = {
-        quality: 100,
-        destinationType: Camera.DestinationType.FILE_URI,
-        sourceType: Camera.PictureSourceType.CAMERA,
-        allowEdit: true,
-        encodingType: Camera.EncodingType.JPEG,
-      };
-
-      $cordovaCamera.getPicture(options).then(function(imageURI) {
-        $scope.modal.show();
-
-        $timeout(function () {
-          $scope.srcImage = imageURI;
-        },500);
-
-      }, function(err) {
-
-        alert(err)
-        // error
-      });
-    };
-
-
-    $scope.uploadImage = function() {
-      // Destination URL
-      var url = "http://beeround.domi-speh.de/upload.php";
-
-      // File for Upload
-      var targetPath = $scope.srcImage;
-
-
-
-      var options = {
-        fileKey: "file",
-        fileName: "image"+new Date().getTime(),
-        chunkedMode: false,
-        mimeType: "multipart/form-data",
-        params : {'fileName': "image"+new Date().getTime()}
-      };
-
-      $cordovaFileTransfer.upload(url, targetPath, options).then(function(result) {
-
-        let data = {
-          beerid : beerId,
-          userid : $ionicUser.id,
-          username: $ionicUser.details.username,
-          userimage: $ionicUser.details.image,
-          image : "http://beeround.domi-speh.de/uploads/"+options.fileName
-        };
-        beeroundService.postBeerImage(data).then(function () {
-          //SUCCESS
-          $scope.modal.hide();
-
-        });
-
-      }, function () {
-        alert("err")
-      });
-    };
-
-
-    $scope.logBeer = function() {
-
-
-      let data = {
-        beerid : beerId,
-        userid : $ionicUser.id,
-        latitude: $rootScope.userSettings.lat,
-        longitude: $rootScope.userSettings.lng,
-        breweryname: $scope.beer.brewery,
-        beername: $scope.beer.nameDisplay
-
-      };
-
-      beeroundService.logBeer(data).then(function () {
-        // SUCCESS
-
-        let confirmPopup = $ionicPopup.confirm({
-          title: 'Das Bier wurde deinen Bieren hinzugefügt!',
-          template: '<small>Möchtest du das Bier noch bewerten oder ein Bild posten?</small>',
-          buttons: [
-            { text: 'abbrechen' },
-            {
-              text: 'Bewerten',
-              type: 'button-positive',
-              onTap: function(e) {
-                $state.go('tabs.rateBeer', {beerId: beerId});
-
-              }
-            }
-          ]
-        });
-
-      }, function () {
-        // TODO ERROR HANDLING
-        console.log("error");
-      });
-
-    };
-
-    function sendRating(){
-      let data = {
-        beerid : beerId,
-        userid : $ionicUser.id,
-        userimage : $ionicUser.image,
-        rating : $scope.currentRating
-      };
-
-      beeroundService.sendBeerRating(data).then(result => {
-        console.log("Rating send");
-      })
-    }
-
-    // Show the action sheet
-
-    $scope.showOptions = function() {
-      // Show the action sheet
-      $ionicActionSheet.show({
-        buttons: [
-          { text: 'Bier bearbeiten' },
-          { text: 'Bier löschen' }
-        ],
-        titleText: 'Bitte wählen',
-        cancelText: 'abbrechen',
-        cancel: function() {
-          // add cancel code..
-        },
-        buttonClicked: function(index) {
-          if(index == 0){
-            $location.url('/tab/details/beer/' + beerId +'/edit');
-          }
-          if( index == 1){
-            $scope.deleteBeer();
-          }
-          return true;
-        }
-      });
-
-    };
-
-    $scope.editBeer = function () {
-      $scope.beerform = [];
-
-      let data = {
-        styleId : $scope.beer.styleId,
-        name : beerform.name,
-        description: beerform.description,
-        abv: beerform.abv,
-        year: beerform.year,
-      };
-
-      breweryDB.putBeerDetails(beerId, data);
-
-    };
-
-    $scope.deleteBeer = function () {
-      let confirmPopup = $ionicPopup.confirm({
-        title: 'Bier löschen',
-        template: 'Bist du dir sicher, dass das Bier nicht mehr existiert und gelöscht werden sollte?',
-        okText: 'Sicher',
-        cancelText: 'Lieber nicht'
-      });
-
-      confirmPopup.then(function(res) {
-        if(res) {
-
-          let data = {
-            beerid : beerId,
-            userid : $ionicUser.id,
-            username: $ionicUser.details.username,
-            useremail: $ionicUser.details.email,
-            beername: $scope.beer.name,
-            url: 'http://api.brewerydb.com/v2/beer/' + beerId + '?key=7802f26125b23378098b3c32911adcce&withLocations=Y'
-          };
-
-          beeroundService.deleteBeer(data);
-
-          alert("Danke! Wir prüfen deine Anfrage und werden das Bier löschen, sollte es nicht mehr existieren.");
-        } else {
-        }
-      });
-    };
-
   });
 
 
