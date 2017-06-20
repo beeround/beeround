@@ -1,12 +1,23 @@
-<ion-view view-title="Meine Biere">
+<ion-view  cache-view="false" view-title="Meine Biere">
   <ion-content>
     <h1>Meine Biere</h1>
 
     <ion-list>
 
       <ion-item class="small-thumbnail-left divider" ng-repeat="beer in beerList">
-        <p>{{beer.beerid}}</p>
-        <p>{{beer.count}}</p>
+
+        <div class="row">
+          <div class="col-60">
+            <p>{{beer.beername}}</p>
+            <p>{{beer.breweryname}}</p>
+          </div>
+          <div class="col-20">
+            <p>{{beer.count}}</p>
+          </div>
+          <div class="col-20">
+            <button ng-click="logBeer(beer.beerid,beer.breweryname, beer.beername)" class="control" >+</button>
+          </div>
+        </div>
 
       </ion-item>
 

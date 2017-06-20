@@ -408,12 +408,46 @@ angular.module('beeround.account', [])
 
   })
 
-  .controller('myBeersCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet) {
+  .controller('myBeersCtrl', function ($rootScope, $scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet) {
 
     beeroundService.getBeerCounts($ionicUser.id).then(result => {
       $scope.beerList = result;
       console.log(result)
-    })
+    });
+
+    $scope.logBeer = function(beerId, breweryname, beername) {
+
+
+      let data = {
+        beerid : beerId,
+        userid : $ionicUser.id,
+        latitude: $rootScope.userSettings.lat,
+        longitude: $rootScope.userSettings.lng,
+        breweryname: breweryname,
+        beername: beername
+
+      };
+
+      beeroundService.logBeer(data).then(function () {
+        // SUCCESS
+        let alertPopup = $ionicPopup.alert({
+          title: beername+ 'eingetragen!',
+          template: 'Deine Aktivität wurde erfolgreich geloggt!'
+        });
+
+        alertPopup.then(function (res) {
+          beeroundService.getBeerCounts($ionicUser.id).then(result => {
+            $scope.beerList = result;
+            console.log(result)
+          });
+        });
+
+      }, function () {
+        // TODO ERROR HANDLING
+        console.log("error");
+      });
+
+    };
   })
 
   .controller('myBeerStoryCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet) {
