@@ -430,17 +430,12 @@ angular.module('beeround.account', [])
 
       beeroundService.logBeer(data).then(function () {
         // SUCCESS
-        let alertPopup = $ionicPopup.alert({
-          title: beername+ 'eingetragen!',
-          template: 'Deine Aktivität wurde erfolgreich geloggt!'
+
+        beeroundService.getBeerCounts($ionicUser.id).then(result => {
+          $scope.beerList = result;
+          console.log(result)
         });
 
-        alertPopup.then(function (res) {
-          beeroundService.getBeerCounts($ionicUser.id).then(result => {
-            $scope.beerList = result;
-            console.log(result)
-          });
-        });
 
       }, function () {
         // TODO ERROR HANDLING
