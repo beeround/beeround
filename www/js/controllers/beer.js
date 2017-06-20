@@ -413,16 +413,58 @@ angular.module('beeround.beer', [])
       }
     };
 
+    $scope.next = function () {
+
+      let newIndex = $scope.selectedBrewery.index + 1;
+
+      if(newIndex < $scope.markers.length){
+
+        $scope.showDetails("",$scope.markers[newIndex],newIndex);
+
+      }
+      else {
+        newIndex = 0;
+        $scope.showDetails("",$scope.markers[newIndex],newIndex);
+
+      }
+
+    };
+
+    $scope.prev = function () {
+
+      let newIndex = $scope.selectedBrewery.index - 1;
+
+      if(newIndex >= 0){
+
+        $scope.showDetails("",$scope.markers[newIndex],newIndex);
+
+      }
+      else {
+        newIndex = $scope.markers.length-1;
+        $scope.showDetails("",$scope.markers[newIndex],newIndex);
+
+      }
+    };
+
     $scope.showDetails = function (e, data, index) {
 
       for (let key in $scope.map.markers) {
+        $scope.map.markers[key].setMap($scope.map);
+      }
 
+      for (let key in $scope.map.markers) {
         if(index+1 != key){
           $scope.map.markers[key].setMap(null);
         }
       }
+      data.index = index;
+
       $scope.selectedBrewery = data;
-      $scope.map.panTo(e.latLng);
+      let coords = {
+        lat : data.lat,
+        lng: data.lng
+      };
+      $scope.map.panTo(coords);
 
       breweryDB.getBeersByBrewery(data.breweryId).then(results => {
         data.beers = results;
