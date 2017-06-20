@@ -44,7 +44,7 @@
               </button>
             </div>
           </div>
-          <ion-scroll style="height:80%" delegate-handle="slide1Scroll">
+          <ion-scroll style="height:77%" delegate-handle="slide1Scroll">
 
             <!--Get a list from all breweries around the users location-->
             <ion-list>
@@ -107,7 +107,7 @@
           </div>
 
 
-          <ion-scroll style="height:80%">
+          <ion-scroll style="height:77%">
 
             <!-- List for sorting by distance !-->
             <ion-list ng-show="activeSorting == 'distance'">
@@ -178,13 +178,23 @@
           <ion-scroll style="height:80%" delegate-handle="slide1Scroll">
 
             <!-- Beer Events around position !-->
-            <ion-item class="card" ng-repeat="beerEvent in beerEvents">
-              <a class="item" ng-href="#/tab/details/event/{{beerEvent.id}}">
-                  <h2>{{beerEvent.name}}</h2>
-                  <p>{{beerEvent.city}} </p>
-                  <i class="icon ion-chevron-right"></i>
-                  <p>Beginn: {{beerEvent.start | date : "dd.MMM.yyyy HH:mm"}}Uhr</p>
-                  <p>Ende: {{beerEvent.end | date : "dd.MMM.yyyy HH:mm"}}Uhr</p>
+            <ion-item class="card event-card" ng-repeat="beerEvent in beerEvents">
+              <a class="item event-item" ng-href="#/tab/details/event/{{beerEvent.id}}">
+
+                <div class="row">
+                  <div class="col col-20">
+                    <p class="event-day">{{beerEvent.start | date : "dd"}}</p>
+                    <p>{{beerEvent.start | date : "MMMM"}}</p>
+                  </div>
+                  <div class="col col-80">
+                    <h2>{{beerEvent.name}}</h2>
+                    <i class="icon ion-chevron-right"></i>
+                    <p>{{beerEvent.start | date : "EEE"}} {{beerEvent.start | date : "HH:mm"}}Uhr, {{beerEvent.city}} </p>
+
+                    <p></p>
+                  </div>
+                </div>
+
               </a>
             </ion-item>
 

@@ -1,41 +1,65 @@
 <ion-view cache-view="false" title="Eventdetails">
   <ion-content>
-    <ion-slides options="data.sliderOptions" slider="data.sliderDelegate">
-      <ion-slide-page>
-        <div class="full-width">
-          <img ng-src="{{beer.images.icon || 'img/beerdetail_v1.jpg'}}">
-        </div>
-      </ion-slide-page>
-      <ion-slide-page>
-        <div class="full-width">
-          <img ng-src="{{beer.images.icon || 'img/beerdetail_v1.jpg'}}">
-        </div>
-      </ion-slide-page>
-      <ion-slide-page>
-        <div class="full-width">
-          <img ng-src="{{beer.images.icon || 'img/beerdetail_v1.jpg'}}">
-        </div>
-      </ion-slide-page>
-    </ion-slides>
+
+           <img class="brewery-image" src="img/event_thumbnail.png">
+          <ion-item class="contact-button">
+            <button ng-show="event.phone" type="button" ng-click="formatNumber(event.phone)" class="invert-button icon ion-ios-telephone"></button>
+            <button ng-show="event.email" ng-click="sendMail(event.email)" class="invert-button icon ion-android-mail"></button>
+          </ion-item>
+
     <ion-item class="brewery-contact">
       <ion-item class="brewery-thumbnail">
-        <h1>{{event.name}}</h1>
-        <p>{{event.price}} €</p>
-        <p>{{event.description}}</p>
-        <p>Beginn: {{event.start | date : "dd.MM.yyyy" : "-0000"}} um {{event.start | date : "HH.mm"}} Uhr</p>
-        <p>Ende: {{event.end | date : "dd.MM.yyyy" : "-0000"}} um {{event.end | date : "HH.mm"}} Uhr</p>
+
+
+        <div class="row divider">
+          <div class="col col-20">
+            <p class="event-day">{{event.start | date : "dd"}}</p>
+            <p>{{event.start | date : "MMMM"}}</p>
+          </div>
+          <div class="col col-60">
+            <h2>{{event.name}}</h2>
+            <p>{{event.start | date : "EEE"}} {{event.start | date : "HH:mm"}}Uhr, {{event.city}} </p>
+          </div>
+          <div class="col-20">
+            <p class="event-price">{{event.price}} €</p>
+          </div>
+        </div>
         <br>
-        <p>Email: {{event.email}}</p>
-        <p>Telefon: {{event.phone}}</p>
-        <br>
-        <p>Adresse:</p>
-        <a ng-href="{{event.website}}">Website</a><br>
-        <a ng-href="{{event.facebook}}">Facebook</a>
-        <p>{{event.street}} {{event.street_number}}<br>{{event.postal_code}} {{event.city}}</p>
+        <div class="row">
+          <div class="col"><p style="white-space: normal">{{event.description}}</p></div>
+        </div>
+          <br>
+
+
+        <div class="row">
+          <div class="col col-10">
+            <i class="ion-ios-clock"></i>
+          </div>
+          <div class="col col-90">
+            <p class="black">{{event.start | date : "EEEE"}} {{event.start | date : "HH:mm"}} - {{event.end | date : "HH:mm"}} Uhr</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-10"><i class="ion-ios-location"></i></div>
+          <div class="col col-90"><a> {{event.street}} {{event.street_number}}, {{event.postal_code}} {{event.city}}</a></div>
+        </div>
+
+        <div class="row">
+          <div class="col col-10"><i class="ion-earth"></i>
+            </div>
+          <div class="col col-90">
+            <a ng-href="{{event.website}}">beeround.de</a>
+          </div>
+          </div>
+
+        <div class="row">
+          <div class="col col-10"><i class="ion-social-facebook"></i></div>
+          <div class="col col-90"><a ng-href="{{event.facebook}}">facebook.com/beeround</a></div>
+        </div>
 
         <button class="button-block" ng-click="createEvent()">zu kalender hinzufügen</button>
       </ion-item>
     </ion-item>
-
   </ion-content>
 </ion-view>

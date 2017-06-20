@@ -731,11 +731,11 @@ angular.module('beeround.beer', [])
         hideLimitLabels: true,
         showTicks: true,
         stepsArray: [
-          {value: 0, legend: '-'},
+          {value: 0, legend: 'wenig'},
           {value: 25},
-          {value: 50, legend: 'o'},
+          {value: 50, legend:'0'},
           {value: 75},
-          {value: 100, legend: '+'}
+          {value: 100, legend: 'viel'}
         ],
       }
     };

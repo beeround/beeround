@@ -11,6 +11,37 @@ angular.module('beeround.event', [])
       return result;
     });
 
+      //Send Mail to Event organizer
+
+      $scope.sendMail = function (mailAdress) {
+
+          window.open("mailto:"+mailAdress, '_self');
+      };
+
+
+      //FORMAT PHONE NUMBER
+
+      $scope.formatNumber = function (phonenumber) {
+
+          let formattedNumber = phonenumber;
+          formattedNumber = formattedNumber.replace(/\s/g, '');
+          formattedNumber = formattedNumber.replace(/-/g, '');
+          formattedNumber = formattedNumber.replace(/\//g, '');
+          formattedNumber = formattedNumber.replace(/\)/g, '');
+          formattedNumber = formattedNumber.replace(/\(/g, '');
+
+          console.log(formattedNumber);
+
+          if (formattedNumber.substr(0, 2) == "49") {
+              formattedNumber = formattedNumber.substr(2);
+          }
+
+          else if(formattedNumber.substr(0,1) == "+49"){
+              formattedNumber = formattedNumber.replace('+49', '0');
+          }
+          console.log(formattedNumber);
+          window.open("tel://"+formattedNumber, '_system', 'location=yes');
+      };
 
     $scope.createEvent = function () {
       console.log(new Date(($filter('date')($scope.event.start, 'medium', '+0200'))));

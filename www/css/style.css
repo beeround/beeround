@@ -24,6 +24,10 @@ body{
     color: #F1A435;
 }
 
+.item p.black{
+    color: #000000; !important;
+}
+
 /*HEADER*/
 
 ion-header-bar.bar.bar-stable{
@@ -207,10 +211,11 @@ h2{
 
 h3{
     padding-top: 20px;
+
 }
 
 h4{
-    text-decoration: underline;
+    color: #666;
 }
 
 p{
@@ -223,6 +228,12 @@ i{
 
 a{
     text-decoration: none;
+    font-size: 14px;
+    color: #000000;
+}
+
+p{
+    font-size: 12px;
 }
 
 .yellow-link{
@@ -369,6 +380,10 @@ a .item .divider{
     left: 0;
 }
 
+a.item.event-item{
+    padding-left: 0px;
+}
+
 
 div.comment > label.item-input{
     min-height: 100px;
@@ -459,7 +474,7 @@ a.button.button-clear.ion-edit:before{
     position: absolute;
     z-index: 3;
     top: 6px;
-    left: 367px;
+    left: 355px;
 
 }
 
@@ -498,8 +513,9 @@ a.button.button-clear.ion-edit:before{
 
 
 .promille {
-  content: url('../img/beeround_promille.svg');
-  font-size: 14px;
+  content: url('../img/beeround_vol.svg');
+  width: 31px;
+    padding-bottom: 3px;
 }
 
 i.small-icon.ion-ios-pint{
@@ -596,6 +612,10 @@ ion-item.brewery-thumbnail.item{
     padding-bottom: 20px;
 }
 
+ion-item.brewery-contact{
+    margin-top: 3px;
+}
+
 
 /*BEERDETAILS*/
 
@@ -610,17 +630,23 @@ ion-item.brewery-thumbnail.item{
     font-weight: bold;
 }
 
-.characteristicsCount{
-    color: #F1A435;
-    font-size: 12px;
+p.characteristicsCount .ng-binding{
+    font-size: 10px;
     float: right;
+    margin-left: 3px;
 }
 
 .characteristicBar{
     background: #773D17;
-    height:10px;
+    height:7px;
     border-radius: 4px;
     margin-top: 5px;
+}
+
+p.characteristicsInfo{
+    font-size: 11px;
+    color: #773D17;
+    font-weight: bold;
 }
 
 .characteristics.row.col-25{
@@ -647,7 +673,7 @@ ion-item.brewery-thumbnail.item{
     position: absolute;
     z-index: 2;
     top:10px;
-    left:142px;
+    left:130px;
 }
 
 .commentDate{
@@ -735,4 +761,19 @@ ion-item.small-thumbnail-left > p i.icon.ion-chevron-right:before  {
 }
 
 
+/*EVENT*/
+
+p.event-day {
+    font-size: 24px;
+
+}
+
+ion-item.event-card{
+    margin-top: 5px;
+}
+
+p.event-price{
+    font-size: 18px;
+    margin-top: 18px;
+}
 
