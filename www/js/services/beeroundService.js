@@ -240,6 +240,12 @@ angular.module('beeround.service', [])
           return $http.get('http://www.beeround.de/api/drinkingstatistics?transform=1&order=count,DESC&filter=userid,eq,' + uid).then(result => {
             return result.data.drinkingstatistics;
           })
+        },
+
+        getBeerDataByMonth: function (uid, timestamp) {
+          return $http.get('http://www.beeround.de/api/drinkinghabits?transform=1&filter[]=userid,eq,'+uid+'&filter[]=timestamp,cs,'+timestamp).then(result => {
+            return result.data.drinkinghabits;
+          })
         }
       }
   }
