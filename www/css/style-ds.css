@@ -113,3 +113,51 @@ ion-item.brown-background > label {
   padding-top: 15px;
 }
 
+.beeround-trophy{
+  content: url('../img/beeround_trophy.svg');
+  width: 40px;
+}
+
+.item p:last-child {
+  padding-bottom: 5px;
+}
+
+.detailbox{
+  padding-left: 30px;
+  border-radius: 5px;
+  height: 150px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+}
+
+.detailbox i {
+  font-size: 27px;
+  color: #C8C6C5;
+  padding-right: 10px;
+}
+
+.detailbox .item {
+  padding-left: 0px;
+}
+
+.detailbox h3{
+  padding-top: 0px;
+  font-size: 20px;
+  margin-top: 0px;
+
+}
+.detailbox span {
+  color:#F1A435;
+  font-size: 14px;
+}
+
+.detailbox span:last-child {
+  padding-left: 70px;
+}
+
+.divider{
+  border-bottom: 1px solid #ddd;
+}
+
+.detailbox div:last-child{
+  padding-top: 10px;
+}

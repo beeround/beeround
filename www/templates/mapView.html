@@ -25,14 +25,16 @@
     </ng-map>
 
     <div on-swipe-left="next()" on-swipe-right="prev()" ng-show="selectedBrewery" class="detailbox">
-      <span style="float:right" ng-click="closeDetails()">Schließen</span>
+      <i class="ion-android-close" style="float:right" ng-click="closeDetails()"></i>
       <h3>{{selectedBrewery.name}}</h3>
+      <div class="item divider">
       <p>{{selectedBrewery.address}}</p>
       <p>{{selectedBrewery.plz}} {{selectedBrewery.city}}</p>
+      </div>
 
       <div ng-show="selectedBrewery.beers && selectedBrewery.events">
-        <span>{{selectedBrewery.beers.length}} Biere</span>
-        <span>{{selectedBrewery.events.length}} Events</span>
+        <span><i class="ion-ios-pint"></i>{{selectedBrewery.beers.length}} Biere</span>
+        <span><i class="ion-ios-calendar"></i>{{selectedBrewery.events.length}} Events</span>
       </div>
 
 
