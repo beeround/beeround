@@ -566,7 +566,7 @@ angular.module('beeround.account', [])
             display: true,
             position: 'left',
             ticks: {
-              suggestedMin: 0
+              beginAtZero: true
             }
           },
 
