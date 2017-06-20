@@ -686,7 +686,7 @@ angular.module('beeround.beer', [])
 
 
     beeroundService.getCharacteristicsByUser(beerId, $ionicUser.id).then(result => {
-      console.log(result);
+
       if((result.sueffig == 0 && result.malzig == 0 && result.herb == 0 && result.erfrischend == 0) || result.sueffig == undefined){
         $scope.sliderSueffig = {value: 50};
         $scope.sliderMalzig = {value: 50};

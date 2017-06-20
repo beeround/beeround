@@ -298,6 +298,11 @@ angular.module('beeround.account', [])
         beeroundService.uploadImage(imageURI).then(imageURL => {
           alert("Erfolgreich hochgeladen");
 
+          let data = {
+            userid: $ionicUser.id ,
+            url: imageURL
+          };
+          $http.post('http://www.beeround.de/api/changeuserimage', data);
           $timeout(function () {
             $ionicUser.details.image = imageURL;
             $ionicUser.save();
@@ -332,6 +337,11 @@ angular.module('beeround.account', [])
         //Image Upload
         beeroundService.uploadImage(imageURI).then(imageURL => {
           alert("Erfolgreich hochgeladen");
+          let data = {
+            userid: $ionicUser.id ,
+            url: imageURL
+          };
+          $http.post('http://www.beeround.de/api/changeuserimage', data);
 
           $timeout(function () {
             $ionicUser.details.image = imageURL;
@@ -398,7 +408,6 @@ angular.module('beeround.account', [])
     $scope.openPopover = function () {
       $scope.popover.show();
       $scope.appBackground = document.getElementsByClassName('appBackground');
-      console.log($scope.appBackground[0]);
       $scope.appBackground[0].setAttribute('class', 'blur');
     };
 
@@ -416,7 +425,6 @@ angular.module('beeround.account', [])
 
     beeroundService.getBeerCounts($ionicUser.id).then(result => {
       $scope.beerList = result;
-      console.log(result)
     });
 
     $scope.logBeer = function(beerId, breweryname, beername) {
@@ -439,11 +447,10 @@ angular.module('beeround.account', [])
           $scope.beerList = result;
           $rootScope.isLocked = true;
 
+          // Timeout against trolling
           $timeout(function () {
             $rootScope.isLocked = false;
           },100000);
-
-          console.log(result)
         });
 
 
@@ -460,8 +467,6 @@ angular.module('beeround.account', [])
     beeroundService.getBeerStory($ionicUser.id).then(result => {
 
       $scope.userBeerStory = result;
-
-      console.log(result);
 
     }, err => {
       //TODO ERROR Handling

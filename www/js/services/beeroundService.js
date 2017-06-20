@@ -205,7 +205,6 @@ angular.module('beeround.service', [])
 
             $cordovaFileTransfer.upload(url, targetPath, options).then(function (result) {
               let imagePath = "http://beeround.domi-speh.de/uploads/" + options.fileName;
-
               resolve(imagePath)
 
 
@@ -215,6 +214,20 @@ angular.module('beeround.service', [])
 
           });
 
+        },
+
+        updateImage: function (img, uid) {
+          let imageData = {
+            userid: uid ,
+            url: img
+          };
+
+          return $http.post('http://www.beeround.de/api/changeuserimage', data).then(function () {
+            console.log("hi")
+            }
+          ), function (err) {
+            return err
+          };
         },
 
         logBeer: function (data) {
