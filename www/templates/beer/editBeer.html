@@ -5,7 +5,7 @@
       <div class="list">
         <label class="item item-input item-stacked-label">
           <span class="input-label">Biername</span>
-          <input ng-model="beerform.name"  name="beerform.name" type="text" required>
+          <input ng-model="beerform.name" placeholder="{{beer.name}}" name="beerform.name" type="text" required>
         </label>
         <label class="item item-input item-select">
           <div class="input-label">
@@ -23,7 +23,8 @@
             <option ng-value="45">Kölsch</option>
             <option ng-value="84">Schwarzbier</option>
             <option ng-value="81">Märzen</option>
-            <option ng-value="92">Zwickelbier</option>
+            <option ng-value="92">Zwickelbier / Kellerbier</option>
+            <option ng-value="54">Rauchbier</option>
           </select>
         </label>
 

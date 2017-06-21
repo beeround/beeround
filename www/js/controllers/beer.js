@@ -1,7 +1,8 @@
 angular.module('beeround.beer', [])
 
 
-  .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, beeroundService, $http, $cordovaGeolocation, $cordovaCalendar, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser) {
+  .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, beeroundService, $http, $cordovaGeolocation, $cordovaCalendar, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser, $location, $stateParams) {
+    let breweryId = $stateParams.breweryId;
 
     // REFRESH Breweries on change view
     $rootScope.$on('$stateChangeStart',
@@ -212,8 +213,8 @@ angular.module('beeround.beer', [])
     // Get breweries function
     // When parameter is given, disable geolocation
     function getBreweries(noGeo) {
-
       $scope.breweries = [];
+      $scope.addBeerForm = [];
 
       // TODO ERROR HANDLING
 
@@ -227,7 +228,6 @@ angular.module('beeround.beer', [])
         console.log("Abfrage ohne Ortung");
 
         breweryDB.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
-
           $scope.breweries = result;
 
           $ionicLoading.hide();
@@ -331,8 +331,26 @@ angular.module('beeround.beer', [])
       });
     }
 
-  })
+    $scope.addBeer = function () {
+      let data = {
+        name: $scope.addBeerForm.name,
+        styleId: $scope.addBeerForm.styleId,
+        abv: $scope.addBeerForm.abv,
+        brewery: breweryId,
+      };
 
+      breweryDB.postBeer(data);
+
+      let alertPopup = $ionicPopup.alert({
+        title: 'Danke für deine Hilfe!',
+        template: 'Wir prüfen deine Angaben und werden das Bier hinzufügen.',
+      });
+      alertPopup.then(function (res) {
+        $location.url('/tab/list/' + breweryId);
+      });
+    };
+
+  })
   .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover, $ionicUser) {
 
     // IF NO USERSETTING
@@ -588,6 +606,7 @@ angular.module('beeround.beer', [])
     $scope.activeWindow = 'beer';
 
 
+
     // Get beers
     breweryDB.getBeersByBrewery(breweryId).then(result => {
 
@@ -646,7 +665,7 @@ angular.module('beeround.beer', [])
         window.open('geo:' + lat + ',' + lng + '?q=' + name, '_system', 'location=yes')
 
       }
-    }
+    };
 
   })
 

@@ -10,7 +10,10 @@ angular.module('beeround.index', [])
   })
   .controller('HomeTabCtrl', function($scope) {
   })
+
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $state, $ionicUser) {
+  //$cordovaGoogleAnalytics.trackView('Home Screen');
+
 
   // GET CURRENT STATE
   $scope.$on('$stateChangeSuccess',
@@ -18,6 +21,7 @@ angular.module('beeround.index', [])
       $scope.current = toState.url;
     }
   )
+
 
 
 

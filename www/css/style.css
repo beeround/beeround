@@ -378,6 +378,10 @@ button.back-button{
     margin-right: auto;
     display: block;
 }
+
+.add-beer-icon{
+ float:right;
+}
 /*ITEM*/
 
 .item{
@@ -433,6 +437,10 @@ ion-item.item-thumbnail-left.item > img.small-img{
 
 ion-item.feed.item-thumbnail-left{
     min-height: 60px;
+}
+
+.events-item{
+  margin-bottom: 15px;
 }
 
 /*ICONS*/

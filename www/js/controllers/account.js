@@ -127,8 +127,12 @@ angular.module('beeround.account', [])
       };
 
       $ionicAuth.signup(details).then(function () {
-        alert("Sign Up");
-        $state.go("tabs.login");
+        let alertPopup = $ionicPopup.alert({
+          title: 'Du bist eingeloggt!',
+        });
+        alertPopup.then(function (res) {
+          $state.go("tabs.login");
+        });
 
         // `$ionicUser` is now registered
       }, function (err) {
@@ -234,12 +238,6 @@ angular.module('beeround.account', [])
 
         }
       }
-      /*if ($scope.editform.image !== undefined){
-       if($scope.editform.image.length !== 0 ) {
-       $ionicUser.details.username = $scope.editform.image;
-       $ionicUser.save();
-       console.log('Image geändert');
-       }}*/
     };
 
     $scope.showOptions = function() {
@@ -391,9 +389,14 @@ angular.module('beeround.account', [])
         if(res) {
           console.log($ionicUser.id);
           $ionicUser.delete();
-          alert("Dein Konto mit dem Namen "+ $scope.userdata.username + " wurde gelöscht." );
-          $ionicAuth.logout();
-          $state.go('tabs.login')
+          let alertPopup = $ionicPopup.alert({
+            title: 'Erfolgreich!',
+            template: "Dein Konto mit dem Namen "+ $scope.userdata.username + " wurde gelöscht.",
+          });
+          alertPopup.then(function (res) {
+            $ionicAuth.logout();
+            $state.go('tabs.login')
+          });
         } else {
 
         }
@@ -408,8 +411,13 @@ angular.module('beeround.account', [])
 
     $scope.logout = function () {
       $ionicAuth.logout();
-      alert("logged out");
-      $state.go('tabs.login')
+
+      let alertPopup = $ionicPopup.alert({
+        title: 'Du wurdest ausgeloggt!'
+      });
+      alertPopup.then(function (res) {
+        $state.go('tabs.login')
+      });
     };
 
   })

@@ -170,12 +170,21 @@ angular.module('breweryDB.service', [])
         },
 
         putBeerDetails: function (data) {
+           $http.put('http://api.brewerydb.com/v2/beer/' + data.beerid + '?key=7802f26125b23378098b3c32911adcce', data).then(result => {
+              console.log(result);
+           });
+        },
+
+        postBeer: function (data) {
           console.log(data);
 
-          // $http.put('http://api.brewerydb.com/v2/beer/' + data.beerid + '?key=7802f26125b23378098b3c32911adcce', data).then(result => {
-          //    console.log(result);
+          // $http.post('http://api.brewerydb.com/v2/beers?key=7802f26125b23378098b3c32911adcce', data).then(result => {
+          //   console.log(result.data);
+          // }, err => {
+          //   console.log(err);
           // });
         },
+
 
         // getBeerStyles: function () {
         //   return $http.get('http://api.brewerydb.com/v2/styles?key=7802f26125b23378098b3c32911adcce').then(function (res) {
