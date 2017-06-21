@@ -595,11 +595,12 @@ angular.module('beeround.account', [])
 
     beeroundService.getUserActivities($ionicUser.id).then(result => {
       $scope.userActivities = result;
+      console.log($scope.userActivities);
     }, err => {
 
       //TODO Error Handling
     });
-    console.log($scope.userActivities);
+
 
   })
 

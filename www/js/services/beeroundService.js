@@ -309,7 +309,7 @@ angular.module('beeround.service', [])
 
 
         getUserActivities: function (uid) {
-          return $http.get('http://www.beeround.de/api/activities?transform=1&filter=userid,eq,' + uid).then(result => {
+          return $http.get('http://www.beeround.de/api.php/activities?transform=1&filter=userid,eq,' + uid).then(result => {
             return result.data.activities[0];
           })
         }

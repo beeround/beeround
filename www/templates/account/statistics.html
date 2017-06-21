@@ -2,25 +2,25 @@
 
   <ion-content>
     <ion-item class="item">
+      <p class="headline"> Fakten</p>
       <div class="row divider" style="margin-bottom: 20px; padding-bottom: 15px;">
+
+
         <div class="col cards-statistic">
-          <h2>{{data[0][5]}} </h2>
-          <p> Biere im letzten Monat</p>
-          <!-- <p ng-show="data[0][5]==0" class="ng-binding text"> Du hast in diesem Monat noch kein Bier getrunken</p>
-          <p ng-show="data[0][5]== 1" class="ng-binding text"> Du hast in diesem Monat erst 1 Bier getrunken</p>
-          <p ng-show="data[0][5]>1" class="ng-binding text"> Du hast in diesem Monat {{data[0][5]}} Biere getrunken</p> -->
+          <h2>{{userActivities.beercount}} </h2>
+          <p> Biere getrunken</p>
         </div>
         <div class="col cards-statistic">
-          <h2>{{data[0][5]}} </h2>
-          <p> Biere im letzten halben Jahr</p>
+          <h2>{{userActivities.differentbeerscount}} </h2>
+          <p> Sorten getrunken</p>
         </div>
         <div class="col cards-statistic">
-          <h2>{{data[0][5]}} </h2>
-          <p> Biere insgesamt</p>
+          <h2>{{userActivities.commentcount}} </h2>
+          <p> Biere kommentiert</p>
         </div>
       </div>
 
-      <p> Graphische Auswertung</p>
+      <p> Letzte Biere</p>
     <div class="item row divider statistic">
 
     <canvas id="line" class="chart chart-line item" chart-data="data"
