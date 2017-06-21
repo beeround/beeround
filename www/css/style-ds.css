@@ -119,10 +119,6 @@ ion-item.brown-background > label {
   width: 40px;
 }
 
-.item p:last-child {
-  padding-bottom: 5px;
-}
-
 .detailbox{
   padding-left: 30px;
   border-radius: 5px;
@@ -161,4 +157,62 @@ ion-item.brown-background > label {
 
 .detailbox div:last-child{
   padding-top: 10px;
+}
+
+p.beer-number {
+  padding-top: 11px;
+  font-size: 30px;
+  color: #F1A435;
+}
+
+.count-beer {
+  float: right;
+}
+
+.beer-info{
+  float: left;
+}
+
+i.icon-beerstory {
+  color: #F1A435;
+  font-size: 20px;
+}
+
+i.icon-beerstory.ion-ios-pint-outline {
+  padding-left: 4px;
+}
+
+i.icon-beerstory.ion-ios-location-outline {
+  padding-left: 2px;
+}
+
+.statistic {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  margin-top: 20px !important;
+}
+
+p.text {
+  white-space: pre-line;
+}
+
+.cards-statistic {
+  margin: 10px 5px 10px 0px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.cards-statistic p {
+  white-space: pre-line;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.cards-statistic h2 {
+  white-space: pre-line;
+  text-align: center;
+  font-size: 45px;
+  padding: 5px 10px 0px 10px;
+  color:#F1A435;
 }

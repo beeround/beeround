@@ -1,9 +1,36 @@
 <ion-view view-title="Statistik">
+
   <ion-content>
-    <h1>Statistik</h1>
-    <canvas id="line" class="chart chart-line" chart-data="data"
+    <ion-item class="item">
+      <div class="row divider" style="margin-bottom: 20px; padding-bottom: 15px;">
+        <div class="col cards-statistic">
+          <h2>{{data[0][5]}} </h2>
+          <p> Biere im letzten Monat</p>
+          <!-- <p ng-show="data[0][5]==0" class="ng-binding text"> Du hast in diesem Monat noch kein Bier getrunken</p>
+          <p ng-show="data[0][5]== 1" class="ng-binding text"> Du hast in diesem Monat erst 1 Bier getrunken</p>
+          <p ng-show="data[0][5]>1" class="ng-binding text"> Du hast in diesem Monat {{data[0][5]}} Biere getrunken</p> -->
+        </div>
+        <div class="col cards-statistic">
+          <h2>{{data[0][5]}} </h2>
+          <p> Biere im letzten halben Jahr</p>
+        </div>
+        <div class="col cards-statistic">
+          <h2>{{data[0][5]}} </h2>
+          <p> Biere insgesamt</p>
+        </div>
+      </div>
+
+      <p> Graphische Auswertung</p>
+    <div class="item row divider statistic">
+
+    <canvas id="line" class="chart chart-line item" chart-data="data"
             chart-labels="labels" chart-series="series" chart-options="options"
             chart-dataset-override="datasetOverride" chart-click="onClick">
     </canvas>
+
+    </div>
+
+
+    </ion-item>
   </ion-content>
 </ion-view>

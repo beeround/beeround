@@ -1,23 +1,23 @@
 <ion-view  cache-view="false" view-title="Meine Biere">
   <ion-content>
-    <h1>Meine Biere</h1>
-
     <ion-list>
 
-      <ion-item class="small-thumbnail-left divider" ng-repeat="beer in beerList">
+      <ion-item class="card event-card item" ng-repeat="beer in beerList">
 
         <div class="row">
-          <div class="col-60">
-            <p>{{beer.beername}}</p>
-            <p>{{beer.breweryname}}</p>
+          <div class="col col-20">
+            <p class="beer-number ng binding">{{beer.count}}</p>
           </div>
-          <div class="col-20">
-            <p>{{beer.count}}</p>
+          <div class="col col-80">
+            <span class="beer-info">
+              <h2>{{beer.beername}}</h2>
+              <p class="ng-binding">{{beer.breweryname}}</p></span>
+            <span class="count-beer" ng-hide="isLocked">
+              <button ng-disabled="isLocked" ng-click="logBeer(beer.beerid,beer.breweryname, beer.beername)" class="control" >+</button>
+            </span>
           </div>
-          <div class="col-20">
-            <button ng-disabled="isLocked" ng-click="logBeer(beer.beerid,beer.breweryname, beer.beername)" class="control" >+</button>
-          </div>
-        </div>
+
+
         </div>
 
       </ion-item>

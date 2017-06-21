@@ -484,45 +484,45 @@ angular.module('beeround.account', [])
       let MonthString = "";
       switch (monthNumber){
         case 0:
-          MonthString = "Januar";
+          MonthString = "Jan";
           break;
         case 1:
-          MonthString = "Februar";
+          MonthString = "Feb";
           break;
         case 2:
-          MonthString = "März";
+          MonthString = "Mär";
           break;
         case 3:
-          MonthString = "April";
+          MonthString = "Apr";
           break;
         case 4:
           MonthString = "Mai";
           break;
         case 5:
-          MonthString = "Juni";
+          MonthString = "Jun";
           break;
         case 6:
-          MonthString = "Juli";
+          MonthString = "Jul";
           break;
         case 7:
         case -5:
-          MonthString = "August";
+          MonthString = "Aug";
           break;
         case 8:
         case -4:
-          MonthString = "September";
+          MonthString = "Sep";
           break;
         case 9:
         case -3:
-          MonthString = "Oktober";
+          MonthString = "Okt";
           break;
         case 10:
         case -2:
-          MonthString = "November";
+          MonthString = "Nov";
           break;
         case 11:
         case -1:
-          MonthString = "Dezember";
+          MonthString = "Dez";
           break;
       }
       return MonthString;
@@ -551,9 +551,11 @@ angular.module('beeround.account', [])
 
     $scope.labels = [ getMonthString((currentMonth -5)), getMonthString((currentMonth -4)), getMonthString((currentMonth -3)), getMonthString((currentMonth -2)), getMonthString((currentMonth -1)), getMonthString(currentMonth)];
     $scope.series = ['Biere'];
+
     $scope.data = [
       statisticData,
     ];
+    console.log($scope.data);
     $scope.onClick = function (points, evt) {
       console.log(points, evt);
     };
