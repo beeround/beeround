@@ -4,7 +4,7 @@
     <ion-item>
     <!--<h1>{{beer.nameDisplay}}</h1> -->
 
-    <div class="rating">
+    <div class="rating item">
       <h1>{{beer.nameDisplay}}</h1>
       <div class="row">
         <div class="col col-20 text-center">
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-      <div class="list">
+      <div class="list legend-rating">
         <label class="item item-input item-floating-label edit-beer">
           <input class="edit-input" type="text" placeholder="Titel deiner Bewertung" ng-model="form.commentTitle">
         </label>
@@ -39,7 +39,7 @@
         <div ng-show="characteristicsWindow" class="characteristics">
           <div class="row">
             <div class="col-75 col-offset-25">
-              <div class="row">
+              <div class="row legend-rating">
                 <div class="col"><p style="text-align: left">wenig</p></div>
                 <div class="col"><p style="text-align: center">0</p></div>
                 <div class="col"><p style="text-align: right">sehr</p></div>
@@ -103,5 +103,7 @@
       </ion-modal-view>
     </script>
   </ion-content>
+
+
 
 </ion-view>

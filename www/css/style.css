@@ -372,7 +372,8 @@ button.back-button{
 .button-block{
     font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
+    margin-left: 0px;
 }
 
 
@@ -703,7 +704,7 @@ p.characteristicsInfo{
     width: 14px;
     height: 14px;
     top:-5px;
-    margin-left: 7px;
+    margin-left: 2px;
 }
 .rzslider .rz-pointer:after {
     background-color: none;
@@ -711,13 +712,14 @@ p.characteristicsInfo{
 }
 .rzslider .rz-tick {
     background:#C8C6C5;
+    margin-left: 2px;
 }
 
 .rzslider .rz-pointer.rz-active:after{
     background: #FFFFFF;
 }
 .rzslider {
-    margin: 15px 0 35px 0;
+    margin: 12px 0 12px 0;
     font-size: 10px;
 }
 
@@ -882,4 +884,13 @@ textarea.commentText{
 
 .information{
     padding-left: 6px;
+}
+
+.legend-rating > div > p{
+    font-size: 12px;
+}
+
+div.list.legend-rating{
+    padding: 0px;
+    margin: 5px;
 }
