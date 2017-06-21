@@ -186,16 +186,20 @@ angular.module('beeround.account', [])
 
   })
 
-  .controller('loginCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $state, $ionicPopup, $stateParams) {
+  .controller('loginCtrl', function (beeroundService, $scope, $http, $ionicAuth, $ionicUser, $state, $ionicPopup, $stateParams) {
     $scope.form = [];
+
 
     $scope.login = function () {
       let details = {'email': $scope.form.email, 'password': $scope.form.password};
 
 
       $ionicAuth.login('basic', details).then(function () {
-        //SUCCESS
-        $state.go("tabs.profile");
+
+        beeroundService.postLogin($ionicUser.id).then(function () {
+          //SUCCESS
+          $state.go("tabs.profile");
+        })
 
       }, function (err) {
         let alertPopup = $ionicPopup.alert({
@@ -212,11 +216,17 @@ angular.module('beeround.account', [])
   .controller('profilCtrl', function ($location, $scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, $cordovaFileTransfer, beeroundService, $cordovaCamera, $ionicActionSheet) {
     $scope.userdata = $ionicUser.details;
 
+    beeroundService.getUserActivities($ionicUser.id).then(result => {
+      $scope.userActivities = result;
+    }, err => {
+
+      //TODO Error Handling
+    });
+
 
     $scope.editform = [];
 
     $scope.editProfile = function () {
-      console.log($scope.editform);
 
       if ($scope.editform.email !== undefined) {
         if ($scope.editform.email.length !== 0) {
@@ -580,7 +590,6 @@ angular.module('beeround.account', [])
 
   .controller('myTrophiesCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet) {
 
-    alert("Tropähen")
   })
 
 

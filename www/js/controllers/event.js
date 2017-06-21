@@ -14,8 +14,10 @@ angular.module('beeround.event', [])
       //Send Mail to Event organizer
 
       $scope.sendMail = function (mailAdress) {
-
-          window.open("mailto:"+mailAdress, '_self');
+        if($ionicUser.id){
+          beeroundService.postContact($ionicUser.id);
+        }
+        window.open("mailto:"+mailAdress, '_self');
       };
 
 
@@ -40,6 +42,12 @@ angular.module('beeround.event', [])
               formattedNumber = formattedNumber.replace('+49', '0');
           }
           console.log(formattedNumber);
+
+        // Log activity
+        if($ionicUser.id){
+          beeroundService.postContact($ionicUser.id);
+        }
+
           window.open("tel://"+formattedNumber, '_system', 'location=yes');
       };
 
@@ -49,7 +57,7 @@ angular.module('beeround.event', [])
           console.log(street, streetnumber, postal_code);
           window.open('https://www.google.com/maps/dir/Current+Location/' + street + streetnumber +', ' + postal_code, '_system');
 
-      }
+      };
 
 
     $scope.createEvent = function () {
@@ -64,7 +72,16 @@ angular.module('beeround.event', [])
         startDate: new Date(($filter('date')($scope.event.start, 'yyyy-MM-dd HH:mm:ss Z'))),
         endDate: new Date(($filter('date')($scope.event.end, 'yyyy-MM-dd HH:mm:ss Z')))
       }).then(function (result) {
-        alert("PROST!")
+
+        // Log activity
+        if($ionicUser.id){
+          beeroundService.postEvent($ionicUser.id);
+        }
+
+        //TODO Feedback
+        alert("PROST!");
+
+
       }, function (err) {
         alert("Hinzufügen fehlgeschlagen")
       })

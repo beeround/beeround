@@ -275,7 +275,45 @@ angular.module('beeround.service', [])
             return result.data.drinkinghabits.length;
 
           })
+        },
+
+        postLogin: function (uid) {
+          let data = {
+            userid: uid
+          };
+
+          return $http.post('http://www.beeround.de/api/loginstatistics', data).then(result => {
+            return result;
+          });
+        },
+
+        postContact: function (uid) {
+          let data = {
+            userid: uid
+          };
+
+          return $http.post('http://www.beeround.de/api/contacted', data).then(result => {
+            return result;
+          });
+        },
+
+        postEvent: function (uid) {
+          let data = {
+            userid: uid
+          };
+
+          return $http.post('http://www.beeround.de/api/eventdownloads', data).then(result => {
+            return result;
+          });
+        },
+
+
+        getUserActivities: function (uid) {
+          return $http.get('http://www.beeround.de/api/activities?transform=1&filter=userid,eq,' + uid).then(result => {
+            return result.data.activities[0];
+          })
         }
+
       }
   }
   ]);

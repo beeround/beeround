@@ -21,9 +21,9 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
-
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
+
 
     });
   })

@@ -651,6 +651,9 @@ angular.module('beeround.beer', [])
         formattedNumber = formattedNumber.replace('+49', '0');
       }
       console.log(formattedNumber);
+      if($ionicUser.id){
+        beeroundService.postContact($ionicUser.id);
+      }
       window.open("tel://" + formattedNumber, '_system', 'location=yes');
     };
 
