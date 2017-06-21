@@ -32,6 +32,24 @@ angular.module('beeround.beer', [])
      $scope.appBackground[0].setAttribute('class', 'view appBackground');
     };
 
+    $ionicPopover.fromTemplateUrl('information.html', {
+
+      scope: $scope
+    }).then(function (information) {
+      $scope.information = information;
+    });
+
+    $scope.openInformation = function () {
+      $scope.information.show();
+      $scope.appBackground = document.getElementsByClassName('appBackground');
+      $scope.appBackground[0].setAttribute('class', 'view blur');
+    };
+    $scope.closeInformation = function () {
+      $scope.information.hide();
+      $scope.appBackground = document.getElementsByClassName('blur');
+      $scope.appBackground[0].setAttribute('class', 'view appBackground');
+    };
+
 
     // TABS
     $scope.tabs = [

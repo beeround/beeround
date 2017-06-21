@@ -572,7 +572,6 @@ angular.module('beeround.account', [])
     $scope.data = [
       statisticData,
     ];
-    console.log($scope.data);
     $scope.onClick = function (points, evt) {
       console.log(points, evt);
     };
@@ -593,6 +592,15 @@ angular.module('beeround.account', [])
         ]
       }
     };
+
+    beeroundService.getUserActivities($ionicUser.id).then(result => {
+      $scope.userActivities = result;
+    }, err => {
+
+      //TODO Error Handling
+    });
+    console.log($scope.userActivities);
+
   })
 
   .controller('myTrophiesCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet) {

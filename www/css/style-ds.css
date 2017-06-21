@@ -221,3 +221,11 @@ p.text {
   padding: 5px 10px 0px 10px;
   color:#F1A435;
 }
+
+.button-block{
+  height: 40px;
+}
+
+.information-box {
+  margin-top: 80px;
+}

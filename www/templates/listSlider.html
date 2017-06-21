@@ -1,4 +1,8 @@
 <ion-view title="beeround">
+  <ion-nav-buttons side="left">
+    <span class="button button-icon button-clear ion-ios-information-empty" ng-click="openInformation()">
+    </span>
+  </ion-nav-buttons>
   <ion-nav-buttons side="right">
     <span class="button button-icon button-clear ion-android-more-vertical" ng-click="openPopover()">
     </span>
@@ -251,6 +255,32 @@
 
         </div>
       </ion-content>
+      </ion-popover-view>
+    </script>
+    <script id="information.html" type="text/ng-template">
+      <ion-popover-view>
+
+        <ion-content>
+
+          <!--Filter, in which radius the brewery should be away from the user-->
+          <div  class="overlay" ng-click="closeInformation()"></div>
+          <div class="card" >
+            <i ng-click="closeInformation()" class="icon ion-close-round"></i>
+
+            <div class="information-box">
+
+            <button class="button-block"> Impressum </button>
+            <button class="button-block"> Datenschutz </button>
+            <button class="button-block"> Feedback geben </button>
+            <button class="button-block"> App bewerten </button>
+            <button class="button-block"> Rechtliches </button>
+            </div>
+          </div>
+
+
+
+
+        </ion-content>
       </ion-popover-view>
     </script>
 
