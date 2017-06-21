@@ -64,8 +64,9 @@ ion-item.brown-background > label {
   z-index: 2;
   font-size: 25px;
   position: absolute;
-  left: 211px;
-  top: 89px;
+  left: 95px;
+  top: 95px;
+  float: left;
 
 }
 

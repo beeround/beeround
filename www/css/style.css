@@ -228,6 +228,14 @@ h3{
 
 }
 
+h3.yellow{
+    padding-top: 0px;
+    margin-top: -6px;
+    margin-bottom: 12px;
+}
+
+
+
 h4{
     color: #666;
 }
@@ -248,6 +256,10 @@ a{
 
 p{
     font-size: 12px;
+}
+
+span{
+    white-space: inherit;
 }
 
 .yellow-link{
@@ -341,6 +353,12 @@ button.back-button{
     border-color: #F1A435;
 }
 
+.invert-button:active {
+    background-color: #ffffff;
+    color: #F1A435;
+    border-color: #F1A435;
+}
+
 
 .button-block{
     font-weight: bold;
@@ -382,7 +400,6 @@ a.item {
 
 a .item .divider{
     border-bottom: 1px solid #ddd;
-
 }
 
 
@@ -714,6 +731,7 @@ p.characteristicsInfo{
     background-position: bottom;
     background-size: 60%;
     margin-bottom: 70px;
+    position: absolute;
 }
 
 
@@ -732,14 +750,7 @@ ion-content.login label.item-input{
 
 /*PROFIL*/
 
-.profilepicture{
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    min-width: 100px;
-    padding-top: 20px;
 
-}
 
 .signup_image{
     width: 100px;
@@ -749,7 +760,9 @@ ion-content.login label.item-input{
     margin-left: auto;
 }
 
-.circleimage{
+
+
+.profilepicture{
     width: 100px;
     height: auto;
     background-size: cover;
@@ -757,6 +770,10 @@ ion-content.login label.item-input{
     border-radius: 100px;
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
+    margin-right: 20px;
+    margin-top: 20px;
+    float: left;
+
 }
 
 .small-thumbnail-left{
@@ -774,6 +791,25 @@ ion-item.small-thumbnail-left > p i.icon.ion-chevron-right:before  {
     transform: translate(0px, 0px);
 }
 
+span.profile-overview{
+    color: #C8C6C5;
+    font-size: 18px;
+    padding-right: 35px;
+    font-weight: bold;
+    float: left;
+    text-align: center;
+line-height: 14px;
+}
+
+span.profile-overview >p {
+    font-size: 10px;
+    font-weight: normal;
+}
+
+.profile-header{
+    padding-bottom: 40px;
+}
+
 
 /*EVENT*/
 
@@ -787,7 +823,8 @@ ion-item.event-card{
 }
 
 p.event-price{
-    font-size: 18px;
+    font-size: 16px;
     margin-top: 18px;
 }
+
 

@@ -43,6 +43,15 @@ angular.module('beeround.event', [])
           window.open("tel://"+formattedNumber, '_system', 'location=yes');
       };
 
+      // Navigate to location
+      $scope.navigateGoogleMaps = function (street, streetnumber, postal_code) {
+
+          console.log(street, streetnumber, postal_code);
+          window.open('https://www.google.com/maps/dir/Current+Location/' + street + streetnumber +', ' + postal_code, '_system');
+
+      }
+
+
     $scope.createEvent = function () {
 
       console.log(new Date(($filter('date')($scope.event.start, 'medium', '+0200'))));
