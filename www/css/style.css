@@ -348,25 +348,19 @@ button.back-button{
     font-size: 30px;
 }
 
-.invert-button  {
+.invert-button, .invert-button:focus  {
     background-color: #F1A435;
     color:#ffffff;
     min-width: 45px;
     min-height: 40px;
-
 }
 
-.invert-button:hover{
+.invert-button:hover, .invert-button:active{
     background-color: #ffffff;
     color:#F1A435;
     border-color: #F1A435;
 }
 
-.invert-button:active {
-    background-color: #ffffff;
-    color: #F1A435;
-    border-color: #F1A435;
-}
 
 
 .button-block{
@@ -707,7 +701,7 @@ p.characteristicsInfo{
     margin-left: 2px;
 }
 .rzslider .rz-pointer:after {
-    background-color: none;
+    background-color: transparent;
     border: none;
 }
 .rzslider .rz-tick {
@@ -878,7 +872,7 @@ textarea.commentText{
     background: rgba(200, 198, 197, 0.3);
     border-radius: 7px;
     padding: 12px;
-    height:120px;
+    height:110px;
     margin-top: 10px;
 }
 
@@ -893,4 +887,8 @@ textarea.commentText{
 div.list.legend-rating{
     padding: 0px;
     margin: 5px;
+}
+
+div.row.legend-rating{
+    padding-bottom: 0px;
 }
