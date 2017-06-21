@@ -29,10 +29,9 @@ angular.module('beeround.index', [])
       id: 1,
       title: data.title,
       text: data.text,
+      every: 'minute'
 
-    }).then(function (result) {
-      console.log(result);
-    });
+    })
   };
 
 

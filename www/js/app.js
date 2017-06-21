@@ -11,7 +11,7 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
       // for form inputs)
 
       $cordovaGoogleAnalytics.startTrackerWithId('UA-101448824-1');
-      $cordovaGoogleAnalytics.trackView('tab-list');
+      //$cordovaGoogleAnalytics.trackView('tab-list');
 
       if (window.cordova && window.cordova.plugins.Keyboard) {
         //Change this to false to return accessory bar
@@ -23,20 +23,6 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
       }
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
-
-      let now = new Date().getTime();
-      let _10SecondsFromNow = new Date(now + 10 * 1000);
-      console.log(_10SecondsFromNow);
-
-      $cordovaLocalNotification.schedule({
-        id: 1,
-        title: 'Title here',
-        text: 'Text here',
-        at: _10SecondsFromNow
-      }).then(function (result) {
-        console.log("Now the result:");
-        console.log(result);
-      });
 
     });
 
