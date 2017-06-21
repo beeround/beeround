@@ -14,6 +14,17 @@ angular.module('beeround.beer', [])
         }
       });
 
+
+
+    //Send Feedback Mail to Event organizer
+
+    $scope.sendMail = function () {
+      if($ionicUser.id){
+        beeroundService.postContact($ionicUser.id);
+      }
+      window.open("mailto:mail@domi-speh.de", '_self');
+    };
+
     // Handle PopOver Filter
     $ionicPopover.fromTemplateUrl('filter.html', {
       scope: $scope
@@ -367,6 +378,8 @@ angular.module('beeround.beer', [])
         $location.url('/tab/list/' + breweryId);
       });
     };
+
+
 
   })
   .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover, $ionicUser) {
