@@ -4,7 +4,6 @@
   margin:0px;
   text-align: left;
 }
-
 .rating button.control {
   width: auto;
   height:auto;
@@ -19,6 +18,7 @@
 div.col.rating{
   text-align: left;
 }
+
 
 
 /*Luisa Code */
@@ -69,6 +69,18 @@ ion-item.brown-background > label {
   float: left;
 
 }
+.add_image_center{
+  color:#F1A435;
+  z-index: 2;
+  font-size: 25px;
+  position: absolute;
+  left: 212px;
+  top: 88px;
+  float: left;
+
+}
+
+
 
 /* Checkboxen*/
 
@@ -96,19 +108,12 @@ ion-item.brown-background > label {
   box-shadow: 0 1px 0 0 #F1A435 !important
 }
 
-.commentText{
-  padding-left: 0px;
-  height:120px;
-}
+
 
 .commentText textarea{
   height: 75%;
 }
 
-
-.ratingComment{
-  padding-top: 10px;
-}
 
 .rating .row {
   padding-top: 15px;

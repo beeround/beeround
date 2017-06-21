@@ -5,10 +5,10 @@
     <!--<h1>{{beer.nameDisplay}}</h1> -->
 
     <div class="rating">
-      <h3>{{beer.nameDisplay}}</h3>
+      <h1>{{beer.nameDisplay}}</h1>
       <div class="row">
         <div class="col col-20 text-center">
-          <button ng-click="negativeRating()" class="control">-</button>
+          <button ng-click="negativeRating()" class="button-brown">-</button>
         </div>
         <div class="col col-60 text-center">
           <i class="ion-ios-pint" ng-class="{'active': currentRating > 0}"></i>
@@ -18,70 +18,67 @@
           <i class="ion-ios-pint" ng-class="{'active': currentRating > 4}"></i>
         </div>
         <div class="col col-20 text-center">
-          <button ng-click="positivRating()" class="control" >+</button>
+          <button ng-click="positivRating()" class="button-brown" >+</button>
         </div>
       </div>
     </div>
 
-      <div class="list divider ratingComment">
-        <label class="item item-input item-floating-label commentTitle">
-          <span class="input-label">Titel deiner Bewertung</span>
-          <input type="text" placeholder="Titel deiner Bewertung" ng-model="form.commentTitle">
+      <div class="list">
+        <label class="item item-input item-floating-label edit-beer">
+          <input class="edit-input" type="text" placeholder="Titel deiner Bewertung" ng-model="form.commentTitle">
         </label>
-        <label class="item item-input item-floating-label commentText">
-          <span class="input-label"> Dein Kommentar </span>
-          <textarea placeholder="Dein Kommentar" ng-model="form.comment"></textarea>
+        <label class="item item-input item-floating-label edit-beer">
+          <textarea class="commentText" placeholder="Dein Kommentar" ng-model="form.comment"></textarea>
         </label>
       </div>
 
       <div class="information">
+      <button class="button-invert" ng-click="changeCharacteristicsWindow()"><i class="icon ion-android-favorite"></i> Eigenschaften</button>
+        <button class="button-invert" ng-click="showOptions()"><i class="icon ion-android-image"></i> Bild/Foto</button>
 
-      <!--CSS STYLE
-      .characteristics.row.col-25{ padding-top: 10px;}
-      .rzslider .rz-pointer {background-color:#F1A435;}
-      .rzslider .rz-pointer:after {background-color:#773D17;}
-      .rzslider .rz-tick {background:#C8C6C5;}
-      .rzslider {margin: 15px 0 35px 0;}
-      -->
-      <button ng-click="changeCharacteristicsWindow()"><i class="icon ion-android-favorite"></i> Eigenschaften</button>
-      <div ng-show="characteristicsWindow" class="characteristics">
-      <div class="row">
-        <div class="col col-25"><span>sueffig</span></div>
+        <div ng-show="characteristicsWindow" class="characteristics">
+          <div class="row">
+            <div class="col-75 col-offset-25">
+              <div class="row">
+                <div class="col"><p style="text-align: left">wenig</p></div>
+                <div class="col"><p style="text-align: center">0</p></div>
+                <div class="col"><p style="text-align: right">sehr</p></div>
+              </div>
+
+            </div>
+          </div>
+          <div class="row">
+        <div class="col col-25"><p>sueffig</p></div>
         <div class="col col-75">
-          <rzslider rz-slider-model="sliderSueffig.value"  rz-slider-options="slider.options"></rzslider>
+          <rzslider rz-slider-model="sliderSueffig.value"  rz-slider-options="slider.optionsmin"></rzslider>
         </div>
       </div>
       <div class="row">
-        <div class="col col-25"><span>malzig</span></div>
+        <div class="col col-25"><p>malzig</p></div>
         <div class="col col-75">
-          <rzslider rz-slider-model="sliderMalzig.value"  rz-slider-options="slider.options"></rzslider>
+          <rzslider rz-slider-model="sliderMalzig.value"  rz-slider-options="slider.optionsmin"></rzslider>
         </div>
       </div>
       <div class="row">
-        <div class="col col-25"><span>herb</span></div>
+        <div class="col col-25"><p>herb</p></div>
         <div class="col col-75">
-          <rzslider rz-slider-model="sliderHerb.value"  rz-slider-options="slider.options"></rzslider>
+          <rzslider rz-slider-model="sliderHerb.value"  rz-slider-options="slider.optionsmin"></rzslider>
         </div>
       </div>
       <div class="row">
-        <div class="col col-25"><span>erfrischend</span></div>
+        <div class="col col-25"><p>erfrischend</p></div>
         <div class="col col-75">
-          <rzslider rz-slider-model="sliderErfrischend.value"  rz-slider-options="slider.options"></rzslider>
+          <rzslider rz-slider-model="sliderErfrischend.value"  rz-slider-options="slider.optionsmin"></rzslider>
         </div>
       </div>
       </div>
 
 
-        <button ng-click="showOptions()"><i class="icon ion-android-image"></i> Bild/Foto</button>
-        <button><i class="icon ion-ios-location"></i> Ich trinke hier</button>
 
     </div>
 
 
-  <div class="comment divider">
-    <h3>Kommentar</h3>
-        <textarea name="comments" ng-model="form.comment" id="comment" cols="30" rows="10"></textarea>
-  </div>
+
 
     </ion-item>
 

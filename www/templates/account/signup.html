@@ -2,13 +2,15 @@
 
   <ion-content scroll="true" class="signup">
     <form ng-submit="signup()">
+      <div ng-click="showOptions()">
       <div class="signup_image text-center">
         <i ng-hide="srcImage" class="ion-ios-contact-outline"></i>
         <img ng-show="srcImage" ng-src="{{srcImage}}" width="100" height="100">
 
       </div>
-      <div class="add_image text-center">
-        <i class="ion-ios-plus" ng-click="showOptions()"></i>
+        <div class="add_image_center text-center">
+          <i class="ion-ios-plus"></i>
+        </div>
       </div>
 
       <div class="list list-inset">
@@ -28,7 +30,7 @@
       </div>
       <ion-item class="brown-background">
         <ion-checkbox ng-model="checked"
-                      ng-required="true" ng-value="'Y'">Ja, ich bestätige, dass ich mindestens 16 Jahre alt bin.
+                      ng-required="true" ng-value="'Y'" class="confirm-age">Ja, ich bestätige, dass ich mindestens 16 Jahre alt bin.
         </ion-checkbox>
         <button type="submit" ng-click="uploadImage(uploadme)" id="register" ng-disabled="!checked"
                 class="button border-button">Senden

@@ -23,13 +23,13 @@ angular.module('beeround.beer', [])
 
     $scope.openPopover = function () {
       $scope.popover.show();
-     // $scope.appBackground = document.getElementsByClassName('appBackground');
-     // $scope.appBackground[0].setAttribute('class', 'blur');
+      $scope.appBackground = document.getElementsByClassName('appBackground');
+     $scope.appBackground[0].setAttribute('class', 'view blur');
     };
     $scope.closePopover = function () {
       $scope.popover.hide();
-    //  $scope.appBackground = document.getElementsByClassName('blur');
-    //  $scope.appBackground[0].setAttribute('class', 'view appBackground');
+     $scope.appBackground = document.getElementsByClassName('blur');
+     $scope.appBackground[0].setAttribute('class', 'view appBackground');
     };
 
 
@@ -772,9 +772,26 @@ angular.module('beeround.beer', [])
           {value: 25},
           {value: 50, legend:'0'},
           {value: 75},
-          {value: 100, legend: 'viel'}
+          {value: 100, legend: 'sehr'}
         ],
+      },
+
+      optionsmin:{
+          floor: 0,
+          ceil: 100,
+          step: 25,
+          hidePointerLabels: true,
+          hideLimitLabels: true,
+          showTicks: true,
+          stepsArray: [
+              {value: 0},
+              {value: 25},
+              {value: 50},
+              {value: 75},
+              {value: 100}
+          ],
       }
+
     };
 
     $scope.positivRating = function () {

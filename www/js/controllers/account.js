@@ -73,7 +73,7 @@ angular.module('beeround.account', [])
             $scope.image = imageURL;
 
           }, err => {
-            alert("Fehler")
+            alert("Leider haben wir keinen Zugriff auf deine Fotos")
           });
 
         },500);
@@ -330,7 +330,7 @@ angular.module('beeround.account', [])
 
 
         }, err => {
-          alert("Fehler")
+          alert("Leider haben wir keinen Zugriff auf deine Fotos")
         });
 
       }, function(err) {
@@ -375,7 +375,7 @@ angular.module('beeround.account', [])
 
 
         }, err => {
-          alert("Fehler")
+          alert("Leider haben wir keinen Zugriff auf deine Kamera")
         });
 
       }, function(err) {
@@ -421,6 +421,13 @@ angular.module('beeround.account', [])
 
     $scope.logout = function () {
       $ionicAuth.logout();
+
+        let confirmPopup = $ionicPopup.alert({
+            title: 'Du hast dich erfolgreich ausgeloggt!',
+            button:
+                {text: 'ok'}
+        });
+      $state.go('tabs.login')
 
       let alertPopup = $ionicPopup.alert({
         title: 'Du wurdest ausgeloggt!'

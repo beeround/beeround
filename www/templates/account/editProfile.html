@@ -5,19 +5,20 @@
   </ion-nav-buttons>
 
   <ion-content>
-    <form ng-submit="editProfile()">
+    <form class="edit-profile" ng-submit="editProfile()">
       <div class="list list-inset">
-        <label class="item item-input item-stacked-label">
-          <span class="input-label">Email ändern</span>
-          <input ng-model="editform.email" name="email" placeholder="{{userdata.email}}" type="email">
+        <label class="item item-input item-stacked-label edit-profile">
+          <p class="input-label">Email ändern</p>
+          <input class="edit-input" ng-model="editform.email" name="email" placeholder="{{userdata.email}}" type="email">
         </label>
 
-        <label class="item item-input item-stacked-label">
-          <span class="input-label">Passwort ändern</span>
-          <input ng-model="editform.password" name="password" placeholder="**********" type="password">
+        <label class="item item-input item-stacked-label edit-profile">
+          <p class="input-label">Passwort ändern</p>
+          <input class="edit-input" ng-model="editform.password" name="password" placeholder="**********" type="password">
         </label>
-        <button type="submit" class="button border-button">Absenden</button>
+        <button type="submit" class="button-block edit-profile">Absenden</button>
       </div>
     </form>
   </ion-content>
 </ion-view>
+
