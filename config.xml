@@ -72,9 +72,10 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
-    <plugin name="cordova-plugin-geolocation" spec="~2.4.2" />
-    <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
-    <plugin name="cordova-plugin-calendar" spec="https://github.com/EddyVerbruggen/Calendar-PhoneGap-Plugin.git" />
     <allow-navigation href="http://10.10.90.239:8100" />
-    <plugin name="cordova-plugin-google-analytics" spec="https://github.com/danwilson/google-analytics-plugin.git" />
+    <plugin name="cordova-plugin-calendar" spec="git+https://github.com/EddyVerbruggen/Calendar-PhoneGap-Plugin.git" />
+    <plugin name="cordova-plugin-geolocation" spec="~2.4.2" />
+    <plugin name="cordova-plugin-google-analytics" spec="git+https://github.com/danwilson/google-analytics-plugin.git" />
+    <plugin name="de.appplant.cordova.plugin.local-notification" spec="git+https://github.com/katzer/cordova-plugin-local-notifications.git" />
+    <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
 </widget>

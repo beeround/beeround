@@ -127,10 +127,12 @@ angular.module('beeround.account', [])
       };
 
       $ionicAuth.signup(details).then(function () {
+
         let alertPopup = $ionicPopup.alert({
-          title: 'Du bist eingeloggt!',
+          title: 'Deine Registrierung war erfolgreich!',
         });
         alertPopup.then(function (res) {
+
           $state.go("tabs.login");
         });
 
@@ -186,7 +188,7 @@ angular.module('beeround.account', [])
 
   })
 
-  .controller('loginCtrl', function (beeroundService, $scope, $http, $ionicAuth, $ionicUser, $state, $ionicPopup, $stateParams) {
+  .controller('loginCtrl', function ($rootScope, beeroundService, $scope, $http, $ionicAuth, $ionicUser, $state, $ionicPopup, $stateParams) {
     $scope.form = [];
 
 
@@ -197,6 +199,14 @@ angular.module('beeround.account', [])
       $ionicAuth.login('basic', details).then(function () {
 
         beeroundService.postLogin($ionicUser.id).then(function () {
+
+          //Notification Test
+          let test = {
+            title: "Testtitel",
+            text: "Das ist ein Test"
+          };
+          $rootScope.scheduleSingleNotification(test);
+
           //SUCCESS
           $state.go("tabs.profile");
         })
@@ -414,11 +424,6 @@ angular.module('beeround.account', [])
 
     };
 
-
-    //Password Reset Url
-    $scope.passwordResetUrl = $ionicAuth.passwordResetUrl;
-    console.log($scope.passwordResetUrl);
-
     $scope.logout = function () {
       $ionicAuth.logout();
 
@@ -427,7 +432,7 @@ angular.module('beeround.account', [])
             button:
                 {text: 'ok'}
         });
-      $state.go('tabs.login')
+      $state.go('tabs.login');
 
       let alertPopup = $ionicPopup.alert({
         title: 'Du wurdest ausgeloggt!'

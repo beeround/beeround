@@ -5,13 +5,13 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
 angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 'ngMap', 'google.places', 'beeround.index', 'beeround.beer', 'beeround.account', 'beeround.event', 'breweryDB.service', 'beeround.service', 'angular.filter', 'rzModule', 'chart.js'])
-  .run(function ($ionicPlatform, $state, $stateParams, $rootScope, $cordovaGoogleAnalytics) {
+  .run(function ($ionicPlatform, $state, $stateParams, $rootScope, $cordovaLocalNotification, $cordovaGoogleAnalytics) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
 
-      //$cordovaGoogleAnalytics.startTrackerWithId('UA-101430108-1');
-      //$cordovaGoogleAnalytics.trackView('tab-list');
+      $cordovaGoogleAnalytics.startTrackerWithId('UA-101448824-1');
+      $cordovaGoogleAnalytics.trackView('tab-list');
 
       if (window.cordova && window.cordova.plugins.Keyboard) {
         //Change this to false to return accessory bar
@@ -24,7 +24,24 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
 
+      let now = new Date().getTime();
+      let _10SecondsFromNow = new Date(now + 10 * 1000);
+      console.log(_10SecondsFromNow);
 
+      $cordovaLocalNotification.schedule({
+        id: 1,
+        title: 'Title here',
+        text: 'Text here',
+        at: _10SecondsFromNow
+      }).then(function (result) {
+        console.log("Now the result:");
+        console.log(result);
+      });
+
+    });
+
+    $ionicPlatform.on('resume', function(){
+      console.log("Resume")
     });
   })
 
