@@ -19,15 +19,16 @@ angular.module('beeround.beer', [])
     }).then(function (popover) {
       $scope.popover = popover;
     });
+
     $scope.openPopover = function () {
       $scope.popover.show();
-      $scope.appBackground = document.getElementsByClassName('appBackground');
-      $scope.appBackground[0].setAttribute('class', 'blur');
+     // $scope.appBackground = document.getElementsByClassName('appBackground');
+     // $scope.appBackground[0].setAttribute('class', 'blur');
     };
     $scope.closePopover = function () {
       $scope.popover.hide();
-      $scope.appBackground = document.getElementsByClassName('blur');
-      $scope.appBackground[0].setAttribute('class', 'view appBackground');
+    //  $scope.appBackground = document.getElementsByClassName('blur');
+    //  $scope.appBackground[0].setAttribute('class', 'view appBackground');
     };
 
 
@@ -56,6 +57,9 @@ angular.module('beeround.beer', [])
     // Start sorting function
     $scope.activeSorting = "distance";
     $scope.filterLocationType = "allLocationTypes";
+
+    // INIT filter
+    $scope.beerCategory = '';
 
 
     // Load breweries on start
@@ -185,6 +189,10 @@ angular.module('beeround.beer', [])
 
       $scope.filterLocationType = type;
 
+    };
+
+    $scope.setCategory = function (cat) {
+      $scope.beerCategory = cat;
     };
 
 

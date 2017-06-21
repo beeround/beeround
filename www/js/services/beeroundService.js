@@ -51,8 +51,12 @@ angular.module('beeround.service', [])
                   return $http.get('http://www.beeround.de/api/beers?transform=1&filter=beers.beerid,eq,' + beer.id).then(result => {
 
                     if (result.data.beers[0]) {
-
                       breweries[firstIndex].beers[secondIndex].rating = result.data.beers[0].avg_rating;
+                      breweries[firstIndex].beers[secondIndex].sueffig = result.data.beers[0].avg_sueffig;
+                      breweries[firstIndex].beers[secondIndex].malzig = result.data.beers[0].avg_malzig;
+                      breweries[firstIndex].beers[secondIndex].herb = result.data.beers[0].avg_herb;
+                      breweries[firstIndex].beers[secondIndex].erfrischend = result.data.beers[0].avg_erfrischend;
+
                       return beer
 
                     }

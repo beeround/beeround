@@ -113,7 +113,7 @@
             <ion-list ng-show="activeSorting == 'distance'">
               <ion-item ng-repeat="location in breweries">
 
-                <ion-item ng-repeat="beer in location.beers">
+                <ion-item ng-show="!beerCategory || beer[beerCategory] > 50" ng-repeat="beer in location.beers">
                   <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
                     <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
                     <h2>{{beer.name}}</h2>
@@ -137,7 +137,7 @@
 
 
             <ion-list>
-              <ion-item ng-repeat="beer in allBeers | orderObjectBy:activeSorting: (activeSorting == 'rating')" >
+              <ion-item  ng-show="!beerCategory || beer[beerCategory] > 50" ng-repeat="beer in allBeers | orderObjectBy:activeSorting: (activeSorting == 'rating')" >
               <ion-item>
                 <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
                   <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
@@ -239,6 +239,15 @@
             </button>
           </div>
 
+          <div ng-show="currentListView == 'Biere'">
+            <h3>Biereigenschaften</h3>
+            <button  ng-class="{'active' : beerCategory == ''}" ng-click="setCategory('')">Alle</button>
+            <button  ng-class="{'active' : beerCategory == 'sueffig'}" ng-click="setCategory('sueffig')">Süffig</button>
+            <button  ng-class="{'active' : beerCategory == 'malzig'}" ng-click="setCategory('malzig')">Malzig</button>
+            <button  ng-class="{'active' : beerCategory == 'herb'}" ng-click="setCategory('herb')">Herb</button>
+            <button  ng-class="{'active' : beerCategory == 'erfrischend'}" ng-click="setCategory('erfrischend')">Erfrischend</button>
+
+          </div>
 
         </div>
       </ion-content>

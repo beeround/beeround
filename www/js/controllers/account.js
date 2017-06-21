@@ -281,6 +281,10 @@ angular.module('beeround.account', [])
       $state.go('tabs.statistics');
     };
 
+    $scope.goToTrophies = function () {
+      $state.go('tabs.trophies');
+    };
+
     $scope.showLibrary = function () {
       let options = {
         quality: 100,
@@ -302,7 +306,14 @@ angular.module('beeround.account', [])
             userid: $ionicUser.id ,
             url: imageURL
           };
-          $http.post('http://www.beeround.de/api/changeuserimage', data);
+
+          $http.delete('http://www.beeround.de/api/changeuserimage/0');
+
+          $timeout(function () {
+            $http.post('http://www.beeround.de/api/changeuserimage', data);
+
+          },1000);
+
           $timeout(function () {
             $ionicUser.details.image = imageURL;
             $ionicUser.save();
@@ -341,7 +352,12 @@ angular.module('beeround.account', [])
             userid: $ionicUser.id ,
             url: imageURL
           };
-          $http.post('http://www.beeround.de/api/changeuserimage', data);
+
+          $http.delete('http://www.beeround.de/api/changeuserimage/0');
+
+          $timeout(function () {
+            $http.post('http://www.beeround.de/api/changeuserimage', data);
+          },1000);
 
           $timeout(function () {
             $ionicUser.details.image = imageURL;
@@ -395,29 +411,6 @@ angular.module('beeround.account', [])
       alert("logged out");
       $state.go('tabs.login')
     };
-
-
-// Handle PopOver
-    $ionicPopover.fromTemplateUrl('filter.html', {
-      scope: $scope
-    }).then(function (popover) {
-      $scope.popover = popover;
-    });
-
-
-    $scope.openPopover = function () {
-      $scope.popover.show();
-      $scope.appBackground = document.getElementsByClassName('appBackground');
-      $scope.appBackground[0].setAttribute('class', 'blur');
-    };
-
-
-    $scope.closePopover = function () {
-      $scope.popover.hide();
-      $scope.appBackground = document.getElementsByClassName('blur');
-      $scope.appBackground[0].setAttribute('class', 'view appBackground');
-    };
-
 
   })
 
@@ -574,6 +567,14 @@ angular.module('beeround.account', [])
       }
     };
   })
+
+  .controller('myTrophiesCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet) {
+
+    alert("Tropähen")
+  })
+
+
+
 ;
 
 

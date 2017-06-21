@@ -28,6 +28,14 @@ body{
     color: #000000; !important;
 }
 
+button[disabled], button[disabled]:hover {
+  cursor: default;
+  color: #C8C6C5;
+  opacity: 0.5;
+  background-color: white;
+}
+
+
 /*HEADER*/
 
 ion-header-bar.bar.bar-stable{
@@ -162,13 +170,19 @@ div.no-padding-right{
 
 /*POPOVER*/
 
+.popover {
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
 div.overlay{
     margin: 0px;
     width: 100%;
     height: 100%;
     background: rgba(255,255,255,0.7);
     position: relative;
-
 }
 
 

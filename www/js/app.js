@@ -60,7 +60,6 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
           }
         }
       })
-
       .state('tabs.addBeer', {
         url: '/details/beer/:breweryId/add',
         views: {
@@ -210,6 +209,25 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
         }
       }
     })
+
+      .state('tabs.trophies', {
+        url: '/account/trophies',
+        views: {
+          'tab-account': {
+            templateUrl: 'templates/account/trophies.html',
+            controller: 'myTrophiesCtrl'
+          }
+        },
+        onEnter: function($state, $ionicAuth, $ionicUser){
+
+          if (!$ionicUser.id) {
+            $state.transition.finally(() => {
+              $state.go('tabs.login')
+            });
+
+          }
+        }
+      })
 
       .state('tabs.login', {
         url: '/account/login',
