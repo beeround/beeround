@@ -4,11 +4,11 @@
     <ion-item>
     <form ng-submit="addBeer()">
       <div class="list list-inset">
-        <label class="item item-input item-stacked-label">
+        <label class="item item-input item-stacked-label input-field">
           <span class="input-label">Biername</span>
           <input ng-model="addBeerForm.name" placeholder="Bspw. Stuttgarter Hofbräu" name="name" type="text" required>
         </label>
-        <label class="item item-input item-select">
+        <label class="item item-input item-select item-stacked-label">
           <div class="input-label">
             Biersorten
           </div>
@@ -28,11 +28,11 @@
             <option ng-value="54">Rauchbier</option>
           </select>
         </label>
-        <label class="item item-input item-stacked-label">
+        <label class="item item-input item-stacked-label input-field">
           <span class="input-label">Promillegehalt</span>
           <input ng-model="addBeerForm.abv" placeholder="5.0" name="beerform.abv" type="text" required>
         </label>
-        <button type="submit" class="button button-dark">Bier hinzufügen</button>
+        <button type="submit" class="button border-button">Bier hinzufügen</button>
       </div>
     </form>
     </ion-item>

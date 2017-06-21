@@ -379,8 +379,6 @@ angular.module('beeround.beer', [])
       });
     };
 
-
-
   })
   .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover, $ionicUser) {
 
@@ -710,8 +708,25 @@ angular.module('beeround.beer', [])
 
     // Make User data output available in view
     $scope.$ionicUser = $ionicUser;
-    $scope.form = [];
 
+    $scope.typeOptions = [
+      {name: 'Bitte wählen', value: 'noData'},
+      {name: 'Pils', value: '75'},
+      {name: 'Weizenbier', value: '48'},
+      {name: 'Kristallweizen', value: '49'},
+      {name: 'Dunkles Weizen', value: '52'},
+      {name: 'Lager', value: '77'},
+      {name: 'Helles', value: '78'},
+      {name: 'Starkbier', value: '90'},
+      {name: 'Export', value: '79'},
+      {name: 'Kölsch', value: '45'},
+      {name: 'Schwarzbier', value: '84'},
+      {name: 'Märzen', value: '81'},
+      {name: 'Zwickelbier / Kellerbier ', value: '92'},
+      {name: 'Rauchbier', value: '54'}
+    ];
+
+    $scope.form = {type: $scope.typeOptions[0].value};
 
     // INIT RATE BEER
     $scope.characteristicsWindow = false;
@@ -729,6 +744,7 @@ angular.module('beeround.beer', [])
 
     breweryDB.getBeerDetails(beerId).then(result => {
       $scope.beer = result.data;
+      $scope.oldBeerName = $scope.beer.name
       $scope.beerform = [];
       $scope.beerform.name = $scope.beer.name;
 
@@ -748,7 +764,7 @@ angular.module('beeround.beer', [])
 
     beeroundService.getCharacteristicsByUser(beerId, $ionicUser.id).then(result => {
 
-      if((result.sueffig == 0 && result.malzig == 0 && result.herb == 0 && result.erfrischend == 0) || result.sueffig == undefined){
+      if ((result.sueffig == 0 && result.malzig == 0 && result.herb == 0 && result.erfrischend == 0) || result.sueffig == undefined) {
         $scope.sliderSueffig = {value: 50};
         $scope.sliderMalzig = {value: 50};
         $scope.sliderHerb = {value: 50};
@@ -801,7 +817,7 @@ angular.module('beeround.beer', [])
         stepsArray: [
           {value: 0, legend: 'wenig'},
           {value: 25},
-          {value: 50, legend:'0'},
+          {value: 50, legend: '0'},
           {value: 75},
           {value: 100, legend: 'sehr'}
         ],
@@ -1074,20 +1090,54 @@ angular.module('beeround.beer', [])
     $scope.editBeer = function () {
       let data = {
         beerid: beerId,
-        styleId: $scope.beerform.styleId,
+        styleId: $scope.form.type,
         name: $scope.beerform.name,
         abv: $scope.beerform.abv,
       };
 
-      breweryDB.putBeerDetails(data);
+      if ($scope.oldBeerName === $scope.beerform.name) {
+        let confirmPopup = $ionicPopup.confirm({
+          title: 'Gleicher Name?',
+          template: 'Der Name hat sich nicht geändert.',
+          okText: 'Richtig.',
+          cancelText: 'Möchte ich ändern!'
+        });
 
-      let alertPopup = $ionicPopup.alert({
-        title: 'Danke für deine Hilfe.',
-        template: 'Wir prüfen deine Anfrage und werden das Bier updaten, wenn alles passt!',
-      });
-      alertPopup.then(function (res) {
-        $location.url('/tab/details/beer/' + beerId);
-      });
+        confirmPopup.then(function (res) {
+          if (res) {
+            if ($scope.form.type === 'noData') {
+              $ionicPopup.alert({
+                title: 'Bitte wähle die Biersorte!',
+              });
+            } else {
+              breweryDB.putBeerDetails(data);
+              let alertPopup = $ionicPopup.alert({
+                title: 'Danke für deine Hilfe.',
+                template: 'Wir prüfen deine Anfrage und werden das Bier updaten!',
+              });
+              alertPopup.then(function (res) {
+                $location.url('/tab/details/beer/' + beerId);
+              });
+            }
+          }
+        });
+      }else{
+          if ($scope.form.type === 'noData') {
+            $ionicPopup.alert({
+              title: 'Bitte wähle die Biersorte!',
+            });
+          } else {
+            breweryDB.putBeerDetails(data);
+            let alertPopup = $ionicPopup.alert({
+              title: 'Danke für deine Hilfe.',
+              template: 'Wir prüfen deine Anfrage und werden das Bier updaten!',
+            });
+            alertPopup.then(function (res) {
+              $location.url('/tab/details/beer/' + beerId);
+            });
+          }
+
+      }
     };
 
     $scope.deleteBeer = function () {
