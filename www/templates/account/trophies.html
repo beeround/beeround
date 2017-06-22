@@ -5,13 +5,13 @@
         <div ng-show="allTrophys[0].appstart > 0" class="col"> <img src="../../img/icon_trophies/baby.png"/></div>
         <div ng-show="allTrophys[0].appstart == 0" class="col"> <img src="../../img/icon_trophies/lock.png"/></div>
         <div ng-show="allTrophys[0].beer >= 3" class="col"> <img src="../../img/icon_trophies/barrel.png"/></div>
-        <div ng-show="allTrophys[0].beer < 3" class="col"> <img src="../../img/icon_trophies/lock.png"/></div>
-        <div ng-show="allTrophys[0].beer > 0" class="col"> <img src="../../img/icon_trophies/beer.png"/></div>
-        <div ng-show="allTrophys[0].beer == 0" class="col"> <img src="../../img/icon_trophies/lock.png"/></div>
+        <div ng-show="allTrophys[0].beer <= 3" class="col"> <img src="../../img/icon_trophies/lock.png"/></div>
+        <div ng-show="allTrophys[0].beer > 2" class="col"> <img src="../../img/icon_trophies/beer.png"/></div>
+        <div ng-show="allTrophys[0].beer < 2" class="col"> <img src="../../img/icon_trophies/lock.png"/></div>
       </div>
       <div class="row">
-        <div ng-show="allTrophys[0].beer >= 2" class="col"> <img src="../../img/icon_trophies/beerglas.png"/></div>
-        <div ng-show="allTrophys[0].beer < 2" class="col"> <img src="../../img/icon_trophies/lock.png"/></div>
+        <div ng-show="allTrophys[0].beer > 0" class="col"> <img src="../../img/icon_trophies/beerglas.png"/></div>
+        <div ng-show="allTrophys[0].beer == 0" class="col"> <img src="../../img/icon_trophies/lock.png"/></div>
         <div ng-show="allTrophys[0].characteristics > 0" class="col"> <img src="../../img/icon_trophies/tester.png"/></div>
         <div ng-show="allTrophys[0].characteristics == 0" class="col"> <img src="../../img/icon_trophies/lock.png"/></div>
         <div ng-show="allTrophys[0].contact > 0" class="col"> <img src="../../img/icon_trophies/contact.png"/></div>
