@@ -125,7 +125,13 @@
         <h3>Kommentare</h3>
         <ion-item class="feed item-thumbnail-left divider" ng-repeat="comment in comments">
           <img class="small-img" ng-src="{{comment.userimage || 'img/no-image-placeholder.png'}}">
-          <p class="commentDate">{{comment.commentcreated | date : "dd.MM.yyyy - HH:mm" : '-0000'}}</p>
+          <div>
+
+          <p class="commentDate" ng-click="deleteComment(comment.commentid)">{{comment.commentcreated | date : "dd.MM.yyyy - HH:mm" : '-0000'}}
+            <i class="ion-trash-b" ng-show="comment.userid == $ionicUser.id" style="color:#C8C6C5"></i>
+          </p>
+
+          </div>
           <h4>{{comment.username}}</h4>
           <div ng-show="comment.image">
             <img ng-src="{{comment.image}}" alt="" width="250">

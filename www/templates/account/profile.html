@@ -1,7 +1,10 @@
 <ion-view cache-view="false"  hide-back-button="true"  view-title="Profil">
+    <ion-nav-buttons side="left">
+    <a class="button button-clear ion-log-out" ng-click="logout()"></a>
+    </ion-nav-buttons>
     <ion-nav-buttons side="right">
-    <a class="button  button-clear ion-edit" ng-href="#/tab/account/editProfile">
-    </a>
+        <a class="button  button-clear ion-edit" ng-href="#/tab/account/editProfile">
+        </a>
     </ion-nav-buttons>
   <ion-content>
 
@@ -53,10 +56,6 @@
 
             </ion-list>
 
-    </ion-item>
-
-    <ion-item class="bottom">
-      <button ng-click="logout()" class="button-block invert-button">Logout</button>
     </ion-item>
 
       <script id="filter.html" type="text/ng-template">
