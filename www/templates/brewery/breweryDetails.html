@@ -27,10 +27,10 @@
                 ng-class="{'active':activeWindow=='events'}">{{eventList.length}} Events
         </button>
 
-        <p ng-show="beerList">
+        <span ng-show="beerList">
         <button ng-show="activeWindow=='beer'" class="add-beer-icon ion-plus-round"
                 ng-click="openAddBeerView(brewery.id)"></button>
-        </p>
+        </span>
         <!--Auskommentieren, wenn Events hinzufügen dazu kommt-->
         <!--<button ng-show="activeWindow=='events'" class="add-beer-icon ion-plus-round"
                                                ng-click="openAddBeerView(brewery.id)"></button>-->
