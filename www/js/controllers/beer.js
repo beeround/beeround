@@ -31,7 +31,7 @@ angular.module('beeround.beer', [])
           });
         });
       }
-      window.open("mailto:mail@domi-speh.de", '_self');
+      window.open("mailto:mail@domi-speh.de", '_system');
     };
 
     // Handle PopOver Filter
