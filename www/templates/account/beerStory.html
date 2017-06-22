@@ -2,6 +2,13 @@
   <ion-content>
 
     <ion-list>
+      <ion-item ng-show="userBeerStory">
+        <div class="row">
+          <div class="col">
+            <p>Aktuell sind keine Biere in deiner Historie hinterlegt.</p>
+          </div>
+        </div>
+      </ion-item>
       <ion-item class="item item-thumbnail-left divider" ng-repeat="beer in userBeerStory">
         <div class="row">
           <div class="col col-10">

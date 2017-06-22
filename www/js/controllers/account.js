@@ -206,14 +206,6 @@ angular.module('beeround.account', [])
 
         beeroundService.postLogin($ionicUser.id).then(function () {
 
-          //Notification Test
-          /* let test = {
-           title: "Testtitel",
-           text: "Das ist ein Test"
-           };
-
-           $rootScope.scheduleSingleNotification(test);*/
-
           //SUCCESS
           $state.go("tabs.profile");
         })
@@ -230,24 +222,27 @@ angular.module('beeround.account', [])
     }
   })
 
-  .controller('profilCtrl', function ($location, $scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, $cordovaFileTransfer, beeroundService, $cordovaCamera, $ionicActionSheet, trophyService) {
+  .controller('profilCtrl', function ($rootScope, $location, $scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, $cordovaFileTransfer, beeroundService, $cordovaCamera, $ionicActionSheet, trophyService) {
     $scope.userdata = $ionicUser.details;
 
     beeroundService.getUserActivities($ionicUser.id).then(result => {
-      $scope.userActivities = result;
-      console.log(result);
-    }, err => {
 
-      // Set counter to 0
-      $scope.userActivities = {
-        beercount: 0,
-        ratingcount: 0
+      $scope.userActivities = result;
+
+      if(result.beercount == undefined){
+        $scope.userActivities.beercount = 0;
       }
+      if(result.ratingcount == undefined){
+        $scope.userActivities.ratingcount = 0;
+      }
+      if(result.logincount == 1 && !$rootScope.once){
+        $rootScope.once = true;
+        $rootScope.newTrophy('img/icon_trophies/baby.png', 1, 1, 'App Start');
+      }
+
     });
 
     trophyService.getTrophies($ionicUser.id).then(result => {
-      console.log(result);
-
 
       $scope.trophies = result[0].appstart+result[0].rating+result[0].event+result[0].differentbeers+result[0].contact+result[0].comment+result[0].characteristics+result[0].beer;
 
@@ -305,7 +300,6 @@ angular.module('beeround.account', [])
       });
 
     };
-
 
     $scope.goToMyBeers = function () {
       $state.go('tabs.myBeers');
@@ -425,7 +419,6 @@ angular.module('beeround.account', [])
         });
       });
     };
-
 
     $scope.deleteUser = function () {
 
@@ -642,8 +635,22 @@ angular.module('beeround.account', [])
     };
 
     beeroundService.getUserActivities($ionicUser.id).then(result => {
+
       $scope.userActivities = result;
-      console.log($scope.userActivities);
+
+      if(result.beercount == undefined) {
+
+        $scope.userActivities.beercount = 0;
+        $scope.userActivities.differentbeerscount = 0;
+
+      }
+
+      if(result.commentcount == undefined){
+        $scope.userActivities.commentcount = 0;
+
+      }
+
+
     }, err => {
 
       //TODO Error Handling
