@@ -132,7 +132,7 @@ angular.module('trophies.service', [])
             img: "img/icon_trophies/beer.png"
         }, {
           rank: 5,
-          step: 173,
+          step: 250,
             img: "img/icon_trophies/barrel.png"
         }],
         rating: [
