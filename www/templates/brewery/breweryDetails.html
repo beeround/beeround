@@ -1,81 +1,88 @@
-<ion-view cache-view="false"  title="Brauerei">
-    <ion-content scroll="false">
-        <ion-scroll style="height:100%">
-            <img class="brewery-image" src="img/brauerei_thumbnail.png">
-            <ion-item class="contact-button">
-              <button ng-show="brewery.locations[0].phone" type="button" ng-click="formatNumber(brewery.locations[0].phone)" class="invert-button icon ion-ios-telephone"></button>
-                <a ng-click="navigateGoogleMaps(brewery.nameShortDisplay,brewery.locations[0].latitude,brewery.locations[0].longitude )">
-                    <button class="invert-button icon ion-ios-location"></button>
-                </a>
-            </ion-item>
-            <ion-item class="brewery-contact">
-                <ion-item class="brewery-thumbnail">
-                    <h1>{{brewery.nameShortDisplay}}</h1>
-                    <p>{{brewery.locations[0].streetAddress}}<br>{{brewery.locations[0].postalCode}}
-                        {{brewery.locations[0].locality}}</p>
-                    <p>{{brewery.locations[0].phone}}</p>
-                    <a ng-show="brewery.locations[0].website" ng-href="{{brewery.locations[0].website}}" target="_blank">Zur Webseite</a>
-                </ion-item>
+<ion-view cache-view="false" title="Brauerei">
+  <ion-content scroll="false">
+    <ion-scroll style="height:100%">
+      <img class="brewery-image" src="img/brauerei_thumbnail.png">
+      <ion-item class="contact-button">
+        <button ng-show="brewery.locations[0].phone" type="button" ng-click="formatNumber(brewery.locations[0].phone)"
+                class="invert-button icon ion-ios-telephone"></button>
+        <a
+          ng-click="navigateGoogleMaps(brewery.nameShortDisplay,brewery.locations[0].latitude,brewery.locations[0].longitude )">
+          <button class="invert-button icon ion-ios-location"></button>
+        </a>
+      </ion-item>
+      <ion-item class="brewery-contact">
+        <ion-item class="brewery-thumbnail">
+          <h1>{{brewery.nameShortDisplay}}</h1>
+          <p>{{brewery.locations[0].streetAddress}}<br>{{brewery.locations[0].postalCode}}
+            {{brewery.locations[0].locality}}</p>
+          <p>{{brewery.locations[0].phone}}</p>
+          <a ng-show="brewery.locations[0].website" ng-href="{{brewery.locations[0].website}}" target="_blank">Zur
+            Webseite</a>
+        </ion-item>
 
-              <button ng-show="beerList.length > 0" ng-click="activeWindow = 'beer'" ng-class="{'active':activeWindow=='beer'}">{{beerList.length}} Biere</button>
-              <button ng-show="eventList.length > 0" ng-click="activeWindow = 'events'" ng-class="{'active':activeWindow=='events'}">{{eventList.length}} Events</button>
+        <button ng-show="beerList.length > 0" ng-click="activeWindow = 'beer'"
+                ng-class="{'active':activeWindow=='beer'}">{{beerList.length}} Biere
+        </button>
+        <button ng-show="eventList.length > 0" ng-click="activeWindow = 'events'"
+                ng-class="{'active':activeWindow=='events'}">{{eventList.length}} Events
+        </button>
 
-              <button ng-show="activeWindow=='beer'" class="add-beer-icon ion-plus-round" ng-click="openAddBeerView(brewery.id)"></button>
-              <!--<button ng-show="activeWindow=='events'" class="add-beer-icon ion-plus-round" ng-click="openAddBeerView(brewery.id)"></button>-->
+        <p ng-show="beerList">
+        <button ng-show="activeWindow=='beer'" class="add-beer-icon ion-plus-round"
+                ng-click="openAddBeerView(brewery.id)"></button>
+        </p>
+        <!--Auskommentieren, wenn Events hinzufügen dazu kommt-->
+        <!--<button ng-show="activeWindow=='events'" class="add-beer-icon ion-plus-round"
+                                               ng-click="openAddBeerView(brewery.id)"></button>-->
 
-                <ion-list ng-show="activeWindow == 'beer'">
-                    <ion-item ng-repeat="beer in beerList">
-                        <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
-                            <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
-                            <h2>{{beer.nameDisplay}}</h2>
-                          <p>{{brewery.nameShortDisplay}}</p>
-                          <i class="icon ion-chevron-right"></i>
-                              <p ng-show="beer.style.abvMin" class="promille-number">
-                                {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>
-                              </p>
-                          <div class="col rating">
-                                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 0}"></i>
-                                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 1}"></i>
-                                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 2}"></i>
-                                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 3}"></i>
-                                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 4}"></i>
-                              </div>
-                        </a>
-                    </ion-item>
-                </ion-list>
-            <ion-list ng-show="activeWindow == 'events'">
-                <ion-item class="card event-card" ng-repeat="event in eventList">
-                    <a class="item event-item" ng-href="#/tab/details/event/{{event.id}}">
+        <ion-list ng-show="activeWindow == 'beer'">
+          <ion-item ng-repeat="beer in beerList">
+            <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
+              <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
+              <h2>{{beer.nameDisplay}}</h2>
+              <p>{{brewery.nameShortDisplay}}</p>
+              <i class="icon ion-chevron-right"></i>
+              <p ng-show="beer.style.abvMin" class="promille-number">
+                {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>
+              </p>
+              <div class="col rating">
+                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 0}"></i>
+                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 1}"></i>
+                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 2}"></i>
+                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 3}"></i>
+                <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 4}"></i>
+              </div>
+            </a>
+          </ion-item>
+        </ion-list>
+        <ion-list ng-show="activeWindow == 'events'">
+          <ion-item class="card event-card" ng-repeat="event in eventList">
+            <a class="item event-item" ng-href="#/tab/details/event/{{event.id}}">
+              <div class="row">
+                <div class="col col-20">
+                  <p class="event-day">{{event.start | date : "dd"}}</p>
+                  <p>{{event.start | date : "MMMM"}} </p>
+                </div>
+                <div class="col col-80">
+                  <h2>{{event.name}}</h2>
+                  <i class="icon ion-chevron-right"></i>
+                  <p> {{event.start | date : "EEE"}} {{event.start | date : " HH:mm"}}Uhr, {{event.city}}</p>
+                  <p></p>
+                </div>
+              </div>
+            </a>
+          </ion-item>
+        </ion-list>
 
-                        <div class="row">
-                            <div class="col col-20">
-                                <p class="event-day">{{event.start | date : "dd"}}</p>
-                                <p>{{event.start | date : "MMMM"}}</p>
-                            </div>
-                            <div class="col col-80">
-                                <h2>{{event.name}}</h2>
-                                <i class="icon ion-chevron-right"></i>
-                                <p>{{event.start | date : "EEE"}} {{event.start | date : "HH:mm"}}Uhr, {{event.city}} </p>
-
-                                <p></p>
-                            </div>
-                        </div>
-
-                    </a>
-                </ion-item>
-            </ion-list>
-
-            </ion-item>
-        </ion-scroll>
-
-        <ion-list ng-show="beerList">
-            <ion-item>
-                <p>Keine Biere hinterlegt!</p>
-            </ion-item>
+        <ion-list>
+          <ion-item class="keine-biere" ng-hide="beerList">
+            <p>Leider sind keine Biere hinterlegt!</p>
+            <button ng-click="openAddBeerView(brewery.id)" class="button-block">Neues Bier hinzufügen</button>
+          </ion-item>
         </ion-list>
 
 
-    </ion-content>
-    </div>
+  </ion-content>
+  </div>
 
 </ion-view>

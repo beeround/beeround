@@ -15,7 +15,6 @@ angular.module('beeround.beer', [])
       });
 
 
-
     //Send Feedback Mail to Event organizer
 
     $scope.sendMail = function () {
@@ -430,6 +429,9 @@ angular.module('beeround.beer', [])
       }
     };
 
+
+
+
   })
   .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover, $ionicUser) {
 
@@ -676,8 +678,6 @@ angular.module('beeround.beer', [])
     const breweryId = $stateParams.brewery;
 
     $scope.activeWindow = 'beer';
-
-
 
     // Get all beers
     breweryDB.getBeersByBrewery(breweryId).then(result => {
@@ -1292,6 +1292,7 @@ angular.module('beeround.beer', [])
         }
       });
     };
+
   });
 
 

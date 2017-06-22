@@ -944,6 +944,10 @@ div.row.legend-rating{
   list-style-type: disc;
   margin-left: 20px;
 }
+.keine-biere p{
+  text-align: center;
+  margin-bottom: 13px;
+}
 
 label.select-beer{
     background: rgba(200, 198, 197, 0.3);
