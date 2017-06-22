@@ -248,3 +248,11 @@ p.headline {
 .item-select select {
   max-width: 100%;
 }
+
+.detailbox .ng-binding:last-child {
+  padding-bottom: 10px;
+}
+
+custom-marker{
+
+}
