@@ -869,17 +869,20 @@ angular.module('beeround.beer', [])
         erfrischend: $scope.sliderErfrischend.value,
       };
 
-      beeroundService.postCharacteristics(data).then(function () {
-        trophyService.checkCharacteristicsTrophies($ionicUser.id).then(result => {
-          if(result != 0){
-            let tmpvar = ' Eigenschaften';
-            if(result.step == 1){
-              tmpvar = ' Eigenschaft'
+      beeroundService.postCharacteristics(data).then(result => {
+
+        if(result != "put"){
+          trophyService.checkCharacteristicsTrophies($ionicUser.id).then(result => {
+            if(result != 0){
+              let tmpvar = ' Eigenschaften';
+              if(result.step == 1){
+                tmpvar = ' Eigenschaft'
+              }
+              $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
             }
-            $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
-          }
-        });
-        console.log("success");
+          });
+          console.log("success");
+        }
       })
     });
 
