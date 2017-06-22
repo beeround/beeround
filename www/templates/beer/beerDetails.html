@@ -134,12 +134,10 @@
             <p>{{comment.comment}}</p>
           </div>
         </ion-item>
-
+        <p ng-show="comments == undefined">Leider keine Kommentare vorhanden!</p>
       </ion-list>
     </div>
     </ion-item>
-
-
 
 
 
@@ -154,7 +152,7 @@
           <img ng-src="{{srcImage}}" id="srcImage" width="250" style="display: block; margin: 40px auto;"/><br/>
           <hr>
           <button ng-click="uploadImage()">Bild hochladen </button>
-          <button ng-click="showOptions()">Wiederholen</button>
+          <button ng-click="startCamera()">Wiederholen</button>
 
         </ion-content>
       </ion-modal-view>
