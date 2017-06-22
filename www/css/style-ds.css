@@ -256,3 +256,8 @@ p.headline {
   position: relative;
 
 }
+
+.search-bar {
+  position: absolute;
+  z-index: 1;
+}
