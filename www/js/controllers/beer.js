@@ -394,31 +394,10 @@ angular.module('beeround.beer', [])
       console.log(data);
 
 
-      if ($scope.addBeerForm.name === undefined || $scope.addBeerForm.name.length >= 5) {
-        let confirmPopup = $ionicPopup.confirm({
-          title: 'Kurzer oder leerer Name.',
-          template: 'Der Name ist sehr kurz oder leer, bist du dir sicher?',
-          okText: 'Sicher.',
-          cancelText: 'Nicht sicher!'
-        });
-
-        confirmPopup.then(function (res) {
-          if (res) {
-            if ($scope.form.type === 'noData') {
-              $ionicPopup.alert({
-                title: 'Bitte wähle eine Biersorte!',
-              });
-            } else {
-              breweryDB.postBeer(data);
-              let alertPopup = $ionicPopup.alert({
-                title: 'Danke für deine Hilfe!',
-                template: 'Wir prüfen deine Angaben und werden das Bier hinzufügen.',
-              });
-              alertPopup.then(function (res) {
-                $location.url('/tab/list/' + breweryId);
-              });
-            }
-          }
+      if ($scope.addBeerForm.name === undefined || $scope.addBeerForm.name.length <= 3) {
+        $ionicPopup.alert({
+          title: 'Zu kurzer oder leerer Name.',
+          template: 'Der Name ist sehr kurz oder leer. Bitte überarbeite den Namen.',
         });
       }else{
         if ($scope.form.type === 'noData') {
@@ -809,6 +788,7 @@ angular.module('beeround.beer', [])
 
       breweryDB.getBreweryByBeerId(beerId).then(brewery => {
         $scope.beer.brewery = brewery.data[0].nameShortDisplay;
+        $scope.beer.breweryid = brewery.data[0].id;
       });
 
       beeroundService.postBeer(result.data).then(function (result) {

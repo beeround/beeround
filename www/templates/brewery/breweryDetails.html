@@ -8,7 +8,6 @@
                     <button class="invert-button icon ion-ios-location"></button>
                 </a>
             </ion-item>
-
             <ion-item class="brewery-contact">
                 <ion-item class="brewery-thumbnail">
                     <h1>{{brewery.nameShortDisplay}}</h1>
@@ -18,8 +17,8 @@
                     <a ng-show="brewery.locations[0].website" ng-href="{{brewery.locations[0].website}}" target="_blank">Zur Webseite</a>
                 </ion-item>
 
-              <button ng-show="beerList.length > 0" ng-click="activeWindow = 'beer'" ng-class="{'active':activeWindow=='beer'}">Biere</button>
-              <button ng-show="eventList.length > 0" ng-click="activeWindow = 'events'" ng-class="{'active':activeWindow=='events'}">Events</button>
+              <button ng-show="beerList.length > 0" ng-click="activeWindow = 'beer'" ng-class="{'active':activeWindow=='beer'}">{{beerList.length}} Biere</button>
+              <button ng-show="eventList.length > 0" ng-click="activeWindow = 'events'" ng-class="{'active':activeWindow=='events'}">{{eventList.length}} Events</button>
 
               <i ng-show="activeWindow=='beer'"><a class="add-beer-icon ion-plus-round" ng-href="#/tab/details/beer/{{brewery.id}}/add"></a></i>
               <i ng-show="activeWindow=='events'"><a class="add-beer-icon ion-plus-round" ng-href="#/tab/details/beer/{{brewery.id}}/add"></a></i>
@@ -61,7 +60,7 @@
             </ion-item>
         </ion-scroll>
 
-        <ion-list ng-show="noData">
+        <ion-list ng-show="beerList">
             <ion-item>
                 <p>Keine Biere hinterlegt!</p>
             </ion-item>
