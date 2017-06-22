@@ -19,9 +19,9 @@
 
 
 
-    <ng-map styles='[{"featureType": "poi.park","elementType": "geometry.fill","stylers": [{"color": "#87a323"}]},{"featureType": "road.highway","elementType": "geometry.fill","stylers": [{"color": "#f69c12"}]},{"featureType": "road.arterial","elementType": "geometry.fill","stylers": [{"color": "#fac73a"}]},{"featureType": "water","elementType": "geometry.fill","stylers": [{"color": "#0d7e96"}]}]'>
+    <ng-map styles='[{"featureType": "poi.park","elementType": "geometry.fill","stylers": [{"color": "#87a323"}]},{"featureType": "road.highway","elementType": "geometry.fill","stylers": [{"color": "#f69c12"}]},{"featureType": "road.arterial","elementType": "geometry.fill","stylers": [{"color": "#fac73a"}]},{"featureType": "water","elementType": "geometry.fill","stylers": [{"color": "#0d7e96"}]}]' on-zoom_changed="zoomChanged()" zoom="{{zoom}}" center="{{userSettings.lat}}, {{userSettings.lng}}">
       <marker position="{{userSettings.lat}}, {{userSettings.lng}}" animation="Animation.BOUNCE" centered="true" icon='../img/marker.png' ></marker>
-      <marker ng-repeat="marker in markers" id="{{marker.id}}" position="{{marker.lat}},{{marker.lng}}" on-click="showDetails(marker, $index)" icon='../img/beeround_marker_brown.png'></marker>
+      <marker ng-repeat="marker in markers" id="{{marker.id}}" position="{{marker.lat}},{{marker.lng}}" on-click="showDetails(marker, $index)" icon='../img/beeround_marker_brown.png' ></marker>
     </ng-map>
     <div on-swipe-left="next()" on-swipe-right="prev()" ng-show="selectedBrewery" class="detailbox">
       <i class="ion-android-close" style="float:right" ng-click="closeDetails()"></i>
