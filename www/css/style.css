@@ -848,6 +848,16 @@ span.profile-overview >p {
     padding-bottom: 40px;
 }
 
+/*Trophäen*/
+
+.trophies div.col {
+  padding:40px 10px;
+}
+
+.trophies div.col img{
+  width:100%;
+  padding:0 30px;
+}
 
 /*EVENT*/
 

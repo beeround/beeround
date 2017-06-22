@@ -637,6 +637,7 @@ angular.module('beeround.account', [])
 
   .controller('myTrophiesCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet, trophyService) {
     trophyService.getTrophies($ionicUser.id).then(result => {
+      $scope.allTrophys = result;
       console.log(result);
     }, err => {
 
