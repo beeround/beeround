@@ -9,8 +9,13 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
     $ionicPlatform.ready(function () {
 
       //Google analytics tracking
-      $cordovaGoogleAnalytics.startTrackerWithId('UA-101448824-1');
-      $cordovaGoogleAnalytics.trackView('tab-list');
+      if (typeof $cordovaGoogleAnalytics !== 'undefined'){
+        $cordovaGoogleAnalytics.startTrackerWithId('UA-101430108-1');
+      }
+      else
+      {
+        console.log("Google Analytics plugin could not be loaded.")
+      }
 
       if (window.cordova && window.cordova.plugins.Keyboard) {
         //Change this to false to return accessory bar

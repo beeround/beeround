@@ -840,7 +840,6 @@ angular.module('beeround.beer', [])
         $scope.comments = result.data.comments;
       } else {
         $scope.comments = undefined;
-        console.log($scope.comments);
       }
     });
 
