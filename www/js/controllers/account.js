@@ -230,7 +230,7 @@ angular.module('beeround.account', [])
     }
   })
 
-  .controller('profilCtrl', function ($location, $scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, $cordovaFileTransfer, beeroundService, $cordovaCamera, $ionicActionSheet) {
+  .controller('profilCtrl', function ($location, $scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, $cordovaFileTransfer, beeroundService, $cordovaCamera, $ionicActionSheet, trophyService) {
     $scope.userdata = $ionicUser.details;
 
     beeroundService.getUserActivities($ionicUser.id).then(result => {

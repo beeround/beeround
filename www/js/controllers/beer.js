@@ -1145,7 +1145,9 @@ angular.module('beeround.beer', [])
         beeroundService.postBeerImage(data).then(function () {
           //SUCCESS
           $scope.modal.hide();
-
+          let alertPopup = $ionicPopup.alert({
+            title: 'Das Bild wurde erfolgreich gepostet.',
+          });
         });
 
       }, function () {
