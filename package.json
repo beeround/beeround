@@ -6,15 +6,17 @@
         "@ionic/cloud": "^0.16.0",
         "angular-animate": "^1.6.4",
         "bluebird": "^3.5.0",
+        "cordova-android": "^6.2.3",
         "cordova-plugin-calendar": "git+https://github.com/EddyVerbruggen/Calendar-PhoneGap-Plugin.git",
+        "cordova-plugin-geolocation": "~2.4.2",
         "cordova-plugin-google-analytics": "git+https://github.com/danwilson/google-analytics-plugin.git",
+        "cordova-plugin-whitelist": "git+https://github.com/apache/cordova-plugin-whitelist.git",
         "de.appplant.cordova.plugin.local-notification": "git+https://github.com/katzer/cordova-plugin-local-notifications.git",
         "gulp": "^3.5.6",
         "gulp-concat": "^2.2.0",
         "gulp-minify-css": "^0.3.0",
         "gulp-rename": "^1.2.0",
         "gulp-sass": "^2.0.4",
-        "cordova-plugin-geolocation": "~2.4.2",
         "ionic-plugin-keyboard": "~2.2.1"
     },
     "repository": {
@@ -48,7 +50,11 @@
             "cordova-plugin-google-analytics": {},
             "de.appplant.cordova.plugin.local-notification": {},
             "cordova-plugin-geolocation": {},
-            "ionic-plugin-keyboard": {}
-        }
+            "ionic-plugin-keyboard": {},
+            "cordova-plugin-whitelist": {}
+        },
+        "platforms": [
+            "android"
+        ]
     }
 }

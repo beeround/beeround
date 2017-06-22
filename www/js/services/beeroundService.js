@@ -147,6 +147,12 @@ angular.module('beeround.service', [])
           });
         },
 
+        deleteComment: function (cId) {
+          return $http.delete('http://www.beeround.de/api/comments/'+cId).then(result => {
+            return result;
+          });
+        },
+
         getCharacteristicsByUser: function (bID, uID) {
           return $http.get('http://www.beeround.de/api/characteristics?transform=1&filter[]=beerid,eq,' + bID + '&filter[]=userid,eq,' + uID + '&satisfy=all').then(result => {
 
