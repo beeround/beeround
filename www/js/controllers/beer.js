@@ -674,20 +674,26 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerListCtrl', function ($scope, breweryDB, beeroundService, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover, $ionicUser, $location) {
+  .controller('beerListCtrl', function ($scope, breweryDB, beeroundService, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover, $ionicUser, $location, $ionicLoading) {
     const breweryId = $stateParams.brewery;
+    console.log("Bier holen...")
+    $ionicLoading.show({
+      content: 'Loading',
+      animation: 'fade-in',
+    });
 
     $scope.activeWindow = 'beer';
 
     // Get all beers
     breweryDB.getBeersByBrewery(breweryId).then(result => {
-
       if (result) {
+        $ionicLoading.hide();
         $scope.beerList = result;
         $scope.noData = false;
 
       }
       else {
+        $ionicLoading.hide();
         $scope.noData = true;
       }
     });
@@ -759,8 +765,11 @@ angular.module('beeround.beer', [])
 
   })
 
-  .controller('beerDetailsCtrl', function ($rootScope, $cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera, $ionicPopup, $location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser, $timeout, trophyService) {
-
+  .controller('beerDetailsCtrl', function ($rootScope, $cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera, $ionicPopup, $location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser, $timeout, trophyService, $ionicLoading) {
+    $ionicLoading.show({
+      content: 'Loading',
+      animation: 'fade-in',
+    });
     let beerId = $stateParams.beerId;
     $scope.image = null;
 
@@ -785,7 +794,7 @@ angular.module('beeround.beer', [])
       {name: 'Rauchbier', value: '54'}
     ];
 
-    // Jump two the second select option (angular bug)
+    // Jump to the second select option (angular bug)
     $scope.form = {type: $scope.typeOptions[0].value};
 
     // INIT RATE BEER
@@ -803,6 +812,7 @@ angular.module('beeround.beer', [])
 
 
     breweryDB.getBeerDetails(beerId).then(result => {
+      $ionicLoading.hide();
       $scope.beer = result.data;
       $scope.oldBeerName = $scope.beer.name;
       $scope.beerform = [];
