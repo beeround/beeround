@@ -12,8 +12,8 @@
       </ion-item>
       <ion-item class="brewery-contact">
         <ion-item class="brewery-thumbnail">
-          <h1>{{brewery.nameShortDisplay}}</h1>
-          <p>{{brewery.locations[0].streetAddress}}<br>{{brewery.locations[0].postalCode}}
+          <h1 style="white-space: normal">{{brewery.nameShortDisplay}}</h1>
+          <p >{{brewery.locations[0].streetAddress}}<br>{{brewery.locations[0].postalCode}}
             {{brewery.locations[0].locality}}</p>
           <a ng-show="brewery.locations[0].website" ng-href="{{brewery.locations[0].website}}" target="_blank">{{brewery.locations[0].website}}</a>
         </ion-item>
@@ -38,7 +38,7 @@
             <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
               <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
               <h2>{{beer.nameDisplay}}</h2>
-              <p>{{brewery.nameShortDisplay}}</p>
+              <p style="padding-right: 40px">{{brewery.nameShortDisplay}}</p>
               <i class="icon ion-chevron-right"></i>
               <div class="row" style="position: absolute; padding-left: 0px;">
                 <div class="col col-33 rating">
