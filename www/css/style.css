@@ -595,11 +595,16 @@ i.small-icon.ion-ios-pint{
 }
 
 
-.full-width img{
-    position: relative;
-    display: block;
+.full-width img.scaling{
+    object-fit: cover;
+    object-position: 50% 50%;
     width: 100%;
 }
+
+div.full-width{
+    height:200px;
+}
+
 
 .gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom {
     bottom: 150px !important;
