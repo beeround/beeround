@@ -658,6 +658,24 @@ angular.module('beeround.account', [])
       console.log(result);
       }, err => {
     });
+      // Handle PopOver Filter
+      $ionicPopover.fromTemplateUrl('trophies.html', {
+          scope: $scope
+      }).then(function (popover) {
+          $scope.popover = popover;
+      });
+
+      $scope.openPopover = function () {
+          $scope.popover.show();
+          $scope.appBackground = document.getElementsByClassName('appBackground');
+          $scope.appBackground[0].setAttribute('class', 'view blur');
+      };
+      $scope.closePopover = function () {
+          $scope.popover.hide();
+          $scope.appBackground = document.getElementsByClassName('blur');
+          $scope.appBackground[0].setAttribute('class', 'view appBackground');
+      };
+
   })
 
 ;

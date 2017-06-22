@@ -2,7 +2,7 @@
   <ion-content class="trophies">
     <ion-list>
       <div class="row">
-        <div ng-show="allTrophys[0].appstart > 0" class="col"> <img src="img/icon_trophies/baby.png"/></div>
+        <div ng-show="allTrophys[0].appstart > 0" class="col" ng-click="openPopover()"><img src="img/icon_trophies/baby.png"/></div>
         <div ng-show="allTrophys[0].appstart == 0" class="col"> <img src="img/icon_trophies/lock.png"/></div>
         <div ng-show="allTrophys[0].beer >= 3" class="col"> <img src="img/icon_trophies/barrel.png"/></div>
         <div ng-show="allTrophys[0].beer <= 3" class="col"> <img src="img/icon_trophies/lock.png"/></div>
@@ -26,5 +26,28 @@
         <div ng-show="allTrophys[0].rating == 0" class="col"> <img src="img/icon_trophies/lock.png"/></div>
       </div>
     </ion-list>
+
+    <script id="trophies.html" type="text/ng-template">
+
+    <ion-popover-view>
+
+      <ion-content scroll="false">
+        <div class="overlay" ng-click="closePopover()"></div>
+
+        <div class="trophyInfo">
+          <i ng-click="closePopover()" class="icon ion-close-round"></i>
+
+          <div class="trophyDescription">
+            <img src="img/icon_trophies/baby.png"/>
+            <h1 class="text-center">Rang {{allTrophys[0].appstart}}</h1>
+            <p class="text-center">
+              Du gehörst jetzt zur beeround Familie!</p>
+          </div>
+        </div>
+
+        </div>
+      </ion-content>
+    </ion-popover-view>
+    </script>
   </ion-content>
 </ion-view>
