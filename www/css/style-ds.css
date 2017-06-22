@@ -233,3 +233,18 @@ p.text {
 p.headline {
   margin-top: 18px;
 }
+
+.beer-sorts{
+  padding-left: 0px;
+}
+
+.select-beer{
+  height: 34px;
+  width: 100%;
+  left:0px;
+  padding-left: 0px;
+}
+
+.item-select select {
+  max-width: 100%;
+}

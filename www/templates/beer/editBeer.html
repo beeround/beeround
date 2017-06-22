@@ -1,23 +1,26 @@
 <ion-view cache-view="false" view-title="Bier bearbeiten">
   <ion-content>
+    <ion-item class="item">
 
     <form ng-submit="editBeer()">
       <div class="list list-inset">
-        <label class="item item-input item-stacked-label">
+        <label class="beer-sorts item-input item-stacked-label">
           <span class="input-label">Biername</span>
-          <input ng-model="beerform.name" placeholder="{{beer.name}}" name="beerform.name" type="text" required>
+          <input class="edit-input" ng-model="beerform.name" placeholder="{{beer.name}}" name="beerform.name" type="text" required>
         </label>
-        <label class="item item-input item-select">
-            Biersorte
+        <span class="input-label">Biername</span>
+        <label class="select-beer item-input item-select">
           <select ng-model='form.type' required
                   ng-options='option.value as option.name for option in typeOptions'>Biersorten</select>
         </label>
-        <label class="item item-input item-stacked-label">
+        <label class="beer-sorts item-input item-stacked-label">
           <span class="input-label">Promille</span>
-          <input ng-model="beerform.abv" placeholder="5.0" name="beerform.abv" type="text">
+          <input class="edit-input" ng-model="beerform.abv" placeholder="5.0" name="beerform.abv" type="text">
         </label>
-        <button type="submit" class="button border-button">Daten ändern</button>
+        <button type="submit" class="button-block border-button">Daten ändern</button>
       </div>
     </form>
+    </ion-item>
+
   </ion-content>
 </ion-view>
