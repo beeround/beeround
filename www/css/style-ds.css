@@ -261,3 +261,12 @@ p.headline {
   position: absolute;
   z-index: 1;
 }
+
+
+
+/*Trophy PopUp*/
+
+.newTrophy .popup-body {
+  text-align: center;
+}
+

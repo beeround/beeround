@@ -25,7 +25,7 @@ angular.module('beeround.index', [])
   $cordovaLocalNotification.schedule({
     id: 2,
     title: "Happy new Beer Year!!",
-    text: "Du nutzt Beeround bereits ein Jahr! Trinken wir, auf viele Weitere!!",
+    text: "Du nutzt Beeround bereits ein Jahr! Danke für deinen Support!",
     every: 'year'
   });
   */
@@ -34,12 +34,14 @@ angular.module('beeround.index', [])
   // Trophy PopUp
   $rootScope.newTrophy = function(img, rank, step, type) {
 
+    //step + type,
     $timeout(function () {
       $ionicPopup.show({
         template: '<img src="'+img+'"/>',
-        title: step + type,
+        title: "Neue Trophäe erhalten!",
         subTitle: 'Glückwunsch!! Rang: '+ rank,
         scope: $scope,
+        cssClass: 'newTrophy',
         buttons: [
           { text: 'Ok' },
         ]

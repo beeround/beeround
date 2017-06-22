@@ -676,7 +676,7 @@ angular.module('beeround.beer', [])
 
   .controller('beerListCtrl', function ($scope, breweryDB, beeroundService, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover, $ionicUser, $location, $ionicLoading) {
     const breweryId = $stateParams.brewery;
-    console.log("Bier holen...")
+    console.log("Bier holen...");
     $ionicLoading.show({
       content: 'Loading',
       animation: 'fade-in',
@@ -696,6 +696,8 @@ angular.module('beeround.beer', [])
         $ionicLoading.hide();
         $scope.noData = true;
       }
+    }, err => {
+      console.log(err)
     });
 
     // Get brewery informations
