@@ -1039,6 +1039,9 @@ angular.module('beeround.beer', [])
       };
 
       $cordovaCamera.getPicture(options).then(function (imageURI) {
+
+        console.log(imageURI);
+
         $scope.modal.show();
         $timeout(function () {
           $scope.srcImage = imageURI;

@@ -37,9 +37,12 @@ angular.module('beeround.index', [])
     //step + type,
     $timeout(function () {
       $ionicPopup.show({
-        template: '<img src="'+img+'"/>',
+        template: '<div class="trophyContainer">' +
+        '<img src="'+img+'"/>' +
+        '<span>'+rank+'</span>' +
+        '</div>',
         title: "Neue Trophäe erhalten!",
-        subTitle: 'Glückwunsch!! Rang: '+ rank,
+        subTitle: 'Glückwunsch!! Du hast '+step +' '+type+' und bist ein Rang aufgestiegen! ',
         scope: $scope,
         cssClass: 'newTrophy',
         buttons: [

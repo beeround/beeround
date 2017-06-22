@@ -383,6 +383,7 @@ angular.module('beeround.account', [])
 
                         //Image Upload
                         beeroundService.uploadImage(imageURI).then(imageURL => {
+
                             alert("Erfolgreich hochgeladen");
                             let data = {
                                 userid: $ionicUser.id,
