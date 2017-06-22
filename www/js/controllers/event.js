@@ -12,7 +12,6 @@ angular.module('beeround.event', [])
     });
 
       //Send Mail to Event organizer
-
       $scope.sendMail = function (mailAdress) {
         if($ionicUser.id){
           beeroundService.postContact($ionicUser.id);
@@ -59,7 +58,7 @@ angular.module('beeround.event', [])
 
       };
 
-
+    //Event for the smartphone calendar
     $scope.createEvent = function () {
 
       $cordovaCalendar.createEvent({
@@ -89,9 +88,6 @@ angular.module('beeround.event', [])
       })
     }
   });
-
-  //startDate: ($filter('date')(new Date($scope.event.start), 'yyyy'), $filter('date')(new Date($scope.event.start), 'MM'), $filter('date')(new Date($scope.event.start), 'dd'), $filter('date')(new Date($scope.event.start), 'HH'), $filter('date')(new Date($scope.event.start), 'MM'), 0, 0, 0),
-  //endDate: ($filter('date')(new Date($scope.event.end), 'yyyy'), $filter('date')(new Date($scope.event.end), 'MM'), $filter('date')(new Date($scope.event.end), 'dd'), $filter('date')(new Date($scope.event.end), 'HH'), $filter('date')(new Date($scope.event.end), 'MM'), 0, 0, 0)
 
 
 

@@ -1,4 +1,5 @@
 angular.module('breweryDB.service', [])
+//Get, post, delete and put data from breweryDB
   .service('breweryDB', ['$http', '$q', '$timeout', 'beeroundService',
     function ($http, $q, $timeout, beeroundService) {
 

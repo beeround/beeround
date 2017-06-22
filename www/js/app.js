@@ -7,11 +7,10 @@
 angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 'ngMap', 'google.places', 'beeround.index', 'beeround.beer', 'beeround.account', 'beeround.event', 'breweryDB.service', 'beeround.service','trophies.service', 'angular.filter', 'rzModule', 'chart.js'])
   .run(function ($ionicPlatform, $state, $stateParams, $rootScope, $cordovaLocalNotification, $cordovaGoogleAnalytics, beeroundService, $ionicUser) {
     $ionicPlatform.ready(function () {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
 
-      //$cordovaGoogleAnalytics.startTrackerWithId('UA-101448824-1');
-      //$cordovaGoogleAnalytics.trackView('tab-list');
+      //Google analytics tracking
+      $cordovaGoogleAnalytics.startTrackerWithId('UA-101448824-1');
+      $cordovaGoogleAnalytics.trackView('tab-list');
 
       if (window.cordova && window.cordova.plugins.Keyboard) {
         //Change this to false to return accessory bar
@@ -38,6 +37,7 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
     });
   })
 
+  //Create all routes for AngularJS
   .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $ionicCloudProvider) {
     $stateProvider
 
@@ -322,6 +322,7 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
     };
   })
 
+  //Password directive for password in register form
   .directive("passwordStrength", function () {
     return {
       restrict: 'A',

@@ -1,6 +1,7 @@
 angular.module('beeround.service', [])
   .service('beeroundService', ['$http', '$q', '$timeout', '$cordovaFileTransfer',
     function ($http, $q, $timeout, $cordovaFileTransfer) {
+      //Get, post, delete and put data from own mysql backend server
 
       return {
         sendBeerRating: function (data) {

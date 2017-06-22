@@ -354,7 +354,7 @@ angular.module('beeround.beer', [])
       }
     }
 
-
+    // get all beer Events
     function getBeerEvents() {
       $scope.beerEvents = [];
 
@@ -365,6 +365,7 @@ angular.module('beeround.beer', [])
       });
     }
 
+    // initialise the options for the select box
     $scope.typeOptions = [
       {name: 'Bitte wählen', value: 'noData'},
       {name: 'Pils', value: '75'},
@@ -382,18 +383,20 @@ angular.module('beeround.beer', [])
       {name: 'Rauchbier', value: '54'}
     ];
 
+    // Jump two the second select option (angular bug)
     $scope.form = {type: $scope.typeOptions[0].value};
 
+    //send a new beer to brewerydb
     $scope.addBeer = function () {
+      //beerform
       let data = {
         name: $scope.addBeerForm.name,
         styleId: $scope.form.type,
         abv: $scope.addBeerForm.abv,
         brewery: breweryId,
       };
-      console.log(data);
 
-
+      //error handling
       if ($scope.addBeerForm.name === undefined || $scope.addBeerForm.name.length <= 3) {
         $ionicPopup.alert({
           title: 'Zu kurzer oder leerer Name.',
@@ -430,6 +433,7 @@ angular.module('beeround.beer', [])
       loadMap(30);
 
     }
+    //initialise markers
     $scope.markers = [];
 
 
@@ -607,6 +611,7 @@ angular.module('beeround.beer', [])
       });
 
 
+    //load map with geolocations
     function loadMap(radius) {
 
       if (radius) {
@@ -655,16 +660,6 @@ angular.module('beeround.beer', [])
         })
       }
     }
-
-    function getBeerEvents() {
-      $scope.beerEvents = [];
-
-      beeroundService.getBreweryEvent().then(result => {
-        console.log(result.events);
-        $scope.beerEvents = result.events;
-
-      });
-    }
   })
 
   .controller('beerListCtrl', function ($scope, breweryDB, beeroundService, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover, $ionicUser) {
@@ -674,7 +669,7 @@ angular.module('beeround.beer', [])
 
 
 
-    // Get beers
+    // Get all beers
     breweryDB.getBeersByBrewery(breweryId).then(result => {
 
       if (result) {
@@ -747,6 +742,7 @@ angular.module('beeround.beer', [])
     // Make User data output available in view
     $scope.$ionicUser = $ionicUser;
 
+    //Initialise the options for select box
     $scope.typeOptions = [
       {name: 'Bitte wählen', value: 'noData'},
       {name: 'Pils', value: '75'},
@@ -764,6 +760,7 @@ angular.module('beeround.beer', [])
       {name: 'Rauchbier', value: '54'}
     ];
 
+    // Jump two the second select option (angular bug)
     $scope.form = {type: $scope.typeOptions[0].value};
 
     // INIT RATE BEER
@@ -980,7 +977,6 @@ angular.module('beeround.beer', [])
 
     };
 
-
     $scope.showLibrary = function () {
       let options = {
         quality: 100,
@@ -1028,7 +1024,6 @@ angular.module('beeround.beer', [])
       });
     };
 
-
     $scope.uploadImage = function () {
       // Destination URL
       var url = "http://beeround.domi-speh.de/upload.php";
@@ -1068,6 +1063,7 @@ angular.module('beeround.beer', [])
       });
     };
 
+    //RATING
 
     $scope.logBeer = function () {
 
@@ -1130,7 +1126,7 @@ angular.module('beeround.beer', [])
       })
     }
 
-    // Show the action sheet
+    // Show the action sheet to change beer data or delete the beer
 
     $scope.showOptions = function () {
       // Show the action sheet
@@ -1157,7 +1153,7 @@ angular.module('beeround.beer', [])
 
     };
 
-
+    //Edit the beer with the form + error handling
     $scope.editBeer = function () {
       let data = {
         beerid: beerId,
@@ -1211,6 +1207,7 @@ angular.module('beeround.beer', [])
       }
     };
 
+    //Delete the beer with the form + error handling
     $scope.deleteBeer = function () {
       let confirmPopup = $ionicPopup.confirm({
         title: 'Bier löschen',
@@ -1243,11 +1240,6 @@ angular.module('beeround.beer', [])
         }
       });
     };
-
-    //Get Styles
-    // breweryDB.getBeerStyles().then(result => {
-    //   $scope.beerStyles = result.data;
-    // });
   });
 
 
