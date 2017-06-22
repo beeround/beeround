@@ -1219,8 +1219,9 @@ angular.module('beeround.beer', [])
       };
 
       beeroundService.sendBeerRating(data).then(result => {
-        trophyService.checkRatingTrophies($ionicUser.id).then(result => {
-          if (result != "put") {
+        if (result != "put") {
+          trophyService.checkRatingTrophies($ionicUser.id).then(result => {
+
             if (result != 0) {
               let tmpvar = ' Bewertungen';
               if (result.step == 1) {
@@ -1228,8 +1229,8 @@ angular.module('beeround.beer', [])
               }
               $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
             }
-          }
-        });
+          });
+        }
       })
     }
 
