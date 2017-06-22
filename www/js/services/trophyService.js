@@ -322,7 +322,7 @@ angular.module('trophies.service', [])
                   });
                   break;
                 default:
-                  resolve(0)
+                  resolve(steps.contact[2])
               }
             })
           });
