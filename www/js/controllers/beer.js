@@ -343,9 +343,9 @@ angular.module('beeround.beer', [])
               }, function () {
                 $ionicLoading.hide();
 
-                  let alertPopup = $ionicPopup.alert({
-                      title: 'Standort nicht gefunden!',
-                  });
+                let alertPopup = $ionicPopup.alert({
+                  title: 'Standort nicht gefunden!',
+                });
               });
             }, function (err) {
               $ionicLoading.hide();
@@ -353,9 +353,9 @@ angular.module('beeround.beer', [])
               $scope.connectionError = true;
 
 
-                let alertPopup = $ionicPopup.alert({
-                    title: 'Bitte überprüfe deine Verbindungen!',
-                });
+              let alertPopup = $ionicPopup.alert({
+                title: 'Bitte überprüfe deine Verbindungen!',
+              });
             });
 
 
@@ -411,7 +411,7 @@ angular.module('beeround.beer', [])
           title: 'Zu kurzer oder leerer Name.',
           template: 'Der Name ist sehr kurz oder leer. Bitte überarbeite den Namen.',
         });
-      }else{
+      } else {
         if ($scope.form.type === 'noData') {
           $ionicPopup.alert({
             title: 'Bitte wähle die Biersorte!',
@@ -428,8 +428,6 @@ angular.module('beeround.beer', [])
         }
       }
     };
-
-
 
 
   })
@@ -729,12 +727,12 @@ angular.module('beeround.beer', [])
       else if (formattedNumber.substr(0, 1) == "+49") {
         formattedNumber = formattedNumber.replace('+49', '0');
       }
-      if($ionicUser.id){
-        beeroundService.postContact($ionicUser.id).then(function(){
+      if ($ionicUser.id) {
+        beeroundService.postContact($ionicUser.id).then(function () {
           trophyService.checkContactTrophies($ionicUser.id).then(result => {
-            if(result != 0){
+            if (result != 0) {
               let tmpvar = ' Kontaktanfragen';
-              if(result.step == 1){
+              if (result.step == 1) {
                 tmpvar = ' Kontaktanfrage'
               }
               $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
@@ -759,10 +757,10 @@ angular.module('beeround.beer', [])
     };
 
     //open add beer view
-      $scope.openAddBeerView = function (breweryid) {
-          $location.url('/tab/details/beer/' + breweryid + '/add');
+    $scope.openAddBeerView = function (breweryid) {
+      $location.url('/tab/details/beer/' + breweryid + '/add');
 
-      };
+    };
 
 
   })
@@ -838,13 +836,40 @@ angular.module('beeround.beer', [])
     });
 
     beeroundService.getComments(beerId).then(function (result) {
-      if(result.data.comments.length > 0){
+      if (result.data.comments.length > 0) {
         $scope.comments = result.data.comments;
-      } else{
+      } else {
         $scope.comments = undefined;
         console.log($scope.comments);
       }
     });
+
+    $scope.deleteComment = function (commentid) {
+
+      let confirmPopup = $ionicPopup.confirm({
+        title: 'Kommentar löschen',
+        template: 'Dein Kommentar wird gelöscht! Bist du dir sicher?',
+        okText: 'Ok',
+        cancelText: 'Abbrechen'
+      });
+
+      confirmPopup.then(function (res) {
+        if (res) {
+          beeroundService.deleteComment(commentid).then(function () {
+            beeroundService.getComments(beerId).then(function (result) {
+              if (result.data.comments.length > 0) {
+                $scope.comments = result.data.comments;
+              } else {
+                $scope.comments = undefined;
+                console.log($scope.comments);
+              }
+            });
+          });
+
+
+        }
+      });
+    };
 
 
     beeroundService.getCharacteristicsByUser(beerId, $ionicUser.id).then(result => {
@@ -888,11 +913,11 @@ angular.module('beeround.beer', [])
 
       beeroundService.postCharacteristics(data).then(result => {
 
-        if(result != "put"){
+        if (result != "put") {
           trophyService.checkCharacteristicsTrophies($ionicUser.id).then(result => {
-            if(result != 0){
+            if (result != 0) {
               let tmpvar = ' Eigenschaften';
-              if(result.step == 1){
+              if (result.step == 1) {
                 tmpvar = ' Eigenschaft'
               }
               $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
@@ -920,20 +945,20 @@ angular.module('beeround.beer', [])
         ],
       },
 
-      optionsmin:{
-          floor: 0,
-          ceil: 100,
-          step: 25,
-          hidePointerLabels: true,
-          hideLimitLabels: true,
-          showTicks: true,
-          stepsArray: [
-              {value: 0},
-              {value: 25},
-              {value: 50},
-              {value: 75},
-              {value: 100}
-          ],
+      optionsmin: {
+        floor: 0,
+        ceil: 100,
+        step: 25,
+        hidePointerLabels: true,
+        hideLimitLabels: true,
+        showTicks: true,
+        stepsArray: [
+          {value: 0},
+          {value: 25},
+          {value: 50},
+          {value: 75},
+          {value: 100}
+        ],
       }
 
     };
@@ -980,17 +1005,17 @@ angular.module('beeround.beer', [])
 
               });
 
-              $scope.form.comment = "";
-              $state.go('tabs.beerDetails', {beerId: beerId});
+          $scope.form.comment = "";
+          $state.go('tabs.beerDetails', {beerId: beerId});
 
-          }, function () {
-              // FAIL
-              let alertPopup = $ionicPopup.alert({
-                  title: 'Kommentar fehlgeschlagen!',
-              });
+        }, function () {
+          // FAIL
+          let alertPopup = $ionicPopup.alert({
+            title: 'Kommentar fehlgeschlagen!',
+          });
 
-              //TODO ERROR HANDLING
-          })
+          //TODO ERROR HANDLING
+        })
       }
     };
 
@@ -1055,9 +1080,9 @@ angular.module('beeround.beer', [])
         }, 500);
 
       }, function (err) {
-          let alertPopup = $ionicPopup.alert({
-              title: 'Es wurde kein Foto ausgewählt',
-          });
+        let alertPopup = $ionicPopup.alert({
+          title: 'Es wurde kein Foto ausgewählt',
+        });
 
       });
     };
@@ -1080,9 +1105,9 @@ angular.module('beeround.beer', [])
 
       }, function (err) {
 
-          let alertPopup = $ionicPopup.alert({
-              title: 'Du hast den Zugriff verweigert! Es wurde kein Foto gemacht',
-          });
+        let alertPopup = $ionicPopup.alert({
+          title: 'Du hast den Zugriff verweigert! Es wurde kein Foto gemacht',
+        });
       });
     };
 
@@ -1118,9 +1143,9 @@ angular.module('beeround.beer', [])
         });
 
       }, function () {
-          let alertPopup = $ionicPopup.alert({
-              title: 'Upload fehlgeschlagen! Bitte überprüfe deine Einstellungen und probiere es nochmal!',
-          });
+        let alertPopup = $ionicPopup.alert({
+          title: 'Upload fehlgeschlagen! Bitte überprüfe deine Einstellungen und probiere es nochmal!',
+        });
 
       });
     };
@@ -1143,9 +1168,9 @@ angular.module('beeround.beer', [])
       beeroundService.logBeer(data).then(function () {
         // SUCCESS
         trophyService.checkBeerTrophies($ionicUser.id).then(result => {
-          if(result != 0){
+          if (result != 0) {
             let tmpvar = ' Biere';
-            if(result.step == 1){
+            if (result.step == 1) {
               tmpvar = ' Bier'
             }
             $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
@@ -1157,15 +1182,15 @@ angular.module('beeround.beer', [])
           template: '<small>Möchtest du das Bier noch bewerten oder ein Bild posten?</small>',
           buttons: [
 
-              {text: 'Zurück'},
-              {
-                  text: 'Bewerten',
-                  type: 'button-positive',
-                  onTap: function (e) {
-                      $state.go('tabs.rateBeer', {beerId: beerId});
+            {text: 'Zurück'},
+            {
+              text: 'Bewerten',
+              type: 'button-positive',
+              onTap: function (e) {
+                $state.go('tabs.rateBeer', {beerId: beerId});
 
               }
-              }
+            }
 
           ]
         });
@@ -1187,7 +1212,7 @@ angular.module('beeround.beer', [])
 
       beeroundService.sendBeerRating(data).then(result => {
         trophyService.checkRatingTrophies($ionicUser.id).then(result => {
-          if(result != "put") {
+          if (result != "put") {
             if (result != 0) {
               let tmpvar = ' Bewertungen';
               if (result.step == 1) {
@@ -1262,21 +1287,21 @@ angular.module('beeround.beer', [])
             }
           }
         });
-      }else{
-          if ($scope.form.type === 'noData') {
-            $ionicPopup.alert({
-              title: 'Bitte wähle die Biersorte!',
-            });
-          } else {
-            breweryDB.putBeerDetails(data);
-            let alertPopup = $ionicPopup.alert({
-              title: 'Danke für deine Hilfe.',
-              template: 'Wir prüfen deine Anfrage und werden das Bier updaten!',
-            });
-            alertPopup.then(function (res) {
-              $location.url('/tab/details/beer/' + beerId);
-            });
-          }
+      } else {
+        if ($scope.form.type === 'noData') {
+          $ionicPopup.alert({
+            title: 'Bitte wähle die Biersorte!',
+          });
+        } else {
+          breweryDB.putBeerDetails(data);
+          let alertPopup = $ionicPopup.alert({
+            title: 'Danke für deine Hilfe.',
+            template: 'Wir prüfen deine Anfrage und werden das Bier updaten!',
+          });
+          alertPopup.then(function (res) {
+            $location.url('/tab/details/beer/' + beerId);
+          });
+        }
 
       }
     };

@@ -83,8 +83,7 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
         url: '/company/impressum',
         views: {
           'tab-list': {
-            templateUrl: 'templates/company/imprint.html',
-            controller: 'breweriesListCtrl'
+            templateUrl: 'templates/company/imprint.html'
           }
         }
       })
@@ -92,8 +91,7 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
         url: '/company/datenschutz',
         views: {
           'tab-list': {
-            templateUrl: 'templates/company/dataprotection.html',
-            controller: 'breweriesListCtrl'
+            templateUrl: 'templates/company/dataprotection.html'
           }
         }
       })
@@ -101,8 +99,7 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
         url: '/company/tools',
         views: {
           'tab-list': {
-            templateUrl: 'templates/company/tools.html',
-            controller: 'breweriesListCtrl'
+            templateUrl: 'templates/company/tools.html'
           }
         }
       })
