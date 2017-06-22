@@ -1,0 +1,89 @@
+<ion-view cache-view="false" view-title="Impressum">
+  <ion-nav-buttons side="right">
+    <span class="button button-icon button-clear ion-ios-information-empty" ng-click="openInformation()">
+    </span>
+  </ion-nav-buttons>
+  <ion-content>
+    <div class="rechtliches">
+      <h1>Impressum</h1>
+      <h4>Angaben gem&auml;&szlig; &sect; 5 TMG:</h4>
+      <p>Karsten Sch&uuml;tz<br
+      /> Warmbronner Weg 6<br/> Geb&auml;ude 44<br/> 71229 Leonberg </p>
+      <h3>Kontakt:</h3>
+      <table>
+        <tr>
+          <td>E-Mail:</td>
+          <td>karstenschuetz@web.de</td>
+        </tr>
+      </table>
+      <h2>Haftung f&uuml;r Inhalte</h2>
+      <p>Als Diensteanbieter sind wir gem&auml;&szlig; &sect; 7 Abs.1 TMG f&uuml;r eigene Inhalte auf diesen
+        Seiten nach den allgemeinen Gesetzen verantwortlich. Nach &sect;&sect; 8 bis 10 TMG sind wir als
+        Diensteanbieter jedoch nicht verpflichtet, &uuml;bermittelte oder gespeicherte fremde Informationen zu
+        &uuml;berwachen oder nach Umst&auml;nden zu forschen, die auf eine rechtswidrige T&auml;tigkeit
+        hinweisen.</p>
+      <p>Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach
+        den allgemeinen Gesetzen bleiben hiervon unber&uuml;hrt. Eine diesbez&uuml;gliche Haftung ist jedoch
+        erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung m&ouml;glich. Bei Bekanntwerden
+        von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
+      <h2>
+        Haftung f&uuml;r Links</h2>
+      <p>Unser Angebot enth&auml;lt Links zu externen Webseiten Dritter, auf
+        deren Inhalte wir keinen Einfluss haben. Deshalb k&ouml;nnen wir f&uuml;r diese fremden Inhalte auch
+        keine Gew&auml;hr &uuml;bernehmen. F&uuml;r die Inhalte der verlinkten Seiten ist stets der jeweilige
+        Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der
+        Verlinkung auf m&ouml;gliche Rechtsverst&ouml;&szlig;e &uuml;berpr&uuml;ft. Rechtswidrige Inhalte
+        waren zum Zeitpunkt der Verlinkung nicht erkennbar.</p>
+      <p>Eine permanente inhaltliche Kontrolle der
+        verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei
+        Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
+      <h2>
+        Urheberrecht</h2>
+      <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten
+        unterliegen dem deutschen Urheberrecht. Die Vervielf&auml;ltigung, Bearbeitung, Verbreitung und jede
+        Art der Verwertung au&szlig;erhalb der Grenzen des Urheberrechtes bed&uuml;rfen der schriftlichen
+        Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur f&uuml;r
+        den privaten, nicht kommerziellen Gebrauch gestattet.</p>
+      <p>Soweit die Inhalte auf dieser Seite nicht
+        vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte
+        Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam
+        werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir
+        derartige Inhalte umgehend entfernen.</p>
+      <p>&nbsp;</p>
+      <p>Quelle: <a target="_blank" href="https://www.erecht24.
+de">eRecht24</a></p>
+    </div>
+
+    <script id="information.html" type="text/ng-template">
+      <ion-popover-view>
+
+        <ion-content>
+
+          <!--Filter, in which radius the brewery should be away from the user-->
+          <div class="overlay" ng-click="closeInformation()"></div>
+          <div class="card">
+            <i ng-click="closeInformation()" class="icon ion-close-round"></i>
+
+            <div class="information-box">
+              <a class="button-block" ng-click="closeInformation()" ng-href="#/tab/company/datenschutz">
+                <button class="button-block">Datenschutz</button>
+              </a>
+              <button class="button-block" ng-click="sendMail()"> Feedback senden</button>
+              <a class="button-block" ng-href="https://play.google.com/store/apps?hl=de" target="_blank">
+                <button class="button-block">App bewerten</button>
+              </a>
+              <a class="button-block" ng-click="closeInformation()" ng-href="#/tab/company/tools">
+                <button class="button-block">Benutzte Tools</button>
+              </a>
+              <a class="button-block" ng-click="closeInformation()" ng-href="#/tab/list">
+                <button class="button-block">Brauerei Liste</button>
+              </a>
+            </div>
+          </div>
+
+
+        </ion-content>
+      </ion-popover-view>
+    </script>
+  </ion-content>
+</ion-view>

@@ -923,6 +923,23 @@ div.row.legend-rating{
     padding-bottom: 0px;
 }
 
+/*Impressum*/
+.rechtliches{
+  padding: 0 16px;
+}
+
+.rechtliches h2{
+  margin-top: 8px;
+  font-size: 15px;
+}
+.rechtliches a{
+  color: blue;
+  text-decoration: underline;
+}
+.rechtliches ul{
+  font-size: 12px;
+}
+
 
 label.select-beer{
     background: rgba(200, 198, 197, 0.3);

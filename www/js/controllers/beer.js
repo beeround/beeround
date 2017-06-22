@@ -786,6 +786,15 @@ angular.module('beeround.beer', [])
       $scope.beerform = [];
       $scope.beerform.name = $scope.beer.name;
 
+      if ($scope.beer.style === undefined) {
+        console.log($scope.beerform.abv);
+        $scope.beerform.abv = 4.9
+      } else {
+        console.log($scope.beer.style);
+        $scope.beerform.abv = $scope.beer.style.abvMin;
+      }
+
+
       breweryDB.getBreweryByBeerId(beerId).then(brewery => {
         $scope.beer.brewery = brewery.data[0].nameShortDisplay;
         $scope.beer.breweryid = brewery.data[0].id;
@@ -1088,8 +1097,9 @@ angular.module('beeround.beer', [])
                   onTap: function (e) {
                       $state.go('tabs.rateBeer', {beerId: beerId});
 
-                  }
-              }
+              }            },
+            {text: 'Zurück'}
+
           ]
         });
 
