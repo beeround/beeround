@@ -5,12 +5,12 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
 angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 'ngMap', 'google.places', 'beeround.index', 'beeround.beer', 'beeround.account', 'beeround.event', 'breweryDB.service', 'beeround.service', 'angular.filter', 'rzModule', 'chart.js'])
-  .run(function ($ionicPlatform, $state, $stateParams, $rootScope, $cordovaGoogleAnalytics) {
+  .run(function ($ionicPlatform, $state, $stateParams, $rootScope, $cordovaLocalNotification, $cordovaGoogleAnalytics) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
 
-      //$cordovaGoogleAnalytics.startTrackerWithId('UA-101430108-1');
+      $cordovaGoogleAnalytics.startTrackerWithId('UA-101448824-1');
       //$cordovaGoogleAnalytics.trackView('tab-list');
 
       if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -24,7 +24,10 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
 
+    });
 
+    $ionicPlatform.on('resume', function(){
+      console.log("Resume")
     });
   })
 

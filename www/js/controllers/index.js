@@ -11,7 +11,7 @@ angular.module('beeround.index', [])
   .controller('HomeTabCtrl', function($scope) {
   })
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state, $ionicUser) {
+.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $state, $ionicUser, $cordovaLocalNotification) {
   //$cordovaGoogleAnalytics.trackView('Home Screen');
 
 
@@ -20,7 +20,19 @@ angular.module('beeround.index', [])
     function(event, toState, toParams, fromState, fromParams) {
       $scope.current = toState.url;
     }
-  )
+  );
+
+
+  $rootScope.scheduleSingleNotification = function (data) {
+
+    $cordovaLocalNotification.schedule({
+      id: 1,
+      title: data.title,
+      text: data.text,
+      every: 'minute'
+
+    })
+  };
 
 
 

@@ -348,31 +348,26 @@ button.back-button{
     font-size: 30px;
 }
 
-.invert-button  {
+.invert-button, .invert-button:focus  {
     background-color: #F1A435;
     color:#ffffff;
     min-width: 45px;
     min-height: 40px;
-
 }
 
-.invert-button:hover{
+.invert-button:hover, .invert-button:active{
     background-color: #ffffff;
     color:#F1A435;
     border-color: #F1A435;
 }
 
-.invert-button:active {
-    background-color: #ffffff;
-    color: #F1A435;
-    border-color: #F1A435;
-}
 
 
 .button-block{
     font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
+    margin-left: 0px;
 }
 
 
@@ -717,21 +712,22 @@ p.characteristicsInfo{
     width: 14px;
     height: 14px;
     top:-5px;
-    margin-left: 7px;
+    margin-left: 2px;
 }
 .rzslider .rz-pointer:after {
-    /*background-color: none;*/
+    background-color: transparent;
     border: none;
 }
 .rzslider .rz-tick {
     background:#C8C6C5;
+    margin-left: 2px;
 }
 
 .rzslider .rz-pointer.rz-active:after{
     background: #FFFFFF;
 }
 .rzslider {
-    margin: 15px 0 35px 0;
+    margin: 12px 0 12px 0;
     font-size: 10px;
 }
 
@@ -890,10 +886,23 @@ textarea.commentText{
     background: rgba(200, 198, 197, 0.3);
     border-radius: 7px;
     padding: 12px;
-    height:120px;
+    height:110px;
     margin-top: 10px;
 }
 
 .information{
     padding-left: 6px;
+}
+
+.legend-rating > div > p{
+    font-size: 12px;
+}
+
+div.list.legend-rating{
+    padding: 0px;
+    margin: 5px;
+}
+
+div.row.legend-rating{
+    padding-bottom: 0px;
 }

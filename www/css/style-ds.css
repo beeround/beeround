@@ -229,3 +229,7 @@ p.text {
 .information-box {
   margin-top: 80px;
 }
+
+p.headline {
+  margin-top: 18px;
+}
