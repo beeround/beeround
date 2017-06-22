@@ -7,155 +7,155 @@ angular.module('trophies.service', [])
           {
           rank: 1,
           step: 1,
-          img: "../../img/icon_trophies/pencil.png"
+          img: "img/icon_trophies/pencil.png"
         }, {
           rank: 2,
           step: 5,
-            img: "../../img/icon_trophies/pencil.png"
+            img: "img/icon_trophies/pencil.png"
         }, {
           rank: 3,
           step: 12,
-            img: "../../img/icon_trophies/pencil.png"
+            img: "img/icon_trophies/pencil.png"
         }, {
           rank: 4,
           step: 25,
-            img: "../../img/icon_trophies/pencil.png"
+            img: "img/icon_trophies/pencil.png"
         }, {
           rank: 5,
           step: 50,
-            img: "../../img/icon_trophies/pencil.png"
+            img: "img/icon_trophies/pencil.png"
         }],
         characteristics: [
           {
           rank: 1,
           step: 1,
-            img: "../../img/icon_trophies/tester.png"
+            img: "img/icon_trophies/tester.png"
         }, {
           rank: 2,
           step: 5,
-            img: "../../img/icon_trophies/tester.png"
+            img: "img/icon_trophies/tester.png"
         }, {
           rank: 3,
           step: 12,
-            img: "../../img/icon_trophies/tester.png"
+            img: "img/icon_trophies/tester.png"
         }, {
           rank: 4,
           step: 25,
-            img: "../../img/icon_trophies/tester.png"
+            img: "img/icon_trophies/tester.png"
         }, {
           rank: 5,
           step: 50,
-            img: "../../img/icon_trophies/tester.png"
+            img: "img/icon_trophies/tester.png"
         }],
         appstart: [
           {
           rank: 1,
           step: 1,
-            img: "../../img/icon_trophies/baby.png"
+            img: "img/icon_trophies/baby.png"
         }, {
           rank: 2,
           step: 30,
-            img: "../../img/icon_trophies/baby.png"
+            img: "img/icon_trophies/baby.png"
         }, {
           rank: 3,
           step: 40,
-            img: "../../img/icon_trophies/baby.png"
+            img: "img/icon_trophies/baby.png"
         }, {
           rank: 4,
           step: 250,
-            img: "../../img/icon_trophies/baby.png"
+            img: "img/icon_trophies/baby.png"
         }, {
           rank: 5,
           step: 500,
-            img: "../../img/icon_trophies/baby.png"
+            img: "img/icon_trophies/baby.png"
         }],
         event: [
           {
           rank: 1,
           step: 1,
-            img: "../../img/icon_trophies/party.png"
+            img: "img/icon_trophies/party.png"
         }, {
           rank: 2,
           step: 3,
-            img: "../../img/icon_trophies/party.png"
+            img: "img/icon_trophies/party.png"
         }, {
           rank: 3,
           step: 6,
-            img: "../../img/icon_trophies/party.png"
+            img: "img/icon_trophies/party.png"
         }, {
           rank: 4,
           step: 15,
-            img: "../../img/icon_trophies/party.png"
+            img: "img/icon_trophies/party.png"
         }, {
           rank: 5,
           step: 35,
-            img: "../../img/icon_trophies/party.png"
+            img: "img/icon_trophies/party.png"
         }],
         contact: [
           {
           rank: 1,
           step: 1,
-            img: "../../img/icon_trophies/contact.png"
+            img: "img/icon_trophies/contact.png"
         }, {
           rank: 2,
           step: 3,
-            img: "../../img/icon_trophies/contact.png"
+            img: "img/icon_trophies/contact.png"
         }, {
           rank: 3,
           step: 6,
-            img: "../../img/icon_trophies/contact.png"
+            img: "img/icon_trophies/contact.png"
         }, {
           rank: 4,
           step: 15,
-            img: "../../img/icon_trophies/contact.png"
+            img: "img/icon_trophies/contact.png"
         }, {
           rank: 5,
           step: 35,
-            img: "../../img/icon_trophies/contact.png"
+            img: "img/icon_trophies/contact.png"
         }],
         beer: [
           {
           rank: 1,
           step: 1,
-            img: "../../img/icon_trophies/beerglas.png"
+            img: "img/icon_trophies/beerglas.png"
         }, {
           rank: 2,
           step: 15,
-            img: "../../img/icon_trophies/beerglas.png"
+            img: "img/icon_trophies/beerglas.png"
         }, {
           rank: 3,
           step: 40,
-            img: "../../img/icon_trophies/beer.png"
+            img: "img/icon_trophies/beer.png"
         }, {
           rank: 4,
           step: 100,
-            img: "../../img/icon_trophies/beer.png"
+            img: "img/icon_trophies/beer.png"
         }, {
           rank: 5,
-          step: 250,
-            img: "../../img/icon_trophies/barrel.png"
+          step: 173,
+            img: "img/icon_trophies/barrel.png"
         }],
         rating: [
           {
           rank: 1,
           step: 1,
-          img: "../../img/icon_trophies/beginner.png"
+          img: "img/icon_trophies/beginner.png"
         }, {
           rank: 2,
           step: 5,
-            img: "../../img/icon_trophies/beginner.png"
+            img: "img/icon_trophies/beginner.png"
         }, {
           rank: 3,
           step: 12,
-            img: "../../img/icon_trophies/beginner.png"
+            img: "img/icon_trophies/beginner.png"
         }, {
           rank: 4,
           step: 25,
-            img: "../../img/icon_trophies/beginner.png"
+            img: "img/icon_trophies/beginner.png"
         }, {
           rank: 5,
           step: 50,
-            img: "../../img/icon_trophies/beginner.png"
+            img: "img/icon_trophies/beginner.png"
         }]
       };
 
