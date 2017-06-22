@@ -1,6 +1,6 @@
 angular.module('beeround.event', [])
 
-  .controller('eventDetailsCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, beeroundService, $http, $cordovaCalendar, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser, $stateParams, $filter) {
+  .controller('eventDetailsCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, beeroundService, $http, $cordovaCalendar, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser, $stateParams, $filter, trophyService) {
 
     let id = $stateParams.id;
 
@@ -14,7 +14,17 @@ angular.module('beeround.event', [])
       //Send Mail to Event organizer
       $scope.sendMail = function (mailAdress) {
         if($ionicUser.id){
-          beeroundService.postContact($ionicUser.id);
+          beeroundService.postContact($ionicUser.id).then(function(){
+            trophyService.checkContactTrophies($ionicUser.id).then(result => {
+              if(result != 0){
+                let tmpvar = 'Kontaktanfragen';
+                if(result.step = 1){
+                  tmpvar = 'Kontaktanfrage'
+                }
+                $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+              }
+            });
+          });
         }
         window.open("mailto:"+mailAdress, '_self');
       };
@@ -71,7 +81,17 @@ angular.module('beeround.event', [])
 
         // Log activity
         if($ionicUser.id){
-          beeroundService.postEvent($ionicUser.id);
+          beeroundService.postEvent($ionicUser.id).then(function(){
+            trophyService.checkEventTrophies($ionicUser.id).then(result => {
+              if(result != 0){
+                let tmpvar = 'Events vorgemerkt';
+                if(result.step = 1){
+                  tmpvar = 'Event vorgemerkt'
+                }
+                $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+              }
+            });
+          });
         }
 
           let alertPopup = $ionicPopup.alert({

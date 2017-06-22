@@ -20,7 +20,18 @@ angular.module('beeround.beer', [])
 
     $scope.sendMail = function () {
       if($ionicUser.id){
-        beeroundService.postContact($ionicUser.id);
+        beeroundService.postContact($ionicUser.id).then(function(){
+          trophyService.checkContactTrophies($ionicUser.id).then(result => {
+            console.log("geht Alex contact2");
+            if(result != 0){
+              let tmpvar = 'Kontaktanfragen';
+              if(result.step = 1){
+                tmpvar = 'Kontaktanfrage'
+              }
+              $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+            }
+          });
+        });
       }
       window.open("mailto:mail@domi-speh.de", '_self');
     };
@@ -714,7 +725,18 @@ angular.module('beeround.beer', [])
       }
       console.log(formattedNumber);
       if($ionicUser.id){
-        beeroundService.postContact($ionicUser.id);
+        beeroundService.postContact($ionicUser.id).then(function(){
+          trophyService.checkContactTrophies($ionicUser.id).then(result => {
+            console.log("geht Alex contact");
+            if(result != 0){
+              let tmpvar = 'Kontaktanfragen';
+              if(result.step = 1){
+                tmpvar = 'Kontaktanfrage'
+              }
+              $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+            }
+          });
+        });
       }
       window.open("tel://" + formattedNumber, '_system', 'location=yes');
     };
@@ -784,10 +806,8 @@ angular.module('beeround.beer', [])
       $scope.beerform.name = $scope.beer.name;
 
       if ($scope.beer.style === undefined) {
-        console.log($scope.beerform.abv);
         $scope.beerform.abv = 4.9
       } else {
-        console.log($scope.beer.style);
         $scope.beerform.abv = $scope.beer.style.abvMin;
       }
 
@@ -847,6 +867,17 @@ angular.module('beeround.beer', [])
       };
 
       beeroundService.postCharacteristics(data).then(function () {
+        trophyService.checkCharacteristicsTrophies($ionicUser.id).then(result => {
+          console.log("geht Alex eigenschften");
+          console.log(result);
+          if(result != 0){
+            let tmpvar = 'Eigenschaften';
+            if(result.step = 1){
+              tmpvar = 'Eigenschaft'
+            }
+            $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+          }
+        });
         console.log("success");
       })
     });
@@ -916,9 +947,15 @@ angular.module('beeround.beer', [])
           };
 
           beeroundService.postComment(data).then(function () {
-
-              let alertPopup = $ionicPopup.alert({
-                  title: 'Kommentar erfolgreich gepostet!',
+              trophyService.checkCommentTrophies($ionicUser.id).then(result => {
+                console.log("geht Alex comment");
+                if(result != 0){
+                  let tmpvar = 'Kommentare';
+                  if(result.step = 1){
+                    tmpvar = 'Kommentar'
+                  }
+                  $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+                }
               });
 
               $scope.form.comment = "";
@@ -1080,6 +1117,16 @@ angular.module('beeround.beer', [])
 
       beeroundService.logBeer(data).then(function () {
         // SUCCESS
+        trophyService.checkBeerTrophies($ionicUser.id).then(result => {
+          console.log("geht Alex Beer");
+          if(result != 0){
+            let tmpvar = 'Biere';
+            if(result.step = 1){
+              tmpvar = 'Bier'
+            }
+            $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+          }
+        });
 
         let confirmPopup = $ionicPopup.confirm({
           title: 'Das Bier wurde deinen Bieren hinzugefügt!',
@@ -1115,14 +1162,18 @@ angular.module('beeround.beer', [])
       };
 
       beeroundService.sendBeerRating(data).then(result => {
-
-        if(result != "put"){
-          trophyService.checkRatingTrophies($ionicUser.id).then(result => {
-            if(result != 0){
-              $rootScope.newTrophy(result.img, result.rank, result.step, 'Bewertungen')
+        trophyService.checkRatingTrophies($ionicUser.id).then(result => {
+          if(result != "put") {
+            console.log("geht Alex Rating");
+            if (result != 0) {
+              let tmpvar = 'Bewertungen';
+              if (result.step = 1) {
+                tmpvar = 'Bewertung'
+              }
+              $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
             }
-          });
-        }
+          }
+        });
       })
     }
 
