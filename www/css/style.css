@@ -676,6 +676,7 @@ ion-item.brewery-contact{
 .brewery-link{
   margin-top: 5px;
   color: #666;
+  margin-left: 5px;
 }
 
 p.characteristicsCount .ng-binding{
@@ -938,8 +939,12 @@ div.row.legend-rating{
 }
 .rechtliches ul{
   font-size: 12px;
+  margin-bottom: 10px;
 }
-
+.rechtliches ul li{
+  list-style-type: disc;
+  margin-left: 20px;
+}
 
 label.select-beer{
     background: rgba(200, 198, 197, 0.3);

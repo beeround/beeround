@@ -50,7 +50,6 @@
       <div class="row">
         <div class="col">
           <h2>{{beer.nameDisplay}}</h2>
-          <a class="ion-ios-home brewery-link" ng-href="#/tab/list/{{beer.breweryid}}"> {{beer.brewery}}</a>
         </div>
         <div class="col rating">
           <i class="small-icon ion-ios-pint" ng-class="{'active': beer.rating > 0}"></i>
@@ -59,12 +58,12 @@
           <i class="small-icon ion-ios-pint" ng-class="{'active': beer.rating > 3}"></i>
           <i class="small-icon ion-ios-pint" ng-class="{'active': beer.rating > 4}"></i>
         </div>
-
         <!--Anzahl Bewertungen-->
         <!--<div class="col">
           <i class="characteristicsCount">{{beer.characteristicsCount}} Bewertungen</i>
         </div>-->
       </div>
+      <div class="row"><a class="ion-ios-home brewery-link" ng-href="#/tab/list/{{beer.breweryid}}"> {{beer.brewery | limitTo: 45}}</a></div>
     </ion-item>
 
     <ion-item>

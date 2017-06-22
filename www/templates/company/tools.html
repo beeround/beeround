@@ -3,31 +3,77 @@
     <span class="button button-icon button-clear ion-ios-information-empty" ng-click="openInformation()">
     </span>
   </ion-nav-buttons>
-  <ion-content>
-    <ion-item>
-      <h1>Benutzte Tools und Programme</h1>
-      <p></p>
-    </ion-item>
+  <ion-content scroll="true">
+    <div class="rechtliches">
+      <h1>Folgende Tools & Dienste wurden benutzt:</h1>
+      <ul>
+        <li><a ng-href="http://ionicframework.com/">Ionic Framework v1</a></li>
+        <li><a ng-href="http://www.brewerydb.com/">Brewery DB</a></li>
+        <li><a ng-href="https://angularjs.org/">Angular JS</a></li>
+        <li><a ng-href="https://www.npmjs.com/">NPM JS</a></li>
+        <li><a ng-href="https://github.com/beeround/beeround">GitHub</a></li>
+      </ul>
+
+      <ul>
+        <li><a ng-href="https://cordova.apache.org/plugins/">Cordova</a></li>
+        <li><a ng-href="https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-geolocation/">Cordova plugin
+          geolocation</a></li>
+        <li><a ng-href="https://github.com/ionic-team/ionic-plugin-keyboard">Cordova Ionic keyboard plugin</a></li>
+        <li><a ng-href="https://github.com/apache/cordova-plugin-whitelist">Cordova plugin whitelist</a></li>
+        <li><a ng-href="https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-console/">Cordova plugin
+          console</a></li>
+        <li><a ng-href="https://github.com/apache/cordova-plugin-statusbar">Cordova plugin statusbar</a></li>
+        <li><a ng-href="https://github.com/apache/cordova-plugin-device">Cordova plugin device</a></li>
+        <li><a ng-href="https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-splashscreen/">Cordova plugin
+          splashscreen</a></li>
+      </ul>
+      <ul>
+        <li><a ng-href="http://gulpjs.com/">Gulp</a></li>
+        <li><a ng-href="https://github.com/contra/gulp-concat">Gulp Concat</a></li>
+        <li><a ng-href="https://github.com/scniro/gulp-clean-css">Gulp clean CSS</a></li>
+        <li><a ng-href="https://github.com/hparra/gulp-rename">Gulp rename</a></li>
+        <li><a ng-href="https://github.com/dlmanning/gulp-sass">Gulp Sass</a></li>
+        <li><a ng-href="https://www.npmjs.com/package/gulp-util">Gulp Shell Util</a></li>
+      </ul>
+      <ul>
+        <li><a ng-href="https://bower.io/">Bower</a></li>
+        <li><a ng-href="https://github.com/shelljs/shelljs">Shell JS</a></li>
+        <li><a ng-href="https://github.com/mevdschee/php-crud-api">PHP CRUD API</a></li>
+        <li><a ng-href="https://developers.google.com/maps/?hl=de">Google Maps</a></li>
+        <li><a ng-href="http://autocompletejs.com/">Autocomplete JS</a></li>
+        <li><a ng-href="https://github.com/saravmajestic/ionic/tree/master/tabbedSlideBox">Tabbed SlideBox</a></li>
+        <li><a ng-href="https://github.com/angular-slider/angularjs-slider">AngularJS slider</a></li>
+        <li><a ng-href="http://jtblin.github.io/angular-chart.js/">Angular ChartJS</a></li>
+        <li><a ng-href="https://www.mysql.com/de/">MySQL</a></li>
+        <li><a ng-href="https://github.com/allenhwkim/angularjs-google-maps">AngularJS Google Maps</a></li>
+      </ul>
+    </div>
     <script id="information.html" type="text/ng-template">
       <ion-popover-view>
 
         <ion-content>
 
           <!--Filter, in which radius the brewery should be away from the user-->
-          <div  class="overlay" ng-click="closeInformation()"></div>
-          <div class="card" >
+          <div class="overlay" ng-click="closeInformation()"></div>
+          <div class="card">
             <i ng-click="closeInformation()" class="icon ion-close-round"></i>
 
             <div class="information-box">
-              <a class="button-block" ng-click="closeInformation()" ng-href="#/tab/company/impressum"><button class="button-block">Impressum</button></a>
-              <a class="button-block" ng-click="closeInformation()" ng-href="#/tab/company/datenschutz"><button class="button-block">Datenschutz</button></a>
-              <button class="button-block" ng-click="sendMail()"> Feedback senden </button>
-              <a class="button-block" ng-href="https://play.google.com/store/apps?hl=de" target="_blank"><button class="button-block">App bewerten</button></a>
-              <a class="button-block" ng-click="closeInformation()" ng-href="#/tab/list"><button class="button-block">Brauerei Liste</button></a>
+              <a class="button-block" ng-click="closeInformation()" ng-href="#/tab/company/impressum">
+                <button class="button-block">Impressum</button>
+              </a>
+              <a class="button-block" ng-click="closeInformation()" ng-href="#/tab/company/datenschutz">
+                <button class="button-block">Datenschutz</button>
+              </a>
+              <button class="button-block" ng-click="sendMail()"> Feedback senden</button>
+              <a class="button-block" ng-href="https://play.google.com/store/apps?hl=de" target="_blank">
+                <button class="button-block">App bewerten</button>
+              </a>
+              <a class="button-block" ng-click="closeInformation()" ng-href="#/tab/list">
+                <button class="button-block">Brauerei Liste</button>
+              </a>
             </div>
           </div>
-
-
 
 
         </ion-content>
