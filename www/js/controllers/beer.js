@@ -713,7 +713,6 @@ angular.module('beeround.beer', [])
       formattedNumber = formattedNumber.replace(/\)/g, '');
       formattedNumber = formattedNumber.replace(/\(/g, '');
 
-      console.log(formattedNumber);
 
       if (formattedNumber.substr(0, 2) == "49") {
         formattedNumber = formattedNumber.substr(2);
@@ -722,7 +721,6 @@ angular.module('beeround.beer', [])
       else if (formattedNumber.substr(0, 1) == "+49") {
         formattedNumber = formattedNumber.replace('+49', '0');
       }
-      console.log(formattedNumber);
       if($ionicUser.id){
         beeroundService.postContact($ionicUser.id).then(function(){
           trophyService.checkContactTrophies($ionicUser.id).then(result => {

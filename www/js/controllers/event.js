@@ -41,7 +41,6 @@ angular.module('beeround.event', [])
           formattedNumber = formattedNumber.replace(/\)/g, '');
           formattedNumber = formattedNumber.replace(/\(/g, '');
 
-          console.log(formattedNumber);
 
           if (formattedNumber.substr(0, 2) == "49") {
               formattedNumber = formattedNumber.substr(2);
@@ -50,11 +49,20 @@ angular.module('beeround.event', [])
           else if(formattedNumber.substr(0,1) == "+49"){
               formattedNumber = formattedNumber.replace('+49', '0');
           }
-          console.log(formattedNumber);
 
         // Log activity
         if($ionicUser.id){
-          beeroundService.postContact($ionicUser.id);
+          beeroundService.postContact($ionicUser.id).then(function(){
+            trophyService.checkContactTrophies($ionicUser.id).then(result => {
+              if(result != 0){
+                let tmpvar = ' Kontaktanfragen';
+                if(result.step == 1){
+                  tmpvar = ' Kontaktanfrage'
+                }
+                $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+              }
+            });
+          });
         }
 
           window.open("tel://"+formattedNumber, '_system', 'location=yes');
