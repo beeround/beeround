@@ -359,7 +359,16 @@ angular.module('beeround.beer', [])
             });
 
 
-          })
+          },function () {
+            $rootScope.userSettings = {
+              lat: "",
+              lng: "",
+              radius: 30
+            };
+            $ionicLoading.hide();
+            let alertPopup = $ionicPopup.alert({
+              title: 'Standort nicht gefunden! Wähle ihn manuell!',
+            });          })
       }
     }
 
@@ -685,10 +694,10 @@ angular.module('beeround.beer', [])
     // Get all beers
     breweryDB.getBeersByBrewery(breweryId).then(result => {
       if (result) {
+        console.log(result);
         $ionicLoading.hide();
         $scope.beerList = result;
         $scope.noData = false;
-
       }
       else {
         $ionicLoading.hide();
@@ -697,7 +706,6 @@ angular.module('beeround.beer', [])
     }, err => {
       console.log(err)
     });
-
     // Get brewery informations
     breweryDB.getBreweryById(breweryId).then(result => {
       $scope.brewery = result.data;
