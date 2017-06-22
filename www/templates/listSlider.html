@@ -170,17 +170,8 @@
 
 
         <ion-slide>
-          <div class="item item-text-wrap">
-            <div ng-model="sortingOptions">
-              <button ng-click="sortBy('name')" class="sortorder" ng-class="{active: activeSorting == 'name'}">A - Z
-              </button>
-              <button ng-click="sortBy('distance')" class="sortorder" ng-class="{active: activeSorting == 'distance'}">
-                <i class="icon ion-android-radio-button-on"> km</i>
-              </button>
-            </div>
-          </div>
-          <ion-scroll style="height:80%" delegate-handle="slide1Scroll">
 
+          <ion-scroll style="height:80%" delegate-handle="slide1Scroll">
             <!-- Beer Events around position !-->
             <ion-item class="card event-card" ng-repeat="beerEvent in beerEvents">
               <a class="item event-item" ng-href="#/tab/details/event/{{beerEvent.id}}">

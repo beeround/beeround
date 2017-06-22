@@ -245,6 +245,14 @@ angular.module('beeround.account', [])
       }
     });
 
+    trophyService.getTrophies($ionicUser.id).then(result => {
+      console.log(result);
+
+
+      $scope.trophies = result[0].appstart+result[0].rating+result[0].event+result[0].differentbeers+result[0].contact+result[0].comment+result[0].characteristics+result[0].beer;
+
+    }, err => {
+    });
 
     $scope.editform = [];
 
@@ -648,8 +656,7 @@ angular.module('beeround.account', [])
     trophyService.getTrophies($ionicUser.id).then(result => {
       $scope.allTrophys = result;
       console.log(result);
-    }, err => {
-
+      }, err => {
     });
   })
 
