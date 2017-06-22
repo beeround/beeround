@@ -4,20 +4,25 @@
     <ion-item>
     <form ng-submit="addBeer()">
       <div class="list list-inset">
-        <label class="item item-input item-stacked-label input-field">
-          <span class="input-label">Biername</span>
-          <input ng-model="addBeerForm.name" placeholder="Bspw. Stuttgarter Hofbräu" name="name" type="text">
+
+        <label class="beer-sorts item-input item-stacked-label">
+          <p class="input-label">Biername</p>
+          <input class="edit-input" ng-model="addBeerForm.name" placeholder="Bspw. Stuttgarter Hofbräu" name="name" type="text">
         </label>
-        <label class="item item-input item-select">
-          Biersorte
-          <select ng-model='form.type'
+
+        <p class="input-label" style="padding-bottom: 0px">Biersorte</p>
+
+        <label class="select-beer item-input item-select">
+          <select ng-model='form.type' required
                   ng-options='option.value as option.name for option in typeOptions'>Biersorten</select>
         </label>
-        <label class="item item-input item-stacked-label input-field">
-          <span class="input-label">Promillegehalt</span>
-          <input ng-model="addBeerForm.abv" placeholder="5.0" name="beerform.abv" type="text">
+
+        <label class="beer-sorts item-input item-stacked-label">
+          <p class="input-label">Promillegehalt</p>
+          <input class="edit-input" ng-model="addBeerForm.abv" placeholder="5.0" name="beerform.abv" type="text">
         </label>
-        <button type="submit" class="button border-button">Bier hinzufügen</button>
+
+        <button type="submit" class="button-block">Bier hinzufügen</button>
       </div>
     </form>
     </ion-item>

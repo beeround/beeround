@@ -951,7 +951,7 @@ label.select-beer{
 label.select-beer >select{
     background: none;
     border-radius: 7px;
-    color: #666;
+    color: #aaa;
     width: 100%;
     direction:ltr;
 }
