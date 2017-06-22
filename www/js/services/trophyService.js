@@ -160,9 +160,7 @@ angular.module('trophies.service', [])
       };
 
       return {
-        checkCommentTrophies: function (iud, comments) {
 
-        },
 
         checkRatingTrophies: function (uid) {
           return new Promise((resolve, reject) => {
@@ -193,8 +191,9 @@ angular.module('trophies.service', [])
                     resolve(steps.rating[3])
                   });
                   break;
+
                 default:
-                  resolve(steps.rating[0])
+                  resolve(0)
               }
             })
           });

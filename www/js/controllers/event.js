@@ -62,15 +62,12 @@ angular.module('beeround.event', [])
 
     $scope.createEvent = function () {
 
-      console.log(new Date(($filter('date')($scope.event.start, 'medium', '+0200'))));
-      console.log(new Date(($filter('date')($scope.event.start, 'yyyy-MM-dd HH:mm:ss Z'))));
-
       $cordovaCalendar.createEvent({
         title: $scope.event.name,
         location: $scope.event.city,
         notes: $scope.event.description,
-        startDate: new Date(($filter('date')($scope.event.start, 'yyyy-MM-dd HH:mm:ss Z'))),
-        endDate: new Date(($filter('date')($scope.event.end, 'yyyy-MM-dd HH:mm:ss Z')))
+        startDate: new Date(($filter('date')($scope.event.start, 'medium', '+0200'))),
+        endDate: new Date(($filter('date')($scope.event.end, 'medium', '+0200')))
       }).then(function (result) {
 
         // Log activity

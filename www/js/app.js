@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
 angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 'ngMap', 'google.places', 'beeround.index', 'beeround.beer', 'beeround.account', 'beeround.event', 'breweryDB.service', 'beeround.service','trophies.service', 'angular.filter', 'rzModule', 'chart.js'])
-  .run(function ($ionicPlatform, $state, $stateParams, $rootScope, $cordovaLocalNotification, $cordovaGoogleAnalytics) {
+  .run(function ($ionicPlatform, $state, $stateParams, $rootScope, $cordovaLocalNotification, $cordovaGoogleAnalytics, beeroundService, $ionicUser) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -27,7 +27,14 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
     });
 
     $ionicPlatform.on('resume', function(){
-      console.log("Resume")
+
+      if($ionicUser.id) {
+        beeroundService.logAppStart($ionicUser.id).then(function () {
+          // Trophäen hier
+
+        })
+
+      }
     });
   })
 
@@ -179,7 +186,7 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
         onEnter: function ($state, $ionicAuth, $ionicUser) {
 
           if (!$ionicUser.id) {
-            $state.transition.finally(() => {w
+            $state.transition.finally(() => {w;
               $state.go('tabs.login')
             });
 

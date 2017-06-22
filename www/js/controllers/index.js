@@ -41,7 +41,7 @@ angular.module('beeround.index', [])
   // Trophy PopUp
   $rootScope.newTrophy = function(img, rank, step, type) {
 
-    //TODO Notifation + Mehrzahl + Styling
+    //TODO Notifation + Styling + Timeout
 
     $ionicPopup.show({
       template: '<img src="'+img+'"/>',

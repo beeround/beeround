@@ -5,24 +5,26 @@ angular.module('beeround.service', [])
       return {
         sendBeerRating: function (data) {
 
-          return $http.get('http://www.beeround.de/api/ratings?transform=1&filter[]=beerid,eq,' + data.beerid + '&filter[]=userid,eq,' + data.userid + '&satisfy=all').then(result => {
+          return new Promise((resolve, reject) => {
+            $http.get('http://www.beeround.de/api/ratings?transform=1&filter[]=beerid,eq,' + data.beerid + '&filter[]=userid,eq,' + data.userid + '&satisfy=all').then(result => {
 
-            //TODO DELETE IF 0
-            if (result.data.ratings.length > 0) {
-              console.log("Data available");
+              //TODO DELETE IF 0
+              if (result.data.ratings.length > 0) {
+                console.log("Data available");
 
-              $http.put('http://www.beeround.de/api/ratings/' + result.data.ratings[0].ratingid, data).then(result => {
-                console.log("PUT: " + result);
-              });
+                $http.put('http://www.beeround.de/api/ratings/' + result.data.ratings[0].ratingid, data).then(result => {
+                  resolve("put");
+                });
 
-            }
-            else {
-              console.log("No DATA");
-              console.log(data);
-              $http.post('http://www.beeround.de/api/ratings', data).then(result => {
-                console.log("POST: " + result.data);
-              });
-            }
+              }
+              else {
+                console.log("No DATA");
+                console.log(data);
+                $http.post('http://www.beeround.de/api/ratings', data).then(result => {
+                  resolve("post");
+                });
+              }
+            })
           })
         },
 
@@ -239,6 +241,8 @@ angular.module('beeround.service', [])
           });
         },
 
+
+
         getBeerStory: function (uid) {
 
           return $http.get('http://www.beeround.de/api/drinkinghabits?transform=1&order=drinkinghabitid,DESC&filter=userid,eq,' + uid).then(result => {
@@ -274,6 +278,16 @@ angular.module('beeround.service', [])
             return result.data.drinkinghabits.length;
 
           })
+        },
+
+        logAppStart: function (uid) {
+          let data = {
+            userid: uid
+          };
+
+          return $http.post('http://www.beeround.de/api/appstart', data).then(result => {
+            console.log("POST: " + result.data);
+          });
         },
 
         postLogin: function (uid) {
@@ -315,6 +329,7 @@ angular.module('beeround.service', [])
             return result.data.activities[0];
           })
         }
+
 
       }
   }

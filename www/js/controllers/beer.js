@@ -1119,13 +1119,14 @@ angular.module('beeround.beer', [])
       };
 
       beeroundService.sendBeerRating(data).then(result => {
-        console.log("Rating send");
 
-        trophyService.checkRatingTrophies($ionicUser.id).then(result => {
-          if(result != 0){
-            $rootScope.newTrophy(result.img, result.rank, result.step, 'Bewertungen')
-          }
-        });
+        if(result != "put"){
+          trophyService.checkRatingTrophies($ionicUser.id).then(result => {
+            if(result != 0){
+              $rootScope.newTrophy(result.img, result.rank, result.step, 'Bewertungen')
+            }
+          });
+        }
       })
     }
 
