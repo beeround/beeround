@@ -4,6 +4,7 @@
   margin:0px;
   text-align: left;
 }
+
 .rating button.control {
   width: auto;
   height:auto;
@@ -271,22 +272,33 @@ p.headline {
 
 
 /*Trophy PopUp*/
-.newTrophy {
-  position: relative;
+.newTrophy popup{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .newTrophy .popup-body {
   text-align: center;
+  display: block;
+  display: inline-table;
+  margin-left: auto;
+}
+
+.newTrophy .popup-buttons > button{
+  background: #F1A435;
+  color: #ffffff;
 }
 
 .newTrophy span {
-  position: absolute;
+  position: relative;
   font-size: 24px;
   font-weight: bold;
-  bottom: 10px;
+  bottom: 30px;
   color: white;
-  right: 38px;
+  right: 30px;
   background-color: #F1A435;
   padding: 10px 14px;
   border-radius: 50%;
 }
+
 
