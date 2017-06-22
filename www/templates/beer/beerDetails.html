@@ -128,7 +128,6 @@
           <div ng-show="!comment.image">
             <p class="comment">{{comment.comment}}</p>
           </div>
-          <button ng-show="comment.userid == $ionicUser.id" ng-click="deleteComment(comment.commentid)">Kommentar löschen</button>
         </ion-item>
         <p ng-show="noComments">Leider keine Kommentare vorhanden!</p>
       </ion-list>
