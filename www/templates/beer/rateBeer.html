@@ -34,7 +34,7 @@
 
       <div class="information">
       <button class="button-invert" ng-click="changeCharacteristicsWindow()"><i class="icon ion-android-favorite"></i> Eigenschaften</button>
-        <button class="button-invert" ng-click="showOptions()"><i class="icon ion-android-image"></i> Bild/Foto</button>
+        <button class="button-invert" ng-click="startCamera()"><i class="icon ion-android-image"></i> Bild/Foto</button>
 
         <div ng-show="characteristicsWindow" class="characteristics">
           <div class="row">
@@ -97,7 +97,7 @@
           <img ng-src="{{srcImage}}" id="srcImage" width="250" style="display: block; margin: 40px auto;"/><br/>
           <hr>
           <button ng-click="uploadImage()">Bild hochladen </button>
-          <button ng-click="showOptions()">Wiederholen</button>
+          <button ng-click="startCamera()">Wiederholen</button>
 
         </ion-content>
       </ion-modal-view>

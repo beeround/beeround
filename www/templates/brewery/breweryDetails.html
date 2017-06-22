@@ -77,7 +77,7 @@
         </ion-list>
 
         <ion-list>
-          <ion-item class="keine-biere" ng-hide="beerList">
+          <ion-item class="keine-biere" ng-show="noData">
             <p>Leider sind keine Biere hinterlegt!</p>
             <button ng-click="openAddBeerView(brewery.id)" class="button-block">Neues Bier hinzufügen</button>
           </ion-item>

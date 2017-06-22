@@ -838,7 +838,12 @@ angular.module('beeround.beer', [])
     });
 
     beeroundService.getComments(beerId).then(function (result) {
-      $scope.comments = result.data.comments;
+      if(result.data.comments.length > 0){
+        $scope.comments = result.data.comments;
+      } else{
+        $scope.comments = undefined;
+        console.log($scope.comments);
+      }
     });
 
 
@@ -1003,7 +1008,7 @@ angular.module('beeround.beer', [])
     };
 
     // Triggered on a button click, or some other target
-    $scope.showOptions = function () {
+    $scope.startCamera = function () {
 
       // Show the action sheet
       $ionicActionSheet.show({
