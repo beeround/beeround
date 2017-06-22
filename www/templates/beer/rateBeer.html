@@ -89,16 +89,17 @@
 
     <script id="image-preview.html" type="text/ng-template">
       <ion-modal-view>
-        <ion-header-bar class="bar bar-header">
-          <h1 class="title">Bildupload</h1>
-          <button class="button button-primary" ng-click="modal.hide()">Cancel</button>
-        </ion-header-bar>
         <ion-content>
-          <img ng-src="{{srcImage}}" id="srcImage" width="250" style="display: block; margin: 40px auto;"/><br/>
-          <hr>
-          <button ng-click="uploadImage()">Bild hochladen </button>
-          <button ng-click="startCamera()">Wiederholen</button>
+          <ion-item class="item">
+          <h1 class="title">Bildupload</h1>
 
+
+          <img ng-src="{{srcImage}}" id="srcImage" width="250" style="display: block; margin: 40px auto;"/><br/>
+
+          <button class="button-block" ng-click="uploadImage()">Bild hochladen </button>
+          <button class="button-block"ng-click="startCamera()">Wiederholen</button>
+          <button class="button-block button-primary" ng-click="modal.hide()">Abbrechen</button>
+          </ion-item>
         </ion-content>
       </ion-modal-view>
     </script>
