@@ -24,17 +24,20 @@
       <marker ng-repeat="marker in markers" id="{{marker.id}}" position="{{marker.lat}},{{marker.lng}}" on-click="showDetails(marker, $index)" icon='../img/beeround_marker_brown.png' ></marker>
     </ng-map>
     <div on-swipe-left="next()" on-swipe-right="prev()" ng-show="selectedBrewery" class="detailbox">
+      <div class="beer-details">
       <i class="ion-android-close" style="float:right" ng-click="closeDetails()"></i>
       <h3>{{selectedBrewery.name}}</h3>
       <div class="item divider">
       <p>{{selectedBrewery.address}}</p>
-      <p>{{selectedBrewery.plz}} {{selectedBrewery.city}}</p>
+      <p style="padding-bottom: 5px">{{selectedBrewery.plz}} {{selectedBrewery.city}}</p>
+      </div>
+        <div ng-show="selectedBrewery.beers && selectedBrewery.events">
+          <span><i class="ion-ios-pint"></i>{{selectedBrewery.beers.length}} Biere</span>
+          <span><i class="ion-ios-calendar"></i>{{selectedBrewery.events.length}} Events</span>
+        </div>
       </div>
 
-      <div ng-show="selectedBrewery.beers && selectedBrewery.events">
-        <span><i class="ion-ios-pint"></i>{{selectedBrewery.beers.length}} Biere</span>
-        <span><i class="ion-ios-calendar"></i>{{selectedBrewery.events.length}} Events</span>
-      </div>
+
 
 
 

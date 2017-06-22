@@ -127,10 +127,13 @@ ion-item.brown-background > label {
 .detailbox{
   padding-left: 30px;
   border-radius: 5px;
-  height: 150px;
+  height: auto;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
 }
 
+.detailbox p {
+  line-height: 15px;
+}
 .detailbox i {
   font-size: 27px;
   color: #C8C6C5;
@@ -249,10 +252,7 @@ p.headline {
   max-width: 100%;
 }
 
-.detailbox .ng-binding:last-child {
-  padding-bottom: 10px;
-}
-
-custom-marker{
+.beer-details {
+  position: relative;
 
 }
