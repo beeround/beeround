@@ -87,7 +87,7 @@ angular.module('beeround.account', [])
           });
 
           })
-    }
+    };
 
     $scope.startCamera = function () {
         let options = {
@@ -121,7 +121,7 @@ angular.module('beeround.account', [])
                 });
             });
         })
-    }
+    };
 
             $scope.signup = function () {
 
@@ -206,12 +206,13 @@ angular.module('beeround.account', [])
 
                         beeroundService.postLogin($ionicUser.id).then(function () {
 
-                            //Notification Test
-                            let test = {
-                                title: "Testtitel",
-                                text: "Das ist ein Test"
-                            };
-                            $rootScope.scheduleSingleNotification(test);
+          //Notification Test
+         /* let test = {
+            title: "Testtitel",
+            text: "Das ist ein Test"
+          };
+
+          $rootScope.scheduleSingleNotification(test);*/
 
                             //SUCCESS
                             $state.go("tabs.profile");
@@ -232,12 +233,17 @@ angular.module('beeround.account', [])
             .controller('profilCtrl', function ($location, $scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, $cordovaFileTransfer, beeroundService, $cordovaCamera, $ionicActionSheet) {
                 $scope.userdata = $ionicUser.details;
 
-                beeroundService.getUserActivities($ionicUser.id).then(result => {
-                    $scope.userActivities = result;
-                }, err => {
+    beeroundService.getUserActivities($ionicUser.id).then(result => {
+      $scope.userActivities = result;
+      console.log(result);
+    }, err => {
 
-                    //TODO Error Handling
-                });
+      // Set counter to 0
+      $scope.userActivities = {
+        beercount : 0,
+        ratingcount : 0
+      }
+    });
 
 
                 $scope.editform = [];
@@ -629,12 +635,15 @@ angular.module('beeround.account', [])
 
             })
 
-            .controller('myTrophiesCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet) {
+  .controller('myTrophiesCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet, trophyService) {
+    trophyService.getTrophies($ionicUser.id).then(result => {
+      console.log(result);
+    }, err => {
 
-            })
+    });
+  })
 
-
-        ;
+;
 
 
 

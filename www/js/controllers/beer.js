@@ -760,7 +760,7 @@ angular.module('beeround.beer', [])
 
   })
 
-  .controller('beerDetailsCtrl', function ($rootScope, $cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera, $ionicPopup, $location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser, $timeout) {
+  .controller('beerDetailsCtrl', function ($rootScope, $cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera, $ionicPopup, $location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser, $timeout, trophyService) {
 
     let beerId = $stateParams.beerId;
     $scope.image = null;
@@ -803,7 +803,7 @@ angular.module('beeround.beer', [])
 
     breweryDB.getBeerDetails(beerId).then(result => {
       $scope.beer = result.data;
-      $scope.oldBeerName = $scope.beer.name
+      $scope.oldBeerName = $scope.beer.name;
       $scope.beerform = [];
       $scope.beerform.name = $scope.beer.name;
 
@@ -1129,6 +1129,8 @@ angular.module('beeround.beer', [])
 
       beeroundService.sendBeerRating(data).then(result => {
         console.log("Rating send");
+
+        trophyService.checkRatingTrophies($ionicUser.id);
       })
     }
 

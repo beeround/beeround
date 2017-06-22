@@ -1,6 +1,6 @@
 angular.module('beeround.service', [])
-  .service('beeroundService', ['$http', '$q', '$timeout', '$cordovaFileTransfer',
-    function ($http, $q, $timeout, $cordovaFileTransfer) {
+  .service('beeroundService', ['$http', '$q', '$timeout', '$cordovaFileTransfer', 'trophyService',
+    function ($http, $q, $timeout, $cordovaFileTransfer, trophyService) {
 
       return {
         sendBeerRating: function (data) {
@@ -283,7 +283,11 @@ angular.module('beeround.service', [])
           };
 
           return $http.post('http://www.beeround.de/api/loginstatistics', data).then(result => {
-            return result;
+
+            trophyService.createTrophyTable(data).then(function (re) {
+              return result;
+
+            });
           });
         },
 

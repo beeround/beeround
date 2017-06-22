@@ -25,12 +25,15 @@ angular.module('beeround.index', [])
 
   $rootScope.scheduleSingleNotification = function (data) {
 
+    let now             = new Date().getTime();
+
+    let twenty = new Date(now + 1200000);
+    console.log(twenty);
+
     $cordovaLocalNotification.schedule({
       id: 1,
       title: data.title,
-      text: data.text,
-      every: 'minute'
-
+      text: data.text
     })
   };
 
