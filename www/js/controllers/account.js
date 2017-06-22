@@ -423,8 +423,8 @@ angular.module('beeround.account', [])
                     let confirmPopup = $ionicPopup.confirm({
                         title: 'Konto löschen',
                         template: 'Bist du dir sicher, dass du dein Konto löschen willst?',
-                        okText: 'Sicher',
-                        cancelText: 'Lieber nicht'
+                        okText: 'Ja',
+                        cancelText: 'Abbrechen'
                     });
 
                     confirmPopup.then(function (res) {

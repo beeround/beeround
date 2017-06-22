@@ -151,7 +151,7 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
         onEnter: function ($state, $ionicAuth, $ionicUser) {
 
           if (!$ionicUser.id) {
-            $state.transition.finally(() => {
+            $state.transition.finally(() => {w
               $state.go('tabs.login')
             });
 

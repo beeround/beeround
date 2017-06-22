@@ -1080,15 +1080,16 @@ angular.module('beeround.beer', [])
           title: 'Das Bier wurde deinen Bieren hinzugefügt!',
           template: '<small>Möchtest du das Bier noch bewerten oder ein Bild posten?</small>',
           buttons: [
-            {
-              text: 'Bewerten',
-              type: 'button-positive',
-              onTap: function (e) {
-                $state.go('tabs.rateBeer', {beerId: beerId});
 
+              {text: 'Zurück'},
+              {
+                  text: 'Bewerten',
+                  type: 'button-positive',
+                  onTap: function (e) {
+                      $state.go('tabs.rateBeer', {beerId: beerId});
+
+                  }
               }
-            },
-              {text: 'Zurück'}
           ]
         });
 
@@ -1154,8 +1155,8 @@ angular.module('beeround.beer', [])
         let confirmPopup = $ionicPopup.confirm({
           title: 'Gleicher Name?',
           template: 'Der Name hat sich nicht geändert.',
-          okText: 'Richtig.',
-          cancelText: 'Möchte ich ändern!'
+          okText: 'Ok',
+          cancelText: 'Ändern'
         });
 
         confirmPopup.then(function (res) {

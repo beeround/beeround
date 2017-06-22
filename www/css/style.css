@@ -284,7 +284,7 @@ button{
     font-family: "Proxima Nova", "Roboto","Helvetica","sans-serif";
     font-size: 14px;
     color: #F1A435;
-    font-weight: normal;
+    font-weight: bold;
     background: #FFFFFF;
     border:0px;
     border-radius: 4px;
@@ -299,13 +299,13 @@ button{
 button.active{
     background: #F1A435;
     color: #FFFFFF;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 button:hover{
     background: #F1A435;
     color: #FFFFFF;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 
@@ -570,6 +570,9 @@ i.small-icon.ion-ios-pint{
 
 /*GENERAL STUFF*/
 
+.back-text{
+    opacity: 0;
+}
 
 .platform-ios .popover .scroll-content {
     margin: 0px;
@@ -786,7 +789,9 @@ input.edit-input{
     background: rgba(200, 198, 197, 0.3);
     border-radius: 7px;
     padding: 12px;
+    color: #666;
 }
+
 .signup_image{
     width: 100px;
     height:100px;
@@ -832,16 +837,12 @@ ion-item.small-thumbnail-left > p i.icon.ion-chevron-right:before  {
 span.profile-overview{
     color: #C8C6C5;
     font-size: 18px;
-    padding-right: 35px;
+    display: block;
+    margin-left: 0px;
+    margin-right: 0px;
     font-weight: bold;
-    float: left;
     text-align: center;
-line-height: 14px;
-}
-
-span.profile-overview >p {
-    font-size: 10px;
-    font-weight: normal;
+    line-height: 14px;
 }
 
 .profile-header{
@@ -858,6 +859,21 @@ span.profile-overview >p {
   width:100%;
   padding:0 30px;
 }
+div.profile-facts{
+    width: 60%;
+    left: 113px;
+    position: absolute;
+}
+
+div.profile-facts > div > p{
+    font-size: 10px;
+    font-weight: normal;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
 
 /*EVENT*/
 
@@ -906,3 +922,22 @@ div.list.legend-rating{
 div.row.legend-rating{
     padding-bottom: 0px;
 }
+
+
+label.select-beer{
+    background: rgba(200, 198, 197, 0.3);
+    border-radius: 7px;
+    padding: 12px;
+    color: #666;
+}
+
+label.select-beer >select{
+    background: none;
+    border-radius: 7px;
+    color: #666;
+    width: 100%;
+    direction:ltr;
+}
+
+
+
