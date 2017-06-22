@@ -912,7 +912,11 @@ angular.module('beeround.beer', [])
     };
 
     $scope.sendComment = function () {
-      let data = {
+      if ($scope.form.comment === null || $scope.form.comment === undefined || $scope.form.comment === "" || $scope.form.comment === "null") {
+      }
+
+      else{
+        let data = {
         beerid: beerId,
         userid: $ionicUser.id,
         username: $ionicUser.details.username,
@@ -920,19 +924,18 @@ angular.module('beeround.beer', [])
         comment: $scope.form.comment
       };
 
-      beeroundService.postComment(data).then(function () {
-        alert("success");
-        $scope.form.comment = "";
-        $state.go('tabs.beerDetails', {beerId: beerId});
+        beeroundService.postComment(data).then(function () {
+          alert("success");
+          $scope.form.comment = "";
+          $state.go('tabs.beerDetails', {beerId: beerId});
 
-        // TODO CUSTOM FEEDBACK
-
-      }, function () {
-        // FAIL
-        alert("Fehlgeschlagen")
-
-        //TODO ERROR HANDLING
-      })
+          // TODO CUSTOM FEEDBACK
+        }, function () {
+          // FAIL
+          alert("Fehlgeschlagen")
+          //TODO ERROR HANDLING
+        })
+      }
     };
 
 
