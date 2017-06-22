@@ -518,8 +518,8 @@ a.button.button-clear.ion-edit:before{
 .ion-android-cancel:before{
     position: absolute;
     z-index: 3;
-    top: 6px;
-    left: 355px;
+    top: -11%;
+    left: 92%;
 
 }
 
@@ -725,11 +725,10 @@ p.characteristicsInfo{
     font-size: 10px;
 }
 
-.box{
+.fadein{
     position: absolute;
-    z-index: 2;
-    top:10px;
-    left:130px;
+    top: 2%;
+    right: 0;
 }
 
 .commentDate{

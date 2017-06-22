@@ -672,7 +672,7 @@ angular.module('beeround.beer', [])
     }
   })
 
-  .controller('beerListCtrl', function ($scope, breweryDB, beeroundService, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover, $ionicUser) {
+  .controller('beerListCtrl', function ($scope, breweryDB, beeroundService, $http, $cordovaGeolocation, $stateParams, $state, $ionicPopover, $ionicUser, $location) {
     const breweryId = $stateParams.brewery;
 
     $scope.activeWindow = 'beer';
@@ -751,6 +751,13 @@ angular.module('beeround.beer', [])
 
       }
     };
+
+    //open add beer view
+      $scope.openAddBeerView = function (breweryid) {
+          $location.url('/tab/details/beer/' + breweryid + '/add');
+
+      };
+
 
   })
 
@@ -1134,8 +1141,8 @@ angular.module('beeround.beer', [])
                   onTap: function (e) {
                       $state.go('tabs.rateBeer', {beerId: beerId});
 
-              }            },
-            {text: 'Zurück'}
+              }
+              }
 
           ]
         });

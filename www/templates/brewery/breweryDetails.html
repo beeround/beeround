@@ -20,8 +20,8 @@
               <button ng-show="beerList.length > 0" ng-click="activeWindow = 'beer'" ng-class="{'active':activeWindow=='beer'}">{{beerList.length}} Biere</button>
               <button ng-show="eventList.length > 0" ng-click="activeWindow = 'events'" ng-class="{'active':activeWindow=='events'}">{{eventList.length}} Events</button>
 
-              <i ng-show="activeWindow=='beer'"><a class="add-beer-icon ion-plus-round" ng-href="#/tab/details/beer/{{brewery.id}}/add"></a></i>
-              <i ng-show="activeWindow=='events'"><a class="add-beer-icon ion-plus-round" ng-href="#/tab/details/beer/{{brewery.id}}/add"></a></i>
+              <button ng-show="activeWindow=='beer'" class="add-beer-icon ion-plus-round" ng-click="openAddBeerView(brewery.id)"></button>
+              <!--<button ng-show="activeWindow=='events'" class="add-beer-icon ion-plus-round" ng-click="openAddBeerView(brewery.id)"></button>-->
 
                 <ion-list ng-show="activeWindow == 'beer'">
                     <ion-item ng-repeat="beer in beerList">
@@ -44,17 +44,25 @@
                     </ion-item>
                 </ion-list>
             <ion-list ng-show="activeWindow == 'events'">
-              <ion-item class="card events-item" ng-repeat="event in eventList">
-                <a class="item item-thumbnail-left divider" ng-href="#/tab/details/event/{{event.id}}">
-                  <div class="item divider">
-                    <h2>{{event.name}}</h2>
-                    <p>{{event.city}} </p>
-                    <i class="icon ion-chevron-right"></i>
-                    <p>Beginn: {{event.start | date : "dd.MMM.yyyy HH:mm"}}</p>
-                    <p>Ende: {{event.end | date : "dd.MMM.yyyy HH:mm"}}</p>
-                  </div>
-                </a>
-              </ion-item>
+                <ion-item class="card event-card" ng-repeat="event in eventList">
+                    <a class="item event-item" ng-href="#/tab/details/event/{{event.id}}">
+
+                        <div class="row">
+                            <div class="col col-20">
+                                <p class="event-day">{{event.start | date : "dd"}}</p>
+                                <p>{{event.start | date : "MMMM"}}</p>
+                            </div>
+                            <div class="col col-80">
+                                <h2>{{event.name}}</h2>
+                                <i class="icon ion-chevron-right"></i>
+                                <p>{{event.start | date : "EEE"}} {{event.start | date : "HH:mm"}}Uhr, {{event.city}} </p>
+
+                                <p></p>
+                            </div>
+                        </div>
+
+                    </a>
+                </ion-item>
             </ion-list>
 
             </ion-item>
