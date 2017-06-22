@@ -78,12 +78,17 @@ angular.module('beeround.event', [])
           beeroundService.postEvent($ionicUser.id);
         }
 
-        //TODO Feedback
-        alert("PROST!");
+          let alertPopup = $ionicPopup.alert({
+              title: 'Prost!',
+              description: 'Event wurde zum Kalender hinzugefügt!'
+          });
 
 
       }, function (err) {
-        alert("Hinzufügen fehlgeschlagen")
+          let alertPopup = $ionicPopup.alert({
+              title: 'Hinzufügen fehlgeschlagen',
+              description: 'Event wurde zum Kalender hinzugefügt!'
+          });
       })
     }
   });

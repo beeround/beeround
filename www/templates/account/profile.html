@@ -15,9 +15,15 @@
     </div>
       <h1>{{userdata.username}}</h1>
         <h3 class="yellow">beer baby</h3>
-    <span class="profile-overview">{{userActivities.beercount}}<p>beer</p></span>
-    <span class="profile-overview">55 <p>ratings</p></span>
-    <span class="profile-overview">2<p>Trophys</p></span>
+    <div class="row" style="width: 50%">
+        <div class="col"><p class="profile-overview">{{userActivities.beercount}}</p><p>beer</p>
+        </div>
+        <div class="col"><p class="profile-overview">55</p> <p>ratings</p>
+        </div>
+        <div class="col"><p class="profile-overview">2</p><p>Trophys</p>
+        </div>
+
+    </div>
 
 </div>
               <ion-list>

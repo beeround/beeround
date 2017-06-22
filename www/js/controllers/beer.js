@@ -334,14 +334,19 @@ angular.module('beeround.beer', [])
               }, function () {
                 $ionicLoading.hide();
 
-                alert("err")
+                  let alertPopup = $ionicPopup.alert({
+                      title: 'Standort nicht gefunden!',
+                  });
               });
             }, function (err) {
               $ionicLoading.hide();
 
               $scope.connectionError = true;
 
-              //TODO ERROR: NO INTERNET; NO GPS OR ELSE
+
+                let alertPopup = $ionicPopup.alert({
+                    title: 'Bitte überprüfe deine Verbindungen!',
+                });
             });
 
 
@@ -915,26 +920,32 @@ angular.module('beeround.beer', [])
       if ($scope.form.comment === null || $scope.form.comment === undefined || $scope.form.comment === "" || $scope.form.comment === "null") {
       }
 
-      else{
-        let data = {
-        beerid: beerId,
-        userid: $ionicUser.id,
-        username: $ionicUser.details.username,
-        userimage: $ionicUser.details.image,
-        comment: $scope.form.comment
-      };
+      else {
+          let data = {
+              beerid: beerId,
+              userid: $ionicUser.id,
+              username: $ionicUser.details.username,
+              userimage: $ionicUser.details.image,
+              comment: $scope.form.comment
+          };
 
-        beeroundService.postComment(data).then(function () {
-          alert("success");
-          $scope.form.comment = "";
-          $state.go('tabs.beerDetails', {beerId: beerId});
+          beeroundService.postComment(data).then(function () {
 
-          // TODO CUSTOM FEEDBACK
-        }, function () {
-          // FAIL
-          alert("Fehlgeschlagen")
-          //TODO ERROR HANDLING
-        })
+              let alertPopup = $ionicPopup.alert({
+                  title: 'Kommentar erfolgreich gepostet!',
+              });
+
+              $scope.form.comment = "";
+              $state.go('tabs.beerDetails', {beerId: beerId});
+
+          }, function () {
+              // FAIL
+              let alertPopup = $ionicPopup.alert({
+                  title: 'Kommentar fehlgeschlagen!',
+              });
+
+              //TODO ERROR HANDLING
+          })
       }
     };
 
@@ -997,9 +1008,10 @@ angular.module('beeround.beer', [])
         }, 500);
 
       }, function (err) {
+          let alertPopup = $ionicPopup.alert({
+              title: 'Es wurde kein Foto ausgewählt',
+          });
 
-        alert(err)
-        // error
       });
     };
 
@@ -1021,8 +1033,9 @@ angular.module('beeround.beer', [])
 
       }, function (err) {
 
-        alert(err)
-        // error
+          let alertPopup = $ionicPopup.alert({
+              title: 'Du hast den Zugriff verweigert! Es wurde kein Foto gemacht',
+          });
       });
     };
 
@@ -1059,7 +1072,10 @@ angular.module('beeround.beer', [])
         });
 
       }, function () {
-        alert("err")
+          let alertPopup = $ionicPopup.alert({
+              title: 'Upload fehlgeschlagen! Bitte überprüfe deine Einstellungen und probiere es nochmal!',
+          });
+
       });
     };
 
@@ -1084,7 +1100,6 @@ angular.module('beeround.beer', [])
           title: 'Das Bier wurde deinen Bieren hinzugefügt!',
           template: '<small>Möchtest du das Bier noch bewerten oder ein Bild posten?</small>',
           buttons: [
-            {text: 'abbrechen'},
             {
               text: 'Bewerten',
               type: 'button-positive',
@@ -1092,7 +1107,8 @@ angular.module('beeround.beer', [])
                 $state.go('tabs.rateBeer', {beerId: beerId});
 
               }
-            }
+            },
+              {text: 'Zurück'}
           ]
         });
 
@@ -1200,9 +1216,9 @@ angular.module('beeround.beer', [])
     $scope.deleteBeer = function () {
       let confirmPopup = $ionicPopup.confirm({
         title: 'Bier löschen',
-        template: 'Bist du dir sicher, dass das Bier nicht mehr existiert und gelöscht werden sollte?',
-        okText: 'Sicher',
-        cancelText: 'Lieber nicht'
+        template: 'Dieses Bier wird jetzt gelöscht! Bist du dir sicher?',
+        okText: 'Ok',
+        cancelText: 'Abbrechen'
       });
 
       confirmPopup.then(function (res) {
