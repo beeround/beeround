@@ -26,7 +26,7 @@ angular.module('beeround.event', [])
             });
           });
         }
-        window.open("mailto:"+mailAdress, '_self');
+        window.open("mailto:"+mailAdress, '_system');
       };
 
 
