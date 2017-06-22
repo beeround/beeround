@@ -22,11 +22,10 @@ angular.module('beeround.beer', [])
       if($ionicUser.id){
         beeroundService.postContact($ionicUser.id).then(function(){
           trophyService.checkContactTrophies($ionicUser.id).then(result => {
-            console.log("geht Alex contact2");
             if(result != 0){
-              let tmpvar = 'Kontaktanfragen';
-              if(result.step = 1){
-                tmpvar = 'Kontaktanfrage'
+              let tmpvar = ' Kontaktanfragen';
+              if(result.step == 1){
+                tmpvar = ' Kontaktanfrage'
               }
               $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
             }
@@ -727,11 +726,10 @@ angular.module('beeround.beer', [])
       if($ionicUser.id){
         beeroundService.postContact($ionicUser.id).then(function(){
           trophyService.checkContactTrophies($ionicUser.id).then(result => {
-            console.log("geht Alex contact");
             if(result != 0){
-              let tmpvar = 'Kontaktanfragen';
-              if(result.step = 1){
-                tmpvar = 'Kontaktanfrage'
+              let tmpvar = ' Kontaktanfragen';
+              if(result.step == 1){
+                tmpvar = ' Kontaktanfrage'
               }
               $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
             }
@@ -868,12 +866,10 @@ angular.module('beeround.beer', [])
 
       beeroundService.postCharacteristics(data).then(function () {
         trophyService.checkCharacteristicsTrophies($ionicUser.id).then(result => {
-          console.log("geht Alex eigenschften");
-          console.log(result);
           if(result != 0){
-            let tmpvar = 'Eigenschaften';
-            if(result.step = 1){
-              tmpvar = 'Eigenschaft'
+            let tmpvar = ' Eigenschaften';
+            if(result.step == 1){
+              tmpvar = ' Eigenschaft'
             }
             $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
           }
@@ -948,11 +944,10 @@ angular.module('beeround.beer', [])
 
           beeroundService.postComment(data).then(function () {
               trophyService.checkCommentTrophies($ionicUser.id).then(result => {
-                console.log("geht Alex comment");
                 if(result != 0){
-                  let tmpvar = 'Kommentare';
-                  if(result.step = 1){
-                    tmpvar = 'Kommentar'
+                  let tmpvar = ' Kommentare';
+                  if(result.step == 1){
+                    tmpvar = ' Kommentar'
                   }
                   $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
                 }
@@ -1118,11 +1113,10 @@ angular.module('beeround.beer', [])
       beeroundService.logBeer(data).then(function () {
         // SUCCESS
         trophyService.checkBeerTrophies($ionicUser.id).then(result => {
-          console.log("geht Alex Beer");
           if(result != 0){
-            let tmpvar = 'Biere';
-            if(result.step = 1){
-              tmpvar = 'Bier'
+            let tmpvar = ' Biere';
+            if(result.step == 1){
+              tmpvar = ' Bier'
             }
             $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
           }
@@ -1164,11 +1158,10 @@ angular.module('beeround.beer', [])
       beeroundService.sendBeerRating(data).then(result => {
         trophyService.checkRatingTrophies($ionicUser.id).then(result => {
           if(result != "put") {
-            console.log("geht Alex Rating");
             if (result != 0) {
-              let tmpvar = 'Bewertungen';
-              if (result.step = 1) {
-                tmpvar = 'Bewertung'
+              let tmpvar = ' Bewertungen';
+              if (result.step == 1) {
+                tmpvar = ' Bewertung'
               }
               $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
             }

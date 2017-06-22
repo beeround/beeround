@@ -17,9 +17,9 @@ angular.module('beeround.event', [])
           beeroundService.postContact($ionicUser.id).then(function(){
             trophyService.checkContactTrophies($ionicUser.id).then(result => {
               if(result != 0){
-                let tmpvar = 'Kontaktanfragen';
-                if(result.step = 1){
-                  tmpvar = 'Kontaktanfrage'
+                let tmpvar = ' Kontaktanfragen';
+                if(result.step == 1){
+                  tmpvar = ' Kontaktanfrage'
                 }
                 $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
               }
@@ -84,9 +84,9 @@ angular.module('beeround.event', [])
           beeroundService.postEvent($ionicUser.id).then(function(){
             trophyService.checkEventTrophies($ionicUser.id).then(result => {
               if(result != 0){
-                let tmpvar = 'Events vorgemerkt';
-                if(result.step = 1){
-                  tmpvar = 'Event vorgemerkt'
+                let tmpvar = ' Events vorgemerkt';
+                if(result.step == 1){
+                  tmpvar = ' Event vorgemerkt'
                 }
                 $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
               }
