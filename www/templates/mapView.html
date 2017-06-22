@@ -32,8 +32,10 @@
       <p style="padding-bottom: 5px">{{selectedBrewery.plz}} {{selectedBrewery.city}}</p>
       </div>
         <div ng-show="selectedBrewery.beers && selectedBrewery.events">
-          <span><i class="ion-ios-pint"></i>{{selectedBrewery.beers.length}} Biere</span>
-          <span><i class="ion-ios-calendar"></i>{{selectedBrewery.events.length}} Events</span>
+          <a ng-href="#/tab/list/{{selectedBrewery.breweryId}}">
+            <i class="yellow ion-ios-pint"></i>{{selectedBrewery.beers.length}} Biere
+            <i style="padding-left: 10px" class=" yellow ion-ios-calendar"></i>{{selectedBrewery.events.length}} Events
+          </a>
         </div>
       </div>
 

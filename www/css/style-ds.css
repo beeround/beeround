@@ -143,7 +143,6 @@ ion-item.brown-background > label {
 }
 .detailbox i {
   font-size: 27px;
-  color: #C8C6C5;
   padding-right: 10px;
 }
 
@@ -301,4 +300,7 @@ p.headline {
   border-radius: 50%;
 }
 
+.beer-details a{
+  color: #666666;
+}
 
