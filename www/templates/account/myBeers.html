@@ -11,7 +11,7 @@
           <div class="col col-80">
             <span class="beer-info">
               <h2>{{beer.beername}}</h2>
-              <p class="ng-binding">{{beer.breweryname}}</p></span>
+              <p class="ng-binding">{{beer.breweryname | limitTo: 25}}</p></span>
             <span class="count-beer" ng-hide="isLocked">
               <button ng-disabled="isLocked" ng-click="logBeer(beer.beerid,beer.breweryname, beer.beername)" class="control" >+</button>
             </span>

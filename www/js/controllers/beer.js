@@ -844,10 +844,12 @@ angular.module('beeround.beer', [])
     });
 
     beeroundService.getComments(beerId).then(function (result) {
+      $scope.noComments = false;
       if (result.data.comments.length > 0) {
+        $scope.noComments = false;
         $scope.comments = result.data.comments;
       } else {
-        $scope.comments = undefined;
+        $scope.noComments = true;
       }
     });
 
@@ -868,7 +870,6 @@ angular.module('beeround.beer', [])
                 $scope.comments = result.data.comments;
               } else {
                 $scope.comments = undefined;
-                console.log($scope.comments);
               }
             });
           });
