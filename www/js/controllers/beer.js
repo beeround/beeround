@@ -956,6 +956,7 @@ angular.module('beeround.beer', [])
 
     $scope.sendComment = function () {
       if ($scope.form.comment === null || $scope.form.comment === undefined || $scope.form.comment === "" || $scope.form.comment === "null") {
+        $state.go('tabs.beerDetails', {beerId: beerId});
       }
 
       else {
@@ -969,13 +970,14 @@ angular.module('beeround.beer', [])
 
           beeroundService.postComment(data).then(function () {
               trophyService.checkCommentTrophies($ionicUser.id).then(result => {
-                if(result != 0){
+                if (result != 0) {
                   let tmpvar = ' Kommentare';
-                  if(result.step == 1){
+                  if (result.step == 1) {
                     tmpvar = ' Kommentar'
                   }
                   $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
                 }
+
               });
 
               $scope.form.comment = "";
