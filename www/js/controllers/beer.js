@@ -360,23 +360,77 @@ angular.module('beeround.beer', [])
       });
     }
 
+    $scope.typeOptions = [
+      {name: 'Bitte wählen', value: 'noData'},
+      {name: 'Pils', value: '75'},
+      {name: 'Weizenbier', value: '48'},
+      {name: 'Kristallweizen', value: '49'},
+      {name: 'Dunkles Weizen', value: '52'},
+      {name: 'Lager', value: '77'},
+      {name: 'Helles', value: '78'},
+      {name: 'Starkbier', value: '90'},
+      {name: 'Export', value: '79'},
+      {name: 'Kölsch', value: '45'},
+      {name: 'Schwarzbier', value: '84'},
+      {name: 'Märzen', value: '81'},
+      {name: 'Zwickelbier / Kellerbier ', value: '92'},
+      {name: 'Rauchbier', value: '54'}
+    ];
+
+    $scope.form = {type: $scope.typeOptions[0].value};
+
     $scope.addBeer = function () {
       let data = {
         name: $scope.addBeerForm.name,
-        styleId: $scope.addBeerForm.styleId,
+        styleId: $scope.form.type,
         abv: $scope.addBeerForm.abv,
         brewery: breweryId,
       };
+      console.log(data);
 
-      breweryDB.postBeer(data);
 
-      let alertPopup = $ionicPopup.alert({
-        title: 'Danke für deine Hilfe!',
-        template: 'Wir prüfen deine Angaben und werden das Bier hinzufügen.',
-      });
-      alertPopup.then(function (res) {
-        $location.url('/tab/list/' + breweryId);
-      });
+      if ($scope.addBeerForm.name === undefined || $scope.addBeerForm.name.length >= 5) {
+        let confirmPopup = $ionicPopup.confirm({
+          title: 'Kurzer oder leerer Name.',
+          template: 'Der Name ist sehr kurz oder leer, bist du dir sicher?',
+          okText: 'Sicher.',
+          cancelText: 'Nicht sicher!'
+        });
+
+        confirmPopup.then(function (res) {
+          if (res) {
+            if ($scope.form.type === 'noData') {
+              $ionicPopup.alert({
+                title: 'Bitte wähle eine Biersorte!',
+              });
+            } else {
+              breweryDB.postBeer(data);
+              let alertPopup = $ionicPopup.alert({
+                title: 'Danke für deine Hilfe!',
+                template: 'Wir prüfen deine Angaben und werden das Bier hinzufügen.',
+              });
+              alertPopup.then(function (res) {
+                $location.url('/tab/list/' + breweryId);
+              });
+            }
+          }
+        });
+      }else{
+        if ($scope.form.type === 'noData') {
+          $ionicPopup.alert({
+            title: 'Bitte wähle die Biersorte!',
+          });
+        } else {
+          breweryDB.postBeer(data);
+          let alertPopup = $ionicPopup.alert({
+            title: 'Danke für deine Hilfe!',
+            template: 'Wir prüfen deine Angaben und werden das Bier hinzufügen.',
+          });
+          alertPopup.then(function (res) {
+            $location.url('/tab/list/' + breweryId);
+          });
+        }
+      }
     };
 
   })
