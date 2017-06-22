@@ -23,7 +23,14 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
 
+      if($ionicUser.id) {
+        beeroundService.logAppStart($ionicUser.id).then(function () {
+          // Trophäen hier
+
+        })
+      }
     });
+
 
     $ionicPlatform.on('resume', function(){
 
