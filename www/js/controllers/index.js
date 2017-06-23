@@ -21,12 +21,7 @@ angular.module('beeround.index', [])
       $scope.current = toState.url;
     }
   );
-  $cordovaLocalNotification.schedule({
-    id: 2,
-    title: "Happy new Beer Year!!",
-    text: "Du nutzt Beeround bereits ein Jahr! Danke für deinen Support!",
-    every: 'year'
-  });
+
 
 
 
@@ -49,7 +44,7 @@ angular.module('beeround.index', [])
         ]
       });
 
-      $cordovaVibration.vibrate(500);
+      $cordovaVibration.vibrate(1000);
 
       let now = new Date().getTime();
 
@@ -61,7 +56,7 @@ angular.module('beeround.index', [])
         text: "Du hast vor kurzem eine Trophäe erhalten. Weiter so!!",
         at: twenty
       })
-    },10000)
+    },5000)
 
   };
 

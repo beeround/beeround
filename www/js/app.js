@@ -28,6 +28,13 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
 
+      $cordovaLocalNotification.schedule({
+        id: 2,
+        title: "Happy new Beer Year!!",
+        text: "Du nutzt Beeround bereits ein Jahr! Danke für deinen Support!",
+        every: 'year'
+      });
+
       if($ionicUser.id) {
         beeroundService.logAppStart($ionicUser.id).then(function () {
           trophyService.checkAppStartTrophies($ionicUser.id).then(result => {
@@ -323,6 +330,7 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
     $urlRouterProvider.otherwise('/tab/list');
 
     $ionicConfigProvider.tabs.position('bottom');
+    $ionicConfigProvider.views.swipeBackEnabled(false);
 
     $ionicCloudProvider.init({
       "core": {
