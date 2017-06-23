@@ -8,8 +8,13 @@
   <ion-content>
         <ion-slides options="data.sliderOptions" slider="data.sliderDelegate">
           <ion-slide-page ng-repeat="comment in comments" ng-show="comment.image">
+          <div class="full-width">
+            <img class="scaling" ng-src="{{comment.image}}">
+          </div>
+        </ion-slide-page>
+          <ion-slide-page  ng-show="!comment.image">
             <div class="full-width">
-              <img class="scaling" ng-src="{{comment.image || 'img/beerdetail_v1.jpg'}}">
+              <img class="scaling" ng-src='img/beerdetail_v1.jpg'>
             </div>
           </ion-slide-page>
         </ion-slides>
