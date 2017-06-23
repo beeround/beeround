@@ -1078,8 +1078,6 @@ angular.module('beeround.beer', [])
 
       $cordovaCamera.getPicture(options).then(function (imageURI) {
 
-        console.log(imageURI);
-
         $scope.modal.show();
         $timeout(function () {
           $scope.srcImage = imageURI;
@@ -1145,9 +1143,14 @@ angular.module('beeround.beer', [])
         beeroundService.postBeerImage(data).then(function () {
           //SUCCESS
           $scope.modal.hide();
-          let alertPopup = $ionicPopup.alert({
-            title: 'Das Bild wurde erfolgreich gepostet.',
-          });
+
+          $timeout(function () {
+            let alertPopup = $ionicPopup.alert({
+              title: 'Das Bild wurde erfolgreich gepostet.',
+            });
+            $state.go('tabs.beerDetails', {beerId: beerId});
+          }, 200);
+
         });
 
       }, function () {
