@@ -275,7 +275,6 @@ span{
 
 }
 
-/*LINKS*/
 
 
 
@@ -918,6 +917,10 @@ p.event-price{
 
 
 /*BEER RATING*/
+
+span.beer-info > h2{
+    white-space: normal;
+}
 
 label.edit-beer{
     padding:0px 10px;
