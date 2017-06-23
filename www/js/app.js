@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in index.js
 angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 'ngMap', 'google.places', 'beeround.index', 'beeround.beer', 'beeround.account', 'beeround.event', 'breweryDB.service', 'beeround.service','trophies.service', 'angular.filter', 'rzModule', 'chart.js'])
-  .run(function ($ionicPlatform, $state, $stateParams, $rootScope, $cordovaLocalNotification, $cordovaGoogleAnalytics, beeroundService, $ionicUser) {
+  .run(function ($ionicPlatform, $state, $stateParams, $rootScope, $cordovaLocalNotification, $cordovaGoogleAnalytics, beeroundService, $ionicUser, trophyService) {
     $ionicPlatform.ready(function () {
 
       //Google analytics tracking

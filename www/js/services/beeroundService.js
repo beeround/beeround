@@ -229,6 +229,47 @@ angular.module('beeround.service', [])
 
         },
 
+        uploadCommentImage: function (path, bId, user) {
+
+          return new Promise((resolve, reject) => {
+
+            // Destination URL
+            let url = "http://beeround.domi-speh.de/upload.php";
+
+            // File for Upload
+            let targetPath = path;
+
+            let options = {
+              fileKey: "file",
+              fileName: "image" + new Date().getTime(),
+              chunkedMode: false,
+              mimeType: "multipart/form-data",
+              params: {'fileName': "image" + new Date().getTime()}
+            };
+
+
+            $cordovaFileTransfer.upload(url, targetPath, options).then(function (result) {
+              let data = {
+                beerid: bId,
+                userid: user.id,
+                username: user.details.username,
+                userimage: user.details.image,
+                image: "http://beeround.domi-speh.de/uploads/" + options.fileName
+              };
+
+
+              $http.post('http://www.beeround.de/api/comments', data).then(result => {
+                resolve(data.image)
+              });
+
+
+            }, function () {
+              reject("error")
+            });
+
+          });
+        },
+
         updateImage: function (img, uid) {
           let imageData = {
             userid: uid ,

@@ -21,14 +21,13 @@ angular.module('beeround.index', [])
       $scope.current = toState.url;
     }
   );
-/* Uncomment on ios build
   $cordovaLocalNotification.schedule({
     id: 2,
     title: "Happy new Beer Year!!",
     text: "Du nutzt Beeround bereits ein Jahr! Danke für deinen Support!",
     every: 'year'
   });
-  */
+
 
 
   // Trophy PopUp

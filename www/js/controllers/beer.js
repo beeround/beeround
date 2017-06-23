@@ -1093,7 +1093,7 @@ angular.module('beeround.beer', [])
 
     $scope.startCamera = function () {
       let options = {
-        quality: 100,
+        quality: 80,
         destinationType: Camera.DestinationType.FILE_URI,
         sourceType: Camera.PictureSourceType.CAMERA,
         allowEdit: true,
@@ -1105,7 +1105,7 @@ angular.module('beeround.beer', [])
 
         $timeout(function () {
           $scope.srcImage = imageURI;
-        }, 500);
+        }, 100);
 
       }, function (err) {
 
@@ -1116,47 +1116,12 @@ angular.module('beeround.beer', [])
     };
 
     $scope.uploadImage = function () {
-      // Destination URL
-      var url = "http://beeround.domi-speh.de/upload.php";
 
-      // File for Upload
-      var targetPath = $scope.srcImage;
+      beeroundService.uploadCommentImage($scope.srcImage, beerId, $ionicUser).then(result => {
 
+        $scope.modal.hide();
+        $state.go('tabs.beerDetails', {beerId: beerId});
 
-      var options = {
-        fileKey: "file",
-        fileName: "image" + new Date().getTime(),
-        chunkedMode: false,
-        mimeType: "multipart/form-data",
-        params: {'fileName': "image" + new Date().getTime()}
-      };
-
-      $cordovaFileTransfer.upload(url, targetPath, options).then(function (result) {
-
-        let data = {
-          beerid: beerId,
-          userid: $ionicUser.id,
-          username: $ionicUser.details.username,
-          userimage: $ionicUser.details.image,
-          image: "http://beeround.domi-speh.de/uploads/" + options.fileName
-        };
-        beeroundService.postBeerImage(data).then(function () {
-          //SUCCESS
-          $scope.modal.hide();
-
-          $timeout(function () {
-            let alertPopup = $ionicPopup.alert({
-              title: 'Das Bild wurde erfolgreich gepostet.',
-            });
-            $state.go('tabs.beerDetails', {beerId: beerId});
-          }, 200);
-
-        });
-
-      }, function () {
-        let alertPopup = $ionicPopup.alert({
-          title: 'Upload fehlgeschlagen! Bitte überprüfe deine Einstellungen und probiere es nochmal!',
-        });
 
       });
     };
