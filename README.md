@@ -1,32 +1,34 @@
 # Beeround
 Find the best rated beers close to your geo location.
 
-# What to do after download
-1. Step <br />
-$ npm install
+<h2>Installation:</h2>
+<h4>1. Gehe zum root Ordner, wo die App installiert werden soll und lasse im Terminal folgenden Befehl laufen:</h4> 
+npm install -g cordova ionic
 
-2. Step: Run the App and start the server (--lab shows the app on ios and android) <br />
-$ ionic serve --lab
+<h4>2. Clone das git repositoy in den Ordner, wo die App installiert werden soll und lasse den Befehl laufen: </h4>
+git clone https://github.com/beeround/beeround.git 
 
-First upload:
-$ ionic upload <br />
+<h4>3. Wechsele in den Ordner wo git hinein geklont wurde und lasse npm laufen: </h4>
+cd beeround <br />
+npm install 
 
-# What should I do after I edited a file
-$ git add FILENAME <br />
-$ git commit -m 'Add a commit name' <br />
-$ git pull https://github.com/beeround/beeround.git <br />
-$ git push https://github.com/beeround/beeround.git
+<h4>4. Installiere das Google Chrome plugin: </h4>
+https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi 
 
-# I want to see what I changed in GIT
-$ git st
+<h4>5. Um den Server zu starten: </h4> <br />
+ionic serve --address localhost
 
-# Upload to Ionic (!! This overrides the old files)
-$ ionic upload <br />
+<h5>Sollte ein Fehler bezüglich einem fehlendem gulpfile kommen, lasse folgende Befehle laufen: </h5> 
+npm updat <br />
+npm remove gulp-sass <br />
+npm install gulp-sass --save-dev 
 
-# I want to start a local server
-1.Install the plugin to allow Cross Origin: <br />
-https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi <br /> 
-2. Install the cordova pluign to allow geolocation <br />
-$ cordova plugin add cordova-plugin-geolocation <br /> 
-3. Start the server <br />
-$ ionic serve --address localhost <br />
+<h5>Den aktuellen Stand aus GIT runter ziehen (Vorsicht: Server vorher stoppen):</h5> 
+git pull
+
+<h5>Server stoppen auf Windows: </h5>
+Strg + C <br />
+Yes
+
+<h5>Browser: </h5>
+Google Chrome
