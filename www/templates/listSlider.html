@@ -193,9 +193,11 @@
               </a>
             </ion-item>
 
-            <ion-list ng-show="noData">
+            <ion-list ng-hide="beerEvents[0].id">
               <ion-item>
-                <p>Keine Events vorhanden</p>
+                <div class="row">
+                  <p>Leider sind keine Events vorhanden.</p>
+                </div>
               </ion-item>
             </ion-list>
 
