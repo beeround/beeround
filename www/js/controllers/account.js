@@ -245,7 +245,22 @@ angular.module('beeround.account', [])
     trophyService.getTrophies($ionicUser.id).then(result => {
 
       $scope.trophies = result[0].appstart+result[0].rating+result[0].event+result[0].differentbeers+result[0].contact+result[0].comment+result[0].characteristics+result[0].beer;
-
+      $scope.rankTitle = "";
+      if($scope.trophies >0){
+        $scope.rankTitle = "beer baby";
+        if($scope.trophies >4){
+          $scope.rankTitle = "beer beginner"
+          if($scope.trophies >9){
+            $scope.rankTitle = "beer buddy"
+            if($scope.trophies >14){
+              $scope.rankTitle = "beer king"
+              if($scope.trophies >19){
+                $scope.rankTitle = "beer sommelier"
+              }
+            }
+          }
+        }
+      }
     }, err => {
     });
 
