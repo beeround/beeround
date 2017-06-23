@@ -177,27 +177,23 @@ angular.module('breweryDB.service', [])
 
         putBeerDetails: function (data) {
           console.log(data);
-           // $http.put('http://api.brewerydb.com/v2/beer/' + data.beerid + '?key=7802f26125b23378098b3c32911adcce', data).then(result => {
-           //    console.log(result);
-           // });
+          //Biere bearbeiten Funktion wurde aus Testzwecken noch nicht freigeschaltet,
+          // da sonst jedes mal eine Abfrage an die breweryDB gesandt wird.
+            // $http.put('http://api.brewerydb.com/v2/beer/' + data.beerid + '?key=7802f26125b23378098b3c32911adcce', data).then(result => {
+            //    console.log(result);
+            // });
         },
 
         postBeer: function (data) {
           console.log(data);
-
-          // $http.post('http://api.brewerydb.com/v2/beers?key=7802f26125b23378098b3c32911adcce', data).then(result => {
-          //   console.log(result.data);
-          // }, err => {
-          //   console.log(err);
-          // });
+          //Biere hinzufügen Funktion wurde aus Testzwecken noch nicht freigeschaltet,
+          // da sonst jedes mal eine Abfrage an die breweryDB gesandt wird.
+            // $http.post('http://api.brewerydb.com/v2/beers?key=7802f26125b23378098b3c32911adcce', data).then(result => {
+            //   console.log(result.data);
+            // }, err => {
+            //   console.log(err);
+            // });
         },
-
-
-        // getBeerStyles: function () {
-        //   return $http.get('http://api.brewerydb.com/v2/styles?key=7802f26125b23378098b3c32911adcce').then(function (res) {
-        //     return res.data;
-        //   });
-        // },
 
       }
     }
