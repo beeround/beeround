@@ -247,15 +247,15 @@ angular.module('beeround.account', [])
       $scope.trophies = result[0].appstart+result[0].rating+result[0].event+result[0].differentbeers+result[0].contact+result[0].comment+result[0].characteristics+result[0].beer;
       $scope.rankTitle = "";
       if($scope.trophies >0){
-        $scope.rankTitle = "beer baby";
+        $scope.rankTitle = "Bier Baby";
         if($scope.trophies >4){
-          $scope.rankTitle = "beer beginner"
+          $scope.rankTitle = "Bier Beginner"
           if($scope.trophies >9){
-            $scope.rankTitle = "beer buddy"
+            $scope.rankTitle = "Bier Buddy"
             if($scope.trophies >14){
-              $scope.rankTitle = "beer king"
+              $scope.rankTitle = "Bier König"
               if($scope.trophies >19){
-                $scope.rankTitle = "beer sommelier"
+                $scope.rankTitle = "Biersommelier"
               }
             }
           }
