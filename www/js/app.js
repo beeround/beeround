@@ -7,15 +7,17 @@
 angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 'ngMap', 'google.places', 'beeround.index', 'beeround.beer', 'beeround.account', 'beeround.event', 'breweryDB.service', 'beeround.service','trophies.service', 'angular.filter', 'rzModule', 'chart.js'])
   .run(function ($ionicPlatform, $state, $stateParams, $rootScope, $cordovaLocalNotification, $cordovaGoogleAnalytics, beeroundService, $ionicUser, trophyService) {
     $ionicPlatform.ready(function () {
+/*
+      $rootScope.$on('$stateChangeSuccess', function () {
+        if(typeof analytics !== undefined) {
+          $cordovaGoogleAnalytics.startTrackerWithId('UA-52323715-8');
+          console.log($state.current.name);
+          $cordovaGoogleAnalytics.trackView($state.current.name);
 
-      //Google analytics tracking
-      if (typeof $cordovaGoogleAnalytics !== 'undefined'){
-        $cordovaGoogleAnalytics.startTrackerWithId('UA-101430108-1');
-      }
-      else
-      {
-        console.log("Google Analytics plugin could not be loaded.")
-      }
+        } else {
+          console.log("Google Analytics Unavailable");
+        }
+      });*/
 
       if (window.cordova && window.cordova.plugins.Keyboard) {
         //Change this to false to return accessory bar

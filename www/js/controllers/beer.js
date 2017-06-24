@@ -253,6 +253,8 @@ angular.module('beeround.beer', [])
     function getBreweries(noGeo) {
       $scope.breweries = [];
       $scope.addBeerForm = [];
+      $scope.allBeers = [];
+
 
       // TODO ERROR HANDLING
 
@@ -300,19 +302,13 @@ angular.module('beeround.beer', [])
       }
       else {
         // Don't wait till death
-        let posOptions = {timeout: 20000, enableHighAccuracy: false};
+        let posOptions = {timeout: 15000, enableHighAccuracy: false};
 
-        // Setup the loader
-        $ionicLoading.show({
-          content: 'Loading',
-          animation: 'fade-in',
-        });
 
         // Geolocation
         $cordovaGeolocation
           .getCurrentPosition(posOptions)
           .then(function (position) {
-
 
             $rootScope.userSettings = {
               lat: position.coords.latitude,
@@ -344,7 +340,7 @@ angular.module('beeround.beer', [])
                 $ionicLoading.hide();
 
                 let alertPopup = $ionicPopup.alert({
-                  title: 'Standort nicht gefunden!',
+                  title: 'Keine Biere gefunden. Versuche es erneut!',
                 });
               });
             }, function (err) {
@@ -360,15 +356,45 @@ angular.module('beeround.beer', [])
 
 
           },function () {
+
+            // NO GEO Access
+            console.log("no Access");
             $rootScope.userSettings = {
-              lat: "",
-              lng: "",
+              lat: "49.35357",
+              lng: "9.15106",
               radius: 30
             };
-            $ionicLoading.hide();
+
+            // GET BREWERIES
+            breweryDB.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
+
+              $scope.breweries = result;
+              $ionicLoading.hide();
+
+              // Update beer array, if beer screen is shown
+              if ($rootScope.currentListView == "Biere") {
+                beeroundService.getBeerRatingByBrewerielist($scope.breweries).then(result => {
+                  $scope.breweries = result;
+                  makeBeerList();
+                })
+              }
+
+              // Resize
+              $ionicScrollDelegate.resize();
+
+            }, function () {
+              $ionicLoading.hide();
+
+              let alertPopup = $ionicPopup.alert({
+                title: 'Keine Biere gefunden. Versuche es erneut!',
+              });
+            });
+
             let alertPopup = $ionicPopup.alert({
-              title: 'Standort nicht gefunden! Wähle ihn manuell!',
-            });          })
+              title: 'Ortung nicht erlaubt!',
+              template: 'Bitte erlaube Beeround, auf deinen Standort zuzugreifen. Als Standort wurde nun Mosbach gesetzt.',
+
+            });})
       }
     }
 
@@ -442,12 +468,13 @@ angular.module('beeround.beer', [])
   })
   .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover, $ionicUser) {
 
+
     // IF NO USERSETTING
-    if (!$rootScope.userSettings) {
-      console.log("Local Settings");
+    if (!$rootScope.userSettings.lat) {
+
       $rootScope.userSettings = {
-        lat: "49.34891529999999",
-        lng: "9.129382899999996"
+        lat: "49.35357",
+        lng: "9.15106"
       };
       loadMap(30);
 
@@ -460,13 +487,15 @@ angular.module('beeround.beer', [])
     $scope.$on('g-places-autocomplete:select', function (event, place) {
 
       const location = JSON.parse(JSON.stringify(place.geometry.location));
-      console.log(location);
+
       $rootScope.userSettings.lat = location.lat;
       $rootScope.userSettings.lng = location.lng;
       $rootScope.location = {
         town: place.formatted_address
 
       };
+      $scope.selectedBrewery = null;
+
       loadMap($rootScope.userSettings.radius);
 
     });

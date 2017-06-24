@@ -285,7 +285,9 @@ angular.module('beeround.service', [])
         },
 
         logBeer: function (data) {
+          console.log(data);
           return $http.post('http://www.beeround.de/api/drinkinghabits', data).then(result => {
+            console.log(result);
             console.log("POST: " + result.data);
           });
         },

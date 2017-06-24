@@ -19,6 +19,7 @@ angular.module('beeround.index', [])
   $scope.$on('$stateChangeSuccess',
     function(event, toState, toParams, fromState, fromParams) {
       $scope.current = toState.url;
+
     }
   );
 
