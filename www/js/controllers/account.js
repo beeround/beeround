@@ -193,7 +193,6 @@ angular.module('beeround.account', [])
 
   })
 
-
   .controller('loginCtrl', function ($rootScope, beeroundService, $scope, $http, $ionicAuth, $ionicUser, $state, $ionicPopup, $stateParams) {
     $scope.form = [];
 
@@ -225,6 +224,14 @@ angular.module('beeround.account', [])
   .controller('profilCtrl', function ($rootScope, $location, $scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, $cordovaFileTransfer, beeroundService, $cordovaCamera, $ionicActionSheet, trophyService) {
     $scope.userdata = $ionicUser.details;
 
+    // INIT
+    $scope.userActivities = {
+      beercount : 0,
+      ratingcount : 0,
+    };
+    $scope.trophies = 0;
+    $scope.rankTitle = "-";
+
     beeroundService.getUserActivities($ionicUser.id).then(result => {
 
       $scope.userActivities = result;
@@ -245,17 +252,16 @@ angular.module('beeround.account', [])
     trophyService.getTrophies($ionicUser.id).then(result => {
 
       $scope.trophies = result[0].appstart+result[0].rating+result[0].event+result[0].differentbeers+result[0].contact+result[0].comment+result[0].characteristics+result[0].beer;
-      $scope.rankTitle = "";
       if($scope.trophies >0){
         $scope.rankTitle = "Bier Baby";
         if($scope.trophies >4){
-          $scope.rankTitle = "Bier Beginner"
+          $scope.rankTitle = "Bier Beginner";
           if($scope.trophies >9){
-            $scope.rankTitle = "Bier Buddy"
+            $scope.rankTitle = "Bier Buddy";
             if($scope.trophies >14){
-              $scope.rankTitle = "Bier König"
+              $scope.rankTitle = "Bier König";
               if($scope.trophies >19){
-                $scope.rankTitle = "Biersommelier"
+                $scope.rankTitle = "Biersommelier";
               }
             }
           }

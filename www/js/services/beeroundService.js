@@ -87,6 +87,8 @@ angular.module('beeround.service', [])
 
         getBreweryEvent: function (userdata) {
           return $http.get('http://www.beeround.de/getevents.php?longitude=' + userdata.lng + '&latitude=' + userdata.lat + '&radius=' + userdata.radius).then(result => {
+            console.log(result.data);
+
             return result.data;
           })
         },

@@ -119,7 +119,7 @@
 
                 <ion-item ng-show="!beerCategory || beer[beerCategory] > 50" ng-repeat="beer in location.beers">
                   <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
-                    <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
+                    <img ng-src="{{beer.labels.icon || 'img/no-image-placeholder.png'}}">
                     <h2>{{beer.name}}</h2>
                     <p>{{location.brewery.name}}</p>
                     <i class="icon ion-chevron-right"></i>
@@ -144,7 +144,7 @@
               <ion-item  ng-show="!beerCategory || beer[beerCategory] > 50" ng-repeat="beer in allBeers | orderObjectBy:activeSorting: (activeSorting == 'rating')" >
               <ion-item>
                 <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
-                  <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
+                  <img ng-src="{{beer.labels.icon || 'img/no-image-placeholder.png'}}">
                   <h2>{{beer.name}}</h2>
                   <p>{{beer.brewery}}</p>
                   <i class="icon ion-chevron-right"></i>
@@ -173,7 +173,7 @@
 
           <ion-scroll style="height:80%" delegate-handle="slide1Scroll">
             <!-- Beer Events around position !-->
-            <ion-item class="card event-card" ng-repeat="beerEvent in beerEvents">
+            <ion-item class="card event-card" ng-repeat="beerEvent in beerEvents | orderBy: start:true" >
               <a class="item event-item" ng-href="#/tab/details/event/{{beerEvent.id}}">
 
                 <div class="row">

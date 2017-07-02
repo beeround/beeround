@@ -7,12 +7,17 @@
   </ion-nav-buttons>
   <ion-content>
         <ion-slides options="data.sliderOptions" slider="data.sliderDelegate">
+          <ion-slide-page ng-show="beer.labels">
+            <div class="full-width">
+              <img class="scaling" ng-src='{{beer.labels.large}}'>
+            </div>
+          </ion-slide-page>
           <ion-slide-page ng-repeat="comment in comments" ng-show="comment.image">
           <div class="full-width">
             <img class="scaling" ng-src="{{comment.image}}">
           </div>
         </ion-slide-page>
-          <ion-slide-page  ng-show="!comment.image">
+          <ion-slide-page ng-show="comment.image != '' && !beer.labels ">
             <div class="full-width">
               <img class="scaling" ng-src='img/beerdetail_v1.jpg'>
             </div>

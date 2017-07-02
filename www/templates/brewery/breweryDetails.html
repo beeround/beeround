@@ -36,7 +36,7 @@
         <ion-list ng-show="activeWindow == 'beer'">
           <ion-item ng-repeat="beer in beerList">
             <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
-              <img ng-src="{{beer.images.icon || 'img/no-image-placeholder.png'}}">
+              <img ng-src="{{beer.labels.icon || 'img/no-image-placeholder.png'}}">
               <h2>{{beer.nameDisplay}}</h2>
               <p style="padding-right: 40px">{{brewery.nameShortDisplay}}</p>
               <i class="icon ion-chevron-right"></i>
@@ -58,7 +58,7 @@
           </ion-item>
         </ion-list>
         <ion-list ng-show="activeWindow == 'events'">
-          <ion-item class="card event-card" ng-repeat="event in eventList">
+          <ion-item class="card event-card" ng-repeat="event in eventList | orderBy: 'start'">
             <a class="item event-item" ng-href="#/tab/details/event/{{event.id}}">
               <div class="row">
                 <div class="col col-20">

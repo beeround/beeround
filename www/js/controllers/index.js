@@ -14,6 +14,8 @@ angular.module('beeround.index', [])
 .controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $state, $ionicUser, $cordovaLocalNotification, $ionicPopup, $cordovaVibration) {
   //$cordovaGoogleAnalytics.trackView('Home Screen');
 
+  $scope.today = new Date().toISOString();
+
 
   // GET CURRENT STATE
   $scope.$on('$stateChangeSuccess',

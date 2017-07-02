@@ -404,8 +404,11 @@ angular.module('beeround.beer', [])
 
       beeroundService.getBreweryEvent($rootScope.userSettings).then(result => {
 
-        $scope.beerEvents = result;
-
+        result.map(event => {
+          if(event.start > $scope.today){
+            $scope.beerEvents.push(event)
+          }
+        });
       });
     }
 
@@ -740,7 +743,13 @@ angular.module('beeround.beer', [])
     });
 
     beeroundService.getEventByBrewery(breweryId).then(results => {
-      $scope.eventList = results;
+      $scope.eventList = [];
+
+      results.map(event => {
+        if(event.start > $scope.today){
+          $scope.eventList.push(event)
+        }
+      });
 
     });
 
