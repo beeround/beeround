@@ -235,16 +235,19 @@ angular.module('beeround.account', [])
     beeroundService.getUserActivities($ionicUser.id).then(result => {
 
       $scope.userActivities = result;
+      console.log(result);
 
       if(result.beercount == undefined){
         $scope.userActivities.beercount = 0;
       }
+
       if(result.ratingcount == undefined){
         $scope.userActivities.ratingcount = 0;
       }
-      if(result.logincount == 1 && !$rootScope.once){
+
+      if(result.logincount == 1 && !$rootScope.once && result.appstartcount < 1 ){
         $rootScope.once = true;
-        $rootScope.newTrophy('img/icon_trophies/baby.png', 1, 1, 'App Start');
+        $rootScope.newTrophy('img/icon_trophies/baby.png', 1, 1, 'appstart');
       }
 
     });
@@ -681,11 +684,12 @@ angular.module('beeround.account', [])
   })
 
   .controller('myTrophiesCtrl', function ($scope, $http, $ionicAuth, $ionicUser, $ionicPopover, $ionicPopup, $state, $stateParams, $timeout, beeroundService, $ionicActionSheet, trophyService) {
+
     trophyService.getTrophies($ionicUser.id).then(result => {
       $scope.allTrophys = result;
-      console.log(result);
       }, err => {
     });
+
       // Handle PopOver Filter
       $ionicPopover.fromTemplateUrl('trophies.html', {
           scope: $scope
@@ -693,7 +697,11 @@ angular.module('beeround.account', [])
           $scope.popover = popover;
       });
 
-      $scope.openPopover = function () {
+      $scope.openPopover = function (type, rang) {
+        trophyService.getDescription(type,rang).then(result => {
+          $scope.currentTrophy = result;
+        });
+
           $scope.popover.show();
           $scope.appBackground = document.getElementsByClassName('appBackground');
           $scope.appBackground[0].setAttribute('class', 'view blur');

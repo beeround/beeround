@@ -6,160 +6,235 @@ angular.module('trophies.service', [])
         comment: [
           {
           rank: 1,
-          step: 1,
+          step: 2,
+          description: "Du hast zwei Beiträge kommentiert.",
           img: "img/icon_trophies/pencil.png"
         }, {
           rank: 2,
-          step: 5,
-            img: "img/icon_trophies/pencil.png"
-        }, {
+          step: 7,
+          img: "img/icon_trophies/pencil.png",
+          description: "Du hast sieben Beiträge kommentiert.",
+
+          }, {
           rank: 3,
           step: 12,
-            img: "img/icon_trophies/pencil.png"
-        }, {
+          img: "img/icon_trophies/pencil.png",
+          description: "Du hast zwölf Beiträge kommentiert.",
+
+          }, {
           rank: 4,
           step: 25,
-            img: "img/icon_trophies/pencil.png"
-        }, {
+          img: "img/icon_trophies/pencil.png",
+          description: "Du hast 25 Beiträge kommentiert.",
+
+          }, {
           rank: 5,
           step: 50,
-            img: "img/icon_trophies/pencil.png"
-        }],
+          img: "img/icon_trophies/pencil.png",
+          description: "Du hast 50 Beiträge kommentiert. Du Tier",
+
+          }],
         characteristics: [
           {
           rank: 1,
-          step: 1,
-            img: "img/icon_trophies/tester.png"
-        }, {
+          step: 2,
+          img: "img/icon_trophies/tester.png",
+          description: "Du hast zwei Biere charakterisiert. Bleib dran ;)",
+
+          }, {
           rank: 2,
-          step: 5,
-            img: "img/icon_trophies/tester.png"
-        }, {
+          step: 7,
+          img: "img/icon_trophies/tester.png",
+          description: "Du hast sieben Biere charakterisiert.",
+
+          }, {
           rank: 3,
           step: 12,
-            img: "img/icon_trophies/tester.png"
-        }, {
+          img: "img/icon_trophies/tester.png",
+          description: "Du hast zwölf Biere charakterisiert.",
+
+          }, {
           rank: 4,
           step: 25,
-            img: "img/icon_trophies/tester.png"
-        }, {
+          img: "img/icon_trophies/tester.png",
+          description: "Du hast 25 Biere charakterisiert.",
+
+          }, {
           rank: 5,
           step: 50,
-            img: "img/icon_trophies/tester.png"
-        }],
+          img: "img/icon_trophies/tester.png",
+          description: "Du hast 50 Biere charakterisiert. Nice!",
+
+          }],
         appstart: [
           {
           rank: 1,
           step: 1,
-            img: "img/icon_trophies/baby.png"
-        }, {
+          img: "img/icon_trophies/baby.png",
+          description: "Du hast Beeround einmal gestartet.",
+
+          }, {
           rank: 2,
           step: 30,
-            img: "img/icon_trophies/baby.png"
-        }, {
+          img: "img/icon_trophies/baby.png",
+          description: "Du hast Beeround bereits 30-mal gestartet.",
+
+          }, {
           rank: 3,
-          step: 40,
-            img: "img/icon_trophies/baby.png"
-        }, {
+          step: 80,
+          img: "img/icon_trophies/baby.png",
+          description: "Du hast Beeround bereits 80-mal gestartet.",
+
+          }, {
           rank: 4,
           step: 250,
-            img: "img/icon_trophies/baby.png"
-        }, {
+          img: "img/icon_trophies/baby.png",
+            description: "Du hast Beeround bereits 250-mal gestartet.",
+
+          }, {
           rank: 5,
           step: 500,
-            img: "img/icon_trophies/baby.png"
-        }],
+          img: "img/icon_trophies/baby.png",
+          description: "Du bist offiziell Beeround-süchtig! Danke für deinen Support.",
+
+          }],
         event: [
           {
           rank: 1,
           step: 1,
-            img: "img/icon_trophies/party.png"
-        }, {
+          img: "img/icon_trophies/party.png",
+          description: "Du hast ein Event in deinen Kalender eintragen lassen.",
+
+          }, {
           rank: 2,
           step: 3,
-            img: "img/icon_trophies/party.png"
-        }, {
+          img: "img/icon_trophies/party.png",
+            description: "Du hast drei Event in deinen Kalender eintragen lassen.",
+
+          }, {
           rank: 3,
           step: 6,
-            img: "img/icon_trophies/party.png"
-        }, {
+          img: "img/icon_trophies/party.png",
+            description: "Du hast sechs Event in deinen Kalender eintragen lassen.",
+
+          }, {
           rank: 4,
           step: 15,
-            img: "img/icon_trophies/party.png"
-        }, {
+          img: "img/icon_trophies/party.png",
+          description: "Du hast 15 Event in deinen Kalender eintragen lassen.",
+
+          }, {
           rank: 5,
           step: 35,
-            img: "img/icon_trophies/party.png"
-        }],
+          img: "img/icon_trophies/party.png",
+            description: "Du hast 35 Event in deinen Kalender eintragen lassen. Krasser Partygänger!",
+
+          }],
         contact: [
           {
           rank: 1,
           step: 1,
-            img: "img/icon_trophies/contact.png"
-        }, {
+          img: "img/icon_trophies/contact.png",
+          description: "Du hast Kontakt mit einem Veranstalter oder einer Brauerei aufgenommen.",
+
+          }, {
           rank: 2,
           step: 3,
-            img: "img/icon_trophies/contact.png"
-        }, {
+          img: "img/icon_trophies/contact.png",
+          description: "Du hast zweimal Kontakt aufgenommen.",
+
+          }, {
           rank: 3,
           step: 6,
-            img: "img/icon_trophies/contact.png"
-        }, {
+          img: "img/icon_trophies/contact.png",
+          description: "Du hast sechsmal Kontakt aufgenommen.",
+
+          }, {
           rank: 4,
           step: 15,
-            img: "img/icon_trophies/contact.png"
-        }, {
+          img: "img/icon_trophies/contact.png",
+          description: "Du hast 15-mal Kontakt aufgenommen.",
+
+          }, {
           rank: 5,
           step: 35,
-            img: "img/icon_trophies/contact.png"
-        }],
+          img: "img/icon_trophies/contact.png",
+          description: "Hör auf zu nerven!",
+
+          }],
         beer: [
           {
           rank: 1,
           step: 1,
-            img: "img/icon_trophies/beerglas.png"
-        }, {
+          img: "img/icon_trophies/beerglas.png",
+          description: "Du hast dein erstes Bier getrunken. Jeder fängt mal klein an ;)",
+
+          }, {
           rank: 2,
           step: 15,
-            img: "img/icon_trophies/beerglas.png"
-        }, {
+          img: "img/icon_trophies/beerglas.png",
+          description: "15 Biere getrunken! Da ist noch Luft nach oben ;)",
+
+          }, {
           rank: 3,
           step: 40,
-            img: "img/icon_trophies/beer.png"
-        }, {
+          img: "img/icon_trophies/beer.png",
+            description: "40 Biere getrunken! Noch 60 bis zum Jubiläum.",
+
+          }, {
           rank: 4,
           step: 100,
-            img: "img/icon_trophies/beer.png"
-        }, {
+          img: "img/icon_trophies/beer.png",
+          description: "100 Biere getrunken! Darauf gleich ein Weiteres?!",
+
+          }, {
           rank: 5,
           step: 250,
-            img: "img/icon_trophies/barrel.png"
-        }],
+            img: "img/icon_trophies/barrel.png",
+            description: "250 Biere getrunken! Du Alki - aber wir finden es geil!",
+
+          }],
         rating: [
           {
           rank: 1,
-          step: 1,
-          img: "img/icon_trophies/beginner.png"
-        }, {
+          step: 2,
+          img: "img/icon_trophies/beginner.png",
+          description: "2 Biere bewertet!",
+
+          }, {
           rank: 2,
           step: 5,
-            img: "img/icon_trophies/beginner.png"
-        }, {
+            img: "img/icon_trophies/beginner.png",
+            description: "5 Biere bewertet!",
+
+          }, {
           rank: 3,
           step: 12,
-            img: "img/icon_trophies/beginner.png"
-        }, {
+            img: "img/icon_trophies/beginner.png",
+            description: "12 Biere bewertet!",
+
+          }, {
           rank: 4,
           step: 25,
-            img: "img/icon_trophies/beginner.png"
-        }, {
+            img: "img/icon_trophies/beginner.png",
+            description: "25 Biere bewertet!",
+
+          }, {
           rank: 5,
           step: 50,
-            img: "img/icon_trophies/beginner.png"
-        }]
+            img: "img/icon_trophies/beginner.png",
+            description: "50 Biere bewertet! Danke für dein Engagement.",
+
+          }]
       };
 
       return {
+        getDescription: function (type, rang) {
+          return new Promise((resolve, reject) => {
+            console.log(type);
+            resolve(steps[type][rang])
+          })
+        },
         checkCharacteristicsTrophies: function (uid) {
           return new Promise((resolve, reject) => {
             // Get User Activity

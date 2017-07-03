@@ -2,26 +2,26 @@
   <ion-content class="trophies">
     <ion-list>
       <div class="row">
-        <div ng-show="allTrophys[0].appstart > 0" class="col" ng-click="openPopover()"><img src="img/icon_trophies/baby.png"/><span class="circle">{{allTrophys[0].appstart}}</span></div>
+        <div ng-show="allTrophys[0].appstart > 0" class="col" ng-click="openPopover('appstart', allTrophys[0].appstart-1)"><img src="img/icon_trophies/baby.png"/><span class="circle">{{allTrophys[0].appstart}}</span></div>
         <div ng-show="allTrophys[0].appstart == 0" class="col"> <img src="img/icon_trophies/lock.png"/></div>
-        <div ng-show="allTrophys[0].beer > 0" class="col"> <img src="img/icon_trophies/beerglas.png"/><span class="circle">{{allTrophys[0].beer}}</span></div>
+        <div ng-show="allTrophys[0].beer > 0" class="col"  ng-click="openPopover('beer', allTrophys[0].beer-1)"> <img src="img/icon_trophies/beerglas.png"/><span class="circle">{{allTrophys[0].beer}}</span></div>
         <div ng-show="allTrophys[0].beer == 0" class="col"> <img src="img/icon_trophies/lock.png"/></div>
-        <div ng-show="allTrophys[0].characteristics > 0" class="col"> <img src="img/icon_trophies/tester.png"/><span class="circle">{{allTrophys[0].characteristics}}</span></div>
+        <div ng-show="allTrophys[0].characteristics > 0" class="col"  ng-click="openPopover('characteristics', allTrophys[0].characteristics-1)"> <img src="img/icon_trophies/tester.png"/><span class="circle">{{allTrophys[0].characteristics}}</span></div>
         <div ng-show="allTrophys[0].characteristics == 0" class="col"> <img src="img/icon_trophies/lock.png"/></div>
       </div>
       <div class="row">
 
 
-        <div ng-show="allTrophys[0].contact > 0" class="col"> <img src="img/icon_trophies/contact.png"/><span class="circle">{{allTrophys[0].contact}}</span></div>
+        <div ng-show="allTrophys[0].contact > 0" class="col"   ng-click="openPopover('contact', allTrophys[0].contact-1)"> <img src="img/icon_trophies/contact.png"/><span class="circle">{{allTrophys[0].contact}}</span></div>
         <div ng-show="allTrophys[0].contact == 0" class="col"> <img src="img/icon_trophies/lock.png"/></div>
-        <div ng-show="allTrophys[0].comment > 0" class="col"> <img src="img/icon_trophies/pencil.png"/><span class="circle">{{allTrophys[0].comment}}</span></div>
+        <div ng-show="allTrophys[0].comment > 0" class="col" ng-click="openPopover('comment', allTrophys[0].comment-1)"> <img src="img/icon_trophies/pencil.png"/><span class="circle">{{allTrophys[0].comment}}</span></div>
         <div ng-show="allTrophys[0].comment == 0" class="col"> <img src="img/icon_trophies/lock.png"/></div>
-        <div ng-show="allTrophys[0].event > 0" class="col"> <img src="img/icon_trophies/party.png"/><span class="circle">{{allTrophys[0].event}}</span></div>
+        <div ng-show="allTrophys[0].event > 0" class="col" ng-click="openPopover('event', allTrophys[0].event-1)"> <img src="img/icon_trophies/party.png"/><span class="circle">{{allTrophys[0].event}}</span></div>
         <div ng-show="allTrophys[0].event == 0" class="col"> <img src="img/icon_trophies/lock.png"/></div>
       </div>
       <div class="row">
 
-        <div ng-show="allTrophys[0].rating > 0" class="col"> <img src="img/icon_trophies/beginner.png"/><span class="circle">{{allTrophys[0].rating}}</span></div>
+        <div ng-show="allTrophys[0].rating > 0" class="col"  ng-click="openPopover('rating', allTrophys[0].rating-1)"> <img src="img/icon_trophies/beginner.png"/><span class="circle">{{allTrophys[0].rating}}</span></div>
         <div ng-show="allTrophys[0].rating == 0" class="col"> <img src="img/icon_trophies/lock.png"/></div>
         <div class="col"></div>
         <div class="col"></div>
@@ -39,10 +39,10 @@
         <div class="trophyInfo">
           <i ng-click="closePopover()" class="icon ion-close-round"></i>
           <div class="trophyDescription">
-            <img src="img/icon_trophies/baby.png"/>
-            <h1 class="text-center">Rang {{allTrophys[0].appstart}}</h1>
+            <img ng-src="{{currentTrophy.img}}"/>
+            <h1 class="text-center">Rang {{currentTrophy.rank}}</h1>
             <p class="text-center">
-              Du gehörst jetzt zur beeround Familie!</p>
+             {{currentTrophy.description}}</p>
           </div>
         </div>
 

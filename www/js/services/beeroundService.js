@@ -204,7 +204,7 @@ angular.module('beeround.service', [])
           return new Promise((resolve, reject) => {
 
             // Destination URL
-            let url = "http://beeround.domi-speh.de/upload.php";
+            let url = "http://www.beeround.de/upload.php";
 
             // File for Upload
             let targetPath = path;
@@ -219,7 +219,7 @@ angular.module('beeround.service', [])
 
 
             $cordovaFileTransfer.upload(url, targetPath, options).then(function (result) {
-              let imagePath = "http://beeround.domi-speh.de/uploads/" + options.fileName;
+              let imagePath = "http://www.beeround.de/uploads/" + options.fileName;
               resolve(imagePath)
 
 
@@ -236,7 +236,7 @@ angular.module('beeround.service', [])
           return new Promise((resolve, reject) => {
 
             // Destination URL
-            let url = "http://beeround.domi-speh.de/upload.php";
+            let url = "http://www.beeround.de/upload.php";
 
             // File for Upload
             let targetPath = path;
@@ -256,7 +256,7 @@ angular.module('beeround.service', [])
                 userid: user.id,
                 username: user.details.username,
                 userimage: user.details.image,
-                image: "http://beeround.domi-speh.de/uploads/" + options.fileName
+                image: "http://www.beeround.de/uploads/" + options.fileName
               };
 
 
@@ -311,6 +311,11 @@ angular.module('beeround.service', [])
 
         getBeerCounts: function (uid) {
           return $http.get('http://www.beeround.de/api/drinkingstatistics?transform=1&order=count,DESC&filter=userid,eq,' + uid).then(result => {
+            return result.data.drinkingstatistics;
+          })
+        },
+        getBeerCountsByBeer: function (uid, bid) {
+          return $http.get('http://www.beeround.de/api/drinkingstatistics?transform=1&order=count,DESC&filter[]=userid,eq,'+ uid+'&filter[]=beerid,eq,'+bid).then(result => {
             return result.data.drinkingstatistics;
           })
         },

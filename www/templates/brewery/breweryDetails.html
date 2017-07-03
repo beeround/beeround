@@ -1,7 +1,7 @@
 <ion-view cache-view="false" title="Brauerei">
   <ion-content scroll="false">
     <ion-scroll style="height:100%">
-      <img class="brewery-image" src="img/brauerei_thumbnail.png">
+      <img class="brewery-image" ng-src="{{brewery.images.large || 'img/brauerei_thumbnail.png'}} ">
       <ion-item class="contact-button">
         <button ng-show="brewery.locations[0].phone" type="button" ng-click="formatNumber(brewery.locations[0].phone)"
                 class="invert-button icon ion-ios-telephone"></button>

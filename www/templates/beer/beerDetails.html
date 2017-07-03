@@ -41,6 +41,15 @@
           <i class="small-icon ion-ios-pint" ng-class="{'active': currentRating > 4}"></i>
         </div>
       </div>
+
+      <div class="row" ng-show="userBeerCount">
+        <div class="col col-66">
+          <p>Bier Counter:</p>
+        </div>
+        <div class="col">
+          <p>{{userBeerCount}}</p>
+        </div>
+      </div>
     </ion-item>
     </div>
 

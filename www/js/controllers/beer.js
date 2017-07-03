@@ -1,7 +1,7 @@
 angular.module('beeround.beer', [])
 
 
-  .controller('breweriesListCtrl', function ($scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, beeroundService, $http, $cordovaGeolocation, $cordovaCalendar, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser, $location, $stateParams) {
+  .controller('breweriesListCtrl', function ($rootScope, $scope, $ionicScrollDelegate, $rootScope, $ionicPopover, breweryDB, beeroundService, $http, $cordovaGeolocation, $cordovaCalendar, $ionicLoading, $timeout, $ionicPopup, $ionicAuth, $ionicUser, $location, $stateParams) {
     let breweryId = $stateParams.breweryId;
 
     // REFRESH Breweries on change view
@@ -9,8 +9,21 @@ angular.module('beeround.beer', [])
       function (event, toState, toParams, fromState, fromParams) {
         document.getElementById('searchLocation').value = "";
 
+        // UPDATE RATING
         if (toState.name == "tabs.breweryList") {
-          getBreweries("noGeo");
+          if(fromParams.beerId){
+
+            $scope.allBeers.map(beer => {
+              if(beer.id == fromParams.beerId){
+
+                if(beer.rating != fromParams.rating){
+                  beer.rating = fromParams.rating
+                }
+              }
+            })
+          }
+
+          //getBreweries("noGeo");
         }
       });
 
@@ -26,7 +39,7 @@ angular.module('beeround.beer', [])
               if(result.step == 1){
                 tmpvar = ' Kontaktanfrage'
               }
-              $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+              $rootScope.newTrophy(result.img, result.rank, result.step, 'contact')
             }
           });
         });
@@ -780,7 +793,7 @@ angular.module('beeround.beer', [])
               if (result.step == 1) {
                 tmpvar = ' Kontaktanfrage'
               }
-              $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+              $rootScope.newTrophy(result.img, result.rank, result.step, 'contact')
             }
           });
         });
@@ -817,6 +830,10 @@ angular.module('beeround.beer', [])
     let beerId = $stateParams.beerId;
     $scope.image = null;
 
+
+    $stateParams.rating = "";
+
+
     // Make User data output available in view
     $scope.$ionicUser = $ionicUser;
 
@@ -851,7 +868,10 @@ angular.module('beeround.beer', [])
 
     beeroundService.getRatingByUser(beerId, $ionicUser.id).then(rating => {
       $scope.currentRating = rating;
+    });
 
+    beeroundService.getBeerCountsByBeer($ionicUser.id, beerId).then(result => {
+      $scope.userBeerCount = result[0].count;
     });
 
 
@@ -861,6 +881,8 @@ angular.module('beeround.beer', [])
       $scope.oldBeerName = $scope.beer.name;
       $scope.beerform = [];
       $scope.beerform.name = $scope.beer.name;
+      $stateParams.rating = result.data.rating;
+
 
       if ($scope.beer.style === undefined) {
         $scope.beerform.abv = 4.9
@@ -964,7 +986,7 @@ angular.module('beeround.beer', [])
               if (result.step == 1) {
                 tmpvar = ' Eigenschaft'
               }
-              $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+              $rootScope.newTrophy(result.img, result.rank, result.step, 'characteristics')
             }
           });
           console.log("success");
@@ -1044,7 +1066,7 @@ angular.module('beeround.beer', [])
                   if (result.step == 1) {
                     tmpvar = ' Kommentar'
                   }
-                  $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+                  $rootScope.newTrophy(result.img, result.rank, result.step, 'comment')
                 }
 
               });
@@ -1180,6 +1202,9 @@ angular.module('beeround.beer', [])
       };
 
       beeroundService.logBeer(data).then(function () {
+        beeroundService.getBeerCountsByBeer($ionicUser.id, beerId).then(result => {
+          $scope.userBeerCount = result[0].count;
+        });
         // SUCCESS
         trophyService.checkBeerTrophies($ionicUser.id).then(result => {
           if (result != 0) {
@@ -1187,7 +1212,7 @@ angular.module('beeround.beer', [])
             if (result.step == 1) {
               tmpvar = ' Bier'
             }
-            $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+            $rootScope.newTrophy(result.img, result.rank, result.step, 'beer')
           }
         });
 
@@ -1233,7 +1258,7 @@ angular.module('beeround.beer', [])
               if (result.step == 1) {
                 tmpvar = ' Bewertung'
               }
-              $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+              $rootScope.newTrophy(result.img, result.rank, result.step, 'rating')
             }
           });
         }

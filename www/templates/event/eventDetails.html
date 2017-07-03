@@ -1,7 +1,7 @@
 <ion-view cache-view="false" title="Eventdetails">
   <ion-content>
 
-           <img class="brewery-image" src="img/event_thumbnail.png">
+           <img class="brewery-image" ng-src="{{event.image || 'img/event_thumbnail.png'}}">
           <ion-item class="contact-button">
             <button ng-show="event.phone" type="button" ng-click="formatNumber(event.phone)" class="invert-button icon ion-ios-telephone"></button>
             <button ng-show="event.email" ng-click="sendMail(event.email)" class="invert-button icon ion-android-mail"></button>

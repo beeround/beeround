@@ -21,7 +21,7 @@ angular.module('beeround.event', [])
                 if(result.step == 1){
                   tmpvar = ' Kontaktanfrage'
                 }
-                $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+                $rootScope.newTrophy(result.img, result.rank, result.step, 'contact')
               }
             });
           });
@@ -59,7 +59,7 @@ angular.module('beeround.event', [])
                 if(result.step == 1){
                   tmpvar = ' Kontaktanfrage'
                 }
-                $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+                $rootScope.newTrophy(result.img, result.rank, result.step, 'contact')
               }
             });
           });
@@ -96,7 +96,7 @@ angular.module('beeround.event', [])
                 if(result.step == 1){
                   tmpvar = ' Event vorgemerkt'
                 }
-                $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+                $rootScope.newTrophy(result.img, result.rank, result.step, 'event')
               }
             });
           });

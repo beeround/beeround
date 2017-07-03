@@ -39,7 +39,7 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
               if(result.step == 1){
                 tmpvar = ' App Start'
               }
-              $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+              $rootScope.newTrophy(result.img, result.rank, result.step, 'appstart')
             }
           });
 
@@ -58,7 +58,7 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
               if(result.step == 1){
                 tmpvar = ' App Start'
               }
-              $rootScope.newTrophy(result.img, result.rank, result.step, tmpvar)
+              $rootScope.newTrophy(result.img, result.rank, result.step, 'appstart')
             }
           });
 
