@@ -91,7 +91,7 @@
 
           <label class="item-input-wrapper">
             <i class="icon ion-ios-search placeholder-icon"></i>
-            <input ng-change="search()" ng-model="searchForm.query" ng-model-options="{debounce: 500}" type="search" placeholder="Bier eingeben">
+            <input ng-change="search()" ng-model="searchForm.query" ng-model-options="{debounce: 300}" type="search" placeholder="Bier eingeben">
           </label>
           <button class="button" ng-click="modal.hide()">
             schließen
@@ -118,7 +118,5 @@
     </ion-modal-view>
   </script>
 </ion-side-menus>
-
-
 </body>
 </html>

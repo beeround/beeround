@@ -500,6 +500,7 @@ angular.module('beeround.account', [])
       $scope.beerList = result;
     });
 
+
     $scope.logBeer = function (beerId, breweryname, beername) {
 
 
@@ -528,8 +529,11 @@ angular.module('beeround.account', [])
 
 
       }, function () {
-        // TODO ERROR HANDLING
-        console.log("error");
+        // Failed
+        let alertPopup = $ionicPopup.alert({
+          title: 'Es ist ein Problem aufgetreten.',
+          template: 'Bitte überprüfe deine Internetverbindung und versuche es erneut.',
+        });
       });
 
     };
@@ -542,8 +546,13 @@ angular.module('beeround.account', [])
       $scope.userBeerStory = result;
 
     }, err => {
-      //TODO ERROR Handling
-      console.log(err);
+      $scope.userBeerStory = [];
+
+      // Failed
+      let alertPopup = $ionicPopup.alert({
+        title: 'Es ist ein Problem aufgetreten.',
+        template: 'Bitte überprüfe deine Internetverbindung und versuche es erneut.',
+      });
     })
 
   })
@@ -676,8 +685,11 @@ angular.module('beeround.account', [])
 
 
     }, err => {
-
-      //TODO Error Handling
+      // Failed
+      let alertPopup = $ionicPopup.alert({
+        title: 'Es ist ein Problem aufgetreten.',
+        template: 'Bitte überprüfe deine Internetverbindung und versuche es erneut.',
+      });
     });
 
 
