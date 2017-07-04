@@ -264,6 +264,7 @@ angular.module('beeround.beer', [])
     // Get breweries function
     // When parameter is given, disable geolocation
     function getBreweries(noGeo) {
+
       $scope.breweries = [];
       $scope.addBeerForm = [];
       $scope.allBeers = [];
@@ -279,6 +280,13 @@ angular.module('beeround.beer', [])
 
       if (noGeo) {
         console.log("Abfrage ohne Ortung");
+        // Cancel beer search request
+        $rootScope.canceled = true;
+
+        // Reset beer search request
+        $timeout(function () {
+          $rootScope.canceled = false;
+        },1000);
 
         breweryDB.getBreweriesNearCoordinates($rootScope.userSettings).then(result => {
           $scope.breweries = result;
