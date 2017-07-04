@@ -21,8 +21,8 @@
   <link rel="stylesheet" href="lib/autocomplete.min.css">
   <link rel="stylesheet" href="lib/tabSlideBox.css">
 
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/style-ds.css" rel="stylesheet">
+  <link  rel="stylesheet" href="css/style.css" rel="stylesheet">
+  <link  rel="stylesheet" href="css/style-ds.css" rel="stylesheet">
 
 
   <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -86,12 +86,34 @@
 
   <script id="search.html" type="text/ng-template">
     <ion-modal-view>
-      <ion-header-bar>
-        <h1 class="title">Suche</h1>
+      <ion-header-bar class="bar bar-header">
+        <div class="bar bar-header item-input-inset">
 
+          <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input ng-change="search()" ng-model="searchForm.query" ng-model-options="{debounce: 500}" type="search" placeholder="Bier eingeben">
+          </label>
+          <button class="button" ng-click="modal.hide()">
+            schließen
+          </button>
+        </div>
       </ion-header-bar>
-      <ion-content>
-        <p>Suchen</p>
+      <ion-content style="top: 120px!important;">
+        <ion-list style="margin-top: 300px">
+          <!-- Show only beers from germany !-->
+            <ion-item ng-repeat="entry in searchResults.data" ng-show="entry.breweries[0].locations[0].countryIsoCode == 'DE'">
+              <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{entry.id}}">
+                <img ng-src="{{entry.labels.icon || 'img/no-image-placeholder.png'}}">
+                <h2>{{entry.nameDisplay}}</h2>
+                <p>{{entry.breweries[0].name}}</p>
+                <i class="icon ion-chevron-right"></i>
+                <p ng-show="entry.style.abvMin" class="promille-number">
+                  {{entry.style.abvMin}}  Vol.-%
+                </p>
+              </a>
+            </ion-item>
+        </ion-list>
+
       </ion-content>
     </ion-modal-view>
   </script>

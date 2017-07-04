@@ -72,6 +72,10 @@
         </div>-->
       </div>
       <div class="row"><a class="ion-ios-home brewery-link" ng-href="#/tab/list/{{beer.breweryid}}"> {{beer.brewery | limitTo: 45}}</a></div>
+      <div class="row"> <div class="col"><p ng-show="beer.style.abvMin" class="promille-number">
+        {{beer.style.abvMin}}  Vol.-%
+      </p></div>
+      </div>
     </ion-item>
 
     <ion-item>

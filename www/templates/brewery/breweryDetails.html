@@ -48,9 +48,9 @@
                   <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 3}"></i>
                   <i class="ion-ios-pint" ng-class="{'active': beer.rating.avg_rating > 4}"></i>
                 </div>
-                <div class="col col-33"><span ng-show="beer.style.abvMin" class="promille-number">
-                {{beer.style.abvMax}} <i class="icon beeround-icon promille"></i>
-              </span></div>
+                <div class="col col-33"><p ng-show="beer.style.abvMin" class="promille-number">
+                  {{beer.style.abvMin}}  Vol.-%
+                </p></div>
               </div>
 
 

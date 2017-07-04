@@ -196,6 +196,12 @@ angular.module('breweryDB.service', [])
             // });
         },
 
+        search: function (query) {
+          return $http.get('http://api.brewerydb.com/v2/search?q=' + query + '&type=beer&withBreweries=Y&key=7802f26125b23378098b3c32911adcce&withLocations=Y').then(function (res) {
+            return res.data;
+          });
+        }
+
       }
     }
 

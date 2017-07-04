@@ -301,6 +301,7 @@ angular.module('beeround.beer', [])
           }
 
           else {
+
             let alertPopup = $ionicPopup.alert({
               title: 'Suche nicht erfolgreich!',
               template: 'Bitte passe deine Suchanfrage an. '
@@ -311,7 +312,18 @@ angular.module('beeround.beer', [])
             });
           }
 
-        });
+        }, err => {
+          console.log("No Data found");
+          $ionicLoading.hide();
+
+          let alertPopup = $ionicPopup.alert({
+            title: 'Suche nicht erfolgreich!',
+            template: 'Bitte passe deine Suchanfrage an. '
+          });
+
+          alertPopup.then(function (res) {
+            $scope.noData = true;
+          });        });
       }
       else {
         // Don't wait till death
@@ -823,6 +835,10 @@ angular.module('beeround.beer', [])
 
   })
   .controller('beerDetailsCtrl', function ($rootScope, $cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera, $ionicPopup, $location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser, $timeout, trophyService, $ionicLoading) {
+
+    //Hide Modal on View change (Beer Search)
+    $scope.modal.hide();
+
     $ionicLoading.show({
       content: 'Loading',
       animation: 'fade-in',
@@ -871,7 +887,9 @@ angular.module('beeround.beer', [])
     });
 
     beeroundService.getBeerCountsByBeer($ionicUser.id, beerId).then(result => {
-      $scope.userBeerCount = result[0].count;
+      if(result[0]){
+        $scope.userBeerCount = result[0].count;
+      }
     });
 
 

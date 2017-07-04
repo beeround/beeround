@@ -11,11 +11,12 @@ angular.module('beeround.index', [])
   .controller('HomeTabCtrl', function($scope) {
   })
 
-.controller('AppCtrl', function(trophyService, $rootScope, $scope, $ionicModal, $timeout, $state, $ionicUser, $cordovaLocalNotification, $ionicPopup, $cordovaVibration) {
+.controller('AppCtrl', function(trophyService, $rootScope, $scope, $ionicModal, $timeout, $state, $ionicUser, $cordovaLocalNotification, $ionicPopup, $cordovaVibration, breweryDB) {
   //$cordovaGoogleAnalytics.trackView('Home Screen');
 
   $scope.today = new Date().toISOString();
 
+  $scope.searchForm = [];
 
   $ionicModal.fromTemplateUrl('search.html', {
     scope: $scope,
@@ -26,7 +27,15 @@ angular.module('beeround.index', [])
 
   $scope.showBeerSearch = function () {
     $scope.modal.show();
+  };
 
+  $scope.search = function () {
+
+    if($scope.searchForm.query && $scope.searchForm.query.length > 3 )
+    breweryDB.search($scope.searchForm.query).then(results => {
+      $scope.searchResults = results;
+      console.log(results);
+    })
   };
 
   // GET CURRENT STATE

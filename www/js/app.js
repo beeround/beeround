@@ -35,10 +35,6 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
         beeroundService.logAppStart($ionicUser.id).then(function () {
           trophyService.checkAppStartTrophies($ionicUser.id).then(result => {
             if(result != 0){
-              let tmpvar = ' App Starts';
-              if(result.step == 1){
-                tmpvar = ' App Start'
-              }
               $rootScope.newTrophy(result.img, result.rank, result.step, 'appstart')
             }
           });
@@ -54,10 +50,6 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
         beeroundService.logAppStart($ionicUser.id).then(function () {
           trophyService.checkAppStartTrophies($ionicUser.id).then(result => {
             if(result != 0){
-              let tmpvar = ' App Starts';
-              if(result.step == 1){
-                tmpvar = ' App Start'
-              }
               $rootScope.newTrophy(result.img, result.rank, result.step, 'appstart')
             }
           });

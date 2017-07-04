@@ -6,5 +6,9 @@
       "path": "/v2",
       "proxyUrl": "http://api.brewerydb.com/v2"
     }
+  ],
+  "type": "ionic1",
+  "watchPatterns": [
+    "scss/**/*"
   ]
 }
