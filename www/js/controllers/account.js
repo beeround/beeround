@@ -724,9 +724,7 @@ angular.module('beeround.account', [])
           $scope.appBackground[0].setAttribute('class', 'view appBackground');
       };
 
-  })
-
-;
+  });
 
 
 

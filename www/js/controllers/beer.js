@@ -834,7 +834,15 @@ angular.module('beeround.beer', [])
 
 
   })
-  .controller('beerDetailsCtrl', function ($rootScope, $cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera, $ionicPopup, $location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser, $timeout, trophyService, $ionicLoading) {
+  .controller('beerDetailsCtrl', function ($http, $rootScope, $cordovaVibration, $cordovaImagePicker, $ionicModal, $cordovaFileTransfer, $ionicActionSheet, $cordovaCamera, $ionicPopup, $location, $scope, beeroundService, breweryDB, $http, $cordovaGeolocation, $stateParams, $state, $ionicUser, $timeout, trophyService, $ionicLoading) {
+
+    // Cancel beer search request
+    $rootScope.canceled = true;
+
+    // Reset beer search request
+    $timeout(function () {
+      $rootScope.canceled = false;
+    },1000);
 
     //Hide Modal on View change (Beer Search)
     $scope.modal.hide();

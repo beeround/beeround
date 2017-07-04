@@ -1,7 +1,9 @@
 angular.module('beeround.service', [])
-  .service('beeroundService', ['$http', '$q', '$timeout', '$cordovaFileTransfer',
-    function ($http, $q, $timeout, $cordovaFileTransfer) {
+  .service('beeroundService', ['$rootScope','$http', '$q', '$timeout', '$cordovaFileTransfer',
+    function ($rootScope, $http, $q, $timeout, $cordovaFileTransfer) {
       //Get, post, delete and put data from own mysql backend server
+
+      let canceller = "";
 
       return {
         sendBeerRating: function (data) {
@@ -30,6 +32,7 @@ angular.module('beeround.service', [])
         },
 
         getBeerRating: function (beerID) {
+
           return $http.get('http://www.beeround.de/api/beers?transform=1&filter=beers.beerid,eq,' + beerID).then(result => {
 
             if (result.data.beers[0]) {
@@ -42,15 +45,22 @@ angular.module('beeround.service', [])
           })
         },
 
+
         getBeerRatingByBrewerielist: function (breweries) {
+
+          canceller = $q.defer();
+
+
           return new Promise(function (resolve, reject) {
 
             breweries.map((obj, firstIndex) => {
 
               if (obj.beers) {
 
+
                 let beerRatingMapping = obj.beers.map((beer, secondIndex) => {
-                  return $http.get('http://www.beeround.de/api/beers?transform=1&filter=beers.beerid,eq,' + beer.id).then(result => {
+
+                  return $http.get('http://www.beeround.de/api/beers?transform=1&filter=beers.beerid,eq,' + beer.id, { timeout: canceller.promise}).then(result => {
 
                     if (result.data.beers[0]) {
                       breweries[firstIndex].beers[secondIndex].rating = result.data.beers[0].avg_rating;
@@ -69,13 +79,16 @@ angular.module('beeround.service', [])
                       return 0
                     }
 
-                  });
+                  }, err=> {});
 
                 });
 
                 // Save to var and give back, if function has ended
                 Promise.all(beerRatingMapping).then(function () {
-                  console.log("Brewery");
+                  if($rootScope.canceled){
+                    canceller.resolve(); // this aborts the request!
+
+                  }
                   resolve(breweries);
                 });
 

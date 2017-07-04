@@ -10,7 +10,6 @@ angular.module('breweryDB.service', [])
         return new Promise(function (resolve, reject) {
           $http.get('http://api.brewerydb.com/v2/brewery/' + brewery.brewery.id + '/beers?key=7802f26125b23378098b3c32911adcce').then(function (res) {
             brewery.beers = res.data.data;
-            console.log(res.data.data);
             return resolve(brewery);
           });
         });
@@ -48,7 +47,6 @@ angular.module('breweryDB.service', [])
       function getRatingByBeers(beers) {
 
         return new Promise(function (resolve, reject) {
-
           if (beers) {
 
             let beerRatingMapping = beers.map((beer, index) => {
