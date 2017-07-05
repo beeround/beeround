@@ -9,8 +9,9 @@ angular.module('beeround.beer', [])
       function (event, toState, toParams, fromState, fromParams) {
         document.getElementById('searchLocation').value = "";
 
+        console.log(fromState)
         // UPDATE RATING
-        if (toState.name == "tabs.breweryList") {
+        if (toState.name == "tabs.breweryList" && fromState.name != 'tabs.map') {
           if(fromParams.beerId){
 
             $scope.allBeers.map(beer => {
@@ -25,6 +26,11 @@ angular.module('beeround.beer', [])
 
           //getBreweries("noGeo");
         }
+
+        if(fromState.name == 'tabs.map'){
+          getBreweries("noGeo");
+        }
+
       });
 
 
@@ -331,7 +337,8 @@ angular.module('beeround.beer', [])
 
           alertPopup.then(function (res) {
             $scope.noData = true;
-          });        });
+          });
+        });
       }
       else {
         // Don't wait till death
@@ -502,7 +509,7 @@ angular.module('beeround.beer', [])
 
 
   })
-  .controller('mapCtrl', function ($scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover, $ionicUser) {
+  .controller('mapCtrl', function ($ionicPopup, $scope, NgMap, $state, $rootScope, breweryDB, beeroundService, $http, $cordovaGeolocation, $ionicLoading, $ionicPopover, $ionicUser) {
 
 
     // IF NO USERSETTING
@@ -740,6 +747,11 @@ angular.module('beeround.beer', [])
             $ionicLoading.hide();
 
           }
+
+        }, err => {
+          console.log("No Data found");
+          $ionicLoading.hide();
+
 
         })
       }
