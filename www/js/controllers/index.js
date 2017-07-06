@@ -76,19 +76,23 @@ angular.module('beeround.index', [])
         if (ionic.Platform.isIOS()) {
           let now = new Date().getTime();
           let twenty = new Date(now + 8400000);
+          $cordovaLocalNotification.schedule({
+            id: 1,
+            title: "Keep going!!",
+            text: "Du hast vor kurzem eine Trophäe erhalten. Weiter so!!",
+            at: twenty
+          })
         }
         else {
           let now = new Date().getTime();
           let twenty = new Date(now + 1200000);
+          $cordovaLocalNotification.schedule({
+            id: 1,
+            title: "Keep going!!",
+            text: "Du hast vor kurzem eine Trophäe erhalten. Weiter so!!",
+            at: twenty
+          })
         }
-
-
-        $cordovaLocalNotification.schedule({
-          id: 1,
-          title: "Keep going!!",
-          text: "Du hast vor kurzem eine Trophäe erhalten. Weiter so!!",
-          at: twenty
-        })
       },5000)
 
     })
