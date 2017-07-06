@@ -9,7 +9,6 @@ angular.module('beeround.beer', [])
       function (event, toState, toParams, fromState, fromParams) {
         document.getElementById('searchLocation').value = "";
 
-        console.log(fromState)
         // UPDATE RATING
         if (toState.name == "tabs.breweryList" && fromState.name != 'tabs.map') {
           if(fromParams.beerId){
@@ -28,6 +27,7 @@ angular.module('beeround.beer', [])
         }
 
         if(fromState.name == 'tabs.map'){
+          // Reload if user is coming from map
           getBreweries("noGeo");
         }
 

@@ -141,7 +141,7 @@
 
 
             <ion-list>
-              <ion-item  ng-show="!beerCategory || beer[beerCategory] > 50" ng-repeat="beer in allBeers | orderObjectBy:activeSorting: (activeSorting == 'rating')" >
+              <ion-item  ng-show="!beerCategory || beer[beerCategory] > 50 && (activeSorting == 'rating' || activeSorting == 'name')" ng-repeat="beer in allBeers | orderObjectBy:activeSorting: (activeSorting == 'rating')" >
               <ion-item>
                 <a class="item item-thumbnail-left divider" ng-href="#/tab/details/beer/{{beer.id}}">
                   <img ng-src="{{beer.labels.icon || 'img/no-image-placeholder.png'}}">

@@ -42,7 +42,6 @@ angular.module('beeround.index', [])
   $scope.$on('$stateChangeSuccess',
     function(event, toState, toParams, fromState, fromParams) {
       $scope.current = toState.url;
-
     }
   );
 
@@ -74,7 +73,15 @@ angular.module('beeround.index', [])
 
         let now = new Date().getTime();
 
-        let twenty = new Date(now + 1200000);
+        if (ionic.Platform.isIOS()) {
+          let now = new Date().getTime();
+          let twenty = new Date(now + 8400000);
+        }
+        else {
+          let now = new Date().getTime();
+          let twenty = new Date(now + 1200000);
+        }
+
 
         $cordovaLocalNotification.schedule({
           id: 1,

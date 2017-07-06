@@ -7,6 +7,11 @@
 angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 'ngMap', 'google.places', 'beeround.index', 'beeround.beer', 'beeround.account', 'beeround.event', 'breweryDB.service', 'beeround.service','trophies.service', 'angular.filter', 'rzModule', 'chart.js'])
   .run(function ($ionicPlatform, $state, $stateParams, $rootScope, $cordovaLocalNotification, $cordovaGoogleAnalytics, beeroundService, $ionicUser, trophyService) {
     $ionicPlatform.ready(function () {
+
+      $ionicPlatform.registerBackButtonAction(function () {
+        $scope.appBackground = document.getElementsByClassName('blur');
+        $scope.appBackground[0].setAttribute('class', 'view appBackground');
+      }, 100);
 /*
       $rootScope.$on('$stateChangeSuccess', function () {
         if(typeof analytics !== undefined) {
@@ -34,7 +39,7 @@ angular.module('beeround', ['ionic', 'ionic.cloud', 'tabSlideBox', 'ngCordova', 
       if($ionicUser.id) {
         beeroundService.logAppStart($ionicUser.id).then(function () {
           trophyService.checkAppStartTrophies($ionicUser.id).then(result => {
-            if(result != 0){
+            if(result > 2){
               $rootScope.newTrophy(result.img, result.rank, result.step, 'appstart')
             }
           });

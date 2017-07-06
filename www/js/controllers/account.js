@@ -245,7 +245,7 @@ angular.module('beeround.account', [])
         $scope.userActivities.ratingcount = 0;
       }
 
-      if(result.logincount == 1 && !$rootScope.once && result.appstartcount < 1 ){
+      if(result.logincount == 1 && !$rootScope.once && result.appstartcount == 0 ){
         $rootScope.once = true;
         $rootScope.newTrophy('img/icon_trophies/baby.png', 1, 1, 'appstart');
       }
@@ -710,18 +710,23 @@ angular.module('beeround.account', [])
       });
 
       $scope.openPopover = function (type, rang) {
+
         trophyService.getDescription(type,rang).then(result => {
           $scope.currentTrophy = result;
-        });
-
           $scope.popover.show();
           $scope.appBackground = document.getElementsByClassName('appBackground');
           $scope.appBackground[0].setAttribute('class', 'view blur');
+        });
+
+
       };
       $scope.closePopover = function () {
-          $scope.popover.hide();
+          $scope.currentTrophy = "";
           $scope.appBackground = document.getElementsByClassName('blur');
           $scope.appBackground[0].setAttribute('class', 'view appBackground');
+           $scope.popover.hide();
+
+
       };
 
   });
